@@ -1,6 +1,7 @@
 import React from "react";
 import "../../App.css";
 import "../../index.css";
+import gatosesion from "../../assets/gatosesion.png";
 import recoverPasswordImg from "../../assets/recoverPassword.png";
 
 const RecoverPassword = () => {
@@ -14,10 +15,12 @@ const RecoverPassword = () => {
       <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", background: "#fff" }}>
         <h1 style={{ color: "#FF6B2C", fontWeight: "bold", fontSize: "3.2rem", textAlign: "center", marginBottom: 24 }}>RECUPERAR<br />CONTRASEÑA</h1>
         <form style={{ width: "90%", maxWidth: 480, marginTop: 32 }}>
+        <img src={gatosesion} alt="Gato sesión" style={{ position: 'absolute', right: 80, top: 265, width: 100, height: 'auto' }} />
+            
           <input
             type="email"
             placeholder="Ingrese su correo"
-            style={{ width: "100%", padding: "22px", fontSize: "1.3rem", borderRadius: 32, color: "#b94d0d",border: "none", background: "#E5E5E5", marginBottom: 32 }}
+            style={{ width: "100%", padding: "22px", fontSize: "1.3rem", borderRadius: 32, color: "#b94d0d", border: "none", background: "#E5E5E5", marginBottom: 32, outline: "none" }}
           />
           <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 32, fontSize: 18, color: "#FF6B2C", fontWeight: "bold" }}>
             <span>VOLVER AL INICIO DE SESION</span>

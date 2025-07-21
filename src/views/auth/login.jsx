@@ -1,11 +1,13 @@
 
-import React from 'react';
-import { FaUserCircle, FaLock } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
 import gatosesion from '../../assets/gatosesion.png';
 import '../../App.css';
 
 const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [password, setPassword] = useState("");
   return (
     <div style={{ display: 'flex', height: '100vh', background: '#f5f5f5' }}>
       {/* Left side with logo */}
@@ -19,43 +21,58 @@ const Login = () => {
           {/* Usuario */}
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaUserCircle style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
-                   <input
-                     type="text"
-                     placeholder="Usuario"
-                     style={{
-                       width: '100%',
-                       padding: '22px 22px 22px 60px',
-                       borderRadius: 36,
-                       border: 'none',
-                       background: '#E5E5E5',
-                       fontSize: '1.35rem',
-                       outline: 'none',
-                       boxShadow: '0 4px 16px 0 rgba(0,0,0,0.10)',
-                       transition: 'box-shadow 0.2s',
-                       color: '#b94d0d',
-                     }}
+            <input
+              type="text"
+              placeholder="Usuario"
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '22px 44px 22px 60px',
+                borderRadius: 36,
+                border: 'none',
+                background: '#E5E5E5',
+                fontSize: '1.35rem',
+                outline: 'none',
+                boxShadow: '0 4px 16px 0 rgba(0,0,0,0.10)',
+                transition: 'box-shadow 0.2s',
+                color: '#b94d0d',
+              }}
             />
-            <img src={gatosesion} alt="Gato sesión" style={{ position: 'absolute', right: -60, top: -45, width: 100, height: 'auto' }} />
+            <img src={gatosesion} alt="Gato sesión" style={{ position: 'absolute', right: 10, top: -45, width: 100, height: 'auto' }} />
           </div>
           {/* Contraseña */}
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaLock style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
-                   <input
-                     type="password"
-                     placeholder="Contraseña"
-                     style={{
-                       width: '100%',
-                       padding: '22px 22px 22px 60px',
-                       borderRadius: 36,
-                       border: 'none',
-                       background: '#E5E5E5',
-                       fontSize: '1.35rem',
-                       outline: 'none',
-                       boxShadow: '0 4px 16px 0 rgba(0,0,0,0.10)',
-                       transition: 'box-shadow 0.2s',
-                       color: '#b94d0d',
-                     }}
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Contraseña"
+              style={{
+                width: '100%',
+                boxSizing: 'border-box',
+                padding: '22px 44px 22px 60px',
+                borderRadius: 36,
+                border: 'none',
+                background: '#E5E5E5',
+                fontSize: '1.35rem',
+                outline: 'none',
+                boxShadow: '0 4px 16px 0 rgba(0,0,0,0.10)',
+                transition: 'box-shadow 0.2s',
+                color: '#b94d0d',
+              }}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              style={{ position: 'absolute', top: '50%', right: 18, transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: 0, outline: 'none' }}
+              tabIndex={-1}
+              onMouseDown={e => e.preventDefault()}
+              onFocus={e => e.target.style.outline = 'none'}
+              onBlur={e => e.target.style.outline = 'none'}
+            >
+              {showPassword ? <FaEyeSlash size={28} color="#F37021" /> : <FaEye size={28} color="#F37021" />}
+            </button>
           </div>
           {/* Links */}
           <div style={{ textAlign: 'center', marginBottom: '2.5rem', fontWeight: 'bold', fontSize: '1.15rem', color: '#F37021', letterSpacing: '0.5px' }}>
