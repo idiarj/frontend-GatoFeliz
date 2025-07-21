@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../App.css";
 import "../../index.css";
 import gatosesion from "../../assets/gatosesion.png";
+import gatosesiondespierto from "../../assets/gatosesiondespierto.png";
+import purring from "../../assets/purrings.mp3";
+import { playSoundOnce, stopAllPurring } from "../../utils/audio";
 import recoverPasswordImg from "../../assets/recoverPassword.png";
 
 const RecoverPassword = () => {
+  const [gatoDespierto, setGatoDespierto] = useState(false);
+  
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       {/* Left side with image */}
@@ -14,9 +19,42 @@ const RecoverPassword = () => {
       {/* Right side with form */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", background: "#fff" }}>
         <h1 style={{ color: "#FF6B2C", fontWeight: "bold", fontSize: "3.2rem", textAlign: "center", marginBottom: 24 }}>RECUPERAR<br />CONTRASEÑA</h1>
-        <form style={{ width: "90%", maxWidth: 480, marginTop: 32 }}>
-        <img src={gatosesion} alt="Gato sesión" style={{ position: 'absolute', right: 80, top: 265, width: 100, height: 'auto' }} />
-            
+        <form style={{ width: "90%", maxWidth: 480, marginTop: 32, position: 'relative' }}>
+         <img
+            src={gatoDespierto ? gatosesiondespierto : gatosesion}
+            alt="Gato sesión"
+            style={{
+              position: 'absolute',
+              right: 10,
+              top: gatoDespierto ? -55 : -55,
+              width: gatoDespierto ? 120 : 120,
+              height: 'auto',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              zIndex: 2
+            }}
+            onMouseEnter={() => {
+              setGatoDespierto(true);
+              playSoundOnce(purring);
+            }}
+            onMouseLeave={() => {
+              setGatoDespierto(false);
+              stopAllPurring();
+            }}
+            onMouseDown={() => setGatoDespierto(true)}
+            onMouseUp={() => {
+              setGatoDespierto(false);
+              stopAllPurring();
+            }}
+            onTouchStart={() => {
+              setGatoDespierto(true);
+              playSoundOnce(purring);
+            }}
+            onTouchEnd={() => {
+              setGatoDespierto(false);
+              stopAllPurring();
+            }}
+          />
           <input
             type="email"
             placeholder="Ingrese su correo"

@@ -3,11 +3,15 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../../App.css";
 import "../../index.css";
 import recoverPasswordImg from "../../assets/recoverPassword.png";
+import gatosesiondespierto from "../../assets/gatosesiondespierto.png";
 import gatosesion from "../../assets/gatosesion.png";
+import miau from '../../assets/miau.mp3';
+import { playSoundOnce, stopAllPurring } from "../../utils/audio";
 
 const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const [gatoDespierto, setGatoDespierto] = useState(false);
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       {/* Left side with image */}
@@ -19,8 +23,41 @@ const NewPassword = () => {
         <h1 style={{ color: "#FF6B2C", fontWeight: "bold", fontSize: "3.2rem", textAlign: "center", marginBottom: 24 }}>NUEVA<br />CONTRASEÑA</h1>        
         <form style={{ width: "90%", maxWidth: 480, marginTop: 32 }}>
           <div style={{ position: "relative", width: "100%", marginBottom: 32 }}>
-            <img src={gatosesion} alt="Gato sesión" style={{ position: 'absolute', right: 10, top: -45, width: 100, height: 'auto' }} />
-
+            <img
+              src={gatoDespierto ? gatosesiondespierto : gatosesion}
+              alt="Gato sesión"
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: gatoDespierto ? -55 : -55,
+                width: gatoDespierto ? 120 : 120,
+                height: 'auto',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                zIndex: 2
+              }}
+              onMouseEnter={() => {
+                setGatoDespierto(true);
+                playSoundOnce(miau);
+              }}
+              onMouseLeave={() => {
+                setGatoDespierto(false);
+                stopAllPurring();
+              }}
+              onMouseDown={() => setGatoDespierto(true)}
+              onMouseUp={() => {
+                setGatoDespierto(false);
+                stopAllPurring();
+              }}
+              onTouchStart={() => {
+                setGatoDespierto(true);
+                playSoundOnce(miau);
+              }}
+              onTouchEnd={() => {
+                setGatoDespierto(false);
+                stopAllPurring();
+              }}
+            />
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Ingrese su nueva contraseña"

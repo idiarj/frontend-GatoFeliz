@@ -3,11 +3,16 @@ import React, { useState } from 'react';
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import logo from '../../assets/logo.png';
 import gatosesion from '../../assets/gatosesion.png';
+import gatosesiondespierto from '../../assets/gatosesiondespierto.png';
+import miau from '../../assets/miau.mp3';
+import { playSoundOnce, stopAllPurring } from '../../utils/audio';
 import '../../App.css';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
+  const [gatoDespierto, setGatoDespierto] = useState(false);
+
   return (
     <div style={{ display: 'flex', height: '100vh', background: '#f5f5f5' }}>
       {/* Left side with logo */}
@@ -38,7 +43,41 @@ const Login = () => {
                 color: '#b94d0d',
               }}
             />
-            <img src={gatosesion} alt="Gato sesión" style={{ position: 'absolute', right: 10, top: -45, width: 100, height: 'auto' }} />
+            <img
+              src={gatoDespierto ? gatosesiondespierto : gatosesion}
+              alt="Gato sesión"
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: gatoDespierto ? -55 : -55,
+                width: gatoDespierto ? 120 : 120,
+                height: 'auto',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                zIndex: 2
+              }}
+              onMouseEnter={() => {
+                setGatoDespierto(true);
+                playSoundOnce(miau);
+              }}
+              onMouseLeave={() => {
+                setGatoDespierto(false);
+                stopAllPurring();
+              }}
+              onMouseDown={() => setGatoDespierto(true)}
+              onMouseUp={() => {
+                setGatoDespierto(false);
+                stopAllPurring();
+              }}
+              onTouchStart={() => {
+                setGatoDespierto(true);
+                playSoundOnce(purring);
+              }}
+              onTouchEnd={() => {
+                setGatoDespierto(false);
+                stopAllPurring();
+              }}
+            />
           </div>
           {/* Contraseña */}
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
