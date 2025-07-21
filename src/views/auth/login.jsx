@@ -7,9 +7,9 @@ import '../../App.css';
 
 const Login = () => {
   return (
-    <div style={{ display: 'flex', height: '100vh', background: '#E5E5E5' }}>
+    <div style={{ display: 'flex', height: '100vh', background: '#f5f5f5' }}>
       {/* Left side with logo */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#E5E5E5' }}>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f5f5f5' }}>
         <img src={logo} alt="Fundación Gato Feliz" style={{ maxWidth: '65%', height: 'auto' }} />
       </div>
       {/* Right side with login form */}
