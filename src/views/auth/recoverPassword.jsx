@@ -1,0 +1,38 @@
+import React from "react";
+import "../../App.css";
+import "../../index.css";
+import recoverPasswordImg from "../../assets/recoverPassword.png";
+
+const RecoverPassword = () => {
+  return (
+    <div style={{ display: "flex", height: "100vh" }}>
+      {/* Left side with image */}
+      <div style={{ flex: 1, background: "#fff9db", display: "flex", alignItems: "stretch", justifyContent: "stretch" }}>
+        <img src={recoverPasswordImg} alt="Recuperar contraseña" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      </div>
+      {/* Right side with form */}
+      <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", background: "#fff" }}>
+        <h1 style={{ color: "#FF6B2C", fontWeight: "bold", fontSize: "3.2rem", textAlign: "center", marginBottom: 24 }}>RECUPERAR<br />CONTRASEÑA</h1>
+        <form style={{ width: "90%", maxWidth: 480, marginTop: 32 }}>
+          <input
+            type="email"
+            placeholder="Ingrese su correo"
+            style={{ width: "100%", padding: "22px", fontSize: "1.3rem", borderRadius: 32, color: "#b94d0d",border: "none", background: "#E5E5E5", marginBottom: 32 }}
+          />
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 32, fontSize: 18, color: "#FF6B2C", fontWeight: "bold" }}>
+            <span>VOLVER AL INICIO DE SESION</span>
+            <a href="/login" style={{ cursor: "pointer", color: "#F7B95B" }}>HAGA CLICK AQUI</a>
+          </div>
+          <button
+            type="submit"
+            style={{ width: "100%", padding: "22px", borderRadius: 32, border: "none", background: "#FF6B2C", color: "#fff", fontWeight: "bold", fontSize: "1.3rem", cursor: "pointer", letterSpacing: 1 }}
+          >
+            ENVIAR
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default RecoverPassword;

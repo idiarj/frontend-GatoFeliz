@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <div style={{ display: 'flex', height: '100vh', background: '#f5f5f5' }}>
       {/* Left side with logo */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f5f5f5' }}>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#fff9db' }}>
         <img src={logo} alt="Fundación Gato Feliz" style={{ maxWidth: '65%', height: 'auto' }} />
       </div>
       {/* Right side with login form */}
@@ -19,46 +19,48 @@ const Login = () => {
           {/* Usuario */}
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaUserCircle style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
-            <input
-              type="text"
-              placeholder="USUARIO"
-              style={{
-                width: '100%',
-                padding: '22px 22px 22px 60px',
-                borderRadius: 36,
-                border: 'none',
-                background: '#E5E5E5',
-                fontWeight: 'bold',
-                fontSize: '1.35rem',
-                outline: 'none',
-                boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)',
-              }}
+                   <input
+                     type="text"
+                     placeholder="Usuario"
+                     style={{
+                       width: '100%',
+                       padding: '22px 22px 22px 60px',
+                       borderRadius: 36,
+                       border: 'none',
+                       background: '#E5E5E5',
+                       fontSize: '1.35rem',
+                       outline: 'none',
+                       boxShadow: '0 4px 16px 0 rgba(0,0,0,0.10)',
+                       transition: 'box-shadow 0.2s',
+                       color: '#b94d0d',
+                     }}
             />
             <img src={gatosesion} alt="Gato sesión" style={{ position: 'absolute', right: -60, top: -45, width: 100, height: 'auto' }} />
           </div>
           {/* Contraseña */}
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaLock style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
-            <input
-              type="password"
-              placeholder="CONTRASEÑA"
-              style={{
-                width: '100%',
-                padding: '22px 22px 22px 60px',
-                borderRadius: 36,
-                border: 'none',
-                background: '#E5E5E5',
-                fontWeight: 'bold',
-                fontSize: '1.35rem',
-                outline: 'none',
-                boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)',
-              }}
+                   <input
+                     type="password"
+                     placeholder="Contraseña"
+                     style={{
+                       width: '100%',
+                       padding: '22px 22px 22px 60px',
+                       borderRadius: 36,
+                       border: 'none',
+                       background: '#E5E5E5',
+                       fontSize: '1.35rem',
+                       outline: 'none',
+                       boxShadow: '0 4px 16px 0 rgba(0,0,0,0.10)',
+                       transition: 'box-shadow 0.2s',
+                       color: '#b94d0d',
+                     }}
             />
           </div>
           {/* Links */}
           <div style={{ textAlign: 'center', marginBottom: '2.5rem', fontWeight: 'bold', fontSize: '1.15rem', color: '#F37021', letterSpacing: '0.5px' }}>
-            ¿OLVIDASTE TU CONTRASEÑA? <span style={{ color: '#F7B95B', cursor: 'pointer', fontSize: '16px' }}> HAGA CLICK AQUI</span><br />
-            ¿NO TIENES CUENTA? <span style={{ color: '#F7B95B', cursor: 'pointer', fontSize: '16px' }}> HAGA CLICK AQUI</span>
+            ¿OLVIDASTE TU CONTRASEÑA? <a href="/recoverPassword" style={{ color: '#F7B95B', cursor: 'pointer', fontSize: '16px',fontWeight: 'bold' }}> HAGA CLICK AQUI</a><br />
+            ¿NO TIENES CUENTA? <a href="/register" style={{ color: '#F7B95B', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}> HAGA CLICK AQUI</a>
           </div>
           {/* Botón ingresar */}
           <button type="submit" style={{ width: '100%', background: '#F37021', color: '#fff', fontWeight: 'bold', fontSize: '1.45rem', border: 'none', borderRadius: 36, padding: '22px 0', cursor: 'pointer', letterSpacing: '1px', boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)' }}>
