@@ -100,6 +100,11 @@ const Register = () => {
             cursor: "pointer"
           }}>INGRESAR</button>
         </form>
+                <div style={{ textAlign: 'center', marginTop: '2rem', fontWeight: 'bold', fontSize: '1.1rem' }}>
+          <a href="/dashboard" style={{ color: '#F37021', cursor: 'pointer' }}>
+          Volver al dashboard
+          </a>
+        </div>
       </div>
       {/* Derecha: Imagen */}
       <div style={{
