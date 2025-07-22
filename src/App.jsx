@@ -3,6 +3,7 @@ import Login from './views/auth/login.jsx';
 import Register from './views/auth/register.jsx';
 import RecoverPassword from './views/auth/RecoverPassword.jsx';
 import NewPassword from './views/auth/newPassword.jsx';
+import Dashboard from './views/user/dashboard.jsx';
 import './App.css';
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
         <Route path='/register' element={<Register/>}/>
         <Route path='/recoverPassword' element={<RecoverPassword/>}/>
         <Route path='/NewPassword' element={<NewPassword/>}/>
-
+        <Route path='/dashboard' element={<Dashboard/>}/>
         <Route path="*" element={<Navigate to= "/login" replace />} />
       </Routes>
     </Router>

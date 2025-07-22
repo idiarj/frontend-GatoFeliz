@@ -19,14 +19,17 @@ const Register = () => {
         flex: 1,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "center",
         height: "100vh",
-        padding: "1rem"
+        padding: "1rem",
+        paddingTop: '3.5vh',
+        minHeight: 0,
+        overflow: 'hidden'
       }}>
         <h2 style={{ color: "#F57C2A", fontWeight: "bold", fontSize: "2.5rem", marginBottom: "0.5rem" }}>REGISTRATE</h2>
         <h3 style={{ color: "#F7B95B", fontWeight: "bold", fontSize: "1.5rem", marginBottom: "2rem" }}>UNETE A NOSOTROS!!</h3>
-        <form style={{ width: "100%", maxWidth: 400 }}>
+        <form style={{ width: "100%", maxWidth: 400, marginTop: 0 }}>
           <div style={{ position: "relative", marginBottom: '1.2rem', marginLeft: '-40px' }}>
             <FaUserCircle style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", color: "#F37021", fontSize: 32 }} />
             <input type="text" placeholder="Usuario" style={{ ...inputStyle, paddingLeft: 70 }} />

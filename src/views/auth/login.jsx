@@ -71,7 +71,7 @@ const Login = () => {
               }}
               onTouchStart={() => {
                 setGatoDespierto(true);
-                playSoundOnce(purring);
+                playSoundOnce(miau);
               }}
               onTouchEnd={() => {
                 setGatoDespierto(false);

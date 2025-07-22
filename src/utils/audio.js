@@ -6,7 +6,8 @@ export function playSoundOnce(audioUrl) {
     globalPurringAudio.currentTime = 0;
   }
   globalPurringAudio = new window.Audio(audioUrl);
-  globalPurringAudio.play();
+  // Handle play() promise to avoid uncaught errors
+  globalPurringAudio.play().catch(() => {});
   return globalPurringAudio;
 }
 export function stopAllPurring() {
