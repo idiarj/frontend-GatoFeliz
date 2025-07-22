@@ -4,33 +4,30 @@ import Logo from '../../components/logo.jsx';
 
 const Dashboard = () => {
   return (
-    <div style={{ minHeight: '100vh', background: '#fff9db', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div style={{ minHeight: '100vh', background: '#fff' }}>
+      {/* Header amarillo */}
       <div style={{
-        background: '#fff',
-        borderRadius: 28,
-        boxShadow: '0 4px 32px 0 rgba(0,0,0,0.07)',
-        padding: '2.5vw 3vw',
-        minWidth: 340,
-        maxWidth: '98vw',
         width: '100%',
-        height: '90vh',
+        background: '#fff9db',
         display: 'flex',
         flexDirection: 'row',
-        gap: 32,
-        justifyContent: 'center',
-        alignItems: 'flex-start',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0.8rem 2.5rem 0.8rem 2.5rem',
         boxSizing: 'border-box',
+        minHeight: 90,
       }}>
+        <h1 style={{ color: '#F37021', fontWeight: 'bold', fontSize: '2.5rem', margin: 0 }}>
+          Bienvenido a Gato Feliz Venzuela
+        </h1>
+        <Logo width={180} height={180} style={{ marginTop: -10, marginBottom: -20, marginLeft: 60 }} />
+      </div>
+      {/* Layout principal */}
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'flex-start', padding: '2vw 3vw' }}>
         <div style={{ minWidth: 180, display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 0 }}>
-          <Logo width={260} height={260} style={{ marginTop: -30, marginLeft: -60 }} />
-          <div style={{ marginTop: -38, marginLeft: -95 }}>
-            <Menu />
-          </div>
+          <Menu />
         </div>
         <div style={{ flex: 1, padding: 0, minWidth: 0 }}>
-          <h1 style={{ color: '#F37021', fontWeight: 'bold', fontSize: '2.2rem', marginBottom: '1.2rem' }}>
-            Bienvenido al Dashboard
-          </h1>
           {/* Contacto box */}
           <div style={{
             marginBottom: 24,
