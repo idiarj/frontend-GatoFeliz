@@ -130,7 +130,7 @@ const Donations = () => {
                 }}
               >
                 <span style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
-                  <FaDog /> ¿Hiciste una donación?
+                      ¿Hiciste una donación?
                 </span>
                 ¡Mándanos tu capture y te agradecemos con ronroneo!
               </div>
@@ -170,7 +170,7 @@ const Donations = () => {
           {/* APORTES */}
           <div
             style={{
-              background: "#FFF3E0",
+              background: "#ffe0d1",
               borderRadius: 24,
               boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
               padding: 32,
@@ -190,10 +190,10 @@ const Donations = () => {
               </h2>
               <div
                 style={{
-                  background: "#ffe0b2",
+                  background: "#fcb47dff",
                   padding: 16,
                   borderRadius: 16,
-                  color: "#F37021",
+                  color: "#ffffffff",
                   fontSize: 18,
                   fontWeight: 700,
                   margin: "16px 0",

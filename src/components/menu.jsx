@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaChevronRight, FaChevronLeft, FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaInstagram, FaPhone } from 'react-icons/fa';
+import { FaChevronRight, FaChevronLeft, FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaInstagram, FaStethoscope } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 
 const menuOptions = [
@@ -12,6 +12,8 @@ const menuOptions = [
   { label: 'Apadrinar', icon: <FaPaw />, path: '/apadrinar' },
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos' },
+  { label: 'Panel Medico', icon: <FaStethoscope />, path: '/panelMedico' },
+
 ];
 
 const Menu = () => {
@@ -25,7 +27,6 @@ const Menu = () => {
         height: '100vh',
         width: 220,
         background: '#fff',
-        borderBottomRightRadius: 18,
         boxShadow: '2px 0 16px 0 rgba(0,0,0,0.10)',
         zIndex: 110,
         display: 'flex',
