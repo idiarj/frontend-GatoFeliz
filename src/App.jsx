@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './views/auth/login.jsx';
 import Register from './views/auth/register.jsx';
-import RecoverPassword from './views/auth/RecoverPassword.jsx';
+import RecoverPassword from './views/auth/recoverPassword.jsx';
 import NewPassword from './views/auth/newPassword.jsx';
 import Dashboard from './views/user/dashboard.jsx';
 import './App.css';

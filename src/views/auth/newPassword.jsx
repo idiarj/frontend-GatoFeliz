@@ -17,7 +17,7 @@ const NewPassword = () => {
       {/* Left side with image */}
       <div style={{ flex: 1, background: "#fff9db", display: "flex", alignItems: "stretch", justifyContent: "stretch" }}>
         <img src={recoverPasswordImg} alt="Recuperar contraseña" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-      </div>
+      </div>como
       {/* Right side with form */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", background: "#fff" }}>
         <h1 style={{ color: "#FF6B2C", fontWeight: "bold", fontSize: "3.2rem", textAlign: "center", marginBottom: 24 }}>NUEVA<br />CONTRASEÑA</h1>        
