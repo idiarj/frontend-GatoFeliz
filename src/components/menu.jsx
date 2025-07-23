@@ -10,7 +10,7 @@ const menuOptions = [
   { label: 'Donaciones', icon: <FaDonate />, path: '/donations' },
   { label: 'Adopciones', icon: <FaCat />, path: '/adopciones' },
   { label: 'Apadrinar', icon: <FaPaw />, path: '/apadrinar' },
-  { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/preguntas' },
+  { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos' },
 ];
 
@@ -25,7 +25,6 @@ const Menu = () => {
         height: '100vh',
         width: 220,
         background: '#fff',
-        borderTopRightRadius: 18,
         borderBottomRightRadius: 18,
         boxShadow: '2px 0 16px 0 rgba(0,0,0,0.10)',
         zIndex: 110,
@@ -90,12 +89,12 @@ const MenuLink = ({ to, children, isActiveBg, onClick }) => {
         fontWeight: 'bold',
         fontSize: 18,
         background: hover
-          ? 'linear-gradient(90deg, #f7b95b 0%, #F37021 100%)'
+          ? '#f8cfbaff'
           : isActiveBg
             ? '#fff9db'
             : 'transparent',
         borderRadius: hover ? 12 : isActiveBg ? 8 : 0,
-        boxShadow: hover ? '0 2px 8px 0 rgba(243,112,33,0.08)' : 'none',
+        boxShadow: hover ? '0 2px 8px 0 #ffe0d1' : 'none',
         transition: 'background 0.18s, color 0.18s, border-radius 0.18s',
         marginBottom: 2,
         fontStyle: isActiveBg ? 'italic' : 'normal',

@@ -8,7 +8,7 @@ const cardData = [
   {
     title: 'Rescate',
     img: rescueCat,
-    bg: '#fff9db',
+    bg: '#fff8e1',
     text: 'Rescatamos y acogemos a los animales necesitados.',
     color: '#F37021',
   },
@@ -22,7 +22,7 @@ const cardData = [
   {
     title: 'Cuidado',
     img: careCat,
-    bg: '#fff9db',
+    bg: '#fff8e1',
     text: 'Brindamos atención médica 24/7 en la fundación.',
     color: '#F37021',
   },
