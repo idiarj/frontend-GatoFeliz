@@ -13,7 +13,6 @@ const menuOptions = [
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos' },
   { label: 'Panel Medico', icon: <FaStethoscope />, path: '/panelMedico' },
-
 ];
 
 const Menu = () => {
