@@ -4,6 +4,9 @@ import Register from './views/auth/register.jsx';
 import RecoverPassword from './views/auth/recoverPassword.jsx';
 import NewPassword from './views/auth/newPassword.jsx';
 import Dashboard from './views/user/dashboard.jsx';
+import AboutUs from './views/user/aboutUs.jsx';
+import Donations from './views/user/donations.jsx';
+import Questions from './views/user/questions.jsx';
 import './App.css';
 
 function App() {
@@ -15,7 +18,11 @@ function App() {
         <Route path='/recoverPassword' element={<RecoverPassword/>}/>
         <Route path='/NewPassword' element={<NewPassword/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path="*" element={<Navigate to= "/login" replace />} />
+        <Route path='/aboutUs' element={<AboutUs/>}/>
+        <Route path='/donations' element={<Donations/>}/>
+        <Route path='/questions' element={<Questions/>}/>
+        {/* Redirigir a login si no hay ruta coincidente */}
+        <Route path="*" element={<Navigate to= "/dashboard" replace />} />
       </Routes>
     </Router>
   );
