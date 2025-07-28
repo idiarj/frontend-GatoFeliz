@@ -1,11 +1,11 @@
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
-import logo from '../../assets/logo.png';
-import gatosesion from '../../assets/gatosesion.png';
-import gatosesiondespierto from '../../assets/gatosesiondespierto.png';
-import miau from '../../assets/miau.mp3';
 import { playSoundOnce, stopAllPurring } from '../../utils/audio';
+import logo from '../../assets/images/logo.png';
+import gatosesion from '../../assets/images/gatosesion.png';
+import gatosesiondespierto from '../../assets/images/gatosesiondespierto.png';
+import miau from '../../assets/audios/miau.mp3';
 import '../../App.css';
 
 const Login = () => {

@@ -1,12 +1,12 @@
 
-import React from "react";
+import { useState } from "react";
 import { FaUserCircle, FaEnvelope, FaLock, FaPhone } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import registroImg from "../../assets/images/registro.png";
 import "../../App.css";
-import registroImg from "../../assets/registro.png";
 
 const Register = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const handleTogglePassword = () => setShowPassword((prev) => !prev);
   return (
     <div style={{

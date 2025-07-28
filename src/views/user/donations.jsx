@@ -1,12 +1,10 @@
-import React from "react";
 import { FaCreditCard, FaGlobeAmericas, FaWhatsapp, FaDog } from "react-icons/fa";
 import { MdAnnouncement } from "react-icons/md";
-import { GiCat } from "react-icons/gi";
-import "../../App.css";
-import donacionesImg from "../../assets/donaciones.png";
-import aportesImg from "../../assets/aportes.png";
+import donacionesImg from "../../assets/images/donaciones.png";
+import aportesImg from "../../assets/images/aportes.png";
 import Head from "../../components/head";
 import Menu from "../../components/menu";
+import "../../App.css";
 
 const Donations = () => {
   return (

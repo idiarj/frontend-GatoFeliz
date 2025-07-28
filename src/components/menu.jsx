@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FaChevronRight, FaChevronLeft, FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaInstagram, FaStethoscope } from 'react-icons/fa';
+import { useState } from 'react';
+import { FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaStethoscope } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 
 const menuOptions = [
@@ -86,7 +86,6 @@ const MenuLink = ({ to, children, isActiveBg, onClick }) => {
         padding: '1rem 1.5rem',
         color: hover ? '#fff' : isActiveBg ? '#F37021' : '#F37021',
         textDecoration: 'none',
-        fontWeight: 'bold',
         fontSize: 18,
         background: hover
           ? '#f8cfbaff'

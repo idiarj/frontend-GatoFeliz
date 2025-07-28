@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Head from "../../components/head";
-import gatoFaq from "../../assets/gatosesiondespierto.png";
-import questionsImg from "../../assets/questions.png";
+import questionsImg from "../../assets/images/questions.png";
 
 const faqs = [
   {

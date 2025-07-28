@@ -1,4 +1,3 @@
-import React from 'react';
 import { IoCall, IoLogoInstagram } from 'react-icons/io5';
 import Logo from './logo.jsx';
 import Menu from './menu.jsx';

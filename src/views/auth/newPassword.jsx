@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { playSoundOnce, stopAllPurring } from "../../utils/audio";
+import recoverPasswordImg from "../../assets/images/recoverPassword.png";
+import gatosesiondespierto from "../../assets/images/gatosesiondespierto.png";
+import gatosesion from "../../assets/images/gatosesion.png";
+import miau from '../../assets/audios/miau.mp3';
 import "../../App.css";
 import "../../index.css";
-import recoverPasswordImg from "../../assets/recoverPassword.png";
-import gatosesiondespierto from "../../assets/gatosesiondespierto.png";
-import gatosesion from "../../assets/gatosesion.png";
-import miau from '../../assets/miau.mp3';
-import { playSoundOnce, stopAllPurring } from "../../utils/audio";
+
+
 
 const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false);

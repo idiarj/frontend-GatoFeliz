@@ -1,8 +1,7 @@
-import React from 'react';
 import Head from '../../components/head.jsx';
-import rescueCat from '../../assets/aboutus1.png';
-import adoptCat from '../../assets/aboutus2.png';
-import careCat from '../../assets/aboutus3.png';
+import rescueCat from '../../assets/images/aboutus1.png';
+import adoptCat from '../../assets/images/aboutus2.png';
+import careCat from '../../assets/images/aboutus3.png';
 
 const cardData = [
   {

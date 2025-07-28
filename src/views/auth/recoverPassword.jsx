@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { playSoundOnce, stopAllPurring } from "../../utils/audio";
+import gatosesion from "../../assets/images/gatosesion.png";
+import gatosesiondespierto from "../../assets/images/gatosesiondespierto.png";
+import purring from "../../assets/audios/purrings.mp3";
+import recoverPasswordImg from "../../assets/images/recoverPassword.png";
 import "../../App.css";
 import "../../index.css";
-import gatosesion from "../../assets/gatosesion.png";
-import gatosesiondespierto from "../../assets/gatosesiondespierto.png";
-import purring from "../../assets/purrings.mp3";
-import { playSoundOnce, stopAllPurring } from "../../utils/audio";
-import recoverPasswordImg from "../../assets/recoverPassword.png";
 
 const RecoverPassword = () => {
   const [gatoDespierto, setGatoDespierto] = useState(false);

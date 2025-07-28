@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from '../assets/logoicono.png';
+import logo from '../assets/images/logoicono.png';
 
 const Logo = ({ width = 120, height = 120, style = {} }) => (
   <img

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Head from '../../components/head.jsx';
 import Menu from '../../components/menu.jsx';
 
