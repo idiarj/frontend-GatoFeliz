@@ -2,12 +2,68 @@
 import { useState } from "react";
 import { FaUserCircle, FaEnvelope, FaLock, FaPhone } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { fetchInstance } from "../../utils/Fetch.js";
+import { useNavigate } from "react-router-dom";
 import registroImg from "../../assets/images/registro.png";
 import "../../App.css";
 
 const Register = () => {
+  const [formData, setFormData] = useState({
+    nom_usuario: "",
+    email_usuario: "",
+    pwd_usuario: "",
+    tlf_usuario: ""
+  })
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const handleTogglePassword = () => setShowPassword((prev) => !prev);
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+    // Aquí puedes manejar el envío del formulario
+    try {
+      console.log("Formulario enviado:", formData);
+      const response = await fetchInstance.post({
+        endpoint: '/auth/register',
+        body: formData,
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+      })
+      console.log("Respuesta del servidor:", response);
+      const data = await response.json();   
+      console.log("Datos recibidos:", data);
+      if(!response.ok && !data.success){
+        console.log("Registro fallido:", data);
+        return;
+      }
+
+      console.log("Registro exitoso:", data);
+      
+      navigate('/login'); // Redirigir al usuario a la página de inicio de sesión después del registro exitoso
+
+
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      return;
+    }
+    // Por ejemplo, podrías hacer una llamada a la API para registrar al usuario
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    //console.log(e.target)
+    console.log(`Campo cambiado: ${name}, Nuevo valor: ${value}`);
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+
+
   return (
     <div style={{
       display: "flex",
@@ -29,21 +85,23 @@ const Register = () => {
       }}>
         <h2 style={{ color: "#F57C2A", fontWeight: "bold", fontSize: "2.5rem", marginBottom: "0.5rem" }}>REGISTRATE</h2>
         <h3 style={{ color: "#F7B95B", fontWeight: "bold", fontSize: "1.5rem", marginBottom: "2rem" }}>UNETE A NOSOTROS!!</h3>
-        <form style={{ width: "100%", maxWidth: 400, marginTop: 0 }}>
+        <form onSubmit={handleSubmit} style={{ width: "100%", maxWidth: 400, marginTop: 0 }}>
           <div style={{ position: "relative", marginBottom: '1.2rem', marginLeft: '-40px' }}>
             <FaUserCircle style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", color: "#F37021", fontSize: 32 }} />
-            <input type="text" placeholder="Usuario" style={{ ...inputStyle, paddingLeft: 70 }} />
+            <input name="nom_usuario" type="text" placeholder="Usuario" style={{ ...inputStyle, paddingLeft: 70 }} onChange={handleChange}/>
           </div>
           <div style={{ position: "relative", marginBottom: '1.2rem', marginLeft: '-40px' }}>
             <FaEnvelope style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", color: "#F7B95B", fontSize: 32 }} />
-            <input type="email" placeholder="Correo Electronico" style={{ ...inputStyle, paddingLeft: 70 }} />
+            <input name="email_usuario" type="email" placeholder="Correo Electronico" style={{ ...inputStyle, paddingLeft: 70 }} onChange={handleChange} />
           </div>
           <div style={{ position: "relative", marginBottom: '1.2rem', marginLeft: '-40px', display: 'flex', alignItems: 'center', width: '500px' }}>
             <FaLock style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", color: "#F37021", fontSize: 32 }} />
             <input 
+              name="pwd_usuario"  
               type={showPassword ? "text" : "password"} 
               placeholder="Contraseña" 
               style={{ ...inputStyle, paddingLeft: 70, paddingRight: 40, width: '75%' }} 
+              onChange={handleChange}
             />
             <button 
               type="button"
@@ -70,13 +128,15 @@ const Register = () => {
             <div style={{ position: "relative" }}>
               <FaPhone style={{ position: "absolute", left: 18, top: "50%", transform: "translateY(-50%)", color: "#F7B95B", fontSize: 32, pointerEvents: 'none' }} />
               <input 
-                type="tel" 
-                placeholder="Telefono" 
-                style={{ ...inputStyle, paddingLeft: 70 }} 
+                name="tlf_usuario"
+                type="tel"
+                placeholder="Telefono"
+                style={{ ...inputStyle, paddingLeft: 70 }}
                 pattern="[0-9]{10}"
                 maxLength={10}
                 inputMode="numeric"
                 required
+                onChange={handleChange}
                 onInput={e => {
                   e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
                 }}
@@ -88,7 +148,8 @@ const Register = () => {
             <span style={{ color: "#F57C2A", fontWeight: "bold", textDecoration: "none"}}>VOLVER AL INICIO DE SESION</span>
             <a href="/login" style={{ color: "#F7B95B", fontWeight: "bold" }}>HAGA CLICK AQUI</a>
           </div>
-          <button type="submit" style={{
+          <button type="submit" 
+          style={{
             width: "100%",
             background: "#F57C2A",
             color: "#fff",

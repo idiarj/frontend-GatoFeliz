@@ -18,7 +18,7 @@ const RecoverPassword = () => {
       </div>
       {/* Right side with form */}
       <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", background: "#fff" }}>
-        <h1 style={{ color: "#FF6B2C", fontWeight: "bold", fontSize: "3.2rem", textAlign: "center", marginBottom: 24 }}>RECUPERAR<br />CONTRASEÑA</h1>
+        <h1 style={{ color: "#F37021", fontWeight: "bold", fontSize: "3.2rem", textAlign: "center", marginBottom: 24 }}>RECUPERAR<br />CONTRASEÑA</h1>
         <form style={{ width: "90%", maxWidth: 480, marginTop: 32, position: 'relative' }}>
          <img
             src={gatoDespierto ? gatosesiondespierto : gatosesion}
@@ -60,9 +60,9 @@ const RecoverPassword = () => {
             placeholder="Ingrese su correo"
             style={{ width: "100%", padding: "22px", fontSize: "1.3rem", borderRadius: 32, color: "#b94d0d", border: "none", background: "#E5E5E5", marginBottom: 32, outline: "none" }}
           />
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 32, fontSize: 18, color: "#FF6B2C", fontWeight: "bold" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 32, fontSize: 18, color: "#F7B95B", fontWeight: "bold" }}>
             <span>VOLVER AL INICIO DE SESION</span>
-            <a href="/login" style={{ cursor: "pointer", color: "#F7B95B" }}>HAGA CLICK AQUI</a>
+            <a href="/login" style={{ cursor: "pointer", color: "#FF6B2C" }}>HAGA CLICK AQUI</a>
           </div>
           <button
             type="submit"

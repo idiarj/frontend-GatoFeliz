@@ -21,7 +21,7 @@ const Login = () => {
       </div>
       {/* Right side with login form */}
       <div style={{ flex: 1, minWidth: 400, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: '#fff', boxShadow: '0 0 40px 0 rgba(0,0,0,0.07)' }}>
-        <h1 style={{ color: '#F37021', fontWeight: 'bold', fontSize: '3.2rem', marginBottom: '2.5rem', textAlign: 'center', letterSpacing: '1px' }}>INICIA SESIÓN</h1>
+        <h1 style={{ color: '#F37021', fontWeight: 'bold', fontSize: '3.2rem', marginBottom: '3.4rem', textAlign: 'center', letterSpacing: '1px' }}>INICIA SESIÓN</h1>
         <form style={{ width: '100%', maxWidth: 440 }}>
           {/* Usuario */}
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
@@ -113,10 +113,10 @@ const Login = () => {
               {showPassword ? <FaEyeSlash size={28} color="#F37021" /> : <FaEye size={28} color="#F37021" />}
             </button>
           </div>
-          {/* Links */}
-          <div style={{ textAlign: 'center', marginBottom: '2.5rem', fontWeight: 'bold', fontSize: '1.15rem', color: '#F37021', letterSpacing: '0.5px' }}>
-            ¿OLVIDASTE TU CONTRASEÑA? <a href="/recoverPassword" style={{ color: '#F7B95B', cursor: 'pointer', fontSize: '16px',fontWeight: 'bold' }}> HAGA CLICK AQUI</a><br />
-            ¿NO TIENES CUENTA? <a href="/register" style={{ color: '#F7B95B', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}> HAGA CLICK AQUI</a>
+          {/* Links */} 
+          <div style={{ textAlign: 'center', marginBottom: '2.5rem', fontWeight: 'bold', fontSize: '1.15rem', color: '#F7B95B', letterSpacing: '0.5px' }}> 
+            ¿OLVIDASTE TU CONTRASEÑA? <a href="/recoverPassword" style={{ color: '#F37021', cursor: 'pointer', fontSize: '16px',fontWeight: 'bold' }}> HAGA CLICK AQUI</a><br />
+            ¿NO TIENES CUENTA? <a href="/register" style={{ color: '#F37021', cursor: 'pointer', fontSize: '16px', fontWeight: 'bold' }}> HAGA CLICK AQUI</a>
           </div>
           {/* Botón ingresar */}
           <button type="submit" style={{ width: '100%', background: '#F37021', color: '#fff', fontWeight: 'bold', fontSize: '1.45rem', border: 'none', borderRadius: 36, padding: '22px 0', cursor: 'pointer', letterSpacing: '1px', boxShadow: '0 2px 8px 0 rgba(0,0,0,0.04)' }}>
