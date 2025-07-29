@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaStethoscope } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
+import { fetchInstance } from '../utils/Fetch';
+
 
 const menuOptions = [
   { label: 'Inicio', icon: <FaHome />, path: '/dashboard' },
@@ -13,6 +15,25 @@ const menuOptions = [
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos' },
   { label: 'Panel Medico', icon: <FaStethoscope />, path: '/panelMedico' },
+  {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/login', onClick: async () => {
+    // Aquí puedes manejar el cierre de sesión, por ejemplo, limpiando el estado del usuario
+      console.log('Cerrar sesión');
+      // Redirigir a la página de inicio o login
+      const response = await fetchInstance.post({
+        endpoint: '/auth/logout',
+        credentials: 'include'
+      });
+      console.log('Respuesta del servidor:', response);
+      const data = await response.json();
+      console.log('Datos recibidos:', data);
+      if (response.ok) {
+        console.log('Sesión cerrada');
+        // Redirigir a la página de inicio o login
+      } else {
+        console.error('Error al cerrar sesión', );
+      }
+    }
+  }
 ];
 
 const Menu = () => {
@@ -62,6 +83,7 @@ const Menu = () => {
               <MenuLink
                 to={opt.path}
                 isActiveBg={isActive}
+                onClick={opt.onClick}
               >
                 {opt.icon} {opt.label}
               </MenuLink>

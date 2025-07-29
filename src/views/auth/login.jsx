@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { playSoundOnce, stopAllPurring } from '../../utils/audio';
+import { fetchInstance } from '../../utils/Fetch';
+import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import gatosesion from '../../assets/images/gatosesion.png';
 import gatosesiondespierto from '../../assets/images/gatosesiondespierto.png';
@@ -9,9 +11,51 @@ import miau from '../../assets/audios/miau.mp3';
 import '../../App.css';
 
 const Login = () => {
+  const navigate = useNavigate()
+  const [formData, setFormData] = useState({
+    nom_usuario: "",
+    pwd_usuario: ""
+  })
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
   const [gatoDespierto, setGatoDespierto] = useState(false);
+
+    const handleChange = (e) => {
+    const { name, value } = e.target;
+    //console.log(e.target)
+    console.log(`Campo cambiado: ${name}, Nuevo valor: ${value}`);
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+
+    const handleSubmit = async (e)=>{
+      e.preventDefault();
+      try {
+        console.log('Formulario enviado')
+        console.table(formData)
+        const response = await fetchInstance.post({
+          endpoint: '/auth/login',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: formData,
+          credentials: 'include'
+        })
+        const data = await response.json();
+        if(!response.ok && !data.success){
+          console.log('Error while trying to log in', data)
+          return;
+        }
+        console.log('Logged in succesfully', data)
+        navigate('/dashboard')
+      } catch (error) {
+        console.error(`Error while trying to log in`, error)
+      }
+    }
+
 
   return (
     <div style={{ display: 'flex', height: '100vh', background: '#f5f5f5' }}>
@@ -22,11 +66,13 @@ const Login = () => {
       {/* Right side with login form */}
       <div style={{ flex: 1, minWidth: 400, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', background: '#fff', boxShadow: '0 0 40px 0 rgba(0,0,0,0.07)' }}>
         <h1 style={{ color: '#F37021', fontWeight: 'bold', fontSize: '3.2rem', marginBottom: '3.4rem', textAlign: 'center', letterSpacing: '1px' }}>INICIA SESIÓN</h1>
-        <form style={{ width: '100%', maxWidth: 440 }}>
+        <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: 440 }}>
           {/* Usuario */}
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaUserCircle style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
             <input
+              name='nom_usuario'
+              onChange={handleChange}
               type="text"
               placeholder="Usuario"
               style={{
@@ -83,6 +129,8 @@ const Login = () => {
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaLock style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
             <input
+              name='pwd_usuario'
+              onChange={handleChange}
               type={showPassword ? 'text' : 'password'}
               placeholder="Contraseña"
               style={{
@@ -98,8 +146,7 @@ const Login = () => {
                 transition: 'box-shadow 0.2s',
                 color: '#b94d0d',
               }}
-              value={password}
-              onChange={e => setPassword(e.target.value)}
+
             />
             <button
               type="button"
