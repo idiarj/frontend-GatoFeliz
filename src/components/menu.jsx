@@ -10,7 +10,7 @@ const menuOptions = [
   { label: 'Registrarse', icon: <FaUserPlus />, path: '/register' },
   { label: '¿Qué Hacemos?', icon: <FaQuestionCircle />, path: '/aboutUs' },
   { label: 'Donaciones', icon: <FaDonate />, path: '/donations' },
-  { label: 'Adopciones', icon: <FaCat />, path: '/adopciones' },
+  { label: 'Adopciones', icon: <FaCat />, path: '/adoption' },
   { label: 'Apadrinar', icon: <FaPaw />, path: '/apadrinar' },
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos' },

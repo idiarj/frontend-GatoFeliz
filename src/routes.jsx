@@ -7,11 +7,12 @@ import Dashboard from './views/user/dashboard.jsx';
 import AboutUs from './views/user/aboutUs.jsx';
 import Donations from './views/user/donations.jsx';
 import Questions from './views/user/questions.jsx';
+import Adoptions from './views/user/adoption.jsx';
 
 export const router = createBrowserRouter([
     {
         path: '/',
-        element: <Navigate to='/login' replace/>
+        element: <Navigate to='/dashboard' replace/>
     },
     {
         path: '/login',
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
     {
         path: '/questions',
         element: <Questions/>
+    },
+    {
+        path: '/adoption',
+        element: <Adoptions/>
     },
     {
         path: '*',
