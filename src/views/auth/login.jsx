@@ -13,7 +13,7 @@ import '../../App.css';
 const Login = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    nom_usuario: "",
+    identifier_usuario: "",
     pwd_usuario: ""
   })
   const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +71,7 @@ const Login = () => {
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaUserCircle style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
             <input
-              name='nom_usuario'
+              name='identifier_usuario'
               onChange={handleChange}
               type="text"
               placeholder="Usuario"
