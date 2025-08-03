@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import AdoptionCard from "../../../components/AdoptionCard";
-import AddAdoptionCard from "../../../components/AddAdoptionCard";
-import Head from "../../../components/head";
-import Menu from "../../../components/menu";
-import michi1 from "../../assets/michis/michi1siames.png";
-import michi2 from "../../assets/michis/michi2blancoynegro.png";
-import michi3 from "../../assets/michis/michi3tabby.png";
-import michi4 from "../../assets/michis/michi4naranja.png";
-import michi5 from "../../assets/michis/michi5bebe.png";
-import michi6 from "../../assets/michis/michi6ragdoll.png";
-import michi7 from "../../assets/michis/michi7naranjo.png";
-import michi8 from "../../assets/michis/michi8siamesDis.png";
-import michi9 from "../../assets/michis/michi9tabbywhite.png";
+import AdoptionCard from "../../../components/adoptionCard/adoptionCard";
+import AddAdoptionCard from "../../../components/addAdoptionCard/addAdoptionCard.jsx";
+import Head from '../../../components/head/head.jsx';
+import Menu from "../../../components/menu/menu.jsx";
+import michi1 from '../../../assets/michis/michi1siames.png';
+import michi2 from '../../../assets/michis/michi2blancoynegro.png';
+import michi3 from '../../../assets/michis/michi3tabby.png';
+import michi4 from '../../../assets/michis/michi4naranja.png';
+import michi5 from '../../../assets/michis/michi5bebe.png';
+import michi6 from '../../../assets/michis/michi6ragdoll.png';
+import michi7 from '../../../assets/michis/michi7naranjo.png';
+import michi8 from '../../../assets/michis/michi8siamesDis.png';
+import michi9 from '../../../assets/michis/michi9tabbywhite.png';
 import "./adoption.css";
 
 const catsData = [

@@ -3,11 +3,11 @@ import Login from './views/auth/login/login.jsx';
 import Register from './views/auth/register/register.jsx';
 import RecoverPassword from './views/auth/recoverPassword/recoverPassword.jsx';
 import NewPassword from './views/auth/newPassword/newPassword.jsx';
-import Dashboard from './views/user/dashboard.jsx';
-import AboutUs from './views/user/aboutUs.jsx';
-import Donations from './views/user/donations.jsx';
-import Questions from './views/user/questions.jsx';
-import Adoptions from './views/user/adoption.jsx';
+import Dashboard from './views/user/dashboard/dashboard.jsx';
+import AboutUs from './views/user/aboutUs/aboutUs.jsx';
+import Donations from './views/user/donations/donations.jsx';
+import Questions from './views/user/questions/questions.jsx';
+import Adoptions from './views/user/adoption/adoption.jsx';
 
 export const router = createBrowserRouter([
     {

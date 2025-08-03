@@ -1,0 +1,86 @@
+/* Estilos para el componente Head */
+.head-container {
+  width: 100%;
+  margin: 0 auto;
+  background: #fff9db;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 2.5rem 0.8rem 2.5rem;
+  box-sizing: border-box;
+  min-height: 90px;
+  box-shadow: 0 2px 12px 0 rgba(243,112,33,0.04);
+  gap: 32px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.head-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+.head-title {
+  color: #F37021;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-left: 200px;
+  margin-bottom: 0;
+}
+
+.head-right {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+}
+
+.head-contact {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.04);
+  padding: 0.7rem 1.2rem;
+  color: #b94d0d;
+  font-weight: bold;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 180px;
+  margin-right: 10px;
+}
+
+.head-contact-title {
+  margin-bottom: 4px;
+  color: #F37021;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.head-contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+  font-size: 15px;
+}
+
+.head-contact-icon {
+  color: #F37021;
+  font-size: 20px;
+}
+
+.head-contact-text {
+  color: #F37021;
+}
+
+.head-logo {
+  margin-top: -3px;
+  margin-bottom: 3px;
+  margin-left: 20px;
+}

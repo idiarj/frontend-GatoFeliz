@@ -1,6 +1,8 @@
 import { useState } from "react";
-import Head from "../../../components/head";
-import questionsImg from "../../assets/images/questions.png";
+import Head from '../../../components/head/head.jsx';
+import questionsImg from '../../../assets/images/questions.png';
+
+import './questions.css';
 
 const faqs = [
   {
@@ -35,53 +37,22 @@ const Questions = () => {
   return (
     <>
       <Head title={"Preguntas frecuentes"} />
-      <div
-        style={{            
-          minHeight: "100vh",
-          fontFamily: "Montserrat, sans-serif",
-        }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 16px", marginLeft: 60, marginTop: 10, width: "100%" }}>
-          <div
-            style={{
-              background: "#ffe0d1",
-              borderRadius: 24,
-              boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-              padding: "32px",
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              gap: 32,
-              marginTop: 120,
-              marginLeft: 200,
-              position: "relative",
-              width: "1100px",
-              maxWidth: "95vw"
-            }}
-          >
-            <div style={{ flex: 1.2, minWidth: 260, maxWidth: 520 }}>
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      <div className="questions-root">
+        <div className="questions-container">
+          <div className="questions-section">
+            <div className="questions-faqs">
+              <div className="questions-faqs-list">
                 {faqs.map((faq, idx) => (
-                  <div
-                    key={idx}
-                    style={{
-                      borderRadius: 14,
-                      boxShadow: "0 2px 8px #0001",
-                      padding: "10px 18px",
-                      marginBottom: 3,
-                      maxWidth: 500,
-                      background: "#fff"
-                    }}
-                  >
+                  <div key={idx} className="questions-faq-item">
                     <div
-                      style={{ color: "#F37021", fontWeight: 700, fontSize: 16, display: "flex", alignItems: "center", gap: 6, cursor: "pointer" }}
+                      className={`questions-faq-question${openIdx === idx ? ' open' : ''}`}
                       onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
                     >
                       {faq.question}
-                      <span style={{ marginLeft: "auto", fontSize: 20, color: "#F7B95B", transition: "transform 0.2s", transform: openIdx === idx ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
+                      <span className="questions-faq-arrow" style={{ transform: openIdx === idx ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
                     </div>
                     {openIdx === idx && (
-                      <div style={{ color: "#b94d0d", fontWeight: 500, fontSize: 14, marginTop: 5 }}>
+                      <div className="questions-faq-answer">
                         {faq.answer}
                       </div>
                     )}
@@ -89,11 +60,11 @@ const Questions = () => {
                 ))}
               </div>
             </div>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <div className="questions-img-container">
               <img
                 src={questionsImg}
                 alt="Questions ilustración"
-                style={{ width: 260, marginTop: 32, marginBottom: 16 }}
+                className="questions-img"
               />
             </div>
           </div>

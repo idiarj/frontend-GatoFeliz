@@ -1,0 +1,60 @@
+/* Estilos para AddAdoptionCard */
+.add-adoption-card-root {
+  background: #f4f4f4;
+  border: 2px solid #1a237e33;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px #0001;
+  width: 270px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.add-adoption-card-img-btn {
+  background: #e0e0e0;
+  border: 2px solid #1976d2;
+  border-radius: 8px;
+  width: 210px;
+  height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #1565c0;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 16px;
+}
+
+.add-adoption-card-img-icon {
+  margin-bottom: 8px;
+}
+
+.add-adoption-card-fields {
+  margin-bottom: 10px;
+  margin-top: 2px;
+}
+
+.add-adoption-card-fields-btn {
+  background: #fff;
+  border: 1px solid #1976d2;
+  color: #1976d2;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 4px 12px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.add-adoption-card-desc {
+  color: #bdbdbd;
+  font-size: 13px;
+  margin-top: 2px;
+  text-align: center;
+}

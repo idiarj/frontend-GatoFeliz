@@ -1,7 +1,8 @@
-import Head from '../../../components/head.jsx';
-import rescueCat from '../../assets/images/aboutus1.png';
-import adoptCat from '../../assets/images/aboutus2.png';
-import careCat from '../../assets/images/aboutus3.png';
+import Head from '../../../components/head/head.jsx';
+import Menu from "../../../components/menu/menu.jsx";
+import rescueCat from '../../../assets/images/aboutus1.png';
+import adoptCat from '../../../assets/images/aboutus2.png';
+import careCat from '../../../assets/images/aboutus3.png';
 import './aboutUs.css';
 
 const cardData = [
@@ -32,6 +33,7 @@ export default function AboutUs() {
   return (
     <div className="aboutus-bg">
       <Head title="¿Qué hacemos?" />
+      <Menu />
       <div className="aboutus-cards">
         {cardData.map((card, idx) => (
           <div
