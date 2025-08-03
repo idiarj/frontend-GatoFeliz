@@ -13,7 +13,7 @@ import '../../App.css';
 const Login = () => {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    identifier_user: "",
+    identifier_usuario: "",
     pwd_usuario: ""
   })
   const [showPassword, setShowPassword] = useState(false);
