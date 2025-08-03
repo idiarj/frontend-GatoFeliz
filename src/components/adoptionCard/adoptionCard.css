@@ -1,3 +1,65 @@
+/* Estilos para el botón Compartir y menú */
+.adoption-card-share {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.share-dropdown {
+  position: relative;
+}
+
+
+.adoption-card-share-main {
+  background: #ffb347;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.adoption-card-share-main:hover {
+  background: #ff9800;
+}
+
+.share-icon svg {
+  display: block;
+}
+
+.share-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  padding: 0.5rem 0;
+  z-index: 10;
+  min-width: 140px;
+}
+
+.share-menu-btn {
+  background: none;
+  border: none;
+  color: #333;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.share-menu-btn:hover {
+  background: #ffb34722;
+  color: #ff9800;
+}
 
 .adoption-card {
   width: 355px;
@@ -6,7 +68,6 @@
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
   display: flex;
   flex-direction: column;
 }
@@ -61,7 +122,7 @@
   color: #fff;
   border: none;
   border-radius: 20px;
-  padding: 8px 0;
+  padding: 8px 48px;
   font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;

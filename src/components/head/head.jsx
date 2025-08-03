@@ -17,7 +17,7 @@ const Head = ({ title, showSearch = false, onSearch }) => {
                 <IoSearch className="head-search-icon" />
                 <input
                   type="text"
-                  placeholder="Buscar..."
+                  placeholder="Buscar por nombre..."
                   className="head-search-input"
                   onChange={e => onSearch && onSearch(e.target.value)}
                 />
