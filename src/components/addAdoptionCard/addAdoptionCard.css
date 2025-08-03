@@ -1,60 +1,84 @@
-/* Estilos para AddAdoptionCard */
-.add-adoption-card-root {
-  background: #f4f4f4;
-  border: 2px solid #1a237e33;
-  border-radius: 18px;
-  box-shadow: 0 2px 8px #0001;
-  width: 270px;
-  height: 320px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  padding: 0;
-}
-
-.add-adoption-card-img-btn {
-  background: #e0e0e0;
-  border: 2px solid #1976d2;
-  border-radius: 8px;
-  width: 210px;
-  height: 170px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #1565c0;
-  font-weight: 700;
-  font-size: 20px;
-  cursor: pointer;
-  margin-bottom: 16px;
-}
-
-.add-adoption-card-img-icon {
-  margin-bottom: 8px;
-}
-
-.add-adoption-card-fields {
-  margin-bottom: 10px;
-  margin-top: 2px;
-}
-
-.add-adoption-card-fields-btn {
+/* Contenedor principal */
+.add-card {
+  width: 280px;
   background: #fff;
-  border: 1px solid #1976d2;
-  color: #1976d2;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 4px 12px;
-  margin-right: 6px;
-  cursor: pointer;
+  border-radius: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  gap: 12px;
+  margin: 0 auto;
 }
 
-.add-adoption-card-desc {
-  color: #bdbdbd;
-  font-size: 13px;
-  margin-top: 2px;
+/* Encabezado con icono */
+.add-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.add-card-header-icon {
+  color: #f37021;
+}
+.add-card-header-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #b94d0d;
+  font-weight: 700;
+}
+
+/* Botón de imagen */
+.add-card-image-btn {
+  width: 100%;
+  height: 160px;
+  background: #f9f9f9;
+  border: 2px dashed #f37021;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #f37021;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.add-card-image-btn:hover:not(:disabled) {
+  background: #fff3e6;
+  border-color: #d95c13;
+}
+.add-card-image-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.add-card-image-icon {
+  margin-bottom: 6px;
+}
+
+/* Botón de campos */
+.add-card-info-btn {
+  width: 100%;
+  background: #f37021;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.add-card-info-btn:hover {
+  background: #d95c13;
+}
+
+/* Descripción */
+.add-card-desc {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #888;
   text-align: center;
+  flex-grow: 1;
 }

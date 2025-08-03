@@ -1,34 +1,42 @@
 import React, { useRef } from "react";
-import { FaImage, FaEdit, FaCheck, FaTimes } from "react-icons/fa";
-import './addAdoptionCard.css';
+import { FaImage, FaPaw } from "react-icons/fa";
+import "./AddAdoptionCard.css";
 
-const AddAdoptionCard = ({ onAdd, uploading }) => {
+const AddAdoptionCard = ({ onAddImage, onAddInfo, uploading }) => {
   const fileInput = useRef();
 
   return (
-    <div className="add-adoption-card-root">
+    <div className="add-card">
+      <div className="add-card-header">
+        <FaPaw className="add-card-header-icon" />
+        <h4 className="add-card-header-title">Nuevo Gatito</h4>
+      </div>
+
       <button
-        className="add-adoption-card-img-btn"
+        className="add-card-image-btn"
         onClick={() => fileInput.current.click()}
+        disabled={uploading}
       >
-        <FaImage size={48} className="add-adoption-card-img-icon" />
-        Insertar imagen
+        <FaImage size={32} className="add-card-image-icon" />
+        <span>Subir foto</span>
         <input
           type="file"
           accept="image/*"
           ref={fileInput}
           style={{ display: "none" }}
-          disabled={uploading}
         />
       </button>
-      <div className="add-adoption-card-fields">
-        <button className="add-adoption-card-fields-btn">
-          Agregar nombre | Sexo | Edad
-        </button>
-      </div>
-      <div className="add-adoption-card-desc">
-        Completa los datos y sube la foto del animal para crear una nueva tarjeta de adopción.
-      </div>
+
+      <button
+        className="add-card-info-btn"
+        onClick={onAddInfo}
+      >
+        Agregar Nombre, Sexo y Edad
+      </button>
+
+      <p className="add-card-desc">
+        Completa los datos y sube la foto para crear la tarjeta.
+      </p>
     </div>
   );
 };

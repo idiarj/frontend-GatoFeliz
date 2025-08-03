@@ -1,25 +1,184 @@
-/* Estilos para dashboard.jsx */
-
+/* layout general */
 .dashboard-container {
-  min-height: 100vh;
-  background: #fff;
-}
-.dashboard-layout {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2vw 3vw;
+  min-height: 100vh;
+  background: #f4f4f4;
 }
 .dashboard-sidebar {
-  min-width: 180px;
+  background: #fff;
+  padding: 2rem 1rem;
+  border-right: 1px solid #eee;
+}
+.dashboard-sidebar :global(.menu-item-active) {
+  background: #fff9c4;
+  border-radius: 8px;
+}
+.dashboard-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HEADER */
+.dashboard-header-container {
+  background: #fff9c4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+}
+.menu-trigger {
+  color: #f47c2c;
+  font-weight: bold;
+  margin-right: 1rem;
+}
+.dashboard-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #f47c2c;
+  font-weight: 900;
+}
+.dashboard-logo {
+  width: 80px;
+  height: 80px;
+  margin-right: 2rem;
+}
+
+/* GRID DE SECCIONES */
+.dashboard-sections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(200px, auto);
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+/* Estilos base de cada sección */
+.dashboard-section {
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: box-shadow 0.2s;
+}
+.dashboard-section:hover {
+  box-shadow: 0 4px 16px rgba(244,124,44,0.15);
+}
+
+/* CARD: Adopciones */
+.dashboard-section.adopciones {
+  background: #fff9c4;
+  border-top-left-radius: 24px;
+}
+.dashboard-section.adopciones h2 {
+  margin: 0 0 0.5rem;
+  color: #d4a00c;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.dashboard-section.adopciones img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+}
+.dashboard-section.adopciones .dashboard-section-info span {
+  color: #a67c00;
+  font-size: 0.9rem;
+  display: block;
+}
+.dashboard-section.adopciones .dashboard-link {
+  color: #f47c2c;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* CARD: Donaciones */
+.dashboard-section.donaciones {
+  background: #ffe0cc;
+  border-radius: 24px;
+}
+.dashboard-section.donaciones h2 {
+  color: #f47c2c;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.dashboard-section.donaciones .dashboard-section-info span {
+  color: #f47c2c;
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+.dashboard-section.donaciones .dashboard-link {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+}
+
+/* CARD: Apadrinar */
+.dashboard-section.apadrinar {
+  background: #ffe0cc;
+  border-radius: 24px;
+}
+.dashboard-section.apadrinar img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 0.8rem;
+}
+.dashboard-section.apadrinar .dashboard-section-info span {
+  color: #f47c2c;
+  font-size: 0.9rem;
+}
+.dashboard-section.apadrinar .dashboard-link {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #f47c2c;
+}
+
+/* CARD: Preguntas */
+.dashboard-section.preguntas {
+  background: #fff9c4;
+  border-radius: 24px;
+}
+.dashboard-section.preguntas h2 {
+  color: #d4a00c;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.dashboard-section.preguntas .dashboard-section-info span {
+  color: #a67c00;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* CARD: Contacto de denuncias */
+.dashboard-section.contacto {
+  grid-column: 1 / span 3;
+  background: #ffe0cc;
+  border-radius: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 0;
+  justify-content: center;
+  min-height: 100px;
 }
-.dashboard-content {
-  flex: 1;
-  padding: 0;
-  min-width: 0;
+.dashboard-section.contacto h3 {
+  margin: 0;
+  color: #f47c2c;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.dashboard-section.contacto span {
+  color: #f47c2c;
+  font-size: 1rem;
+  margin-top: 0.4rem;
 }
