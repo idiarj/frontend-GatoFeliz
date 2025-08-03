@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import AdoptionCard from "../../components/AdoptionCard";
-import AddAdoptionCard from "../../components/AddAdoptionCard";
-import Head from "../../components/head";
-import Menu from "../../components/menu";
+import AdoptionCard from "../../../components/AdoptionCard";
+import AddAdoptionCard from "../../../components/AddAdoptionCard";
+import Head from "../../../components/head";
+import Menu from "../../../components/menu";
 import michi1 from "../../assets/michis/michi1siames.png";
 import michi2 from "../../assets/michis/michi2blancoynegro.png";
 import michi3 from "../../assets/michis/michi3tabby.png";
@@ -12,6 +12,7 @@ import michi6 from "../../assets/michis/michi6ragdoll.png";
 import michi7 from "../../assets/michis/michi7naranjo.png";
 import michi8 from "../../assets/michis/michi8siamesDis.png";
 import michi9 from "../../assets/michis/michi9tabbywhite.png";
+import "./adoption.css";
 
 const catsData = [
   {
@@ -99,15 +100,15 @@ const Adoptions = () => {
   }, []);
 
   return (
-    <div style={{ background: "#fff"}}>
+    <div className="adoption-container">
       <Head title="Adopciones" />
       <Menu />
-      <div style={{ marginLeft: 240, paddingTop: 120, paddingRight: 32, paddingLeft: 32 }}>
-        <div style={{ textAlign: "center", color: "#b94d0d", fontWeight: 700, fontSize: 22, marginBottom: 18 }}>
+      <div className="adoption-content">
+        <div className="adoption-info">
           La manera de adoptar es enviando una solicitud o visitando directamente la fundación.<br />
           Escríbenos antes de venir para coordinar tu visita y poder atenderte de la mejor manera posible.
         </div>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 32, justifyContent: "center" }}>
+        <div className="adoption-cards">
           {cats.map((cat) => (
             <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
           ))}

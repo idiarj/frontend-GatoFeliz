@@ -1,0 +1,154 @@
+/* Estilos para register.jsx */
+
+.register-container {
+  display: flex;
+  height: 100vh;
+  background: #fff;
+}
+.register-form-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  padding: 1rem;
+  padding-top: 3.5vh;
+  min-height: 0;
+  overflow: hidden;
+}
+.register-title {
+  color: #F57C2A;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+.register-subtitle {
+  color: #F7B95B;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+.register-form {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 0;
+}
+.register-input-group {
+  position: relative;
+  margin-bottom: 1.2rem;
+  margin-left: -40px;
+}
+.register-icon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 32px;
+}
+.register-icon.user {
+  color: #F37021;
+}
+.register-icon.email {
+  color: #F7B95B;
+}
+.register-icon.lock {
+  color: #F37021;
+}
+.register-icon.phone {
+  color: #F7B95B;
+  pointer-events: none;
+}
+.register-input {
+  width: 400px;
+  padding: 16px 16px 16px 70px;
+  border-radius: 30px;
+  border: none;
+  background: #E5E5E5;
+  font-size: 1.1rem;
+  outline: none;
+  box-shadow: 0 4px 16px 0 rgba(0,0,0,0.10);
+  transition: box-shadow 0.2s;
+  color: #b94d0d;
+}
+.password-group {
+  display: flex;
+  align-items: center;
+  width: 500px;
+}
+.register-input.password {
+  padding-right: 40px;
+  width: 75%;
+}
+.toggle-password-btn {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: #F37021;
+  font-size: 24px;
+  outline: none;
+}
+.phone-group {
+  position: relative;
+}
+.phone-hint {
+  color: #cccccc;
+  font-size: 13px;
+  margin-top: 0.2rem;
+  margin-left: 0.5rem;
+}
+.register-links {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+.register-link-text {
+  color: #F57C2A;
+  font-weight: bold;
+  text-decoration: none;
+}
+.register-link {
+  color: #F7B95B;
+  font-weight: bold;
+}
+.register-btn {
+  width: 100%;
+  background: #F57C2A;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 0.8rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.register-dashboard-link {
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.dashboard-link {
+  color: #F37021;
+  cursor: pointer;
+}
+.register-image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff9db;
+  height: 100vh;
+}
+.register-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

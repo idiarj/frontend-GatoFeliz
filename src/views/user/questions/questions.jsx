@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Head from "../../components/head";
+import Head from "../../../components/head";
 import questionsImg from "../../assets/images/questions.png";
 
 const faqs = [
