@@ -5,9 +5,17 @@
 }
 .adoption-content {
   margin-left: 240px;
-  padding-top: 140px;
+  padding-top: 30px;
   padding-right: 32px;
   padding-left: 32px;
+}
+/* Asegura que el Head no esté fijo y el buscador quede visible arriba */
+.adoption-container .head-container {
+  position: static !important;
+  top: unset !important;
+  left: unset !important;
+  width: 100%;
+  z-index: auto;
 }
 .adoption-info {
   text-align: center;

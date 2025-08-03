@@ -1,3 +1,46 @@
+/* Estilos para el buscador opcional en Head */
+.head-search {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+}
+
+.head-search {
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #f37021;
+  border-radius: 30px;
+  padding: 6px 12px;
+  height: 40px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: border-color 0.3s ease;
+}
+
+.head-search:focus-within {
+  border-color: #d95c13;
+}
+.head-search-icon {
+  font-size: 18px;
+  color: #f37021;
+  margin-right: 8px;
+}
+
+.head-search-input {
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-family: inherit;
+  background-color: transparent;
+  color: #444;
+  padding: 0 10px;
+  min-width: 200px;
+}
+
+.head-search-input::placeholder {
+  color: #bbb;
+}
+
 /* Estilos para el componente Head */
 .head-container {
   width: 100%;

@@ -91,17 +91,22 @@ const catsData = [
 
 const Adoptions = () => {
   const [cats, setCats] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    // Simula la petición a la base de datos
     setTimeout(() => {
       setCats(catsData);
-    }, 500); // Simula un pequeño delay
+    }, 500);
   }, []);
+
+  // Filtrar gatos por nombre
+  const filteredCats = cats.filter(cat =>
+    cat.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div className="adoption-container">
-      <Head title="Adopciones" />
+      <Head title="Adopciones" showSearch={true} onSearch={setSearch} />
       <Menu />
       <div className="adoption-content">
         <div className="adoption-info">
@@ -109,7 +114,7 @@ const Adoptions = () => {
           Escríbenos antes de venir para coordinar tu visita y poder atenderte de la mejor manera posible.
         </div>
         <div className="adoption-cards">
-          {cats.map((cat) => (
+          {filteredCats.map((cat) => (
             <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
           ))}
           <AddAdoptionCard onAdd={() => alert("Agregar nuevo gato (funcionalidad pendiente)")} />

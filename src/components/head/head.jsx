@@ -1,11 +1,9 @@
-import { IoCall, IoLogoInstagram } from 'react-icons/io5';
+import { IoCall, IoLogoInstagram, IoSearch } from 'react-icons/io5';
 import Logo from '../logo.jsx';
 import Menu from '../menu/menu.jsx';
-
-
 import './head.css';
 
-const Head = ({ title }) => {
+const Head = ({ title, showSearch = false, onSearch }) => {
   return (
     <div className="head-container">
       <div className="head-left">
@@ -13,17 +11,30 @@ const Head = ({ title }) => {
         <h1 className="head-title">{title}</h1>
       </div>
       <div className="head-right">
-        <div className="head-contact">
-          <div className="head-contact-title">CONTACTO</div>
-          <div className="head-contact-row">
-            <IoCall className="head-contact-icon" />
-            <span className="head-contact-text">0414 640-7460</span>
-          </div>
-          <div className="head-contact-row">
-            <IoLogoInstagram className="head-contact-icon" />
-            <span className="head-contact-text">gatofelizvenezuela</span>
-          </div>
-        </div>
+        {showSearch && (
+          <>
+              <div className="head-search">
+                <IoSearch className="head-search-icon" />
+                <input
+                  type="text"
+                  placeholder="Buscar..."
+                  className="head-search-input"
+                  onChange={e => onSearch && onSearch(e.target.value)}
+                />
+              </div>
+            <div className="head-contact">
+              <div className="head-contact-title">CONTACTO</div>
+              <div className="head-contact-row">
+                <IoCall className="head-contact-icon" />
+                <span className="head-contact-text">0414 640-7460</span>
+              </div>
+              <div className="head-contact-row">
+                <IoLogoInstagram className="head-contact-icon" />
+                <span className="head-contact-text">gatofelizvenezuela</span>
+              </div>
+            </div>
+          </>
+        )}
         <Logo width={100} height={100} className="head-logo" />
       </div>
     </div>
