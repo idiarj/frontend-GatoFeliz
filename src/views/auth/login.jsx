@@ -71,7 +71,7 @@ const Login = () => {
           <div style={{ position: 'relative', marginBottom: '2rem' }}>
             <FaUserCircle style={{ position: 'absolute', left: 18, top: '50%', transform: 'translateY(-50%)', color: '#F37021', fontSize: 32 }} />
             <input
-              name='identifier_user'
+              name='identifier_usuario'
               onChange={handleChange}
               type="text"
               placeholder="Usuario"
