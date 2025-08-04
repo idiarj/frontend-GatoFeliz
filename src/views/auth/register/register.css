@@ -71,15 +71,14 @@
   transition: box-shadow 0.2s;
   color: #b94d0d;
 }
-.password-group {
-  display: flex;
-  align-items: center;
-  width: 500px;
-}
+
+/* Solo agrego el padding-right para el ojito, el resto lo hereda de .register-input */
 .register-input.password {
-  padding-right: 40px;
-  width: 75%;
+  padding-right: 50px;
 }
+
+
+/* Alineo el ojito igual que los íconos de los otros inputs */
 .toggle-password-btn {
   position: absolute;
   right: 35px;
@@ -144,7 +143,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff9db;
+  background: #fffdce;
   height: 100vh;
 }
 .register-image {

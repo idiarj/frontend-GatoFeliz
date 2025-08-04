@@ -1,83 +1,99 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { FiPhone } from 'react-icons/fi';
+import { FaQuestionCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Head from '../../../components/head/head.jsx';
-import Menu from "../../../components/menu/menu.jsx";
+import Menu from '../../../components/menu/menu.jsx';
 import './dashboard.css';
 
 import logoIcono from '../../../assets/images/logoicono.png';
-import michi1siames from '../../../assets/michis/michi1siames.png';
-import michi2blancoynegro from '../../../assets/michis/michi2blancoynegro.png';
+import michiNina from '../../../assets/michis/michi1siames.png';
+import michiPair from '../../../assets/michis/michi2blancoynegro.png';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const [lastAdoptionId, setLastAdoptionId] = useState(null);
-
-  useEffect(() => {
-    fetch('/api/adoptions/last')
-      .then(res => res.json())
-      .then(data => setLastAdoptionId(data.id))
-      .catch(() => setLastAdoptionId('N/A'));
-  }, []);
 
   return (
     <div className="dashboard-container">
-      <Menu className="dashboard-sidebar" />
-      <div className="dashboard-main">
-        <div className="dashboard-header-container">
-          <div className="dashboard-header">
-            <span className="menu-trigger">menu &gt;</span>
-            <h1>Bienvenido a Gato Feliz Venezuela</h1>
-          </div>
-          <img src={logoIcono} alt="Logo" className="dashboard-logo" />
-        </div>
+      {/* Sidebar with Menu component */}
+      <div className="dashboard-sidebar">
+        <Menu />
+      </div>
 
+      {/* Main content area */}
+      <div className="dashboard-main">
+        {/* Header component */}
+        <Head 
+          title="Bienvenido a Gato Feliz Venezuela"
+          logoSrc={logoIcono}
+        />
+
+        {/* Dashboard sections grid */}
         <div className="dashboard-sections">
-          {/* Adopciones */}
-          <div className="dashboard-section adopciones" onClick={() => navigate('/adoption')}>
+          {/* Adopciones Card */}
+          <div 
+            className="dashboard-section adopciones"
+            onClick={() => navigate('/adoptions')}
+          >
             <h2>Adopciones</h2>
-            <img src={michi1siames} alt="Adopción" />
+            <img src={michiNina} alt="Nina - Gatita en adopción" />
             <div className="dashboard-section-info">
               <span>Nina | Hembra | 1 año aprox</span>
-              <span>Último ID: {lastAdoptionId}</span>
-              <span className="dashboard-link">Ver más...</span>
+              <div className="dashboard-link">Ver mas…</div>
             </div>
           </div>
 
-          {/* Donaciones */}
-          <div className="dashboard-section donaciones" onClick={() => navigate('/donations')}>
+          {/* Donaciones Card */}
+          <div 
+            className="dashboard-section donaciones"
+            onClick={() => navigate('/donations')}
+          >
             <h2>Donaciones</h2>
             <div className="dashboard-section-info">
-              <span>Método de pago</span>
+              <strong>Método de pago</strong>
               <span>Zelle | Pago móvil | PayPal</span>
-              <span>También puedes donar:</span>
-              <span>Alimento, Medicinas, Productos de limpieza...</span>
-              <span className="dashboard-link">Cada aporte cuenta</span>
+              <strong>También puedes donar:</strong>
+              <span>Alimento</span>
+              <span>Medicinas</span>
+              <span>Productos de limpieza...</span>
+              <div className="dashboard-link">Cada aporte cuenta</div>
             </div>
           </div>
 
-          {/* Apadrinar */}
-          <div className="dashboard-section apadrinar" onClick={() => navigate('/apadrinar')}>
-            <img src={michi2blancoynegro} alt="Apadrinar" />
+          {/* Apadrinar Card */}
+          <div 
+            className="dashboard-section apadrinar"
+            onClick={() => navigate('/sponsor')}
+          >
+            <img src={michiPair} alt="Gatitos para apadrinar" />
             <div className="dashboard-section-info">
-              <span>¿No puedes adoptar pero quieres ofrecerle amor y estabilidad a un gatito?</span>
-              <span className="dashboard-link">Apadrinar</span>
+              <span>
+                ¿No puedes adoptar pero quieres ofrecerle amor y 
+                estabilidad a un gatito?
+              </span>
+              <div className="dashboard-link">Apadrinar</div>
             </div>
           </div>
 
-          {/* Preguntas */}
-          <div className="dashboard-section preguntas" onClick={() => navigate('/questions')}>
-            <h2>Preguntas</h2>
+          {/* Preguntas Card */}
+          <div 
+            className="dashboard-section preguntas"
+            onClick={() => navigate('/questions')}
+          >
+            <h2>Preguntas <FaQuestionCircle size={30} color="#a67c00" style={{verticalAlign: 'middle', marginLeft: '110px'}} /></h2>
             <div className="dashboard-section-info">
               <span>¿Se puede visitar la fundación?</span>
               <span>¿Solo ayudan gatos?</span>
               <span>¿Cuánto cuesta esterilizar?</span>
+              <span>¿Cómo puedo ayudar?</span>
+              <div className="dashboard-link">Ver más preguntas</div>
             </div>
           </div>
 
-          {/* Contacto de denuncias */}
+          {/* Contacto de denuncias Card */}
           <div className="dashboard-section contacto">
-            <h3>CONTACTO DE DENUNCIAS POR MALTRATO</h3>
-            <span>📞 +58 4129267842</span>
+            <h3>CONTACTO DE<br /> DENUNCIAS POR MALTRATO</h3>
+            <span><FiPhone size={24} color="#f47c2c" /> +58 4129267842</span>
           </div>
         </div>
       </div>
