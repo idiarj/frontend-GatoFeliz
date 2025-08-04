@@ -46,7 +46,7 @@
   overflow: hidden;
   margin-top: 80px;
   cursor: pointer;
-  font-size: 1.25rem;
+  font-size: 1.6rem;
 }
 
 .dashboard-section:hover {
@@ -147,18 +147,23 @@
   grid-row: 1 / span 2;
   position: relative;
   height: 510px;
+  overflow: hidden;
 }
 
 .dashboard-section.apadrinar img {
   width: 100%;
-  height: 220px;
+  height: 340px;
   object-fit: cover;
-  border-radius: 16px;
-  margin-bottom: 1.5rem;
+  border-radius: 0;
+  margin-bottom: 0;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .dashboard-section.apadrinar .dashboard-section-info {
-  margin-top: auto;
+  margin-top: 350px;
   text-align: center;
   padding-bottom: 1rem;
 }
