@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { FaImage, FaPaw } from "react-icons/fa";
-import "./AddAdoptionCard.css";
+import "./addAdoptionCard.css";
 
 const AddAdoptionCard = ({ onAddImage, onAddInfo, uploading }) => {
   const fileInput = useRef();

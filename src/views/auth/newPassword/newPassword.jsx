@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { playSoundOnce, stopAllPurring } from "../../../utils/audio";
+import { fetchInstance } from "../../../utils/Fetch";
 import recoverPasswordImg from "../../../assets/images/recoverPassword.png";
 import gatosesiondespierto from "../../../assets/images/gatosesiondespierto.png";
 import gatosesion from "../../../assets/images/gatosesion.png";
@@ -15,16 +17,56 @@ const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [gatoDespierto, setGatoDespierto] = useState(false);
+
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
+  useEffect(() => {
+    if (!token) {
+      console.error("No token found in URL, the password reset wont work.");
+      //navigate("/login");
+    }
+    console.log("Token from URL:", token);
+  }, [token, navigate]);
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+    try {
+      console.log("New password submitted:", password);
+      //setPassword("");    
+      const response = await fetchInstance.post({
+        endpoint: '/auth/reset-password',
+        body: {
+          token,
+          newPassword: password
+        },
+        headers: { 'Content-Type': 'application/json' }
+      })
+      const data = await response.json();
+      if (data.success) {
+        console.log("Password reset successful");
+        // Optionally, redirect to login or show a success message
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error submitting new password:", error);
+    }
+    // Handle form submission logic here
+    // Reset the password field after submission
+  }
+
+
+
   return (
     <div className="newpass-container">
       {/* Left side with image */}
       <div className="newpass-image-section">
         <img src={recoverPasswordImg} alt="Recuperar contraseña" className="newpass-image" />
-      </div>como
+      </div>
       {/* Right side with form */}
       <div className="newpass-form-section">
         <h1 className="newpass-title">NUEVA<br />CONTRASEÑA</h1>
-        <form className="newpass-form">
+        <form onSubmit={handleSubmit} className="newpass-form">
           <div className="newpass-input-group">
             <img
               src={gatoDespierto ? gatosesiondespierto : gatosesion}
@@ -76,6 +118,7 @@ const NewPassword = () => {
             <a href="/login" className="newpass-link">HAGA CLICK AQUI</a>
           </div>
           <button
+
             type="submit"
             className="newpass-btn"
           >

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { playSoundOnce, stopAllPurring } from "../../../utils/audio";
+import { fetchInstance } from "../../../utils/Fetch";
 import gatosesion from "../../../assets/images/gatosesion.png";
 import gatosesiondespierto from "../../../assets/images/gatosesiondespierto.png";
 import purring from "../../../assets/audios/purrings.mp3";
@@ -10,6 +11,27 @@ import "./recoverPassword.css";
 
 const RecoverPassword = () => {
   const [gatoDespierto, setGatoDespierto] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e)=>{
+    e.preventDefault();
+    try {
+      const response = await fetchInstance.post({
+        endpoint: '/auth/forgot-password',
+        body: { email_usuario: email },
+        headers: { 'Content-Type': 'application/json' },
+      });
+      const data = await response.json();
+      console.log("Email submitted:", email);
+      console.log("Response data:", data);
+
+      if (data.success) {
+        console.log("Password recovery email sent successfully");
+      }
+    } catch (error) {
+      console.error("Error submitting email:", error);
+    }
+  }
   
   return (
     <div className="recover-container">
@@ -20,7 +42,7 @@ const RecoverPassword = () => {
       {/* Right side with form */}
       <div className="recover-form-section">
         <h1 className="recover-title">RECUPERAR<br />CONTRASEÑA</h1>
-        <form className="recover-form">
+        <form onSubmit={handleSubmit} className="recover-form">
           <img
             src={gatoDespierto ? gatosesiondespierto : gatosesion}
             alt="Gato sesión"
@@ -48,6 +70,7 @@ const RecoverPassword = () => {
             }}
           />
           <input
+            onChange={e => setEmail(e.target.value)}
             type="email"
             placeholder="Ingrese su correo"
             className="recover-input"
