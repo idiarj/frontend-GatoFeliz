@@ -1,9 +1,21 @@
-/* Estilos para el botón Compartir y menú */
-.adoption-card-share {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: flex-end;
-  position: relative;
+/* Mueve el icono de compartir a la derecha */
+.adoption-card-share-icon {
+  margin-left: auto;
+}
+/* Acciones alineadas a la derecha */
+.adoption-card-button {
+  background-color: #f37021;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 48px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 40px;
 }
 
 .share-dropdown {
@@ -117,19 +129,6 @@
   color: #7a4f02;
 }
 
-.adoption-card-button {
-  background-color: #f37021;
-  color: #fff;
-  border: none;
-  border-radius: 20px;
-  padding: 8px 48px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
 
 .adoption-card-button:hover {
   background-color: #d95c13;
