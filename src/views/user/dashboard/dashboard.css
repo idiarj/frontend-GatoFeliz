@@ -35,22 +35,30 @@
 }
 
 /* Estilos base de cada sección */
+/* Estilos base de cada sección */
 .dashboard-section {
   height: 100%;
   padding: 2rem 1.5rem;
-  border-radius: 28px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.09);
+  margin-top: 100px;
+}
+
+/* Elimina el padding para el card de adopciones y ajusta el ancho */
+.dashboard-section.adopciones {
+  padding: 0;
   display: flex;
   flex-direction: column;
-  transition: box-shadow 0.2s ease;
-  overflow: hidden;
-  margin-top: 80px;
-  cursor: pointer;
-  font-size: 1.6rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 500px;
+  min-width: 360px;
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 .dashboard-section:hover {
-  box-shadow: 0 4px 16px rgba(244, 124, 44, 0.15);
+  box-shadow: 0 12px 40px rgba(244, 124, 44, 0.18), 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
 /* CARD: Adopciones */
@@ -59,22 +67,33 @@
   border-top-left-radius: 24px;
   grid-column: 1;
   grid-row: 1;
-  height: 340px;
+  height: 375px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  margin-top: 100px;
 }
 
 .dashboard-section.adopciones h2 {
   margin: 0 0 0.8rem 0;
-  color: #d4a00c;
-  font-size: 1.1rem;
+  color: #f47c2c;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .dashboard-section.adopciones img {
-  width: 100%;
-  height: 160px;
+  width: calc(100% + 3rem);
+  height: 220px;
   object-fit: cover;
-  border-radius: 16px;
-  margin-bottom: 1.2rem;
+  border-radius: 0;
+  margin-left: -1.5rem;
+  margin-right: -1.5rem;
+  margin-bottom: 1rem;
+  display: block;
 }
 
 .dashboard-section.adopciones .dashboard-section-info {
@@ -87,6 +106,14 @@
   display: block;
   margin-bottom: 0.4rem;
 }
+
+  .dashboard-section.preguntas .dashboard-link {
+    display: block;
+    font-size: 1.07rem;
+    color: #d4a00c;
+    font-weight: bold;
+    margin-top: 2.2rem;
+  }
 
 .dashboard-section.adopciones .dashboard-link {
   color: #f47c2c;
@@ -163,7 +190,7 @@
 }
 
 .dashboard-section.apadrinar .dashboard-section-info {
-  margin-top: 350px;
+  margin-top: 390px;
   text-align: center;
   padding-bottom: 1rem;
 }

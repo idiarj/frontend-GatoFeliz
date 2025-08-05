@@ -9,7 +9,8 @@ const AdoptionCard = ({
   age,
   image,
   onRequest,
-  buttonLabel = 'ENVIAR SOLICITUD'
+  buttonLabel = 'ENVIAR SOLICITUD',
+  boxShadow = true
 }) => {
   const pageUrl = `${window.location.origin}/adopcion/${encodeURIComponent(name)}`;
   const handleCopyLink = () => {
@@ -18,7 +19,10 @@ const AdoptionCard = ({
   };
 
   return (
-    <div className="adoption-card">
+    <div
+      className="adoption-card"
+      style={boxShadow ? { boxShadow: '0 4px 16px rgba(0,0,0,0.15)' } : { boxShadow: 'none' }}
+    >
       <div className="adoption-card-image-wrapper">
         <img
           src={image}
