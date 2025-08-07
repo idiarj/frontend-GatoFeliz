@@ -84,6 +84,21 @@ class Fetch{
             throw error;
         }
     }
+
+    async postMultipart({endpoint, body, headers, credentials}){
+        try {
+            const response = await fetch(`${this.baseUrl}${endpoint}`, {
+                method: 'POST',
+                headers: headers,
+                credentials: credentials,
+                body: body
+            });
+            return response;
+        } catch (error) {
+            console.error('Fetch POST Multipart error:', error);
+            throw error;
+        }
+    }
 }
 
 

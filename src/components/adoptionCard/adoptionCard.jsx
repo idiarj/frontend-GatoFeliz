@@ -1,4 +1,3 @@
-import React from 'react';
 import { MdIosShare } from 'react-icons/md';
 import './adoptionCard.css';
 

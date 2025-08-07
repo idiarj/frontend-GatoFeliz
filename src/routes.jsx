@@ -1,4 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import { fetchInstance } from "./utils/Fetch.js";
 import Login from './views/auth/login/login.jsx';
 import Register from './views/auth/register/register.jsx';
 import RecoverPassword from './views/auth/recoverPassword/recoverPassword.jsx';
@@ -48,7 +49,14 @@ export const router = createBrowserRouter([
     },
     {
         path: '/adoption',
-        element: <Adoptions/>
+        element: <Adoptions/>,
+        loader: async () => {
+            const response = await fetchInstance.get({ endpoint: '/animal',  headers: { 'Content-Type': 'application/json' } });
+            const data = await response.json();
+            console.table(data);
+            return data.data;
+        },
+        hydrateFallbackElement: <div>Cargando...</div>
     },
     {
         path: '*',
