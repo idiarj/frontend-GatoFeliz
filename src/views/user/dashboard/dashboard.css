@@ -42,59 +42,41 @@
   margin-top: 100px;
 }
 
-/* Elimina el padding para el card de adopciones y ajusta el ancho */
-.dashboard-section.adopciones {
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 500px;
-  min-width: 360px;
-  height: 100%;
-  box-sizing: border-box;
-  margin: 0 auto;
-}
-
 .dashboard-section:hover {
   box-shadow: 0 12px 40px rgba(244, 124, 44, 0.18), 0 12px 40px rgba(0, 0, 0, 0.18);
 }
 
+.dashboard-section.contacto:hover,
+.dashboard-section.apadrinar:hover {
+  box-shadow: none;
+}
+
 /* CARD: Adopciones */
 .dashboard-section.adopciones {
-  background: #fffdce;
-  border-top-left-radius: 24px;
-  grid-column: 1;
-  grid-row: 1;
-  height: 375px;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  margin-top: 100px;
+  position: absolute;
+  top: 170px; /* Puedes cambiar este valor */
+  left: 270px; /* Puedes cambiar este valor */
+ height: 200px;
+ padding: 0;
+ margin-top: 0;
 }
 
 .dashboard-section.adopciones h2 {
-  margin: 0 0 0.8rem 0;
+  margin: 0 auto 0.8rem auto;
   color: #f47c2c;
-  font-size: 2rem;
+  font-size: 1.1rem;
   font-weight: 700;
+  text-align: center;
+  margin-top: -25px;
+  background: #fffdce;
+  border-radius: 8px;
+  padding: 1.2em 0.8em 0.3em 0.8em;
+  min-height: unset;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-.dashboard-section.adopciones img {
-  width: calc(100% + 3rem);
-  height: 220px;
-  object-fit: cover;
-  border-radius: 0;
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  margin-bottom: 1rem;
-  display: block;
-}
 
 .dashboard-section.adopciones .dashboard-section-info {
   margin-top: auto;
@@ -133,7 +115,7 @@
 .dashboard-section.donaciones h2 {
   margin: 0 0 0.8rem 0;
   color: #f47c2c;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 700;
 }
 
@@ -147,21 +129,21 @@
   color: #f47c2c;
   display: block;
   margin-bottom: 0.2rem;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
 }
 
 .dashboard-section.donaciones .dashboard-section-info span {
   text-align: center;
   align-self: center;
   color: #f47c2c;
-  font-size: 0.8rem;
+  font-size: 12px;
   line-height: 1.2;
   margin-bottom: 0.3rem;
 }
 
 .dashboard-section.donaciones .dashboard-link {
-  margin-top: auto;
-  font-size: 0.9rem;
+  margin-top: 10px;
+  font-size: 1.0rem;
   color: #f47c2c;
   font-weight: bold;
 }
@@ -253,23 +235,29 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 130px;
-  height: 80px;
+  margin-top: 160px;
+  height: 48px;
+  font-size: 1rem;
   cursor: default;
 }
 
 .dashboard-section.contacto h3 {
   margin: 0 0 0.8rem 0;
   color: #f47c2c;
-  font-size: 1.0rem;
+  font-size: 0.85rem;
   font-weight: 700;
   line-height: 1.2;
 }
 
 .dashboard-section.contacto span {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   color: #f47c2c;
   font-weight: 600;
+}
+
+.dashboard-section.contacto span svg {
+  vertical-align: sub;
+  margin-right: 6px;
 }
 
 /* Responsive design */

@@ -102,8 +102,21 @@
   transition: transform 0.3s ease;
 }
 
+
 .adoption-card:hover .adoption-card-image {
   transform: scale(1.05);
+}
+
+.adoption-card:hover .adoption-card-image--no-anim {
+  transform: none !important;
+}
+
+/* Desactiva la animación de la imagen si se usa esta clase */
+.adoption-card-image--no-anim {
+  transition: none;
+}
+.adoption-card:hover .adoption-card-image--no-anim {
+  transform: none;
 }
 
 .adoption-card-content {

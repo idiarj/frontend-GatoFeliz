@@ -115,7 +115,6 @@ const Dashboard = () => {
         <div className="dashboard-sections">
           {/* Adopciones Card usando AdoptionCard */}
           <div className="dashboard-section adopciones" onClick={() => navigate('/adoption')}>
-            <h2>Adopciones</h2>
             <AdoptionCard
               name={catsData[catsData.length-1].name}
               gender={catsData[catsData.length-1].gender}
@@ -124,9 +123,12 @@ const Dashboard = () => {
               onRequest={() => navigate('/adoptions')}
               buttonLabel="Ver más…"
               boxShadow={false}
+              animatedImage={false}
             />
+            <div className="dashboard-section-info">
+              <h2>Adopciones</h2>
+            </div>
           </div>
-
           {/* Donaciones Card */}
           <div 
             className="dashboard-section donaciones"
@@ -135,7 +137,7 @@ const Dashboard = () => {
             <h2>Donaciones</h2>
             <div className="dashboard-section-info">
               <strong>Método de pago</strong>
-              <span>Zelle | Pago móvil | PayPal</span>
+              <span>Zelle | Pago móvil | PayPal | Binance | Venmo </span>
               <strong>También puedes donar:</strong>
               <span>Alimento</span>
               <span>Medicinas</span>
