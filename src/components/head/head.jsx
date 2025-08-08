@@ -1,14 +1,19 @@
 import { IoCall, IoLogoInstagram, IoSearch } from 'react-icons/io5';
+import { useUser } from '../../hooks/useUser.jsx';
 import Logo from '../logo.jsx';
 import Menu from '../menu/menu.jsx';
 import './head.css';
 
-const Head = ({ title, showSearch = false, onSearch }) => {
+const Head = ({ showSearch = false, onSearch }) => {
+  const { user } = useUser();
+
   return (
     <div className="head-container">
       <div className="head-left">
         <Menu />
-        <h1 className="head-title">{title}</h1>
+        <h1 className="head-title">
+          {user && user.nom_usuario ? `Bienvenido a Gato Feliz Venezuela, ${user.nom_usuario}!` : "Bienvenido a Gato Feliz Venezuela!"}
+          </h1>
       </div>
       <div className="head-right">
         {showSearch && (

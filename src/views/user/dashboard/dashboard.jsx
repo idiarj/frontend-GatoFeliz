@@ -108,7 +108,6 @@ const Dashboard = () => {
       <div className="dashboard-main">
         {/* Header component */}
         <Head 
-          title="Bienvenido a Gato Feliz Venezuela"
           logoSrc={logoIcono}
         />
 

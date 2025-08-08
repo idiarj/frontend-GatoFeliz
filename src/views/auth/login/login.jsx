@@ -4,6 +4,7 @@ import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { playSoundOnce, stopAllPurring } from '../../../utils/audio';
 import { fetchInstance } from '../../../utils/Fetch';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../../hooks/useUser';
 import logo from '../../../assets/images/logo.png';
 import gatosesion from '../../../assets/images/gatosesion.png';
 import gatosesiondespierto from '../../../assets/images/gatosesiondespierto.png';
@@ -12,6 +13,7 @@ import "../../../App.css";
 import './login.css';
 
 const Login = () => {
+  const { setUser } = useUser();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     identifier_usuario: "",
@@ -40,12 +42,15 @@ const Login = () => {
         credentials: 'include'
       });
       const data = await response.json();
+      console.log("Login response:", data);
       if (!response.ok && !data.success) {
         return;
       }
+      setUser(data.data);
       navigate('/dashboard');
     } catch (error) {
       // Puedes mostrar un mensaje de error aquí si lo deseas
+      console.error("Error during login:", error);
       return;
     }
   };

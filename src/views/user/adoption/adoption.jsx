@@ -112,7 +112,10 @@ const Adoptions = () => {
         body: data,
       });
       console.log("Response:", response.data);
-      return response.data;
+      const catData = await response.json();
+      setCats((prevCats) => [...prevCats, catData]);
+
+      return catData;
     } catch (error) {
       console.error("Error submitting form:", error);
       throw error;
