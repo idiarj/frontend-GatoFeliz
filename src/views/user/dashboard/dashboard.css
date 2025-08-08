@@ -54,54 +54,24 @@
 /* CARD: Adopciones */
 .dashboard-section.adopciones {
   position: absolute;
-  top: 170px; /* Puedes cambiar este valor */
-  left: 270px; /* Puedes cambiar este valor */
+  top: 170px; 
+  left: 270px; 
  height: 200px;
  padding: 0;
  margin-top: 0;
 }
 
-.dashboard-section.adopciones h2 {
-  margin: 0 auto 0.8rem auto;
-  color: #f47c2c;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-align: center;
-  margin-top: -25px;
-  background: #fffdce;
-  border-radius: 8px;
-  padding: 1.2em 0.8em 0.3em 0.8em;
-  min-height: unset;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
 
-
-.dashboard-section.adopciones .dashboard-section-info {
-  margin-top: auto;
-}
-
-.dashboard-section.adopciones .dashboard-section-info span {
-  color: #a67c00;
-  font-size: 0.85rem;
+.dashboard-section.preguntas .dashboard-link {
   display: block;
-  margin-bottom: 0.4rem;
-}
-
-  .dashboard-section.preguntas .dashboard-link {
-    display: block;
-    font-size: 1.07rem;
-    color: #d4a00c;
-    font-weight: bold;
-    margin-top: 2.2rem;
-  }
-
-.dashboard-section.adopciones .dashboard-link {
-  color: #f47c2c;
+  font-size: 1.07rem;
+  color: #f7aa1d;
   font-weight: bold;
-  font-size: 0.9rem;
+  margin-top: -5px;
+  text-align: center;
 }
+
+
 
 /* CARD: Donaciones */
 .dashboard-section.donaciones {
@@ -277,10 +247,33 @@
   margin-top: -10px;
 }
 
+.preguntas-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  border-radius: 16px;
+  padding: 1rem 0.5rem;
+  margin-bottom: 1.2rem;
+  margin-top: -155px;
+}
+.pregunta-icon-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  color: #f47c2c;
+  font-size: 1rem;
+}
+.pregunta-icon-block span {
+  margin-top: 0.3rem;
+  color: #f47c2c;
+  font-size: 1rem;
+}
+
 .dashboard-section.preguntas h2 {
   height: 160px;
   margin: 0 0 0.8rem 0;
-  color: #d4a00c;
+  color: #f7aa1d;
   font-size: 1.1rem;
   font-weight: 700;
 }
@@ -290,10 +283,11 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  margin-top:-20px;
 }
 
 .dashboard-section.preguntas .dashboard-section-info span {
-  color: #a67c00;
+  color: #f47c2c;
   font-size: 0.85rem;
   line-height: 1.3;
   display: block;
