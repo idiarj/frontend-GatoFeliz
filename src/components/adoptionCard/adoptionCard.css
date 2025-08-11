@@ -146,3 +146,28 @@
 .adoption-card-button:hover {
   background-color: #d95c13;
 }
+
+.adoption-card-icon-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+  border-radius: 50%;
+}
+
+.adoption-card-icon-btn:hover {
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.delete-btn svg {
+  color: #d32f2f;
+}
+
+.delete-btn:hover svg {
+  color: #b71c1c;
+}

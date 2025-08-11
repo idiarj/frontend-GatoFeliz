@@ -26,6 +26,17 @@ const Adoptions = () => {
   //   cat.name.toLowerCase().includes(search.toLowerCase())
   // );
 
+    const onDelete = async (id) => {
+      try {
+        await fetchInstance.delete({
+          endpoint: `/animal/${id}`
+        });
+        setCats((prevCats) => prevCats.filter((cat) => cat.id_animal !== id));
+      } catch (error) {
+        console.error("Error deleting cat:", error);
+      }
+    };
+
     const onSubmit = async (data) => {
     try {
       const response = await fetchInstance.postMultipart({
@@ -69,6 +80,7 @@ const Adoptions = () => {
                 age={cat.edad_animal}
                 image={cat.ruta_imagen_an}
                 onRequest={() => alert(`Solicitud enviada para ${cat.nom_animal}`)}
+                onDelete={() => onDelete(cat.id_animal)}
               />
             ))
           )}

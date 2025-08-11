@@ -1,6 +1,6 @@
-import { MdIosShare } from 'react-icons/md';
+import { MdIosShare, MdDeleteOutline } from 'react-icons/md';
 import './adoptionCard.css';
-
+import { useUser } from '../../hooks/useUser';
 
 const AdoptionCard = ({
   name,
@@ -8,14 +8,19 @@ const AdoptionCard = ({
   age,
   image,
   onRequest,
+  onDelete, // <-- Nueva prop para manejar la acción de eliminar
   buttonLabel = 'ENVIAR SOLICITUD',
   boxShadow = true
 }) => {
   const pageUrl = `${window.location.origin}/adopcion/${encodeURIComponent(name)}`;
+
   const handleCopyLink = () => {
     navigator.clipboard.writeText(pageUrl);
     alert('¡Enlace copiado! Puedes compartirlo donde quieras.');
   };
+
+  const { user } = useUser();
+  let testing = true;
 
   return (
     <div
@@ -34,16 +39,31 @@ const AdoptionCard = ({
         <p className="adoption-card-subtitle">
           {gender} &bull; {age}
         </p>
-        <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+        <div style={{display: 'flex', alignItems: 'center', gap: '8px', width: '100%'}}>
           <button
             className="adoption-card-button adoption-card-button-large"
             onClick={onRequest}
           >
             {buttonLabel}
           </button>
-          <button className="adoption-card-share-icon" onClick={handleCopyLink} style={{background: 'none', border: 'none', padding: 0, cursor: 'pointer'}}>
-            <MdIosShare size={24} color="#FF9800" />
+          <button
+            className="adoption-card-icon-btn"
+            onClick={handleCopyLink}
+            title="Compartir"
+          >
+            <MdIosShare size={22} color="#FF9800" />
           </button>
+          {
+            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+              <button
+                className="adoption-card-icon-btn"
+                onClick={onDelete}
+                title="Eliminar"
+              >
+                <MdDeleteOutline size={22} color="#F44336" />
+              </button>
+            )
+          }
         </div>
       </div>
     </div>
