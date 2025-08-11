@@ -74,8 +74,8 @@ const MedicalPanel = () => {
           medicalCases={medicalCases} 
           handleRowClick={handleRowClick} 
         />
-        <div style={{ flex: 1, padding: '24px', background: '#fff', minWidth: '500px' }}>
-          <MedicalCaseForm selectedCase={selectedCase} onSave={handleSave} />
+        <div style={{ flex: 1, padding: '24px', background: '#fff', marginTop: '120px' }}>
+          <MedicalCaseForm selectedCase={selectedCase} onSave={handleSave} medicalCases={medicalCases} />
         </div>
       </div>
     </>

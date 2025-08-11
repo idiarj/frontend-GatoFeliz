@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./medicalCaseForm.css";
 
+const today = new Date().toISOString().slice(0, 10);
 const initialForm = {
   historiaClinica: "",
-  fechaAdmision: "",
+  fechaAdmision: today,
   horaAdmision: "",
   nombrePaciente: "",
   propietario: "",
@@ -42,16 +43,37 @@ const initialForm = {
   firmaPropietario: ""
 };
 
-const MedicalCaseForm = ({ selectedCase, onSave }) => {
+const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [] }) => {
+  const getNextHistoriaClinica = () => {
+    if (!medicalCases.length) return "001";
+    const last = medicalCases.reduce((max, c) => {
+      const num = parseInt(c.historiaClinica, 10);
+      return num > max ? num : max;
+    }, 0);
+    return String(last + 1).padStart(3, "0");
+  };
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = String(now.getHours()).padStart(2, "0");
+    const minutes = String(now.getMinutes()).padStart(2, "0");
+    return `${hours}:${minutes}`;
+  };
+
   const [form, setForm] = useState(initialForm);
 
   useEffect(() => {
     if (selectedCase) {
       setForm(selectedCase);
     } else {
-      setForm(initialForm);
+      setForm({
+        ...initialForm,
+        historiaClinica: getNextHistoriaClinica(),
+        fechaAdmision: today,
+        horaAdmision: getCurrentTime(),
+      });
     }
-  }, [selectedCase]);
+  }, [selectedCase, medicalCases]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
