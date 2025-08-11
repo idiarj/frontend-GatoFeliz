@@ -8,7 +8,7 @@ import alimentoLogo from '../../../assets/logos/alimento.png';
 import medicinaLogo from '../../../assets/logos/medicina.png';
 import limpiezaLogo from '../../../assets/logos/limpieza.png';
 import michi1 from '../../../assets/michis/michi1.png';
-import michiPair from '../../../assets/michis/michi2blancoynegro.png';
+import michiPair from '../../../assets/michis/michi2.png';
 
 export const dashboardImages = {
   logoIcono,

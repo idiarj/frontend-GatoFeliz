@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
 import SponsorCard from "../../../components/sponsorCard/sponsorCard.jsx";
+import AddSponsorCard from "../../../components/addSponsorCard/addSponsorCard.jsx";
 import Head from '../../../components/head/head.jsx';
 import Menu from "../../../components/menu/menu.jsx";
 
@@ -63,6 +64,7 @@ const Sponsor =  () => {
               />
             ))
           )}
+                    <AddSponsorCard onSubmit={onSubmit} uploading={false}/>
         </div>
       </div>
     </div>

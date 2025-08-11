@@ -52,9 +52,9 @@ const Menu = () => {
         {menuOptions.map(opt => {
           const isActive = location.pathname === opt.path;
           //console.log(user);
-          if(user && opt.session === false) return null; 
-          if(!user && opt.session === true) return null;
-          if(user && opt.needed_profiles && !opt.needed_profiles.includes(user.id_perfil)) return null;
+          // if(user && opt.session === false) return null; 
+          // if(!user && opt.session === true) return null;
+          // if(user && opt.needed_profiles && !opt.needed_profiles.includes(user.id_perfil)) return null;
           return (
             <li key={opt.label} className="menu-list-item">
               <MenuLink

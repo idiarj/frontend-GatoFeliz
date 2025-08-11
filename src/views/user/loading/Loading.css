@@ -10,7 +10,7 @@
   inset:0;
   display:grid;
   place-items:center;
-  background: radial-gradient(1200px 800px at 70% 20%, #fff, var(--bg));
+  background: #fff;
   z-index:9999;
 }
 

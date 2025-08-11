@@ -17,13 +17,10 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div>
-        <Head  />
+        <Head title={user ? `Bienvenido, ${user.nom_usuario}!` : "Bienvenido a Gato Feliz Venezuela!"} />
         <Menu />
       </div>
       <div className="dashboard-main">
-        <Head 
-          logoSrc={dashboardImages.logoIcono}
-        />
         <div className="dashboard-sections">
           {/* Adopciones Card usando AdoptionCard */}
           <div className="dashboard-section adopciones" onClick={() => navigate('/adoption')}>
