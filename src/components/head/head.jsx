@@ -1,19 +1,15 @@
 import { IoCall, IoLogoInstagram, IoSearch } from 'react-icons/io5';
-import { useUser } from '../../hooks/useUser.jsx';
 import Logo from '../logo.jsx';
 import Menu from '../menu/menu.jsx';
 import './head.css';
 
-const Head = ({ showSearch = false, onSearch }) => {
-  const { user } = useUser();
+const Head = ({ title, showSearch = false, onSearch }) => {
 
   return (
     <div className="head-container">
       <div className="head-left">
         <Menu />
-        <h1 className="head-title">
-          {user && user.nom_usuario ? `Bienvenido a Gato Feliz Venezuela, ${user.nom_usuario}!` : "Bienvenido a Gato Feliz Venezuela!"}
-          </h1>
+        <h1 className="head-title">{title}</h1>
       </div>
       <div className="head-right">
         {showSearch && (
@@ -27,6 +23,8 @@ const Head = ({ showSearch = false, onSearch }) => {
                   onChange={e => onSearch && onSearch(e.target.value)}
                 />
               </div>
+          </>
+        )}
             <div className="head-contact">
               <div className="head-contact-title">CONTACTO</div>
               <div className="head-contact-row">
@@ -38,8 +36,6 @@ const Head = ({ showSearch = false, onSearch }) => {
                 <span className="head-contact-text">gatofelizvenezuela</span>
               </div>
             </div>
-          </>
-        )}
         <Logo width={100} height={100} className="head-logo" />
       </div>
     </div>
