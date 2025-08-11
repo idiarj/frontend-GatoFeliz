@@ -14,13 +14,11 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div className="dashboard-sidebar">
+      <div>
+        <Head  />
         <Menu />
       </div>
       <div className="dashboard-main">
-        <Head 
-          logoSrc={dashboardImages.logoIcono}
-        />
         <div className="dashboard-sections">
           {/* Adopciones Card usando AdoptionCard */}
           <div className="dashboard-section adopciones" onClick={() => navigate('/adoption')}>
@@ -79,7 +77,7 @@ const Dashboard = () => {
             className="dashboard-section preguntas"
             onClick={() => navigate('/questions')}
           >
-            <h2>Preguntas </h2>
+            <h2 className="preguntas-title">Preguntas </h2>
             <div className="preguntas-icons-row">
               <div className="pregunta-icon-block">
                 <FaHome size={32} color="#f47c2c" />

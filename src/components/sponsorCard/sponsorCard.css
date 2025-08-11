@@ -1,0 +1,148 @@
+/* Mueve el icono de compartir a la derecha */
+.sponsor-card-share-icon {
+  margin-left: auto;
+}
+/* Acciones alineadas a la derecha */
+.sponsor-card-button {
+  background-color: #f37021;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 48px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-left: 40px;
+}
+
+.share-dropdown {
+  position: relative;
+}
+
+
+.sponsor-card-share-main {
+  background: #ffb347;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.5rem 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.sponsor-card-share-main:hover {
+  background: #ff9800;
+}
+
+.share-icon svg {
+  display: block;
+}
+
+.share-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  padding: 0.5rem 0;
+  z-index: 10;
+  min-width: 140px;
+}
+
+.share-menu-btn {
+  background: none;
+  border: none;
+  color: #333;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.share-menu-btn:hover {
+  background: #ffb34722;
+  color: #ff9800;
+}
+
+.sponsor-card {
+  width: 355px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sponsor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+.sponsor-card-image-wrapper {
+  height: 260px;
+  overflow: hidden;
+}
+
+.sponsor-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+
+.sponsor-card:hover .sponsor-card-image {
+  transform: scale(1.05);
+}
+
+.sponsor-card:hover .sponsor-card-image--no-anim {
+  transform: none !important;
+}
+
+/* Desactiva la animación de la imagen si se usa esta clase */
+.sponsor-card-image--no-anim {
+  transition: none;
+}
+.sponsor-card:hover .sponsor-card-image--no-anim {
+  transform: none;
+}
+
+.sponsor-card-content {
+  background-color: #fffdce;
+  padding: 16px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sponsor-card-title {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #b94d0d;
+  font-weight: 700;
+}
+
+.sponsor-card-subtitle {
+  margin: 4px 0 12px;
+  font-size: 0.9rem;
+  color: #7a4f02;
+}
+
+
+.sponsor-card-button:hover {
+  background-color: #d95c13;
+}

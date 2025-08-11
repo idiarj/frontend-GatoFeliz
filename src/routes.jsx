@@ -9,6 +9,7 @@ import AboutUs from './views/user/aboutUs/aboutUs.jsx';
 import Donations from './views/user/donations/donations.jsx';
 import Questions from './views/user/questions/questions.jsx';
 import Adoptions from './views/user/adoption/adoption.jsx';
+import Sponsor from './views/user/sponsor/sponsor.jsx';
 
 export const router = createBrowserRouter([
     {
@@ -54,6 +55,16 @@ export const router = createBrowserRouter([
             const response = await fetchInstance.get({ endpoint: '/animal',  headers: { 'Content-Type': 'application/json' } });
             const data = await response.json();
             console.table(data);
+            return data.data;
+        },
+        hydrateFallbackElement: <div>Cargando...</div>
+    },
+    {
+        path: '/apadrinar',
+        element: <Sponsor/>,
+        loader: async () => {
+            const response = await fetchInstance.get({ endpoint: '/animal',  headers: { 'Content-Type': 'application/json' } });
+            const data = await response.json();
             return data.data;
         },
         hydrateFallbackElement: <div>Cargando...</div>

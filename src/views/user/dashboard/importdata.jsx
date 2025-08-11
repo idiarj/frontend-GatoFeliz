@@ -7,7 +7,7 @@ import venmoLogo from '../../../assets/logos/venmo.png';
 import alimentoLogo from '../../../assets/logos/alimento.png';
 import medicinaLogo from '../../../assets/logos/medicina.png';
 import limpiezaLogo from '../../../assets/logos/limpieza.png';
-import michi1 from '../../../assets/michis/michi1siames.png';
+import michi1 from '../../../assets/michis/michi1.png';
 import michiPair from '../../../assets/michis/michi2blancoynegro.png';
 
 export const dashboardImages = {

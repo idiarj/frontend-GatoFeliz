@@ -47,6 +47,7 @@ const Donations = () => {
                 <strong>Paypal:</strong> sailedevis@hotmail.com<br /> (Titular: Saile Devis)<br />
                 <strong>Zelle:</strong> gatofelizvenezuela@gmail.com<br />  (Titular: Luis Prado)<br />
                 <strong>Venmo:</strong> @Janell-Copello<br />
+                <strong>Binance:</strong> ID:5800<br />
                 <strong>Gofundme:</strong>{" "}
                 <a
                   href="https://www.gofundme.com/f/9yevcq-ayudanos-a-que-400-gatos-no-vuelvan-a-la-calle"
