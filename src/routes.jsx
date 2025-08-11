@@ -9,6 +9,8 @@ import AboutUs from './views/user/aboutUs/aboutUs.jsx';
 import Donations from './views/user/donations/donations.jsx';
 import Questions from './views/user/questions/questions.jsx';
 import Adoptions from './views/user/adoption/adoption.jsx';
+import Loading from "./views/user/loading/Loading.jsx";
+
 
 export const router = createBrowserRouter([
     {
@@ -51,15 +53,20 @@ export const router = createBrowserRouter([
         path: '/adoption',
         element: <Adoptions/>,
         loader: async () => {
+            await new Promise(resolve => setTimeout(resolve, 2000)); // Simula retraso de 1 segundo
             const response = await fetchInstance.get({ endpoint: '/animal',  headers: { 'Content-Type': 'application/json' } });
             const data = await response.json();
             console.table(data);
             return data.data;
         },
-        hydrateFallbackElement: <div>Cargando...</div>
+        hydrateFallbackElement: <Loading subtitle={'Cargando gatos...'}/>
     },
     {
         path: '*',
         element: <Navigate to="/dashboard" replace/>
+    },
+    {
+        path: '/test',
+        element: <Loading subtitle={'Cargando gatos...'} compact/>
     }
 ])

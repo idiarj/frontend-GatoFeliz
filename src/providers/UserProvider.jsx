@@ -11,10 +11,6 @@ export const UserProvider = ({ children }) => {
     const fetchUser = async () => {
       const response = await fetchInstance.get({
         endpoint: '/auth/me',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
         credentials: 'include'
       })
       console.log(response)

@@ -3,14 +3,16 @@ import { FiPhone } from 'react-icons/fi';
 import { FaHome, FaBriefcaseMedical, FaHandHoldingHeart } from 'react-icons/fa';
 import { MdPets } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../../hooks/useUser.jsx';
 import Head from '../../../components/head/head.jsx';
 import Menu from '../../../components/menu/menu.jsx';
 import './dashboard.css';
 import AdoptionCard from '../../../components/adoptionCard/adoptionCard.jsx';
-import { dashboardImages, catsData, getLastCat, getPaymentLogos, getDonationTypes, getSponsorImage} from './importdata.jsx';
+import { dashboardImages, getLastCat, getPaymentLogos, getDonationTypes, getSponsorImage} from './importdata.jsx';
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const { user } = useUser();
 
   return (
     <div className="dashboard-container">
@@ -19,6 +21,7 @@ const Dashboard = () => {
       </div>
       <div className="dashboard-main">
         <Head 
+          title={user ? `Bienvenido, ${user.nom_usuario}!` : "Bienvenido a Gato Feliz Venezuela!"}
           logoSrc={dashboardImages.logoIcono}
         />
         <div className="dashboard-sections">
