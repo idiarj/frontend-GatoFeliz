@@ -9,6 +9,8 @@ import AboutUs from './views/user/aboutUs/aboutUs.jsx';
 import Donations from './views/user/donations/donations.jsx';
 import Questions from './views/user/questions/questions.jsx';
 import Adoptions from './views/user/adoption/adoption.jsx';
+import Sponsor from './views/user/sponsor/sponsor.jsx';
+import Loading from "./views/user/loading/Loading.jsx";
 
 export const router = createBrowserRouter([
     {
