@@ -54,7 +54,7 @@ export const router = createBrowserRouter([
         path: '/adoption',
         element: <Adoptions/>,
         loader: async () => {
-            await new Promise(resolve => setTimeout(resolve, 2000)); // Simula retraso de 1 segundo
+            //await new Promise(resolve => setTimeout(resolve, 2000)); // Simula retraso de 1 segundo
             const response = await fetchInstance.get({ endpoint: '/animal',  headers: { 'Content-Type': 'application/json' } });
             const data = await response.json();
             console.table(data);

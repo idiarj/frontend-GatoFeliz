@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
+import { useUser } from "../../../hooks/useUser.jsx";
 import AdoptionCard from "../../../components/adoptionCard/adoptionCard";
 import AddAdoptionCard from "../../../components/addAdoptionCard/addAdoptionCard.jsx";
 import Head from '../../../components/head/head.jsx';
@@ -11,6 +12,8 @@ import "./adoption.css";
 
 const Adoptions = () => {
   const [cats, setCats] = useState([]);
+  const { user } = useUser();
+  const test = true;
   //const [search, setSearch] = useState("");
 
   const data = useLoaderData();
@@ -31,7 +34,11 @@ const Adoptions = () => {
       });
       console.log("Response:", response.data);
       const catData = await response.json();
-      setCats((prevCats) => [...prevCats, catData]);
+      setCats((prevCats) => {
+        console.log("Previous cats:", prevCats);
+        console.log("New cat data:", catData);
+        return [...prevCats, catData.data];
+      });
 
       return catData;
     } catch (error) {
@@ -65,7 +72,11 @@ const Adoptions = () => {
               />
             ))
           )}
-          <AddAdoptionCard onSubmit={onSubmit} uploading={false}/>
+          {
+            (test || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+              <AddAdoptionCard onSubmit={onSubmit} uploading={false} />
+            )
+          }
         </div>
       </div>
     </div>
