@@ -1,0 +1,32 @@
+/* Estilos para sponsor.jsx */
+
+.sponsor-container {
+  background: #fff;
+}
+.sponsor-content {
+  margin-left: 240px;
+  padding-top: 30px;
+  padding-right: 32px;
+  padding-left: 32px;
+}
+/* Asegura que el Head no esté fijo y el buscador quede visible arriba */
+.sponsor-container .head-container {
+  position: static !important;
+  top: unset !important;
+  left: unset !important;
+  width: 100%;
+  z-index: auto;
+}
+.sponsor-info {
+  text-align: center;
+  color: #b94d0d;
+  font-weight: 700;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+.sponsor-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
