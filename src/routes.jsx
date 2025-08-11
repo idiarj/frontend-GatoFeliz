@@ -11,6 +11,7 @@ import Questions from './views/user/questions/questions.jsx';
 import Adoptions from './views/user/adoption/adoption.jsx';
 import Sponsor from './views/user/sponsor/sponsor.jsx';
 import Loading from "./views/user/loading/Loading.jsx";
+import MedicalPanel from './views/user/medicalPanel/medicalPanel.jsx';
 
 export const router = createBrowserRouter([
     {
@@ -78,5 +79,10 @@ export const router = createBrowserRouter([
     {
         path: '/test',
         element: <Loading subtitle={'Cargando gatos...'} compact/>
+    }
+    ,
+    {
+        path: '/panelMedico',
+        element: <MedicalPanel/>
     }
 ])
