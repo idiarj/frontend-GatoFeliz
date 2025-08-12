@@ -63,7 +63,7 @@ const AddSponsorCard = ({ onSubmit, uploading }) => {
         <h4 className="add-card-header-title">Nuevo Gatito</h4>
       </div>
 
-      <div className="add-card-image-preview">
+      <div className="add-sponsor-card-image-preview">
         {imagePreview ? (
           <img src={imagePreview} alt="preview" className="image-preview" style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '12px' }} />
         ) : (
