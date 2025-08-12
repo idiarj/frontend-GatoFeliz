@@ -104,25 +104,25 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [] }) => {
         <div className="form-row">
           <div>
             <label>N° Historia clínica:</label>
-            <input name="historiaClinica" value={form.historiaClinica} onChange={handleChange} />
+            <input name="historiaClinica" value={form.historiaClinica} type="text" readOnly style={{background: '#fafafa', border: '1px solid #e0e0e0', borderRadius: '6px', padding: '6px 10px'}} />
           </div>
           <div>
             <label>Fecha admisión:</label>
-            <input name="fechaAdmision" value={form.fechaAdmision} onChange={handleChange} type="date" />
+            <input name="fechaAdmision" value={form.fechaAdmision} type="date" readOnly />
           </div>
           <div>
             <label>Hora:</label>
-            <input name="horaAdmision" value={form.horaAdmision} onChange={handleChange} />
-          </div>
-          <div>
-            <label>Nombre del paciente:</label>
-            <input name="nombrePaciente" value={form.nombrePaciente} onChange={handleChange} />
+            <input name="horaAdmision" value={form.horaAdmision} type="text" readOnly style={{background: '#fafafa', border: '1px solid #e0e0e0', borderRadius: '6px', padding: '6px 10px'}} />
           </div>
         </div>
         <div className="form-row">
           <div>
             <label>Propietario:</label>
             <input name="propietario" value={form.propietario} onChange={handleChange} />
+          </div>
+          <div>
+            <label>Nombre del paciente:</label>
+            <input name="nombrePaciente" value={form.nombrePaciente} onChange={handleChange} />
           </div>
           <div>
             <label>Veterinario encargado:</label>
@@ -276,17 +276,6 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [] }) => {
           <div>
             <input name="enfermedadesPrevias" value={form.enfermedadesPrevias} onChange={handleChange} placeholder="Enfermedades o procedimientos previos" />
           </div>
-        </div>
-      </div>
-      {/* Firmas */}
-      <div className="firmas-row">
-        <div>
-          <label>Firma Encargado:</label>
-          <input name="firmaEncargado" value={form.firmaEncargado} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Firma Propietario:</label>
-          <input name="firmaPropietario" value={form.firmaPropietario} onChange={handleChange} />
         </div>
       </div>
       <button type="submit" className="medical-case-form-btn">
