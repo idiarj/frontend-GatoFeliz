@@ -20,7 +20,7 @@ const AdoptionCard = ({
   };
 
   const { user } = useUser();
-  let testing = true;
+  let testing = import.meta.env.VITE_TESTING === 'true';
 
   return (
     <div

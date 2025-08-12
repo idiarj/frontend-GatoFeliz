@@ -13,7 +13,7 @@ import "./adoption.css";
 const Adoptions = () => {
   const [cats, setCats] = useState([]);
   const { user } = useUser();
-  const test = true;
+  const testing = import.meta.env.VITE_TESTING === 'true';
   //const [search, setSearch] = useState("");
 
   const data = useLoaderData();
@@ -85,7 +85,7 @@ const Adoptions = () => {
             ))
           )}
           {
-            (test || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
               <AddAdoptionCard onSubmit={onSubmit} uploading={false} />
             )
           }

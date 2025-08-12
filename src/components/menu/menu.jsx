@@ -42,6 +42,7 @@ const menuOptions = [
 const Menu = () => {
   const location = useLocation();
   const {user} = useUser();
+  let testing = import.meta.env.VITE_TESTING === 'true';
   console.log(user);
   return (
     <nav className="menu-nav">
@@ -52,9 +53,9 @@ const Menu = () => {
         {menuOptions.map(opt => {
           const isActive = location.pathname === opt.path;
           // Filtrado de opciones según sesión y perfil
-          // if (user && opt.session === false) return null;
-          // if (!user && opt.session === true) return null;
-          // if (user && opt.needed_profiles && !opt.needed_profiles.includes(user.id_perfil)) return null;
+          if ((user && opt.session === false) && !testing) return null;
+          if ((!user && opt.session === true) && !testing) return null;
+          if ((user && opt.needed_profiles && !opt.needed_profiles.includes(user.id_perfil)) && !testing) return null;
           return (
             <li key={opt.label} className="menu-list-item">
               <MenuLink
