@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   height: 100vh;
-  width: 220px;
+  width: 200px; /* Ajuste para verse igual en 100% zoom */
   background: #fff;
   box-shadow: 2px 0 16px 0 rgba(0,0,0,0.10);
   z-index: 110;
@@ -14,10 +14,10 @@
 }
 
 .menu-title {
-  margin: 32px 0 18px 24px;
+  margin: 32px 0 18px 20px;
   color: #F37021;
   font-weight: bold;
-  font-size: 22px;
+  font-size: 20px; /* Ajuste para verse igual en 100% zoom */
   letter-spacing: 1px;
   display: flex;
   align-items: center;
@@ -41,10 +41,10 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 1rem 1.5rem;
+  padding: 0.9rem 1.2rem; /* Ajuste para verse igual en 100% zoom */
   color: #F37021;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px; /* Ajuste para verse igual en 100% zoom */
   background: transparent;
   border-radius: 0;
   box-shadow: none;

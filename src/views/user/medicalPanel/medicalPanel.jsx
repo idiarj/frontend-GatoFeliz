@@ -1,54 +1,81 @@
 import React from "react";
 import "./medicanlPanel.css";
-import { medicalCases, medicalPanelStats } from "./medicalPanelData";
+import MedicalPanelPanel from "./medicalPanelPanel/medicalPanelPanel.jsx";
+import { medicalPanelStats } from "./medicalPanelData";
+import MedicalCaseForm from "./medicalCaseForm/MedicalCaseForm.jsx";
 import Head from '../../../components/head/head.jsx';
 import Menu from '../../../components/menu/menu.jsx';
 
 const MedicalPanel = () => {
+  // JSON de prueba para los casos médicos
+  const [medicalCases, setMedicalCases] = React.useState([
+    {
+      historiaClinica: "001",
+      historia: "Fractura en pata trasera",
+      tratamiento: "Férula",
+      insumos: "Yes",
+      estado: "En tratamiento",
+      aporte: "$2000",
+      // ...otros campos del formulario
+    },
+    {
+      historiaClinica: "002",
+      historia: "Ingesta de cuerpo extraño",
+      tratamiento: "Cirugía",
+      insumos: "Yes",
+      estado: "En tratamiento",
+      aporte: "$1000",
+    },
+    {
+      historiaClinica: "003",
+      historia: "Infección respiratoria",
+      tratamiento: "Antibióticos",
+      insumos: "Yes",
+      estado: "Resuelto",
+      aporte: "—",
+    },
+    {
+      historiaClinica: "004",
+      historia: "Fractura en pata trasera",
+      tratamiento: "Férula",
+      insumos: "Yes",
+      estado: "Pendiente",
+      aporte: "$1500",
+    },
+    {
+      historiaClinica: "005",
+      historia: "Lesión en el ojo",
+      tratamiento: "Medicamentos",
+      insumos: "Pendiente",
+      estado: "En tratamiento",
+      aporte: "$500",
+    },
+  ]);
+
+  const [selectedCase, setSelectedCase] = React.useState(null);
+  const handleRowClick = (idx) => {
+    setSelectedCase([...medicalCases].reverse()[idx]);
+  };
+  const handleAddNew = () => {
+    setSelectedCase(null);
+  };
+  const handleSave = (newCase) => {
+    setMedicalCases([newCase, ...medicalCases]);
+    setSelectedCase(null);
+  };
+
   return (
     <>
       <Head title="Panel medico" />
       <div style={{ display: "flex" }}>
         <Menu />
-        <div className="medical-panel-container" style={{ flex: 1 }}>
-          <div className="medical-panel-header">
-            <div className="medical-panel-header-box">
-              <h2>{medicalPanelStats.cajasTotales}</h2>
-              <p>Cajas Totales</p>
-            </div>
-            <div className="medical-panel-header-box">
-              <h2>{medicalPanelStats.cajasDisponibles}</h2>
-              <p>Cajas Disponibles</p>
-            </div>
-            <div className="medical-panel-header-box">
-              <h2>{medicalPanelStats.casos}</h2>
-              <p>Casos</p>
-            </div>
-          </div>
-          <table className="medical-panel-table">
-            <thead>
-              <tr>
-                <th style={{whiteSpace: 'nowrap'}}>N° Caso</th>
-                <th style={{whiteSpace: 'nowrap'}}>Historia del Caso</th>
-                <th style={{whiteSpace: 'nowrap'}}>Tratamiento</th>
-                <th style={{whiteSpace: 'nowrap'}}>Insumos Requeridos</th>
-                <th style={{whiteSpace: 'nowrap'}}>Estado del Caso</th>
-                <th style={{whiteSpace: 'nowrap'}}>Aporte Monetario del Familiar</th>
-              </tr>
-            </thead>
-            <tbody>
-              {medicalCases.map((item, idx) => (
-                <tr key={idx}>
-                  <td>{String(idx + 1).padStart(3, '0')}</td>
-                  <td>{item.historia}</td>
-                  <td>{item.tratamiento}</td>
-                  <td>{item.insumos}</td>
-                  <td>{item.estado}</td>
-                  <td>{item.aporte}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <MedicalPanelPanel 
+          medicalPanelStats={medicalPanelStats} 
+          medicalCases={medicalCases} 
+          handleRowClick={handleRowClick} 
+        />
+        <div style={{ flex: 1, padding: '24px', background: '#fff', marginTop: '120px' }}>
+          <MedicalCaseForm selectedCase={selectedCase} onSave={handleSave} medicalCases={medicalCases} />
         </div>
       </div>
     </>
