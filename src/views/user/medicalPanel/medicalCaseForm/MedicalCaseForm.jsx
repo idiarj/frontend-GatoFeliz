@@ -98,198 +98,191 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [] }) => {
   };
 
   return (
-    <form className="medical-case-form" onSubmit={handleSubmit}>
+    <form className="medical-case-form" onSubmit={handleSubmit} style={{ maxWidth: '1100px', minWidth: '900px', margin: '0 auto', padding: '32px 24px', borderRadius: '16px', boxShadow: '0 4px 32px #0002' }}>
       {/* Sección 1: Encabezado */}
       <div className="section-table">
-        <div className="form-row">
-          <div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ flex: 1 }}>
             <label>N° Historia clínica:</label>
-            <input name="historiaClinica" value={form.historiaClinica} onChange={handleChange} />
+            <input className="modern-input" name="historiaClinica" value={form.historiaClinica} type="text" readOnly />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Fecha admisión:</label>
-            <input name="fechaAdmision" value={form.fechaAdmision} onChange={handleChange} type="date" />
+            <input className="modern-input" name="fechaAdmision" value={form.fechaAdmision} type="date" readOnly />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Hora:</label>
-            <input name="horaAdmision" value={form.horaAdmision} onChange={handleChange} />
-          </div>
-          <div>
-            <label>Nombre del paciente:</label>
-            <input name="nombrePaciente" value={form.nombrePaciente} onChange={handleChange} />
+            <input className="modern-input" name="horaAdmision" value={form.horaAdmision} type="text" readOnly />
           </div>
         </div>
-        <div className="form-row">
-          <div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
+          <div style={{ flex: 1 }}>
             <label>Propietario:</label>
-            <input name="propietario" value={form.propietario} onChange={handleChange} />
+            <input className="modern-input" name="propietario" value={form.propietario} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
+            <label>Nombre del paciente:</label>
+            <input className="modern-input" name="nombrePaciente" value={form.nombrePaciente} onChange={handleChange} />
+          </div>
+          <div style={{ flex: 1 }}>
             <label>Veterinario encargado:</label>
-            <input name="veterinario" value={form.veterinario} onChange={handleChange} />
+            <input className="modern-input" name="veterinario" value={form.veterinario} onChange={handleChange} />
           </div>
         </div>
-        <div className="form-row">
-          <div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
+          <div style={{ flex: 1 }}>
             <label>Dirección:</label>
-            <input name="direccion" value={form.direccion} onChange={handleChange} />
+            <input className="modern-input" name="direccion" value={form.direccion} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Teléfono:</label>
-            <input name="telefono" value={form.telefono} onChange={handleChange} />
+            <input className="modern-input" name="telefono" value={form.telefono} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Ciudad:</label>
-            <input name="ciudad" value={form.ciudad} onChange={handleChange} />
+            <input className="modern-input" name="ciudad" value={form.ciudad} onChange={handleChange} />
           </div>
         </div>
-        <div className="form-row" style={{display: 'flex', gap: '12px'}}>
+        <div className="form-row" style={{display: 'flex', gap: '24px', marginTop: '16px'}}>
           <div style={{flex: 1}}>
             <label>Especie:</label>
-            <input name="especie" value={form.especie} onChange={handleChange} />
+            <input className="modern-input" name="especie" value={form.especie} onChange={handleChange} />
           </div>
           <div style={{flex: 1}}>
             <label>Raza:</label>
-            <input name="raza" value={form.raza} onChange={handleChange} />
+            <input className="modern-input" name="raza" value={form.raza} onChange={handleChange} />
           </div>
           <div style={{flex: 1}}>
             <label>Sexo:</label>
-            <input name="sexo" value={form.sexo} onChange={handleChange} />
+            <input className="modern-input" name="sexo" value={form.sexo} onChange={handleChange} />
           </div>
           <div style={{flex: 1}}>
             <label>Edad:</label>
-            <input name="edad" value={form.edad} onChange={handleChange} />
+            <input className="modern-input" name="edad" value={form.edad} onChange={handleChange} />
           </div>
         </div>
-        <div className="form-row">
-          <div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
+          <div style={{ flex: 1 }}>
             <label>Color y señas particulares:</label>
-            <input name="color" value={form.color} onChange={handleChange} />
+            <input className="modern-input" name="color" value={form.color} onChange={handleChange} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <label>N° Kennel:</label>
+            <input className="modern-input" name="kennel" value={form.kennel || ''} onChange={handleChange} type="text" placeholder="Si se hospitaliza" />
           </div>
         </div>
       </div>
       {/* Sección 2: Motivo consulta */}
       <div className="section-table">
         <div className="section-title">2. Motivo consulta</div>
-        <div className="form-row">
-          <div>
-            <input name="motivo" value={form.motivo} onChange={handleChange} placeholder="Motivo consulta" />
+        <div className="form-row" style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ flex: 1 }}>
+            <input className="modern-input" name="motivo" value={form.motivo} onChange={handleChange} placeholder="Motivo consulta" />
           </div>
         </div>
       </div>
       {/* Sección 3 y 4: Historia y Dieta */}
       <div className="section-table">
-        <div className="form-row">
-          <div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ flex: 1 }}>
             <label>3. Historia:</label>
-            <input name="historia" value={form.historia} onChange={handleChange} />
+            <input className="modern-input" name="historia" value={form.historia} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>4. Dieta:</label>
-            <input name="dieta" value={form.dieta} onChange={handleChange} />
+            <input className="modern-input" name="dieta" value={form.dieta} onChange={handleChange} />
           </div>
         </div>
-        <div className="form-row">
-          <div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
+          <div style={{ flex: 1 }}>
             <label>Vacunación:</label>
             <input type="checkbox" name="vacunacion" checked={form.vacunacion} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Desparasitaciones:</label>
             <input type="checkbox" name="desparasitacion" checked={form.desparasitacion} onChange={handleChange} />
           </div>
         </div>
-        <div className="form-row">
-          <div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
+          <div style={{ flex: 1 }}>
             <label>Productos:</label>
-            <input name="productos" value={form.productos} onChange={handleChange} />
+            <input className="modern-input" name="productos" value={form.productos} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Fechas:</label>
-            <input name="fechas" value={form.fechas} onChange={handleChange} />
+            <input className="modern-input" name="fechas" value={form.fechas} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Estado reproductivo:</label>
-            <input name="estadoReproductivo" value={form.estadoReproductivo} onChange={handleChange} />
+            <input className="modern-input" name="estadoReproductivo" value={form.estadoReproductivo} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: 1 }}>
             <label>Procedencia:</label>
-            <input name="procedencia" value={form.procedencia} onChange={handleChange} />
+            <input className="modern-input" name="procedencia" value={form.procedencia} onChange={handleChange} />
           </div>
         </div>
       </div>
       {/* Sección 6: Constantes fisiológicas */}
       <div className="section-table">
         <div className="section-title">6. Constantes fisiológicas</div>
-        <div className="constantes-row">
-          <div>
+        <div className="constantes-row" style={{ display: 'flex', flexWrap: 'wrap', gap: '24px' }}>
+          <div style={{ flex: '1 1 120px', marginLeft: '8px', marginRight: '8px' }}>
             <label>Peso</label>
-            <input name="constantes.peso" value={form.constantes.peso} onChange={handleChange} />
+            <input className="modern-input" name="constantes.peso" value={form.constantes.peso} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>T°</label>
-            <input name="constantes.temperatura" value={form.constantes.temperatura} onChange={handleChange} />
+            <input className="modern-input" name="constantes.temperatura" value={form.constantes.temperatura} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>F. Car.</label>
-            <input name="constantes.fCar" value={form.constantes.fCar} onChange={handleChange} />
+            <input className="modern-input" name="constantes.fCar" value={form.constantes.fCar} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>F. Res.</label>
-            <input name="constantes.fRes" value={form.constantes.fRes} onChange={handleChange} />
+            <input className="modern-input" name="constantes.fRes" value={form.constantes.fRes} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>T. LL. C</label>
-            <input name="constantes.tllc" value={form.constantes.tllc} onChange={handleChange} />
+            <input className="modern-input" name="constantes.tllc" value={form.constantes.tllc} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>Mucosas</label>
-            <input name="constantes.mucosas" value={form.constantes.mucosas} onChange={handleChange} />
+            <input className="modern-input" name="constantes.mucosas" value={form.constantes.mucosas} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>Turgencia piel</label>
-            <input name="constantes.turgencia" value={form.constantes.turgencia} onChange={handleChange} />
+            <input className="modern-input" name="constantes.turgencia" value={form.constantes.turgencia} onChange={handleChange} style={{ width: '120px' }} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>Pulso</label>
-            <input name="constantes.pulso" value={form.constantes.pulso} onChange={handleChange} />
+            <input className="modern-input" name="constantes.pulso" value={form.constantes.pulso} onChange={handleChange} />
           </div>
-          <div>
+          <div style={{ flex: '1 1 120px' }}>
             <label>Otras</label>
-            <input name="constantes.otras" value={form.constantes.otras} onChange={handleChange} />
+            <input className="modern-input" name="constantes.otras" value={form.constantes.otras} onChange={handleChange} />
           </div>
         </div>
       </div>
       {/* Sección 7: Anamnesis */}
       <div className="section-table">
         <div className="section-title">7. Anamnesis</div>
-        <div className="form-row">
-          <div>
-            <input name="anamnesis" value={form.anamnesis} onChange={handleChange} placeholder="Anamnesis" />
+        <div className="form-row" style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ flex: 1 }}>
+            <input className="modern-input" name="anamnesis" value={form.anamnesis} onChange={handleChange} />
           </div>
         </div>
       </div>
       {/* Sección 8: Enfermedades o procedimientos anteriores */}
       <div className="section-table">
-        <div className="section-title">8. Enfermedades o procedimientos (tto) anteriores</div>
-        <div className="form-row">
-          <div>
-            <input name="enfermedadesPrevias" value={form.enfermedadesPrevias} onChange={handleChange} placeholder="Enfermedades o procedimientos previos" />
+        <div className="section-title">8. Enfermedades o procedimientos anteriores</div>
+        <div className="form-row" style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ flex: 1 }}>
+            <input className="modern-input" name="enfermedadesPrevias" value={form.enfermedadesPrevias} onChange={handleChange}/>
           </div>
         </div>
       </div>
-      {/* Firmas */}
-      <div className="firmas-row">
-        <div>
-          <label>Firma Encargado:</label>
-          <input name="firmaEncargado" value={form.firmaEncargado} onChange={handleChange} />
-        </div>
-        <div>
-          <label>Firma Propietario:</label>
-          <input name="firmaPropietario" value={form.firmaPropietario} onChange={handleChange} />
-        </div>
-      </div>
-      <button type="submit" className="medical-case-form-btn">
+      <button type="submit" className="medical-case-form-btn" style={{ marginTop: '32px', width: '100%', padding: '16px', fontSize: '1.1rem', background: '#1976d2', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', boxShadow: '0 2px 8px #0002' }}>
         {selectedCase ? "Guardar cambios" : "Agregar nuevo caso"}
       </button>
     </form>

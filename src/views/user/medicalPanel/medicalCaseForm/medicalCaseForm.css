@@ -1,3 +1,26 @@
+/* Modern input styles */
+.modern-input {
+  width: 100%;
+  padding: 3px 6px;
+  border: 1px solid #bdbdbd;
+  border-radius: 6px;
+  background: #f7f9fa;
+  font-size: 0.92rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+  box-shadow: 0 1px 2px #0001;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+.modern-input:focus {
+  border-color: #1976d2;
+  box-shadow: 0 2px 8px #1976d222;
+  background: #fff;
+}
+.modern-input[readonly] {
+  background: #ececec;
+  color: #888;
+}
 .medical-case-form {
   background: #fff;
   border-radius: 12px;
@@ -13,13 +36,13 @@
 .medical-case-form .form-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 18px;
   margin-bottom: 8px;
 }
 
 .medical-case-form .form-row > div {
-  flex: 1 1 160px;
-  min-width: 110px;
+  flex: 1 1 120px;
+  min-width: 80px;
   display: flex;
   flex-direction: column;
 }
@@ -74,7 +97,7 @@
   border: 1.5px solid #e0e0e0;
   border-radius: 8px;
   margin-bottom: 12px;
-  padding: 10px 12px;
+  padding: 18px 18px 14px 18px;
   background: #fcfcfc;
 }
 .medical-case-form .section-title {
