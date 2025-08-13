@@ -1,14 +1,34 @@
-import React from "react";
 import "./medicanlPanel.css";
-import MedicalPanelPanel from "./medicalPanelPanel/medicalPanelPanel.jsx";
+import { useEffect, useState } from "react";
 import { medicalPanelStats } from "./medicalPanelData";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../../hooks/useUser.jsx";
+import MedicalPanelPanel from "./medicalPanelPanel/medicalPanelPanel.jsx";
 import MedicalCaseForm from "./medicalCaseForm/MedicalCaseForm.jsx";
 import Head from '../../../components/head/head.jsx';
 import Menu from '../../../components/menu/menu.jsx';
 
 const MedicalPanel = () => {
+  let testing = import.meta.env.VITE_TESTING === 'true'
+  const navigate = useNavigate()
+  const { user } = useUser();
+  const logical = !user || (user.id_perfil !== 1 && user.id_perfil !== 2)
+  console.log(logical)
+  console.log('Hay user?', !!user)
+  console.log('Estoy testeando?', testing)
+  //console.log('El usuario tiene los perfiles adecuados?',(user.id_perfil !== 1 && user.id_perfil !== 2))
+  console.log(logical)
+
+useEffect(() => {
+  if (
+    (!user || (user.id_perfil !== 1 && user.id_perfil !== 2)) &&
+    !testing
+  ) {
+    navigate('/dashboard');
+  }
+}, [user, testing, navigate]);
   // JSON de prueba para los casos médicos
-  const [medicalCases, setMedicalCases] = React.useState([
+  const [medicalCases, setMedicalCases] = useState([
     {
       historiaClinica: "001",
       historia: "Fractura en pata trasera",
@@ -52,13 +72,16 @@ const MedicalPanel = () => {
     },
   ]);
 
-  const [selectedCase, setSelectedCase] = React.useState(null);
+  const [selectedCase, setSelectedCase] = useState(null);
+
   const handleRowClick = (idx) => {
     setSelectedCase([...medicalCases].reverse()[idx]);
   };
-  const handleAddNew = () => {
-    setSelectedCase(null);
-  };
+
+  // const handleAddNew = () => {
+  //   setSelectedCase(null);
+  // };
+
   const handleSave = (newCase) => {
     setMedicalCases([newCase, ...medicalCases]);
     setSelectedCase(null);

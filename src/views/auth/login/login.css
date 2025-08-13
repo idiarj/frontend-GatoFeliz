@@ -79,7 +79,7 @@
   z-index: 2;
 }
 
-.toggle-password-btn {
+.toggle-password-btn-login {
   position: absolute;
   top: 50%;
   right: 18px;
@@ -126,4 +126,32 @@
 .dashboard-link {
   color: #F37021;
   cursor: pointer;
+}
+
+.login-error {
+  color: #e66930;
+  font-size: 1.25rem;
+  text-align: center;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  background: #fff3f3;
+  border: 2px dashed #ffbaba;
+  border-radius: 18px;
+  padding: 1.1rem 1.2rem 1.1rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  box-shadow: 0 2px 8px 0 rgba(255,59,59,0.07);
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  letter-spacing: 0.5px;
+  animation: shake 0.25s 1;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+  75% { transform: translateX(-4px); }
+  100% { transform: translateX(0); }
 }

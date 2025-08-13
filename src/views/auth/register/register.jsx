@@ -1,23 +1,33 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../../../hooks/useUser.jsx";
 import { FaUserCircle, FaEnvelope, FaLock, FaPhone } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { fetchInstance } from "../../../utils/Fetch.js";
-import { useNavigate } from "react-router-dom";
 import registroImg from "../../../assets/images/registro.png";
 import "../../../App.css";
 import "./register.css";
 
 const Register = () => {
+  
   const [formData, setFormData] = useState({
     nom_usuario: "",
     email_usuario: "",
     pwd_usuario: "",
     tlf_usuario: ""
   })
+
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const handleTogglePassword = () => setShowPassword((prev) => !prev);
+  const { user } = useUser();
+
+    useEffect(()=>{
+      if(user){
+        navigate('/dashboard')
+      }
+    })
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -92,7 +102,7 @@ const Register = () => {
             <button 
               type="button"
               onClick={handleTogglePassword} 
-              className="toggle-password-btn"
+              className="toggle-password-btn-register"
             >
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>

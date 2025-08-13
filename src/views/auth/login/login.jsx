@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { playSoundOnce, stopAllPurring } from '../../../utils/audio';
 import { fetchInstance } from '../../../utils/Fetch';
@@ -13,14 +13,21 @@ import "../../../App.css";
 import './login.css';
 
 const Login = () => {
-  const { setUser } = useUser();
+  const [showPassword, setShowPassword] = useState(false);
+  const [gatoDespierto, setGatoDespierto] = useState(false);
+  const [error, setError] = useState(null);
+  const { setUser, user } = useUser();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     identifier_usuario: "",
     pwd_usuario: ""
   });
-  const [showPassword, setShowPassword] = useState(false);
-  const [gatoDespierto, setGatoDespierto] = useState(false);
+
+  useEffect(()=>{
+    if(user){
+      navigate('/dashboard')
+    }
+  })
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,6 +51,7 @@ const Login = () => {
       const data = await response.json();
       console.log("Login response:", data);
       if (!response.ok && !data.success) {
+        setError(data.errorMsg || "Error de inicio de sesión");
         return;
       }
       setUser(data.data);
@@ -112,7 +120,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="toggle-password-btn"
+              className="toggle-password-btn-login"
               tabIndex={-1}
               onMouseDown={e => e.preventDefault()}
               onFocus={e => e.target.style.outline = 'none'}
@@ -121,6 +129,13 @@ const Login = () => {
               {showPassword ? <FaEyeSlash size={28} color="#F37021" /> : <FaEye size={28} color="#F37021" />}
             </button>
           </div>
+           { error && (
+             <div className="login-error">
+               {error}
+             </div>
+           ) }
+          {/* Espacio extra para separar el error de los links */}
+          { error && <div style={{marginBottom: '1.5rem'}}></div> }
           <div className="login-links">
             ¿OLVIDASTE TU CONTRASEÑA? <a href="/recoverPassword" className="login-link"> HAGA CLICK AQUI</a><br />
             ¿NO TIENES CUENTA? <a href="/register" className="login-link"> HAGA CLICK AQUI</a>

@@ -13,6 +13,9 @@ import Sponsor from './views/user/sponsor/sponsor.jsx';
 import Loading from "./views/user/loading/Loading.jsx";
 import MedicalPanel from './views/user/medicalPanel/medicalPanel.jsx';
 
+
+
+
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -70,7 +73,7 @@ export const router = createBrowserRouter([
             const data = await response.json();
             return data.data;
         },
-        hydrateFallbackElement: <div>Cargando...</div>
+        hydrateFallbackElement: <Loading subtitle={'Cargando gatos apadrinables...'}/>
     },
     {
         path: '*',
@@ -82,7 +85,13 @@ export const router = createBrowserRouter([
     }
     ,
     {
-        path: '/panelMedico',
-        element: <MedicalPanel/>
+        path: '/medical',
+        element: <MedicalPanel/>,
+        loader: async () => {
+            // const response = await fetchInstance.get({ endpoint: '/medical', headers: { 'Content-Type': 'application/json' } });
+            // const data = await response.json();
+            // return data.data;
+        },
+        hydrateFallbackElement: <Loading subtitle={'Cargando panel médico...'}/>
     }
 ])

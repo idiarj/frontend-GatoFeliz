@@ -73,16 +73,16 @@
 }
 
 /* Solo agrego el padding-right para el ojito, el resto lo hereda de .register-input */
-.register-input.password {
-  padding-right: 50px;
-}
+/* .register-input.password {
+  padding-right: 0px;
+} */
 
 
 /* Alineo el ojito igual que los íconos de los otros inputs */
-.toggle-password-btn {
+.toggle-password-btn-register {
   position: absolute;
-  right: 35px;
-  top: 50%;
+  right: -20px;
+  top: 51%;
   transform: translateY(-50%);
   background: none;
   border: none;
