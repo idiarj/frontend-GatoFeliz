@@ -1,6 +1,7 @@
 import React from "react";
 import "./medicanlPanel.css";
 import MedicalPanelPanel from "./medicalPanelPanel/medicalPanelPanel.jsx";
+import Modal from "../../../components/modal/Modal.jsx";
 import { medicalPanelStats } from "./medicalPanelData";
 import MedicalCaseForm from "./medicalCaseForm/MedicalCaseForm.jsx";
 import Head from '../../../components/head/head.jsx';
@@ -53,14 +54,23 @@ const MedicalPanel = () => {
   ]);
 
   const [selectedCase, setSelectedCase] = React.useState(null);
+  const [modalOpen, setModalOpen] = React.useState(false);
+
   const handleRowClick = (idx) => {
     setSelectedCase([...medicalCases].reverse()[idx]);
+    // El modal NO se abre al hacer click en la fila
   };
   const handleAddNew = () => {
     setSelectedCase(null);
+    setModalOpen(true);
   };
   const handleSave = (newCase) => {
     setMedicalCases([newCase, ...medicalCases]);
+    setSelectedCase(null);
+    setModalOpen(false);
+  };
+  const handleCloseModal = () => {
+    setModalOpen(false);
     setSelectedCase(null);
   };
 
@@ -69,15 +79,27 @@ const MedicalPanel = () => {
       <Head title="Panel medico" />
       <div style={{ display: "flex" }}>
         <Menu />
-        <MedicalPanelPanel 
-          medicalPanelStats={medicalPanelStats} 
-          medicalCases={medicalCases} 
-          handleRowClick={handleRowClick} 
-        />
-        <div style={{ flex: 1, padding: '24px', background: '#fff', marginTop: '120px' }}>
-          <MedicalCaseForm selectedCase={selectedCase} onSave={handleSave} medicalCases={medicalCases} />
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', marginTop: '60px' }}>
+          <MedicalPanelPanel 
+            medicalPanelStats={medicalPanelStats} 
+            medicalCases={medicalCases} 
+            handleRowClick={handleRowClick} 
+          />
+          <button 
+            style={{ marginTop: '32px', padding: '12px 32px', fontSize: '1.1rem', background: '#1976d2', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', boxShadow: '0 2px 8px #0002' }}
+            onClick={handleAddNew}
+          >
+            Agregar historia clínica
+          </button>
         </div>
       </div>
+      {modalOpen && (
+        <div style={{ position: 'fixed', left: 0, right: 0, top: '180px', zIndex: 9999 }}>
+          <Modal open={modalOpen} onClose={handleCloseModal}>
+            <MedicalCaseForm selectedCase={selectedCase} onSave={handleSave} medicalCases={medicalCases} />
+          </Modal>
+        </div>
+      )}
     </>
   );
 };

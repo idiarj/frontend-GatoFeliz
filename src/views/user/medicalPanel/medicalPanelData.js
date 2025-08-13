@@ -1,22 +1,17 @@
 // Datos de prueba simulando respuesta de la BDD
 export const medicalCases = [
   {
-    historia: "Fractura en pata trasera",
-    tratamiento: "Férula",
-    insumos: "Yes",
+    historia: "Lesión en el ojo",
+    tratamiento: "Medicamentos",
+    kennel: "D05",
+    insumos: "Pendient",
     estado: "En tratamiento",
-    aporte: "$2000"
-  },
-  {
-    historia: "Ingesta de cuerpo extraño",
-    tratamiento: "Cirugía",
-    insumos: "Yes",
-    estado: "En tratamiento",
-    aporte: "$1000"
+    aporte: "$500"
   },
   {
     historia: "Infección respiratoria",
     tratamiento: "Antibióticos",
+    kennel: "E08",
     insumos: "Yes",
     estado: "Resuelto",
     aporte: "—"
@@ -24,16 +19,26 @@ export const medicalCases = [
   {
     historia: "Fractura en pata trasera",
     tratamiento: "Férula",
+    kennel: "C07",
     insumos: "Yes",
     estado: "Pendiente",
     aporte: "$1500"
   },
   {
-    historia: "Lesión en el ojo",
-    tratamiento: "Medicamentos",
-    insumos: "Pendient",
+    historia: "Ingesta de cuerpo extraño",
+    tratamiento: "Cirugía",
+    kennel: "B03",
+    insumos: "Yes",
     estado: "En tratamiento",
-    aporte: "$500"
+    aporte: "$1000"
+  },
+  {
+    historia: "Fractura en pata trasera",
+    tratamiento: "Férula",
+    kennel: "A12",
+    insumos: "Yes",
+    estado: "En tratamiento",
+    aporte: "$2000"
   }
 ];
 
