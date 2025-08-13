@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./medicalPanelPanel.css";
 
-const MedicalPanelPanel = ({ medicalPanelStats, medicalCases, handleRowClick }) => (
+const MedicalPanelPanel = ({ medicalPanelStats, medicalCases, handleRowClick }) => {
+  useEffect(() => {
+    console.log('medicalCases:', medicalCases);
+  }, [medicalCases]);
+
+  return (
   <div className="medical-panel-container" style={{ flex: 1, marginLeft: '350px', marginTop: '80px' }}>
     <div className="medical-panel-header">
       <div className="medical-panel-header-box">
@@ -26,7 +31,7 @@ const MedicalPanelPanel = ({ medicalPanelStats, medicalCases, handleRowClick }) 
       <thead>
         <tr>
           <th style={{whiteSpace: 'nowrap'}}>N° Caso</th>
-          <th style={{whiteSpace: 'nowrap'}}>Kennel (opcional)</th>
+          <th style={{whiteSpace: 'nowrap'}}>N° Kennel (opcional)</th>
           <th style={{whiteSpace: 'nowrap'}}>Motivo del Caso</th>
           <th style={{whiteSpace: 'nowrap'}}>Tratamiento</th>
           <th style={{whiteSpace: 'nowrap'}}>Insumos Requeridos</th>
@@ -49,6 +54,7 @@ const MedicalPanelPanel = ({ medicalPanelStats, medicalCases, handleRowClick }) 
       </tbody>
     </table>
   </div>
-);
+  );
+};
 
 export default MedicalPanelPanel;

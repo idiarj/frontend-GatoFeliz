@@ -12,6 +12,7 @@ const MedicalPanel = () => {
   const [medicalCases, setMedicalCases] = React.useState([
     {
       historiaClinica: "001",
+      kennel: "10",
       historia: "Fractura en pata trasera",
       tratamiento: "Férula",
       insumos: "Yes",
@@ -22,6 +23,7 @@ const MedicalPanel = () => {
     {
       historiaClinica: "002",
       historia: "Ingesta de cuerpo extraño",
+      kennel: "32",
       tratamiento: "Cirugía",
       insumos: "Yes",
       estado: "En tratamiento",
@@ -37,6 +39,7 @@ const MedicalPanel = () => {
     },
     {
       historiaClinica: "004",
+      kennel: "21",
       historia: "Fractura en pata trasera",
       tratamiento: "Férula",
       insumos: "Yes",
