@@ -17,7 +17,9 @@ const Register = () => {
     pwd_usuario: "",
     tlf_usuario: ""
   })
-
+  const [isSubmitting, setIsSubmitting] = useState(false);          // NEW
+  const [dots, setDots] = useState('');      
+  const [error, setError] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const handleTogglePassword = () => setShowPassword((prev) => !prev);
@@ -29,37 +31,47 @@ const Register = () => {
       }
     })
 
+  useEffect(() => {                                                  // NEW
+    if (!isSubmitting) return;
+    const id = setInterval(() => {
+      setDots(prev => (prev.length >= 3 ? '' : prev + '.'));
+    }, 450);
+    return () => clearInterval(id);
+  }, [isSubmitting]);
+
   const handleSubmit = async (e)=>{
     e.preventDefault();
-    // Aquí puedes manejar el envío del formulario
+    setError(null);                      // NEW (opcional para limpiar error previo)
+    setIsSubmitting(true);               // NEW: empieza indicador
+
     try {
       console.log("Formulario enviado:", formData);
       const response = await fetchInstance.post({
         endpoint: '/auth/register',
         body: formData,
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         credentials: 'include'
       })
       console.log("Respuesta del servidor:", response);
       const data = await response.json();   
       console.log("Datos recibidos:", data);
+
       if(!response.ok && !data.success){
+        setError(data.errorMsg || "Error al registrar el usuario");
         console.log("Registro fallido:", data);
+        setIsSubmitting(false);          // NEW: termina indicador en error
         return;
       }
 
       console.log("Registro exitoso:", data);
-      
-      navigate('/login'); // Redirigir al usuario a la página de inicio de sesión después del registro exitoso
-
+      // Mantener isSubmitting true hasta que la navegación cambie la vista
+      navigate('/login');
 
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
+      setIsSubmitting(false);            // NEW: termina indicador en excepción
       return;
     }
-    // Por ejemplo, podrías hacer una llamada a la API para registrar al usuario
   }
 
   const handleChange = (e) => {
@@ -133,11 +145,27 @@ const Register = () => {
           </div>
           <button type="submit" className="register-btn">INGRESAR</button>
         </form>
+          {/* { error && (
+             <div className="login-error">
+               {error}
+             </div>
+           ) } */}
+        {isSubmitting && (                                                  // NEW
+          <div className="register-progress" role="status" aria-live="polite">
+            Registrando usuario{dots}
+          </div>
+        )}
+
         <div className="register-dashboard-link">
           <a href="/dashboard" className="dashboard-link">
           Volver al dashboard
           </a>
         </div>
+          { error && (
+             <div className="login-error">
+               {error}
+             </div>
+           ) }
       </div>
       {/* Derecha: Imagen */}
       <div className="register-image-section">

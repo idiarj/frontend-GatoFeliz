@@ -12,6 +12,7 @@ import "./recoverPassword.css";
 const RecoverPassword = () => {
   const [gatoDespierto, setGatoDespierto] = useState(false);
   const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -25,9 +26,10 @@ const RecoverPassword = () => {
       console.log("Email submitted:", email);
       console.log("Response data:", data);
 
-      if (data.success) {
-        console.log("Password recovery email sent successfully");
+      if (!response.ok && !data.success) {
+        setError(data.errorMsg || "Error al enviar el correo");
       }
+      console.log("Password recovery email sent successfully");
     } catch (error) {
       console.error("Error submitting email:", error);
     }
@@ -75,6 +77,11 @@ const RecoverPassword = () => {
             placeholder="Ingrese su correo"
             className="recover-input"
           />
+          { error && (
+             <div className="recover-error">
+               {error}
+             </div>
+           ) }
           <div className="recover-links">
             <span>VOLVER AL INICIO DE SESION</span>
             <a href="/login" className="recover-link">HAGA CLICK AQUI</a>

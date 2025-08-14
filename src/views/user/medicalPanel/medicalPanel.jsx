@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
 import MedicalPanelPanel from "./medicalPanelPanel/medicalPanelPanel.jsx";
 import Modal from "../../../components/modal/Modal.jsx";
-import { medicalPanelStats } from "./medicalPanelData";
 import MedicalCaseForm from "./medicalCaseForm/MedicalCaseForm.jsx";
 import Head from '../../../components/head/head.jsx';
 import Menu from '../../../components/menu/menu.jsx';
@@ -78,9 +77,7 @@ useEffect(() => {
   ]);
 
   const [selectedCase, setSelectedCase] = useState(null);
-
-  const [selectedCase, setSelectedCase] = React.useState(null);
-  const [modalOpen, setModalOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleRowClick = (idx) => {
     setSelectedCase([...medicalCases].reverse()[idx]);

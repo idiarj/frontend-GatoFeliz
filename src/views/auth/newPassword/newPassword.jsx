@@ -17,17 +17,18 @@ const NewPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [gatoDespierto, setGatoDespierto] = useState(false);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  useEffect(() => {
-    if (!token) {
-      console.error("No token found in URL, the password reset wont work.");
-      //navigate("/login");
-    }
-    console.log("Token from URL:", token);
-  }, [token, navigate]);
+  // useEffect(() => {
+  //   if (!token) {
+  //     console.error("No token found in URL, the password reset wont work.");
+  //     //navigate("/login");
+  //   }
+  //   console.log("Token from URL:", token);
+  // }, [token, navigate]);
 
   const handleSubmit = async (e)=>{
     e.preventDefault();
@@ -43,11 +44,14 @@ const NewPassword = () => {
         headers: { 'Content-Type': 'application/json' }
       })
       const data = await response.json();
-      if (data.success) {
-        console.log("Password reset successful");
-        // Optionally, redirect to login or show a success message
-        navigate("/login");
+      if (!response.ok && !data.success) {
+        setError(data.errorMsg || "Error al restablecer la contraseña");
+        console.log("Restablecimiento de contraseña fallido:", data);
+        return;
       }
+      console.log("Password reset successful");
+      // Optionally, redirect to login or show a success message
+      navigate("/login");
     } catch (error) {
       console.error("Error submitting new password:", error);
     }
@@ -117,6 +121,11 @@ const NewPassword = () => {
             <span>VOLVER AL INICIO DE SESION</span>
             <a href="/login" className="newpass-link">HAGA CLICK AQUI</a>
           </div>
+          { error && (
+             <div className="login-error">
+               {error}
+             </div>
+           ) }
           <button
 
             type="submit"
