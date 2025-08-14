@@ -98,14 +98,14 @@
   flex-grow: 0;
 }
 
-.form-group {
+.form-group-adoption {
   margin-bottom: 18px;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
-.form-group label {
+.form-group-adoption label {
   font-weight: 600;
   color: #b94d0d;
   font-size: 0.92rem;
@@ -114,8 +114,8 @@
   gap: 6px;
 }
 
-.form-group input,
-.form-group select {
+.form-group-adoption input,
+.form-group-adoption select {
   padding: 12px 14px;
   border: 2px solid #f37021;
   border-radius: 12px;
@@ -126,8 +126,8 @@
   color: #333;
   }
 
-.form-group input:focus,
-.form-group select:focus {
+.form-group-adoption input:focus,
+.form-group-adoption select:focus {
   border-color: #d95c13;
   box-shadow: 0 0 0 3px rgba(243, 112, 33, 0.15);
 }

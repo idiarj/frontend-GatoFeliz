@@ -99,19 +99,19 @@ const AddAdoptionCard = ({ onSubmit, uploading }) => {
 
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <div className="form-group">
+          <div className="form-group-adoption">
           <label><FaSignature /> Nombre</label>
           <input type="text" name="nom_animal" value={formData.nom_animal} onChange={handleChange} />
           </div>
-          {/* <div className="form-group">
+          {/* <div className="form-group-adoption">
             <label><FaDog /> Raza</label>
             <input type="text" name="raza_animal" value={formData.raza_animal} onChange={handleChange} />
           </div> */}
-          <div className="form-group">
+          <div className="form-group-adoption">
             <label><FaBirthdayCake /> Edad</label>
             <input type="text" name="edad_animal" value={formData.edad_animal} onChange={handleChange} />
           </div>
-          <div className="form-group">
+          <div className="form-group-adoption">
             <label><FaVenusMars /> Sexo</label>
             <select name="genero_animal" value={formData.genero_animal} onChange={handleChange}>
               <option value="">Seleccionar</option>
@@ -119,7 +119,7 @@ const AddAdoptionCard = ({ onSubmit, uploading }) => {
               <option value="Hembra">Hembra</option>
             </select>
           </div>
-          <div className="form-group">
+          <div className="form-group-adoption">
             <label><FaWeight /> Peso (kg)</label>
             <input type="number" name="peso_animal" value={formData.peso_animal} onChange={handleChange} min="0" step="0.1" />
           </div>

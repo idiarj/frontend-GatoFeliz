@@ -21,6 +21,7 @@
   background: #ececec;
   color: #888;
 }
+
 .medical-case-form {
   background: #fff;
   border-radius: 12px;
@@ -88,6 +89,7 @@
   box-shadow: 0 1px 4px rgba(0,0,0,0.07);
   transition: background 0.2s;
 }
+
 .medical-case-form-btn:hover {
   background: #e08c1a;
 }
@@ -129,6 +131,80 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+/* === Overlay del modal (ya lo usas desde JSX) === */
+/* Si prefieres mover estilos inline a CSS, puedes descomentar:
+*/
+.medical-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 12px;
+}
+
+/* ====== MODO COMPACTO (añadido) ====== */
+.medical-case-form--compact .section-title {
+  font-size: 0.95em;
+  margin-bottom: 4px;
+}
+
+.medical-case-form--compact .form-row {
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.medical-case-form--compact .form-row > div {
+  flex: 1 1 110px;
+  min-width: 70px;
+}
+
+.medical-case-form--compact label {
+  font-size: 0.9em;
+  margin-bottom: 2px;
+}
+
+/* Inputs más compactos */
+.medical-case-form--compact .modern-input,
+.medical-case-form--compact input[type="text"],
+.medical-case-form--compact input[type="date"],
+.medical-case-form--compact input[type="number"],
+.medical-case-form--compact input[type="email"],
+.medical-case-form--compact input[type="tel"] {
+  padding: 3px 6px;
+  font-size: 0.9em;
+  margin-bottom: 2px;
+}
+
+/* Bloque de constantes más apretado */
+.medical-case-form--compact .constantes-row {
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.medical-case-form--compact .constantes-row > div {
+  flex: 1 1 90px;
+  min-width: 70px;
+}
+
+/* Botón principal un poco más delgado */
+.medical-case-form--compact .medical-case-form-btn {
+  padding: 8px 16px;
+  font-size: 1em;
+}
+
+/* Responsive */
+@media (max-width: 780px) {
+  .medical-case-form--compact {
+    max-width: 96vw !important;
+    min-width: auto !important;
+    padding: 14px 10px !important;
+  }
 }
 
 @media (max-width: 700px) {

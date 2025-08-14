@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaStethoscope, FaUserShield } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { fetchInstance } from '../../utils/Fetch';
 import { useUser } from '../../hooks/useUser';
 import './menu.css';
 
-const logout = async () => {
+
+const logout = async (setUser, navigate) => {
     // Aquí puedes manejar el cierre de sesión, por ejemplo, limpiando el estado del usuario
       console.log('Cerrar sesión');
       // Redirigir a la página de inicio o login
@@ -18,7 +19,9 @@ const logout = async () => {
       console.log('Datos recibidos:', data);
       if (response.ok) {
         console.log('Sesión cerrada');
+        setUser(null); // Limpiar el estado del usuario
         // Redirigir a la página de inicio o login
+        navigate('/login');
       } else {
         console.error('Error al cerrar sesión', );
       }
@@ -41,7 +44,8 @@ const menuOptions = [
 
 const Menu = () => {
   const location = useLocation();
-  const {user} = useUser();
+  const navigate = useNavigate(); 
+  const { user, setUser } = useUser();
   let testing = import.meta.env.VITE_TESTING === 'true';
   console.log(user);
   return (
@@ -61,7 +65,7 @@ const Menu = () => {
               <MenuLink
                 to={opt.path}
                 isActiveBg={isActive}
-                onClick={opt.onClick}
+                onClick={opt.onClick ? () => opt.onClick(setUser, navigate) : undefined}
               >
                 {opt.icon} {opt.label}
               </MenuLink>
@@ -79,6 +83,13 @@ const MenuLink = ({ to, children, isActiveBg, onClick }) => {
   let linkClass = 'menu-link';
   if (isActiveBg) linkClass += ' active';
   if (hover) linkClass += ' hover';
+    const handleClick = (e) => {
+    if (onClick) {
+      e.preventDefault();   // ← evita que <Link> navegue
+      e.stopPropagation();
+      onClick();            // ← ejecuta tu logout (hará navigate internamente)
+    }
+  };
   return (
 
     <Link
@@ -86,7 +97,7 @@ const MenuLink = ({ to, children, isActiveBg, onClick }) => {
       className={linkClass}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      onClick={onClick}
+      onClick={handleClick}
     >
       {children}
     </Link>

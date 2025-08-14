@@ -1,11 +1,9 @@
-import "./medicanlPanel.css";
+import "./medicalPanel.css";
 import { useEffect, useState } from "react";
 import { medicalPanelStats } from "./medicalPanelData";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
-import MedicalPanelPanel from "./medicalPanelPanel/medicalPanelPanel.jsx";
-import Modal from "../../../components/modal/Modal.jsx";
-import MedicalCaseForm from "./medicalCaseForm/MedicalCaseForm.jsx";
+import MedicalCaseForm from "../../../components/medicalCaseForm/MedicalCaseForm.jsx";
 import Head from '../../../components/head/head.jsx';
 import Menu from '../../../components/menu/menu.jsx';
 
@@ -105,16 +103,63 @@ useEffect(() => {
   return (
     <>
       <Head title="Panel medico" />
-      <div style={{ display: "flex" }}>
-        <Menu />
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', marginTop: '60px' }}>
-          <MedicalPanelPanel 
-            medicalPanelStats={medicalPanelStats} 
-            medicalCases={medicalCases} 
-            handleRowClick={handleRowClick} 
-          />
+      <Menu />
+      <div className="medicalpanel-flex">
+        <div className="medicalpanel-content">
+          {/* Panel principal integrado aquí */}
+          <div className="medical-panel-container medicalpanel-maincontainer">
+            <div className="medical-panel-header">
+              <div className="medical-panel-header-box">
+                <h2>{medicalPanelStats.cajasTotales}</h2>
+                <p>Kennels Totales</p>
+              </div>
+              <div className="medical-panel-header-box">
+                <h2>{medicalPanelStats.cajasDisponibles}</h2>
+                <p>Kennels Disponibles</p>
+              </div>
+              <div className="medical-panel-header-box">
+                <h2>{medicalPanelStats.casos}</h2>
+                <p>Casos</p>
+                {medicalCases.length > 0 && medicalCases[medicalCases.length - 1].kennel && (
+                  <p className="medicalpanel-kennelinfo">
+                    Kennel: {medicalCases[medicalCases.length - 1].kennel}
+                  </p>
+                )}
+              </div>
+            </div>
+            <section className="medicalpanel-table-section">
+              <div className="medicalpanel-table-wrapper">
+                <table className="medical-panel-table">
+                  <thead>
+                    <tr>
+                      <th className="medicalpanel-nowrap">N° Caso</th>
+                      <th className="medicalpanel-nowrap">N° Kennel (opcional)</th>
+                      <th className="medicalpanel-nowrap">Motivo del Caso</th>
+                      <th className="medicalpanel-nowrap">Tratamiento</th>
+                      <th className="medicalpanel-nowrap">Insumos Requeridos</th>
+                      <th className="medicalpanel-nowrap">Estado del Caso</th>
+                      <th className="medicalpanel-nowrap">Aporte Monetario del Familiar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {[...medicalCases].reverse().map((item, idx, arr) => (
+                      <tr key={arr.length - idx - 1} className="medicalpanel-row" onClick={() => handleRowClick(idx)}>
+                        <td>{String(arr.length - idx).padStart(3, '0')}</td>
+                        <td>{item.kennel ? item.kennel : '-'}</td>
+                        <td>{item.historia}</td>
+                        <td>{item.tratamiento}</td>
+                        <td>{item.insumos}</td>
+                        <td>{item.estado}</td>
+                        <td>{item.aporte}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
           <button 
-            style={{ marginTop: '32px', padding: '12px 32px', fontSize: '1.1rem', background: '#1976d2', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer', boxShadow: '0 2px 8px #0002' }}
+            className="medicalpanel-addbtn"
             onClick={handleAddNew}
           >
             Agregar historia clínica
@@ -122,10 +167,8 @@ useEffect(() => {
         </div>
       </div>
       {modalOpen && (
-        <div style={{ position: 'fixed', left: 0, right: 0, top: '180px', zIndex: 9999 }}>
-          <Modal open={modalOpen} onClose={handleCloseModal}>
+        <div className="medicalpanel-modalbg" onClick={handleCloseModal}>
             <MedicalCaseForm selectedCase={selectedCase} onSave={handleSave} medicalCases={medicalCases} />
-          </Modal>
         </div>
       )}
     </>
