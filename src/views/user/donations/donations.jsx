@@ -92,14 +92,14 @@ const Donations = () => {
             <div className="aportes-items-modern">
               <div className="aportes-item-modern">
                 <img src={proteinaIcon} alt="Proteínas" className="aportes-icon-modern" />
-                <div className="aportes-text-modern">Proteínas:<br /> sardinas, carnes, mollejas</div>
+                <div className="aportes-text-modern">Proteínas:<br /> pollo, sardinas, carne, mollejas o gatarina</div>
               </div>
               <div className="aportes-item-modern">
                 <img src={medicinasIcon} alt="Medicinas" className="aportes-icon-modern" />
                 <div className="aportes-text-modern">Medicinas:<br /> guantes, hisopos, gasas, vitaminas y alcohol</div>
               </div>
               <div className="aportes-item-modern">
-                <img src={limpiezasIcon} alt="Limpieza" className="aportes-icon-modern" />
+                <img src={limpiezasIcon} alt="Limpieza" className="aportes-icon-modern aportes-icon-limpiezas" />
                 <div className="aportes-text-modern">Productos de limpieza:<br /> desinfectantes, escobas, lavaplatos, esponjas</div>
               </div>
               <div className="aportes-item-modern">
