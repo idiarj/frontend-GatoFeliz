@@ -53,7 +53,7 @@ const Sponsor =  () => {
             <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
           ))} */}
           {cats && (
-            cats.map((cat)=>(
+            cats.map((cat, idx) => (
               <SponsorCard
                 key={cat.id_animal}
                 name={cat.nom_animal}
@@ -61,6 +61,13 @@ const Sponsor =  () => {
                 age={cat.edad_animal}
                 image={cat.ruta_imagen_an}
                 onRequest={() => alert(`Solicitud enviada para ${cat.nom_animal}`)}
+                onDelete={() => {
+                  if(window.confirm(`¿Seguro que deseas eliminar a ${cat.nom_animal}?`)) {
+                    setCats(prev => prev.filter((_, i) => i !== idx));
+                  }
+                }}
+                buttonLabel="ENVIAR SOLICITUD"
+                boxShadow={true}
               />
             ))
           )}

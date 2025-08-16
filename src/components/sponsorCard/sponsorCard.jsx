@@ -1,5 +1,7 @@
-import { MdIosShare } from 'react-icons/md';
+import { MdIosShare, MdDeleteOutline } from 'react-icons/md';
 import './sponsorCard.css';
+import { useUser } from '../../hooks/useUser';
+
 
 const SponsorCard = ({
   name,
@@ -7,6 +9,7 @@ const SponsorCard = ({
   age,
   image,
   onRequest,
+  onDelete, 
   buttonLabel = 'ENVIAR SOLICITUD',
   boxShadow = true
 }) => {
@@ -15,6 +18,9 @@ const SponsorCard = ({
     navigator.clipboard.writeText(pageUrl);
     alert('¡Enlace copiado! Puedes compartirlo donde quieras.');
   };
+
+  const { user } = useUser();
+  let testing = import.meta.env.VITE_TESTING === 'true';
 
   return (
     <div
@@ -33,15 +39,28 @@ const SponsorCard = ({
         <p className="sponsor-card-subtitle">
           {gender} &bull; {age}
         </p>
-        <div style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+        <div className="sponsor-card-actions-row" style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
+          {(testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+            <button
+              className="sponsor-card-icon-btn sponsor-card-delete-btn"
+              onClick={onDelete}
+              title="Eliminar"
+            >
+              <MdDeleteOutline size={22} color="#F44336" />
+            </button>
+          )}
           <button
             className="sponsor-card-button sponsor-card-button-large"
             onClick={onRequest}
           >
             {buttonLabel}
           </button>
-          <button className="sponsor-card-share-icon" onClick={handleCopyLink} style={{background: 'none', border: 'none', padding: 0, cursor: 'pointer'}}>
-            <MdIosShare size={24} color="#FF9800" />
+          <button
+            className="sponsor-card-icon-btn sponsor-card-share-btn"
+            onClick={handleCopyLink}
+            title="Compartir"
+          >
+            <MdIosShare size={22} color="#FF9800" />
           </button>
         </div>
       </div>

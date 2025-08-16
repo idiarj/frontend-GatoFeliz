@@ -9,6 +9,7 @@ import Menu from '../../../components/menu/menu.jsx';
 import './dashboard.css';
 import AdoptionCard from '../../../components/adoptionCard/adoptionCard.jsx';
 import { dashboardImages, getLastCat, getPaymentLogos, getDonationTypes, getSponsorImage} from './importdata.jsx';
+import SponsorCard from '../../../components/sponsorCard/sponsorCard.jsx';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ const Dashboard = () => {
               age={getLastCat().age}
               image={getLastCat().image}
               onRequest={() => navigate('/adoptions')}
-              buttonLabel="Ver más…"
+              buttonLabel="ENVIAR SOLICITUD"
               boxShadow={false}
               animatedImage={false}
             />
@@ -59,20 +60,18 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Apadrinar Card */}
-          <div 
-            className="dashboard-section apadrinar"
-            onClick={() => navigate('/sponsor')}
-          >
-            <img src={getSponsorImage()} alt="Gatitos para apadrinar" />
-            <div className="dashboard-section-info">
-              <span>
-                ¿No puedes adoptar pero quieres ofrecerle amor y 
-                estabilidad a un gatito?
-              </span>
-              <div className="dashboard-link">Apadrinar</div>
+            {/* SponsorCard abajo a la derecha */}
+            <div className="sponsor-card-bottom-right">
+              <SponsorCard
+                name={getLastCat().name}
+                gender={getLastCat().gender}
+                age={getLastCat().age}
+                image={getLastCat().image}
+                onRequest={() => navigate('/sponsor')}
+                buttonLabel="ENVIAR SOLICITUD"
+                boxShadow={false}
+              />
             </div>
-          </div>
 
           {/* Preguntas Card */}
           <div 

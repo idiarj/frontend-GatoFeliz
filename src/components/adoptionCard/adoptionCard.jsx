@@ -39,7 +39,16 @@ const AdoptionCard = ({
         <p className="adoption-card-subtitle">
           {gender} &bull; {age}
         </p>
-        <div style={{display: 'flex', alignItems: 'center', gap: '8px', width: '100%'}}>
+        <div className="adoption-card-actions-row">
+          {(testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+            <button
+              className="adoption-card-icon-btn adoption-card-delete-btn"
+              onClick={onDelete}
+              title="Eliminar"
+            >
+              <MdDeleteOutline size={22} color="#F44336" />
+            </button>
+          )}
           <button
             className="adoption-card-button adoption-card-button-large"
             onClick={onRequest}
@@ -47,23 +56,12 @@ const AdoptionCard = ({
             {buttonLabel}
           </button>
           <button
-            className="adoption-card-icon-btn"
+            className="adoption-card-icon-btn adoption-card-share-btn"
             onClick={handleCopyLink}
             title="Compartir"
           >
             <MdIosShare size={22} color="#FF9800" />
           </button>
-          {
-            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
-              <button
-                className="adoption-card-icon-btn"
-                onClick={onDelete}
-                title="Eliminar"
-              >
-                <MdDeleteOutline size={22} color="#F44336" />
-              </button>
-            )
-          }
         </div>
       </div>
     </div>

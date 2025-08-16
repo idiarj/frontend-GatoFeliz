@@ -1,3 +1,10 @@
+/* SponsorCard abajo a la derecha */
+.sponsor-card-bottom-right {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 100;
+}
 /* Título de la sección de preguntas más arriba */
 .preguntas-title {
   margin-top: 20px;

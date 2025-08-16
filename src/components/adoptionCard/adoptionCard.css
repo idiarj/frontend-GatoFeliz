@@ -1,3 +1,21 @@
+/* Fila de acciones: eliminar izquierda, compartir derecha, botón centrado */
+.adoption-card-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 12px;
+}
+
+.adoption-card-delete-btn {
+  margin-right: 24px;
+}
+
+.adoption-card-share-btn {
+  margin-left: auto;
+}
+
 /* Mueve el icono de compartir a la derecha */
 .adoption-card-share-icon {
   margin-left: auto;
@@ -8,14 +26,16 @@
   color: #fff;
   border: none;
   border-radius: 20px;
-  padding: 8px 48px;
-  font-size: 0.9rem;
+  padding: 6px 32px;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-left: 40px;
+  margin-left: 20px; 
+  margin-right: 8px;
+  white-space: nowrap;
 }
 
 .share-dropdown {
