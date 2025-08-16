@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaStethoscope, FaUserShield } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { fetchInstance } from '../../utils/Fetch';
-import { useUser } from '../../hooks/useUser';
+import { useAuthUser } from '../../hooks/useAuthUser';
+import { useQueryClient } from '@tanstack/react-query';
 import './menu.css';
 
 
-const logout = async (setUser, navigate) => {
+const logout = async (queryClient, navigate) => {
     // Aquí puedes manejar el cierre de sesión, por ejemplo, limpiando el estado del usuario
       console.log('Cerrar sesión');
       // Redirigir a la página de inicio o login
@@ -19,7 +20,7 @@ const logout = async (setUser, navigate) => {
       console.log('Datos recibidos:', data);
       if (response.ok) {
         console.log('Sesión cerrada');
-        setUser(null); // Limpiar el estado del usuario
+        queryClient.setQueryData(['authUser'], null);
         // Redirigir a la página de inicio o login
         navigate('/login');
       } else {
@@ -44,10 +45,11 @@ const menuOptions = [
 
 const Menu = () => {
   const location = useLocation();
-  const navigate = useNavigate(); 
-  const { user, setUser } = useUser();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const { data: authUser } = useAuthUser();
   let testing = import.meta.env.VITE_TESTING === 'true';
-  console.log(user);
+  console.log(authUser);
   return (
     <nav className="menu-nav">
       <div className="menu-title">
@@ -57,15 +59,15 @@ const Menu = () => {
         {menuOptions.map(opt => {
           const isActive = location.pathname === opt.path;
           // Filtrado de opciones según sesión y perfil
-          if ((user && opt.session === false) && !testing) return null;
-          if ((!user && opt.session === true) && !testing) return null;
-          if ((user && opt.needed_profiles && !opt.needed_profiles.includes(user.id_perfil)) && !testing) return null;
+          if ((authUser && opt.session === false) && !testing) return null;
+          if ((!authUser && opt.session === true) && !testing) return null;
+          if ((authUser && opt.needed_profiles && !opt.needed_profiles.includes(authUser.id_perfil)) && !testing) return null;
           return (
             <li key={opt.label} className="menu-list-item">
               <MenuLink
                 to={opt.path}
                 isActiveBg={isActive}
-                onClick={opt.onClick ? () => opt.onClick(setUser, navigate) : undefined}
+                onClick={opt.onClick ? () => opt.onClick(queryClient, navigate) : undefined}
               >
                 {opt.icon} {opt.label}
               </MenuLink>

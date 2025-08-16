@@ -1,6 +1,6 @@
 import { MdIosShare, MdDeleteOutline } from 'react-icons/md';
 import './adoptionCard.css';
-import { useUser } from '../../hooks/useUser';
+import { useAuthUser } from '../../hooks/useAuthUser';
 
 const AdoptionCard = ({
   name,
@@ -19,7 +19,7 @@ const AdoptionCard = ({
     alert('¡Enlace copiado! Puedes compartirlo donde quieras.');
   };
 
-  const { user } = useUser();
+  const { data: authUser } = useAuthUser();
   let testing = import.meta.env.VITE_TESTING === 'true';
 
   return (
@@ -54,7 +54,7 @@ const AdoptionCard = ({
             <MdIosShare size={22} color="#FF9800" />
           </button>
           {
-            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+            (testing || (authUser && (authUser.id_perfil === 1 || authUser.id_perfil === 2))) && (
               <button
                 className="adoption-card-icon-btn"
                 onClick={onDelete}

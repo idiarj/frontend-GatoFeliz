@@ -3,21 +3,27 @@ import { FiPhone } from 'react-icons/fi';
 import { FaHome, FaBriefcaseMedical, FaHandHoldingHeart } from 'react-icons/fa';
 import { MdPets } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../hooks/useUser.jsx';
 import Head from '../../../components/head/head.jsx';
 import Menu from '../../../components/menu/menu.jsx';
 import './dashboard.css';
 import AdoptionCard from '../../../components/adoptionCard/adoptionCard.jsx';
 import { dashboardImages, getLastCat, getPaymentLogos, getDonationTypes, getSponsorImage} from './importdata.jsx';
+import { useAuthUser } from '../../../hooks/useAuthUser.jsx';
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user } = useUser();
+  const { data: authUser, isLoading } = useAuthUser();
+  const title = isLoading
+  ? "Cargando..."
+  : authUser
+    ? `Bienvenido, ${authUser.nom_usuario}!`
+    : "Bienvenido a Gato Feliz Venezuela!";
 
   return (
     <div className="dashboard-container">
       <div>
-        <Head title={user ? `Bienvenido, ${user.nom_usuario}!` : "Bienvenido a Gato Feliz Venezuela!"} />
+        <Head title={title} />
         <Menu />
       </div>
       <div className="dashboard-main">

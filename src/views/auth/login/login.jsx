@@ -1,10 +1,10 @@
-
 import { useState, useEffect } from 'react';
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { playSoundOnce, stopAllPurring } from '../../../utils/audio';
 import { fetchInstance } from '../../../utils/Fetch';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../hooks/useUser';
+import { useAuthUser } from '../../../hooks/useAuthUser';
+import { useQueryClient } from '@tanstack/react-query';
 import logo from '../../../assets/images/logo.png';
 import gatosesion from '../../../assets/images/gatosesion.png';
 import gatosesiondespierto from '../../../assets/images/gatosesiondespierto.png';
@@ -16,18 +16,21 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [gatoDespierto, setGatoDespierto] = useState(false);
   const [error, setError] = useState(null);
-  const { setUser, user } = useUser();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     identifier_usuario: "",
     pwd_usuario: ""
   });
 
-  useEffect(()=>{
-    if(user){
-      navigate('/dashboard')
+  const { data: authUser, isLoading } = useAuthUser();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  // ✅ Redirigir si ya hay usuario autenticado
+  useEffect(() => {
+    if (!isLoading && authUser) {
+      navigate('/dashboard');
     }
-  })
+  }, [authUser, isLoading, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,39 +42,45 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+
     try {
       const response = await fetchInstance.post({
         endpoint: '/auth/login',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: formData,
         credentials: 'include'
       });
+
       const data = await response.json();
-      console.log("Login response:", data);
-      if (!response.ok && !data.success) {
+      if (!response.ok || !data.success) {
         setError(data.errorMsg || "Error de inicio de sesión");
         return;
       }
-      setUser(data.data);
+
+      // ✅ Refrescar el estado global del usuario
+      await queryClient.invalidateQueries({ queryKey: ['authUser'] });
+
+      // ✅ Redirigir
       navigate('/dashboard');
     } catch (error) {
-      // Puedes mostrar un mensaje de error aquí si lo deseas
       console.error("Error during login:", error);
-      return;
+      setError("Ocurrió un error al iniciar sesión.");
     }
   };
 
   return (
     <div className="login-container">
-      {/* Left side with logo */}
+      {/* Sección izquierda con logo */}
       <div className="login-logo-section">
         <img src={logo} alt="Fundación Gato Feliz" className="login-logo" />
       </div>
+
+      {/* Sección derecha con formulario */}
       <div className="login-form-section">
         <h1 className="login-title">INICIA SESIÓN</h1>
         <form onSubmit={handleSubmit} className="login-form">
+          {/* Input de usuario */}
           <div className="login-input-group">
             <FaUserCircle className="login-icon user" />
             <input
@@ -85,29 +94,16 @@ const Login = () => {
               src={gatoDespierto ? gatosesiondespierto : gatosesion}
               alt="Gato sesión"
               className={`login-cat ${gatoDespierto ? 'awake' : ''}`}
-              onMouseEnter={() => {
-                setGatoDespierto(true);
-                playSoundOnce(miau);
-              }}
-              onMouseLeave={() => {
-                setGatoDespierto(false);
-                stopAllPurring();
-              }}
+              onMouseEnter={() => { setGatoDespierto(true); playSoundOnce(miau); }}
+              onMouseLeave={() => { setGatoDespierto(false); stopAllPurring(); }}
               onMouseDown={() => setGatoDespierto(true)}
-              onMouseUp={() => {
-                setGatoDespierto(false);
-                stopAllPurring();
-              }}
-              onTouchStart={() => {
-                setGatoDespierto(true);
-                playSoundOnce(miau);
-              }}
-              onTouchEnd={() => {
-                setGatoDespierto(false);
-                stopAllPurring();
-              }}
+              onMouseUp={() => { setGatoDespierto(false); stopAllPurring(); }}
+              onTouchStart={() => { setGatoDespierto(true); playSoundOnce(miau); }}
+              onTouchEnd={() => { setGatoDespierto(false); stopAllPurring(); }}
             />
           </div>
+
+          {/* Input de contraseña */}
           <div className="login-input-group">
             <FaLock className="login-icon lock" />
             <input
@@ -126,24 +122,29 @@ const Login = () => {
               onFocus={e => e.target.style.outline = 'none'}
               onBlur={e => e.target.style.outline = 'none'}
             >
-              {showPassword ? <FaEyeSlash size={28} color="#F37021" /> : <FaEye size={28} color="#F37021" />}
+              {showPassword
+                ? <FaEyeSlash size={28} color="#F37021" />
+                : <FaEye size={28} color="#F37021" />
+              }
             </button>
           </div>
-           { error && (
-             <div className="login-error">
-               {error}
-             </div>
-           ) }
-          {/* Espacio extra para separar el error de los links */}
-          { error && <div style={{marginBottom: '1.5rem'}}></div> }
+
+          {/* Mensaje de error */}
+          {error && <div className="login-error">{error}</div>}
+          {error && <div style={{ marginBottom: '1.5rem' }}></div>}
+
+          {/* Enlaces de ayuda */}
           <div className="login-links">
-            ¿OLVIDASTE TU CONTRASEÑA? <a href="/recoverPassword" className="login-link"> HAGA CLICK AQUI</a><br />
-            ¿NO TIENES CUENTA? <a href="/register" className="login-link"> HAGA CLICK AQUI</a>
+            ¿OLVIDASTE TU CONTRASEÑA? <a href="/recoverPassword" className="login-link"> HAGA CLICK AQUÍ</a><br />
+            ¿NO TIENES CUENTA? <a href="/register" className="login-link"> HAGA CLICK AQUÍ</a>
           </div>
+
+          {/* Botón de login */}
           <button type="submit" className="login-btn">
             INGRESAR
           </button>
         </form>
+
         <div className="login-dashboard-link">
           <a href="/dashboard" className="dashboard-link">
             Volver al dashboard
