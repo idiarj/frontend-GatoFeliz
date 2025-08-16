@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
-import { useUser } from "../../../hooks/useUser.jsx";
+import { useAuthUser } from "../../../hooks/useAuthUser.jsx";
 import AdoptionCard from "../../../components/adoptionCard/adoptionCard";
 import AddAdoptionCard from "../../../components/addAdoptionCard/addAdoptionCard.jsx";
 import Head from '../../../components/head/head.jsx';
@@ -12,7 +12,7 @@ import "./adoption.css";
 
 const Adoptions = () => {
   const [cats, setCats] = useState([]);
-  const { user } = useUser();
+  const { data: authUser } = useAuthUser();
   const testing = import.meta.env.VITE_TESTING === 'true';
   //const [search, setSearch] = useState("");
 
@@ -85,7 +85,7 @@ const Adoptions = () => {
             ))
           )}
           {
-            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+            (testing || (authUser && (authUser.id_perfil === 1 || authUser.id_perfil === 2))) && (
               <AddAdoptionCard onSubmit={onSubmit} uploading={false} />
             )
           }
