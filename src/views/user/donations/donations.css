@@ -1,3 +1,43 @@
+/* Fondos alternos para los aportes */
+.aportes-item-modern:nth-child(1),
+.aportes-item-modern:nth-child(3) {
+  background: #ffe0d1;
+}
+.aportes-item-modern:nth-child(2),
+.aportes-item-modern:nth-child(4) {
+  background: #ffe0d1;
+}
+.donations-card:last-child .donations-block {
+  padding: 2px 0 2px 0;
+}
+.donations-card:last-child .donations-divider {
+  margin-bottom: 0.5px;
+  height: 0.5px;
+}
+/* Bloques visuales para métodos de pago */
+.donations-block {
+  padding: 10px 0 8px 0;
+  text-align: left;
+}
+.donations-block-title {
+  font-weight: 700;
+  color: #F37021;
+  font-size: 1.08rem;
+  margin-bottom: 2px;
+}
+.donations-block-info {
+  color: #b94d0d;
+  font-size: 0.98rem;
+  font-weight: 500;
+}
+.donations-divider {
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(90deg, #ffe0d1 0%, #F37021 50%, #ffe0d1 100%);
+  border-radius: 2px;
+  margin: 0 0 6px 0;
+  opacity: 0.5;
+}
 /* donations.css */
 
 .donations-root {
@@ -52,7 +92,7 @@
   justify-content: flex-start;
   gap: 32px;
   margin-bottom: 24px;
-  margin-left: 105px; /* Ajusta este valor según el ancho del menú */
+  margin-left: 100px; /* Ajusta este valor según el ancho del menú */
 }
 .donations-card {
   background: #fff;
@@ -62,7 +102,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 8px;
   transition: box-shadow 0.3s, transform 0.3s;
   min-height: 320px;
   max-height: 340px;
@@ -123,15 +163,85 @@
   background: #e65c00;
 }
 
+
 .aportes-modern {
-  background: #fff7ed;
-  border-radius: 20px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
   padding: 32px 24px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 32px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.aportes-title-modern {
+  color: #F37021;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  margin-left: 140px; /* Ajusta este valor según el ancho del menú */
+  text-align: center;
+}
+
+.aportes-items-modern {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  margin: 0 auto 16px auto;
+  margin-left: 70px;
+}
+
+.aportes-item-modern {
+  border-radius: 24px;
+  padding: 18px;
+  min-width: 150px;
+  max-width: 210px;
+  text-align: center;
+  box-shadow: 0 2px 8px #0001;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 1100px) {
+  .aportes-items-modern {
+    flex-wrap: wrap;
+    gap: 16px;
+    max-width: 98vw;
+  }
+  .aportes-item-modern {
+    min-width: 120px;
+    max-width: 48vw;
+  }
+}
+
+@media (max-width: 900px) {
+  .aportes-items-modern {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+  .aportes-item-modern {
+    min-width: 180px;
+    max-width: 90vw;
+  }
+}
+
+.aportes-icon-modern {
+  width: 64px;
+  margin-bottom: 12px;
+}
+
+.aportes-text-modern {
+  color: #F37021;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 8px;
 }
 .aportes-urgentes-modern {
   flex: 1.2;

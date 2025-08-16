@@ -41,7 +41,7 @@ export function getLastCat() {
 }
 
 export function getPaymentLogos() {
-  return [zelleLogo, pagomovilLogo, paypalLogo, binanceLogo, venmoLogo];
+  return [zelleLogo, pagomovilLogo, paypalLogo, binanceLogo];
 }
 
 export function getDonationTypes() {
