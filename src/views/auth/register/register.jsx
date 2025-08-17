@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
 import { FaUserCircle, FaEnvelope, FaLock, FaPhone } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -141,7 +141,7 @@ const Register = () => {
           </div>
           <div className="register-links">
             <span className="register-link-text">VOLVER AL INICIO DE SESION</span>
-            <a href="/login" className="register-link">HAGA CLICK AQUI</a>
+            <Link to="/auth/login" className="register-link">HAGA CLICK AQUI</Link>
           </div>
           <button type="submit" className="register-btn">INGRESAR</button>
         </form>
@@ -157,9 +157,9 @@ const Register = () => {
         )}
 
         <div className="register-dashboard-link">
-          <a href="/dashboard" className="dashboard-link">
+          <Link to="/dashboard" className="dashboard-link">
           Volver al dashboard
-          </a>
+          </Link>
         </div>
           { error && (
              <div className="login-error">

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { playSoundOnce, stopAllPurring } from "../../../utils/audio";
 import { fetchInstance } from "../../../utils/Fetch";
@@ -18,23 +18,25 @@ const NewPassword = () => {
   const [password, setPassword] = useState("");
   const [gatoDespierto, setGatoDespierto] = useState(false);
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState("");
 
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
-  // useEffect(() => {
-  //   if (!token) {
-  //     console.error("No token found in URL, the password reset wont work.");
-  //     //navigate("/login");
-  //   }
-  //   console.log("Token from URL:", token);
-  // }, [token, navigate]);
+  useEffect(() => {
+    if (!token) {
+      console.error("No token found in URL, the password reset wont work.");
+      //navigate("/login");
+    }
+    console.log("Token from URL:", token);
+  }, [token, navigate]);
 
-  const handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    setSuccess("");
     try {
       console.log("New password submitted:", password);
-      //setPassword("");    
       const response = await fetchInstance.post({
         endpoint: '/auth/reset-password',
         body: {
@@ -42,21 +44,23 @@ const NewPassword = () => {
           newPassword: password
         },
         headers: { 'Content-Type': 'application/json' }
-      })
+      });
       const data = await response.json();
       if (!response.ok && !data.success) {
         setError(data.errorMsg || "Error al restablecer la contraseña");
         console.log("Restablecimiento de contraseña fallido:", data);
         return;
       }
+      setSuccess("¡Listo! Tu contraseña ha sido cambiada exitosamente. Ahora puedes iniciar sesión con tu nueva contraseña. 🐾");
+      setPassword("");
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 1000);
       console.log("Password reset successful");
-      // Optionally, redirect to login or show a success message
-      navigate("/login");
     } catch (error) {
+      setError("Ocurrió un error inesperado. Intenta de nuevo más tarde.");
       console.error("Error submitting new password:", error);
     }
-    // Handle form submission logic here
-    // Reset the password field after submission
   }
 
 
@@ -119,17 +123,22 @@ const NewPassword = () => {
           </div>
           <div className="newpass-links">
             <span>VOLVER AL INICIO DE SESION</span>
-            <a href="/login" className="newpass-link">HAGA CLICK AQUI</a>
+            <Link to="/auth/login" className="newpass-link">HAGA CLICK AQUI</Link>
           </div>
+          { success && (
+            <div className="recover-success">
+              {success}
+            </div>
+          )}
           { error && (
-             <div className="login-error">
-               {error}
-             </div>
-           ) }
+            <div className="login-error">
+              {error}
+            </div>
+          )}
           <button
-
             type="submit"
             className="newpass-btn"
+            disabled={!!success}
           >
             ENVIAR
           </button>

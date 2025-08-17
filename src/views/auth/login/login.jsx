@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { playSoundOnce, stopAllPurring } from '../../../utils/audio';
 import { fetchInstance } from '../../../utils/Fetch';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../../../hooks/useUser';
 import logo from '../../../assets/images/logo.png';
 import gatosesion from '../../../assets/images/gatosesion.png';
@@ -31,6 +31,7 @@ const Login = () => {
   })
 
   const handleChange = (e) => {
+
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -39,6 +40,7 @@ const Login = () => {
   };
 
   const handleSubmit = async (e) => {
+    setError(null);
     e.preventDefault();
     try {
       const response = await fetchInstance.post({
@@ -138,17 +140,17 @@ const Login = () => {
           {/* Espacio extra para separar el error de los links */}
           { error && <div style={{marginBottom: '1.5rem'}}></div> }
           <div className="login-links">
-            ¿OLVIDASTE TU CONTRASEÑA? <a href="/recoverPassword" className="login-link"> HAGA CLICK AQUI</a><br />
-            ¿NO TIENES CUENTA? <a href="/register" className="login-link"> HAGA CLICK AQUI</a>
+            ¿OLVIDASTE TU CONTRASEÑA? <Link to="/auth/recoverPassword" className="login-link"> HAGA CLICK AQUI</Link><br />
+            ¿NO TIENES CUENTA? <Link to="/auth/register" className="login-link"> HAGA CLICK AQUI</Link>
           </div>
           <button type="submit" className="login-btn">
             INGRESAR
           </button>
         </form>
         <div className="login-dashboard-link">
-          <a href="/dashboard" className="dashboard-link">
+          <Link to="/dashboard" className="dashboard-link">
             Volver al dashboard
-          </a>
+          </Link>
         </div>
       </div>
     </div>
