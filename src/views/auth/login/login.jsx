@@ -25,6 +25,7 @@ const Login = () => {
 
   useEffect(()=>{
     if(user){
+      console.log(`Usuario autenticado: ${user.nom_usuario}`);
       navigate('/dashboard')
     }
   })

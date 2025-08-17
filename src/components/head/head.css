@@ -55,10 +55,6 @@
   min-height: 90px;
   box-shadow: 0 2px 12px 0 rgba(243,112,33,0.04);
   gap: 32px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2000;
 }
 
 .head-left {
@@ -72,7 +68,7 @@
   color: #F37021;
   font-weight: bold;
   font-size: 2.5rem;
-  margin-left: 200px;
+  margin-left: 0px;
   margin-bottom: 0;
 }
 

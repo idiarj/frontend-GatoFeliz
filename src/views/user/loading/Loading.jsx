@@ -18,8 +18,8 @@ export default function Loading({ message = "Cargando…", subtitle, compact = f
       aria-live="polite"
       aria-busy="true"
     >
-        <Menu/>
-        <Head/>
+        {/* <Menu/>
+        <Head/> */}
       <div className="loading-card">
         <div className="loading-left">
           <div className="spinner" aria-hidden="true" />

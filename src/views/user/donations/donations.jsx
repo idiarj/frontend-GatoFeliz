@@ -14,9 +14,10 @@ import './donations.css';
 const Donations = () => {
   return (
     <>
-      <Head title={"Donaciones y aportes"} />
-      <Menu />
-      <div className="donations-root">
+      {/* <Head title={"Donaciones y aportes"} />
+      <Menu /> */}
+      {/* <div className="donations-root">
+      </div> */}
         <div className="donations-container-modern">
           <section className="donations-header">
             <p>Tu ayuda transforma vidas. Elige tu método favorito y apoya a nuestros gatitos.</p>
@@ -109,7 +110,6 @@ const Donations = () => {
             </div>
           </section>
         </div>
-      </div>
     </>
   );
 };

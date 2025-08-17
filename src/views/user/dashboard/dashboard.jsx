@@ -17,10 +17,10 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <div>
+      {/* <div>
         <Head title={user ? `Bienvenido, ${user.nom_usuario}!` : "Bienvenido a Gato Feliz Venezuela!"} />
         <Menu />
-      </div>
+      </div> */}
       <div className="dashboard-main">
         <div className="dashboard-sections">
           {/* Adopciones Card usando AdoptionCard */}

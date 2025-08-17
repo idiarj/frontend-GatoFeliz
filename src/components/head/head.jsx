@@ -7,10 +7,9 @@ const Head = ({ title, showSearch = false, onSearch }) => {
 
   return (
     <div className="head-container">
-      <div className="head-left">
-        <Menu />
+
         <h1 className="head-title">{title}</h1>
-      </div>
+
       <div className="head-right">
         {showSearch && (
           <>

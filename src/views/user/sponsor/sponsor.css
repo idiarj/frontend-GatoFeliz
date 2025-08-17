@@ -4,10 +4,10 @@
   background: #fff;
 }
 .sponsor-content {
-  margin-left: 240px;
+  /* margin-left: 240px; */
   padding-top: 30px;
   padding-right: 32px;
-  padding-left: 32px;
+  /* padding-left: 32px; */
 }
 /* Asegura que el Head no esté fijo y el buscador quede visible arriba */
 .sponsor-container .head-container {

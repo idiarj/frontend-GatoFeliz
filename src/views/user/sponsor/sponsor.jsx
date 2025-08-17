@@ -41,9 +41,8 @@ const Sponsor =  () => {
   }
 
   return (
-    <div className="sponsor-container">
-      <Head title="Apadrinar" showSearch={true} onSearch={() => {}} />
-      <Menu />
+    // <div className="sponsor-container">
+    // </div>
       <div className="sponsor-content">
         <div className="sponsor-info">
           Apadrinar tiene un costo de tan solo $12 al mes, con esto le aseguras la comida y salud a tu peludo favorito, Envíanos el nombre del gato y captura del comprobante por whatsapp
@@ -74,7 +73,6 @@ const Sponsor =  () => {
                     <AddSponsorCard onSubmit={onSubmit} uploading={false}/>
         </div>
       </div>
-    </div>
   );
 };
 

@@ -1,0 +1,55 @@
+/* Alturas base para que el grid pueda ocupar toda la pantalla */
+html, body, #root {
+  height: 100%;
+}
+body {
+  margin: 0;
+}
+
+/* Grid maestro: head arriba, sidebar izquierda, contenido a la derecha */
+.app-root {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 260px 1fr;  /* sidebar | contenido */
+  grid-template-rows: auto 1fr;      /* head (alto natural) | main */
+  grid-template-areas:
+    "aside head"   /* ← el menú ocupa también la fila superior, col izq */
+    "aside main";  /* ← y toda la altura a la izquierda */
+  overflow: hidden;
+  background: #f5f7fb;
+}
+
+
+/* Áreas */
+.app-head {
+  grid-area: head;
+  /* Si quieres que no se mueva al hacer scroll del main */
+  position: sticky;
+  top: 0;
+  z-index: 10;                        /* por si hay dropdowns */
+  /* Tu Head ya maneja estilos internos, solo deja el contenedor limpio */
+}
+
+.app-aside {
+  grid-area: aside;
+  /* background: #fff;
+  border-right: 1px solid #e5e7eb; */
+  overflow: auto;                     /* scroll independiente en el menú */
+  min-width: 0;                       /* evita empujes inesperados */
+}
+
+/* Área donde va el contenido de la ruta actual (Outlet) */
+.app-main {
+  grid-area: main;
+  overflow: auto;                     /* scroll del contenido */
+  padding: 16px;                      /* espaciado consistente */
+  min-width: 0;                       /* ¡clave! evita overflow horizontal */
+  min-height: 0;                 /* ¡clave! permite que el overflow funcione */
+}
+
+/* (Opcional) Responsivo: colapsar sidebar en pantallas pequeñas */
+@media (max-width: 900px) {
+  .app-root {
+    grid-template-columns: 72px 1fr;  /* menú estrecho tipo icon bar */
+  }
+}

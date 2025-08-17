@@ -12,6 +12,7 @@ import Adoptions from './views/user/adoption/adoption.jsx';
 import Sponsor from './views/user/sponsor/sponsor.jsx';
 import Loading from "./views/user/loading/Loading.jsx";
 import MedicalPanel from './views/user/medicalPanel/medicalPanel.jsx';
+import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 
 
 
@@ -22,22 +23,30 @@ export const router = createBrowserRouter([
         element: <Navigate to='/dashboard' replace/>
     },
     {
-        path: '/login',
+        path: 'auth',
+        children: [
+    {
+        path: 'login',
         element: <Login/>
     },
     {
-        path: '/register',
+        path: 'register',
         element: <Register/>
     },
     {
-        path: '/recoverPassword',
+        path: 'recoverPassword',
         element: <RecoverPassword/>
     },
     {
-        path: '/NewPassword',
+        path: 'NewPassword',
         element: <NewPassword/>
     },
+        ]
+    },
     {
+        element: <AppLayout/>,
+        children: [
+                {
         path: '/dashboard',
         element: <Dashboard/>
     },
@@ -76,15 +85,6 @@ export const router = createBrowserRouter([
         hydrateFallbackElement: <Loading subtitle={'Cargando gatos apadrinables...'}/>
     },
     {
-        path: '*',
-        element: <Navigate to="/dashboard" replace/>
-    },
-    {
-        path: '/test',
-        element: <Loading subtitle={'Cargando gatos...'} compact/>
-    }
-    ,
-    {
         path: '/medical',
         element: <MedicalPanel/>,
         loader: async () => {
@@ -94,4 +94,15 @@ export const router = createBrowserRouter([
         },
         hydrateFallbackElement: <Loading subtitle={'Cargando panel médico...'}/>
     }
+        ]
+    },
+    {
+        path: '*',
+        element: <Navigate to="/dashboard" replace/>
+    },
+    {
+        path: '/test',
+        element: <Loading subtitle={'Cargando gatos...'} compact/>
+    }
+
 ])

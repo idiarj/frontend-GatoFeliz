@@ -31,10 +31,12 @@ const cardData = [
 
 export default function AboutUs() {
   return (
-    <div className="aboutus-bg">
-      <Head title="¿Qué hacemos?" />
-      <Menu />
-      <div className="aboutus-cards">
+    // <div className="aboutus-bg">
+    //   {/* <Head title="¿Qué hacemos?" />
+    //   <Menu /> */}
+
+    // </div>
+          <div className="aboutus-cards">
         {cardData.map((card, idx) => (
           <div
             key={idx}
@@ -51,6 +53,5 @@ export default function AboutUs() {
           </div>
         ))}
       </div>
-    </div>
   );
 }

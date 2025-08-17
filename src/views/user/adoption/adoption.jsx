@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
-import { useAuthUser } from "../../../hooks/useAuthUser.jsx";
+import { useUser } from "../../../hooks/useUser.jsx";
 import AdoptionCard from "../../../components/adoptionCard/adoptionCard";
 import AddAdoptionCard from "../../../components/addAdoptionCard/addAdoptionCard.jsx";
 import Head from '../../../components/head/head.jsx';
@@ -12,7 +12,7 @@ import "./adoption.css";
 
 const Adoptions = () => {
   const [cats, setCats] = useState([]);
-  const { data: authUser } = useAuthUser();
+  const { user } = useUser();
   const testing = import.meta.env.VITE_TESTING === 'true';
   //const [search, setSearch] = useState("");
 
@@ -59,10 +59,13 @@ const Adoptions = () => {
   }
 
   return (
-    <div className="adoption-container">
-      <Head title="Adopciones" showSearch={true} onSearch={() => {}} />
-      <Menu />
-      <div className="adoption-content">
+    // <div className="adoption-container">
+    //   {/* <Head title="Adopciones" showSearch={true} onSearch={() => {}} />
+    //   <Menu /> */}
+   
+    // </div>
+
+       <div className="adoption-content">
         <div className="adoption-info">
           La manera de adoptar es enviando una solicitud o visitando directamente la fundación.<br />
           Escríbenos antes de venir para coordinar tu visita y poder atenderte de la mejor manera posible.
@@ -85,13 +88,12 @@ const Adoptions = () => {
             ))
           )}
           {
-            (testing || (authUser && (authUser.id_perfil === 1 || authUser.id_perfil === 2))) && (
+            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
               <AddAdoptionCard onSubmit={onSubmit} uploading={false} />
             )
           }
         </div>
       </div>
-    </div>
   );
 };
 

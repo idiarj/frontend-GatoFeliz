@@ -102,11 +102,11 @@ useEffect(() => {
 
   return (
     <>
-      <Head title="Panel medico" />
-      <Menu />
-      <div className="medicalpanel-flex">
-        <div className="medicalpanel-content">
-          {/* Panel principal integrado aquí */}
+      {/* <div className="medicalpanel-flex">
+      </div> */}
+        {/* <div className="medicalpanel-content">
+          {/* Panel principal integrado aquí 
+        </div> */}
           <div className="medical-panel-container medicalpanel-maincontainer">
             <div className="medical-panel-header">
               <div className="medical-panel-header-box">
@@ -164,8 +164,6 @@ useEffect(() => {
           >
             Agregar historia clínica
           </button>
-        </div>
-      </div>
       {modalOpen && (
         <div className="medicalpanel-modalbg" onClick={handleCloseModal}>
             <MedicalCaseForm selectedCase={selectedCase} onSave={handleSave} medicalCases={medicalCases} />

@@ -21,7 +21,7 @@ const logout = async (setUser, navigate) => {
         console.log('Sesión cerrada');
         setUser(null); // Limpiar el estado del usuario
         // Redirigir a la página de inicio o login
-        navigate('/login');
+        navigate('/auth/login');
       } else {
         console.error('Error al cerrar sesión', );
       }
@@ -29,15 +29,15 @@ const logout = async (setUser, navigate) => {
 
 const menuOptions = [
   { label: 'Inicio', icon: <FaHome />, path: '/dashboard', session: 'indiferent'},
-  { label: 'Iniciar Sesión', icon: <FaSignInAlt />, path: '/login', session: false }, 
-  { label: 'Registrarse', icon: <FaUserPlus />, path: '/register', session: false },
+  { label: 'Iniciar Sesión', icon: <FaSignInAlt />, path: '/auth/login', session: false }, 
+  { label: 'Registrarse', icon: <FaUserPlus />, path: '/auth/register', session: false },
   { label: '¿Qué Hacemos?', icon: <FaQuestionCircle />, path: '/aboutUs', session: 'indiferent' },
   { label: 'Donaciones', icon: <FaDonate />, path: '/donations', session: 'indiferent' },
   { label: 'Adopciones', icon: <FaCat />, path: '/adoption', session: 'indiferent' },
   { label: 'Apadrinar', icon: <FaPaw />, path: '/apadrinar', session: 'indiferent' },
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions', session: 'indiferent' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos', session: true },
-  {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/login', onClick: logout, session: true},
+  {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/auth/login', onClick: logout, session: true},
   { label: 'Panel Medico', icon: <FaStethoscope />, path: '/medical', session: true, needed_profiles: [1, 2]},
   {label: 'Administracion', icon: <FaUserShield />, path: '/admin', session: true, needed_profiles: [1]}
 ];
