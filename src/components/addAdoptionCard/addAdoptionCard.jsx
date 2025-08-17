@@ -4,7 +4,7 @@ import { FaImage, FaPaw, FaCat, FaWeight, FaSignature, FaBirthdayCake, FaVenusMa
 import Modal from "../modal/Modal";
 import "./addAdoptionCard.css";
 
-const AddAdoptionCard = ({ onSubmit, uploading }) => {
+const AddAdoptionCard = ({ onSubmit, uploading, fromSponsor }) => {
   const fileInput = useRef();
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -15,7 +15,8 @@ const AddAdoptionCard = ({ onSubmit, uploading }) => {
     especie_animal: "Gato",
     edad_animal: "",
     genero_animal: "",
-    peso_animal: ""
+    peso_animal: "",
+    adoptable: !fromSponsor
   });
 
 

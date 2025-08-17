@@ -36,7 +36,6 @@ const Questions = () => {
   const [openIdx, setOpenIdx] = useState(null);
   return (
     <>
-      <Head title={"Preguntas frecuentes"} />
       <div className="questions-root">
         <div className="questions-container">
           <div className="questions-section">

@@ -28,7 +28,7 @@ function AppLayout() {
       case '/apadrinar':
         return 'Apadrinar';
       case '/questions':
-        return 'Preguntas';
+        return 'Preguntas frecuentes';
       case '/misgatos':
         return 'Mis Gatos';
       case '/medical':

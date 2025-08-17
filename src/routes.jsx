@@ -67,10 +67,10 @@ export const router = createBrowserRouter([
         element: <Adoptions/>,
         loader: async () => {
             //await new Promise(resolve => setTimeout(resolve, 2000)); // Simula retraso de 1 segundo
-            const response = await fetchInstance.get({ endpoint: '/animal',  headers: { 'Content-Type': 'application/json' } });
-            const data = await response.json();
+            const response = await fetchInstance.get({ endpoint: '/animal?adoptable=true',  headers: { 'Content-Type': 'application/json' } });
+            const {data} = await response.json();
             console.table(data);
-            return data.data;
+            return data;
         },
         hydrateFallbackElement: <Loading subtitle={'Cargando gatos...'}/>
     },
@@ -78,7 +78,7 @@ export const router = createBrowserRouter([
         path: '/apadrinar',
         element: <Sponsor/>,
         loader: async () => {
-            const response = await fetchInstance.get({ endpoint: '/animal',  headers: { 'Content-Type': 'application/json' } });
+            const response = await fetchInstance.get({ endpoint: '/animal?adoptable=false',  headers: { 'Content-Type': 'application/json' } });
             const data = await response.json();
             return data.data;
         },

@@ -70,7 +70,7 @@ const Sponsor =  () => {
               />
             ))
           )}
-                    <AddSponsorCard onSubmit={onSubmit} uploading={false}/>
+            <AddSponsorCard onSubmit={onSubmit} uploading={false}/>
         </div>
       </div>
   );
