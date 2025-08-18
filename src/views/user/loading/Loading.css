@@ -1,5 +1,5 @@
 :root{
-  --brand:#3c558a;      /* azul marca */
+  --brand:#ff6f00;      /* azul marca */
   --accent:#faae97;     /* durazno */
   --bg:#fff9db;         /* marfil suave */
   --ink:#2b2b2b;        /* texto principal */
@@ -39,7 +39,7 @@
   width:56px;
   height:56px;
   border-radius:50%;
-  border:3px solid rgba(60,85,138,.15);
+  border:3px solid rgba(255, 153, 0, 0.15);
   border-top-color: var(--brand);
   animation: spin 1s linear infinite;
 }
