@@ -1,14 +1,9 @@
 import { FaCreditCard, FaGlobeAmericas, FaWhatsapp, FaDog } from "react-icons/fa";
-import { MdAnnouncement } from "react-icons/md";
 import donacionesImg from '../../../assets/images/donaciones.png';
-import aportesImg from '../../../assets/images/aportes.png';
 import proteinaIcon from '../../../assets/logos/proteina.png';
 import medicinasIcon from '../../../assets/logos/medicinas.png';
 import limpiezasIcon from '../../../assets/logos/limpiezas.png';
 import ropaIcon from '../../../assets/logos/ropa.png';
-import Head from '../../../components/head/head.jsx';
-import Menu from "../../../components/menu/menu.jsx";
-
 import './donations.css';
 
 const Donations = () => {

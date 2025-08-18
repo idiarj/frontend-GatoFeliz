@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { fetchInstance } from "./utils/Fetch.js";
-import { fetchCatsLoader } from "./api/Cats.js";
+import { delay } from "./utils/delay.js";
 import Login from './views/auth/login/login.jsx';
 import Register from './views/auth/register/register.jsx';
 import RecoverPassword from './views/auth/recoverPassword/recoverPassword.jsx';
@@ -66,7 +66,14 @@ export const router = createBrowserRouter([
     {
         path: '/adoption',
         element: <Adoptions/>,
-        loader: fetchCatsLoader
+        loader: async () => {
+            await delay(1000);
+            const response = await fetchInstance.get({ endpoint: '/animal?adoptable=true',  headers: { 'Content-Type': 'application/json' } });
+            const data = await response.json();
+            console.table(data);
+            return data.data;
+        },
+        hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos...'} compact/></div>
     },
     {
         path: '/apadrinar',
