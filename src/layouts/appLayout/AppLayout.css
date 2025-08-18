@@ -41,8 +41,8 @@ body {
 /* Área donde va el contenido de la ruta actual (Outlet) */
 .app-main {
   grid-area: main;
-  overflow: auto;                     /* scroll del contenido */
-  padding: 16px;                      /* espaciado consistente */
+  overflow: auto;                  
+  /* padding: 16px;                      espaciado consistente */
   min-width: 0;                       /* ¡clave! evita overflow horizontal */
   min-height: 0;                 /* ¡clave! permite que el overflow funcione */
 }
