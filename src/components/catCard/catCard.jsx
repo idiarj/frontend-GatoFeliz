@@ -35,7 +35,7 @@ const CatCard = ({
           className="adoption-card-image"
         />
       </div>
-      <div className="adoption-card-content" style={{ background: fromSponsor ? '#fff': '#fffdce'}}>
+      <div className="adoption-card-content" style={{ background: fromSponsor ? '#ffe9ce': '#fffdce'}}>
         <h3 className="adoption-card-title">{name}</h3>
         <p className="adoption-card-subtitle">
           {gender} &bull; {age}

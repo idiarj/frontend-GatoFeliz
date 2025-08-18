@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
-import AdoptionCard from "../../../components/catCard/catCard.jsx";
+import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard.jsx";
 import "./sponsor.css";
 
@@ -50,7 +50,7 @@ const Sponsor =  () => {
           ))} */}
           {cats && (
             cats.map((cat, idx) => (
-              <AdoptionCard
+              <CatCard
                 key={cat.id_animal}
                 name={cat.nom_animal}
                 gender={cat.genero_animal}
@@ -64,6 +64,7 @@ const Sponsor =  () => {
                 }}
                 buttonLabel="ENVIAR SOLICITUD"
                 boxShadow={true}
+                fromSponsor={true}
               />
             ))
           )}
