@@ -1,10 +1,10 @@
-// AddAdoptionCard.jsx
+// AddCatCard.jsx
 import React, { useRef, useState } from "react";
 import { FaImage, FaPaw, FaCat, FaWeight, FaSignature, FaBirthdayCake, FaVenusMars } from "react-icons/fa";
 import Modal from "../modal/Modal";
-import "./addAdoptionCard.css";
+import "./addCatCard.css";
 
-const AddAdoptionCard = ({ onSubmit, uploading, fromSponsor }) => {
+const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
   const fileInput = useRef();
   const [imagePreview, setImagePreview] = useState(null);
   const [imageFile, setImageFile] = useState(null);
@@ -131,4 +131,4 @@ const AddAdoptionCard = ({ onSubmit, uploading, fromSponsor }) => {
   );
 };
 
-export default AddAdoptionCard;
+export default AddCatCard;

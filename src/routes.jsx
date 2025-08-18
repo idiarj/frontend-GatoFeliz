@@ -83,7 +83,7 @@ export const router = createBrowserRouter([
             const data = await response.json();
             return data.data;
         },
-        hydrateFallbackElement: <Loading subtitle={'Cargando gatos apadrinables...'}/>
+        hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>
     },
     {
         path: '/medical',

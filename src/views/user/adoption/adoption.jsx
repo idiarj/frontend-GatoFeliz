@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
-import AdoptionCard from "../../../components/adoptionCard/adoptionCard";
-import AddAdoptionCard from "../../../components/addAdoptionCard/addAdoptionCard.jsx";
+import CatCard from "../../../components/catCard/catCard.jsx";
+import AddCatCard from "../../../components/addCatCard/addCatCard"
 import Head from '../../../components/head/head.jsx';
 import Menu from "../../../components/menu/menu.jsx";
 
@@ -76,7 +76,7 @@ const Adoptions = () => {
           ))} */}
           {cats && (
             cats.map((cat)=>(
-              <AdoptionCard
+              <CatCard
                 key={cat.id_animal}
                 name={cat.nom_animal}
                 gender={cat.genero_animal}
@@ -89,7 +89,7 @@ const Adoptions = () => {
           )}
           {
             (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
-              <AddAdoptionCard onSubmit={onSubmit} uploading={false} />
+              <AddCatCard onSubmit={onSubmit} uploading={false} />
             )
           }
         </div>

@@ -1,8 +1,8 @@
 import { MdIosShare, MdDeleteOutline } from 'react-icons/md';
-import './adoptionCard.css';
 import { useUser } from '../../hooks/useUser';
+import './catCard.css'
 
-const AdoptionCard = ({
+const CatCard = ({
   name,
   gender,
   age,
@@ -10,7 +10,8 @@ const AdoptionCard = ({
   onRequest,
   onDelete, // <-- Nueva prop para manejar la acción de eliminar
   buttonLabel = 'ENVIAR SOLICITUD',
-  boxShadow = true
+  boxShadow = true,
+  fromSponsor
 }) => {
   const pageUrl = `${window.location.origin}/adopcion/${encodeURIComponent(name)}`;
 
@@ -34,7 +35,7 @@ const AdoptionCard = ({
           className="adoption-card-image"
         />
       </div>
-      <div className="adoption-card-content">
+      <div className="adoption-card-content" style={{ background: fromSponsor ? '#fff': '#fffdce'}}>
         <h3 className="adoption-card-title">{name}</h3>
         <p className="adoption-card-subtitle">
           {gender} &bull; {age}
@@ -68,4 +69,4 @@ const AdoptionCard = ({
   );
 };
 
-export default AdoptionCard;
+export default CatCard;
