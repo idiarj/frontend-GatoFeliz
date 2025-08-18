@@ -108,8 +108,14 @@
 }
 
 /* Compact variant if you ever need it */
-.loading-root.compact{
-  position:static;
-  background:transparent;
-  padding:8px;
+.loading-root.compact {
+  position: relative;     /* no static */
+  background: transparent;
+  padding: 8px;
+
+  /* centrado en su caja padre */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px; /* o el alto que quieras ocupar */
 }
