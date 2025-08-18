@@ -10,7 +10,7 @@ body {
 .app-root {
   height: 100vh;
   display: grid;
-  grid-template-columns: 260px 1fr;  /* sidebar | contenido */
+  grid-template-columns: 200px 1fr;  /* sidebar | contenido */
   grid-template-rows: auto 1fr;      /* head (alto natural) | main */
   grid-template-areas:
     "aside head"   /* ← el menú ocupa también la fila superior, col izq */
