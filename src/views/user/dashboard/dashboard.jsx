@@ -32,7 +32,7 @@ const Dashboard = () => {
           {/* Card informativo arriba del sponsor */}
           <div className="dashboard-section info-animales">
             <p>
-              Todos nuestros animales han sido abandonados y ahora buscan una adopción que les de la vida que merecen.
+              ¿Sabías que todos nuestros animales han sido abandonados y ahora buscan una adopción que les de la vida que merecen?
             </p>
           </div>
           {/* Donaciones Card */}
@@ -59,9 +59,9 @@ const Dashboard = () => {
             </div>
           </div>
 
-            {/* SponsorCard abajo a la derecha */}
-            <div className="sponsor-card-bottom-right">
-              <cat
+            {/* Sponsor CatCard con estilos de adopciones */}
+            <div className="dashboard-section sponsor" onClick={() => navigate('/sponsor')}>
+              <CatCard
                 name={getLastCat().name}
                 gender={getLastCat().gender}
                 age={getLastCat().age}
@@ -69,6 +69,7 @@ const Dashboard = () => {
                 onRequest={() => navigate('/sponsor')}
                 buttonLabel="ENVIAR SOLICITUD"
                 boxShadow={false}
+                fromSponsor={true}
               />
             </div>
 
@@ -77,24 +78,24 @@ const Dashboard = () => {
             className="dashboard-section preguntas"
             onClick={() => navigate('/questions')}
           >
-            <h2 className="preguntas-title">Preguntas</h2>
+            <h2 className="preguntas-title">Preguntas frecuentes</h2>
             <div className="dashboard-section-info preguntas-list">
-              <div className="pregunta-item">
-                <span>¿Se puede visitar la fundación?</span>
-                <FaHome size={24} color="#f47c2c" className="pregunta-icon" />
-              </div>
-              <div className="pregunta-item">
-                <span>¿Solo ayudan gatos?</span>
-                <MdPets size={24} color="#f47c2c" className="pregunta-icon" />
-              </div>
-              <div className="pregunta-item">
-                <span>¿Cuánto cuesta esterilizar?</span>
-                <FaBriefcaseMedical size={24} color="#f47c2c" className="pregunta-icon" />
-              </div>
-              <div className="pregunta-item">
-                <span>¿Cómo puedo ayudar?</span>
-                <FaHandHoldingHeart size={24} color="#f47c2c" className="pregunta-icon" />
-              </div>
+                <div className="pregunta-item" style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
+                  <span style={{marginRight: '60px'}}>¿Se puede visitar la fundación?</span>
+                  <FaHome size={24} color="#f47c2c" className="pregunta-icon" />
+                </div>
+                <div className="pregunta-item" style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
+                  <span style={{marginRight: '132px'}}>¿Solo ayudan gatos?</span>
+                  <MdPets size={24} color="#f47c2c" className="pregunta-icon" />
+                </div>
+                <div className="pregunta-item" style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
+                  <span style={{marginRight: '90px'}}>¿Cuánto cuesta esterilizar?</span>
+                  <FaBriefcaseMedical size={24} color="#f47c2c" className="pregunta-icon" />
+                </div>
+                <div className="pregunta-item" style={{display: 'flex', alignItems: 'center', justifyContent: 'flex-start'}}>
+                  <span style={{marginRight: '117px'}}>¿Cómo puedo ayudar?</span>
+                  <FaHandHoldingHeart size={24} color="#f47c2c" className="pregunta-icon" />
+                </div>
             </div>
           </div>
 
