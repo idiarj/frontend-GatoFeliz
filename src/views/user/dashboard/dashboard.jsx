@@ -1,24 +1,18 @@
-import React from 'react';
 import { FiPhone } from 'react-icons/fi';
 import { FaHome, FaBriefcaseMedical, FaHandHoldingHeart } from 'react-icons/fa';
 import { MdPets } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../../hooks/useUser.jsx';
-import Head from '../../../components/head/head.jsx';
-import Menu from '../../../components/menu/menu.jsx';
-import './dashboard.css';
+import { getLastCat, getPaymentLogos, getDonationTypes } from './importdata.jsx';
 import CatCard from '../../../components/catCard/catCard.jsx';
-import { dashboardImages, getLastCat, getPaymentLogos, getDonationTypes, getSponsorImage} from './importdata.jsx';
+import './dashboard.css';
+
+
+
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { user } = useUser();
 
   return (
     <div className="dashboard-container">
-      {/* <div>
-        <Head title={user ? `Bienvenido, ${user.nom_usuario}!` : "Bienvenido a Gato Feliz Venezuela!"} />
-        <Menu />
-      </div> */}
       <div className="dashboard-main">
         <div className="dashboard-sections">
           {/* Adopciones Card usando CatCard */}
@@ -60,7 +54,7 @@ const Dashboard = () => {
 
             {/* SponsorCard abajo a la derecha */}
             <div className="sponsor-card-bottom-right">
-              <cat
+              <CatCard
                 name={getLastCat().name}
                 gender={getLastCat().gender}
                 age={getLastCat().age}
@@ -68,6 +62,7 @@ const Dashboard = () => {
                 onRequest={() => navigate('/sponsor')}
                 buttonLabel="ENVIAR SOLICITUD"
                 boxShadow={false}
+                fromSponsor={true}
               />
             </div>
 

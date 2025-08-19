@@ -14,6 +14,7 @@ import Sponsor from './views/user/sponsor/sponsor.jsx';
 import Loading from "./views/user/loading/Loading.jsx";
 import MedicalPanel from './views/user/medicalPanel/medicalPanel.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
+import NotFound from "./views/user/notFound/notFound.jsx";
 
 
 
@@ -99,7 +100,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '*',
-        element: <Navigate to="/dashboard" replace/>
+        element: <NotFound/>
     },
     {
         path: '/test',
