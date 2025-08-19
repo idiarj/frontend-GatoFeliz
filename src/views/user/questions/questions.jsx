@@ -1,39 +1,44 @@
 import { useState } from "react";
 import Head from '../../../components/head/head.jsx';
 import questionsImg from '../../../assets/images/questions.png';
+import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 import './questions.css';
 
 const faqs = [
   {
-    question: "¿Se puede visitar el refugio?",
-    answer:
-      "¡Claro que sí! Incluso si solo deseas venir a darle amor a los gatitos, estaremos encantados de recibirte. Solo te pedimos que nos avises primero por WhatsApp, ya que no tenemos la ubicación pública debido a que algunas personas han aprovechado la situación para abandonar animales irresponsablemente en nuestra puerta.",
-  },
-  {
     question: "¿Qué es apadrinar?",
     answer:
-      "Apadrinar es ayudar a cubrir los gastos de alimentación, salud y bienestar de uno o varios gatitos del refugio. Puedes hacerlo con aportes mensuales o puntuales.",
+      "Apadrinar es ayudar a cubrir los gastos de alimentación, salud y bienestar de uno o varios gatitos del refugio. Puedes hacerlo con aportes mensuales.",
+  },
+  {
+    question: "¿Se puede visitar el refugio?",
+    answer:
+      "Si, incluso si solo quieres ir a ver a los gatitos. Puedes encontrar la ubicación buscando el nombre de la fundación en Google.",
   },
   {
     question: "¿Solo ayudan gatos?",
     answer:
-      "Aunque los gatitos son nuestra prioridad, también brindamos apoyo a abuelitos de la comunidad que necesitan comida y abrigo.",
+      "Ofrecemos atención a todos los animales, pero nuestra prioridad son los gatos.",
   },
   {
-    question: "¿Cuánto cuesta una consulta o esterilizar?",
+    question: "¿En que parte de Venezuela se encuentran?",
+    answer: "Estamos ubicados en Maracaibo, estado Zulia."
+  },
+  {
+    question: "¿Cuánto cuesta esterilizar?",
     answer:
-      "El costo depende del caso y del veterinario. Si necesitas ayuda, contáctanos y te orientamos sobre precios y opciones solidarias.",
+      "Cuesta $10, el horario de llevar el animalito es de 8am a 10am y la de entra de entre 3pm y 5pm. Te recomendamos llegar temprano ya que es por orden de llegada.",
   },
   {
     question: "¿Puedo llevar cualquier gato que vea en la calle?",
     answer:
       "No siempre es posible recibir nuevos gatitos por temas de espacio y recursos. Escríbenos y te ayudamos a buscar la mejor solución para el animalito.",
   },
-  // --- nuevas preguntas agregadas ---
   {
     question: "¿Atienden consultas de rutinas que no son emergencias?",
-    answer: "Sí, atendemos consultas de rutina además de emergencias."
+    answer: "Sí, el costo de la consulta es $7. El horario es de 8am a 8pm, por orden de llegada y según disponibilidad."
   },
   {
     question: "¿Piensan expandirse más allá de Maracaibo?",
@@ -45,7 +50,7 @@ const faqs = [
   },
   {
     question: "¿Cómo puedo participar en las actividades de la fundación?",
-    answer: "Puedes participar estando pendiente de nuestro Instagram, donde publicamos cuando necesitamos traslados o ayuda en actividades."
+    answer: "Puedes participar estando pendiente de nuestro Instagram, donde publicamos cuando necesitamos traslados para los rescates."
   },
   {
     question: "¿Cómo llevan el control de los gatos hospitalizados y los que no para no confundirse?",
@@ -64,16 +69,12 @@ const faqs = [
     answer: "Puedes colaborar donando medicinas, gatarina, proteínas, productos de limpieza y accesorios para gatos como jaulas, comederos, etc."
   },
   {
-    question: "¿Tienen consultas? ¿Cuáles son los costos y horarios?",
-    answer: "Sí, el costo de la consulta es $7. El horario es de 8am a 8pm, por orden de llegada y según disponibilidad."
-  },
-  {
     question: "¿Cuántos gatitos tienen actualmente?",
     answer: "Tenemos aproximadamente 300 gatitos en este momento."
   },
   {
     question: "¿Cuántas personas trabajan en la fundación?",
-    answer: "Actualmente trabajan 7 personas, una señora encargada de la limpieza y 5 auxiliares veterinarios que se turnan."
+    answer: "Actualmente 7 trabajadores, una señora encargada de la limpieza y 5 auxiliares veterinarios que se turnan."
   },
   {
     question: "¿Qué hacen con los gatos cuando se recuperan y no tienen a dónde ir? ¿Se quedan en la fundación?",
@@ -83,49 +84,54 @@ const faqs = [
     question: "¿Qué se requiere para adoptar un gato?",
     answer: "Responsabilidad y disposición para quererlos y cuidarlos."
   },
-  {
-    question: "¿Dónde se encuentra la sede principal?",
-    answer: "Puedes encontrar la ubicación buscando el nombre de la fundación en Google."
-  },
-  {
-    question: "¿Por qué solo gatos y no perros también?",
-    answer: "También atendemos perros, pero nos enfocamos principalmente en gatos por... Responde Luis. Luis es el gerente, estoy esperando que me conteste para cambiarlo."
-  },
+
 ];
+
+
+const chunkArray = (arr, size) => {
+  const result = [];
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
+  }
+  return result;
+};
 
 const Questions = () => {
   const [openIdx, setOpenIdx] = useState(null);
+  // Agrupar preguntas en bloques de 4
+  const faqChunks = chunkArray(faqs, 4);
   return (
     <>
       <div className="questions-root">
         <div className="questions-container">
           <div className="questions-section">
-            <div className="questions-faqs">
-              <div className="questions-faqs-list">
-                {faqs.map((faq, idx) => (
-                  <div key={idx} className="questions-faq-item">
-                    <div
-                      className={`questions-faq-question${openIdx === idx ? ' open' : ''}`}
-                      onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                    >
-                      {faq.question}
-                      <span className="questions-faq-arrow" style={{ transform: openIdx === idx ? "rotate(180deg)" : "rotate(0deg)" }}>▼</span>
-                    </div>
-                    {openIdx === idx && (
-                      <div className="questions-faq-answer">
-                        {faq.answer}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+            <div className="questions-benito-fixed">
+              <img src={questionsImg} alt="Benito responde" className="questions-benito-img" />
+              <div className="questions-benito-text">Benito responde tus dudas...</div>
             </div>
-            <div className="questions-img-container">
-              <img
-                src={questionsImg}
-                alt="Questions ilustración"
-                className="questions-img"
-              />
+            <div className="questions-faqs">
+              {faqs.map((faq, idx) => (
+                <div key={idx} className={`questions-faq-item${openIdx === idx ? ' active' : ''}`}>
+                  <div
+                    className={`questions-faq-question${openIdx === idx ? ' open' : ''}`}
+                    onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
+                  >
+                    <span className="questions-faq-question-text">{faq.question}</span>
+                    <span className="questions-faq-arrow">
+                      {openIdx === idx ? (
+                        <FaArrowCircleDown size={24} color="#ff9500" />
+                      ) : (
+                        <FaArrowCircleUp size={24} color="#ff9500" />
+                      )}
+                    </span>
+                  </div>
+                  {openIdx === idx && (
+                    <div className="questions-faq-answer">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
