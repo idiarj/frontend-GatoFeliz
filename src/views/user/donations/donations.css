@@ -69,8 +69,6 @@
 }
 .donations-img-modern {
   width: 100px;
-  border-radius: 50%;
-  box-shadow: 0 4px 16px #0001;
   margin-bottom: 16px;
   animation: bounce 2s infinite;
 }
@@ -116,6 +114,10 @@
 }
 .donations-card:nth-child(-n+3) {
   margin-top: 8px !important;
+  min-height: 370px !important;
+  max-height: 400px !important;
+  padding: 40px 28px !important;
+  font-size: 1.08rem !important;
 }
 .donations-card:hover {
   box-shadow: 0 16px 48px rgba(243,112,33,0.18), 0 2px 12px rgba(0,0,0,0.12);
@@ -143,6 +145,10 @@
   align-items: center;
   text-align: center;
   background: linear-gradient(120deg, #fff7ed 60%, #ffe0d1 100%);
+  min-height: 370px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .donations-card.whatsapp p {

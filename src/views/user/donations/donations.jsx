@@ -14,9 +14,6 @@ const Donations = () => {
       {/* <div className="donations-root">
       </div> */}
         <div className="donations-container-modern">
-          <section className="donations-header">
-            <p>Tu ayuda transforma vidas. Elige tu método favorito y apoya a nuestros gatitos.</p>
-          </section>
           <div className="donations-grid">
               <div className="donations-card" style={{ background: '#ffe0d1' }}>
                 <h3><FaCreditCard /> Métodos de pago (BS)</h3>
@@ -28,7 +25,6 @@ const Donations = () => {
                     <span><strong>Cuenta:</strong> 0134 0050 4105 0102 3671</span>
                   </div>
                 </div>
-                <div className="donations-divider"></div>
                 <div className="donations-block">
                   <div className="donations-block-title">Pago Móvil</div>
                   <div className="donations-block-info">
