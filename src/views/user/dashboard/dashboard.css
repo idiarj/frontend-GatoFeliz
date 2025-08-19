@@ -1,11 +1,44 @@
-/* SponsorCard abajo a la derecha */
+/* Card informativo arriba del sponsor */
+.dashboard-section.info-animales {
+  position: absolute;
+  top: 50px;
+  left: 1075px;
+  height: 70px;
+  width: 325px;
+  background: #fffdce;
+  border-radius: 24px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.dashboard-section.info-animales p {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #f47c2c;
+  font-weight: 600;
+  text-align: center;
+}
+/* Ocultar la barra de scroll visualmente */
+html, body {
+  overflow: hidden;
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar, html::-webkit-scrollbar {
+  display: none; /* Chrome, Safari y Opera */
+}
+/* Quitar scroll de la pantalla en dashboard */
+html, body {
+  overflow: hidden;
+}
 .sponsor-card-bottom-right {
   position: fixed;
   bottom: 32px;
   right: 32px;
   z-index: 100;
 }
-/* Título de la sección de preguntas más arriba */
 .preguntas-title {
   margin-top: 20px;
 }
@@ -13,7 +46,6 @@
 .dashboard-container {
   display: flex;
   min-height: 100vh;
-  background: #fff;
 }
 
 .dashboard-sidebar {
@@ -45,8 +77,6 @@
   margin: 0 0 0 auto;
 }
 
-/* Estilos base de cada sección */
-/* Estilos base de cada sección */
 .dashboard-section {
   height: 100%;
   padding: 2rem 1.5rem;
@@ -65,7 +95,7 @@
 /* CARD: Adopciones */
 .dashboard-section.adopciones {
   position: absolute;
-  top: 170px; 
+  top: 150px; 
   left: 270px; 
  height: 200px;
  padding: 0;
@@ -88,9 +118,11 @@
 .dashboard-section.donaciones {
   background: #ffe0cc;
   border-radius: 28px;
-  grid-column: 2;
-  grid-row: 1;
+  position: fixed;
+  top: 50px;
+  left: 670px;
   height: 200px;
+  width: 310px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -204,57 +236,16 @@
   margin-bottom: 0.5rem;
 }
 
-/* CARD: Apadrinar */
-.dashboard-section.apadrinar {
-  background: #ffe0cc;
-  border-radius: 28px;
-  grid-column: 3;
-  grid-row: 1 / span 2;
-  position: relative;
-  height: 510px;
-  overflow: hidden;
-}
-
-.dashboard-section.apadrinar img {
-  width: 100%;
-  height: 340px;
-  object-fit: cover;
-  border-radius: 0;
-  margin-bottom: 0;
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.dashboard-section.apadrinar .dashboard-section-info {
-  margin-top: 390px;
-  text-align: center;
-  padding-bottom: 1rem;
-}
-
-.dashboard-section.apadrinar .dashboard-section-info span {
-  color: #f47c2c;
-  font-size: 0.85rem;
-  line-height: 1.3;
-  display: block;
-  margin-bottom: 0.8rem;
-}
-
-.dashboard-section.apadrinar .dashboard-link {
-  display: inline-block;
-  font-weight: bold;
-  color: #f47c2c;
-  font-size: 1rem;
-}
-
 /* CARD: Preguntas */
 .dashboard-section.preguntas {
   background: #fffdce;
   border-radius: 28px;
-  grid-column: 2;
-  grid-row: 2;
-  height: 220px;
+  position: fixed;
+  top: 460px;
+  left: 670px;
+  min-height: 180px;
+  height: auto;
+  width: 310px;
   margin-top: -10px;
 }
 
@@ -282,50 +273,73 @@
 }
 
 .dashboard-section.preguntas h2 {
-  height: 160px;
-  margin: 0 0 0.8rem 0;
+  margin: 0.8rem 0 0.8rem 0.5rem;
   color: #f7aa1d;
   font-size: 1.1rem;
   font-weight: 700;
 }
 
 .dashboard-section.preguntas .dashboard-section-info {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  margin-top:-20px;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .dashboard-section.preguntas .dashboard-section-info span {
+.pregunta-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: none;
+  padding: 0.4rem 0.5rem 0.4rem 0.5rem;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  width: 100%;
+}
+.pregunta-item span {
   color: #f7aa1d;
-  font-size: 0.85rem;
-  line-height: 1.3;
+  font-size: 1.25rem;
+  font-weight: 600;
   display: block;
-  margin-bottom: 0.6rem;
+}
+.pregunta-icon {
+  margin-left: 100px;
+  vertical-align: middle;
+  flex-shrink: 0;
+  color: #f47c2c !important;
+}
 }
 
 /* CARD: Contacto de denuncias */
 .dashboard-section.contacto {
-  grid-column: 1;
-  grid-row: 2;
   background: #ffe0cc;
   border-radius: 28px;
+  position: fixed;
+  top: 490px;
+  left: 270px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-top: 160px;
-  height: 48px;
+  width: 310px;
+  height: 60px;
   font-size: 1rem;
   cursor: default;
+  box-shadow: none;
 }
+
+.dashboard-section.contacto:hover {
+  box-shadow: 0 12px 40px rgba(244, 124, 44, 0.18), 0 12px 40px rgba(61, 28, 28, 0.18);
+}
+
 
 .dashboard-section.contacto h3 {
   margin: 0 0 0.8rem 0;
   color: #f47c2c;
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   font-weight: 700;
   line-height: 1.2;
 }
@@ -392,4 +406,16 @@
     grid-row: auto;
     height: 320px;
   }
+}
+
+.dashboard-section.sponsor {
+  position: absolute;
+  top: 410px;
+  left: 1075px;
+  height: 200px;
+  padding: 0;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -34,6 +34,13 @@ const Dashboard = () => {
               animatedImage={false}
             />
           </div>
+
+          {/* Card informativo arriba del sponsor */}
+          <div className="dashboard-section info-animales">
+            <p>
+              Todos nuestros animales han sido abandonados y ahora buscan una adopción que les de la vida que merecen.
+            </p>
+          </div>
           {/* Donaciones Card */}
           <div 
             className="dashboard-section donaciones"
@@ -58,16 +65,17 @@ const Dashboard = () => {
             </div>
           </div>
 
-            {/* SponsorCard abajo a la derecha */}
-            <div className="sponsor-card-bottom-right">
-              <cat
+            {/* Sponsor CatCard especial */}
+            <div className="dashboard-section sponsor" onClick={() => navigate('/sponsor')}>
+              <CatCard
                 name={getLastCat().name}
                 gender={getLastCat().gender}
                 age={getLastCat().age}
                 image={getLastCat().image}
                 onRequest={() => navigate('/sponsor')}
-                buttonLabel="ENVIAR SOLICITUD"
-                boxShadow={false}
+                buttonLabel="enviar solicitud"
+                boxShadow={true}
+                fromSponsor={true}
               />
             </div>
 
@@ -76,37 +84,30 @@ const Dashboard = () => {
             className="dashboard-section preguntas"
             onClick={() => navigate('/questions')}
           >
-            <h2 className="preguntas-title">Preguntas </h2>
-            <div className="preguntas-icons-row">
-              <div className="pregunta-icon-block">
-                <FaHome size={32} color="#f47c2c" />
-                <span>Visitar</span>
+            <h2 className="preguntas-title">Preguntas</h2>
+            <div className="dashboard-section-info preguntas-list">
+              <div className="pregunta-item">
+                <span>¿Se puede visitar la fundación?</span>
+                <FaHome size={24} color="#f47c2c" className="pregunta-icon" />
               </div>
-              <div className="pregunta-icon-block">
-                <MdPets size={32} color="#f47c2c" />
-                <span>Gatos</span>
+              <div className="pregunta-item">
+                <span>¿Solo ayudan gatos?</span>
+                <MdPets size={24} color="#f47c2c" className="pregunta-icon" />
               </div>
-              <div className="pregunta-icon-block">
-                <FaBriefcaseMedical size={32} color="#f47c2c" />
-                <span>Esterilizar</span>
+              <div className="pregunta-item">
+                <span>¿Cuánto cuesta esterilizar?</span>
+                <FaBriefcaseMedical size={24} color="#f47c2c" className="pregunta-icon" />
               </div>
-              <div className="pregunta-icon-block">
-                <FaHandHoldingHeart size={32} color="#f47c2c" />
-                <span>Ayudar</span>
+              <div className="pregunta-item">
+                <span>¿Cómo puedo ayudar?</span>
+                <FaHandHoldingHeart size={24} color="#f47c2c" className="pregunta-icon" />
               </div>
-            </div>
-            <div className="dashboard-section-info">
-              <span>¿Se puede visitar la fundación?</span>
-              <span>¿Solo ayudan gatos?</span>
-              <span>¿Cuánto cuesta esterilizar?</span>
-              <span>¿Cómo puedo ayudar?</span>
-              <div className="dashboard-link">Ver más preguntas</div>
             </div>
           </div>
 
           {/* Contacto de denuncias Card */}
           <div className="dashboard-section contacto">
-            <h3>CONTACTO DE<br /> DENUNCIAS POR MALTRATO</h3>
+            <h3>Contacto de<br /> Denuncias por maltrato</h3>
             <span><FiPhone size={24} color="#f47c2c" /> +58 4129267842</span>
           </div>
         </div>

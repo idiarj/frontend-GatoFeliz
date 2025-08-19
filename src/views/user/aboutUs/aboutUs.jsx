@@ -24,7 +24,7 @@ const cardData = [
     title: 'Cuidado',
     img: careCat,
     bg: '#fff8e1',
-    text: 'Brindamos atención médica 24/7 en la fundación.',
+    text: 'Les brindamos atención médica 24/7 en la fundación.',
     color: '#F37021',
   },
 ];

@@ -98,7 +98,6 @@ const chunkArray = (arr, size) => {
 
 const Questions = () => {
   const [openIdx, setOpenIdx] = useState(null);
-  // Agrupar preguntas en bloques de 4
   const faqChunks = chunkArray(faqs, 4);
   return (
     <>
