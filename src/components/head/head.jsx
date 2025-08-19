@@ -1,9 +1,20 @@
 import { IoCall, IoLogoInstagram, IoSearch } from 'react-icons/io5';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from '../logo.jsx';
-import Menu from '../menu/menu.jsx';
 import './head.css';
 
-const Head = ({ title, showSearch = false, onSearch }) => {
+const Head = ({ title, onSearch }) => {
+  const [showSearch, setShowSearch] = useState(false);
+  const location = useLocation();
+  console.log(location.pathname);
+  useEffect(() => {
+    if (location.pathname === '/adoption' || location.pathname === '/apadrinar') {
+      setShowSearch(true);
+    } else {
+      setShowSearch(false);
+    }
+  }, [location.pathname]);
 
   return (
     <div className="head-container">
