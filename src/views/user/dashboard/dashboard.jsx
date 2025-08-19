@@ -7,10 +7,8 @@ import { useUser } from '../../../hooks/useUser.jsx';
 import Head from '../../../components/head/head.jsx';
 import Menu from '../../../components/menu/menu.jsx';
 import './dashboard.css';
-import AdoptionCard from '../../../components/adoptionCard/adoptionCard.jsx';
+import CatCard from '../../../components/catCard/catCard.jsx';
 import { dashboardImages, getLastCat, getPaymentLogos, getDonationTypes, getSponsorImage} from './importdata.jsx';
-import SponsorCard from '../../../components/sponsorCard/sponsorCard.jsx';
-
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user } = useUser();
@@ -23,9 +21,9 @@ const Dashboard = () => {
       </div> */}
       <div className="dashboard-main">
         <div className="dashboard-sections">
-          {/* Adopciones Card usando AdoptionCard */}
+          {/* Adopciones Card usando CatCard */}
           <div className="dashboard-section adopciones" onClick={() => navigate('/adoption')}>
-            <AdoptionCard
+            <CatCard
               name={getLastCat().name}
               gender={getLastCat().gender}
               age={getLastCat().age}
@@ -62,7 +60,7 @@ const Dashboard = () => {
 
             {/* SponsorCard abajo a la derecha */}
             <div className="sponsor-card-bottom-right">
-              <SponsorCard
+              <cat
                 name={getLastCat().name}
                 gender={getLastCat().gender}
                 age={getLastCat().age}

@@ -30,6 +30,67 @@ const faqs = [
     answer:
       "No siempre es posible recibir nuevos gatitos por temas de espacio y recursos. Escríbenos y te ayudamos a buscar la mejor solución para el animalito.",
   },
+  // --- nuevas preguntas agregadas ---
+  {
+    question: "¿Atienden consultas de rutinas que no son emergencias?",
+    answer: "Sí, atendemos consultas de rutina además de emergencias."
+  },
+  {
+    question: "¿Piensan expandirse más allá de Maracaibo?",
+    answer: "No, es logísticamente imposible expandirnos fuera de Maracaibo."
+  },
+  {
+    question: "¿Cómo manejan la organización y logística para cubrir todas las necesidades de la fundación?",
+    answer: "Responde Luis. Luis es el gerente, estoy esperando que me conteste para cambiarlo."
+  },
+  {
+    question: "¿Cómo puedo participar en las actividades de la fundación?",
+    answer: "Puedes participar estando pendiente de nuestro Instagram, donde publicamos cuando necesitamos traslados o ayuda en actividades."
+  },
+  {
+    question: "¿Cómo llevan el control de los gatos hospitalizados y los que no para no confundirse?",
+    answer: "Los gatos hospitalizados están en jaulas, lo que facilita su control y seguimiento."
+  },
+  {
+    question: "¿La fundación solo existe gracias a los donativos?",
+    answer: "Sí, la fundación se sostiene únicamente gracias a los donativos."
+  },
+  {
+    question: "¿Cómo logran ayudar a tantos gatos con emergencias médicas y también en la alimentación de los de la fundación y zonas cercanas?",
+    answer: "Responde Luis. Luis es el gerente, estoy esperando que me conteste para cambiarlo."
+  },
+  {
+    question: "¿Cómo se puede colaborar sin necesidad de dar dinero?",
+    answer: "Puedes colaborar donando medicinas, gatarina, proteínas, productos de limpieza y accesorios para gatos como jaulas, comederos, etc."
+  },
+  {
+    question: "¿Tienen consultas? ¿Cuáles son los costos y horarios?",
+    answer: "Sí, el costo de la consulta es $7. El horario es de 8am a 8pm, por orden de llegada y según disponibilidad."
+  },
+  {
+    question: "¿Cuántos gatitos tienen actualmente?",
+    answer: "Tenemos aproximadamente 300 gatitos en este momento."
+  },
+  {
+    question: "¿Cuántas personas trabajan en la fundación?",
+    answer: "Actualmente trabajan 7 personas, una señora encargada de la limpieza y 5 auxiliares veterinarios que se turnan."
+  },
+  {
+    question: "¿Qué hacen con los gatos cuando se recuperan y no tienen a dónde ir? ¿Se quedan en la fundación?",
+    answer: "Sí, se les busca un hogar, pero si no lo consiguen permanecen en la fundación."
+  },
+  {
+    question: "¿Qué se requiere para adoptar un gato?",
+    answer: "Responsabilidad y disposición para quererlos y cuidarlos."
+  },
+  {
+    question: "¿Dónde se encuentra la sede principal?",
+    answer: "Puedes encontrar la ubicación buscando el nombre de la fundación en Google."
+  },
+  {
+    question: "¿Por qué solo gatos y no perros también?",
+    answer: "También atendemos perros, pero nos enfocamos principalmente en gatos por... Responde Luis. Luis es el gerente, estoy esperando que me conteste para cambiarlo."
+  },
 ];
 
 const Questions = () => {
