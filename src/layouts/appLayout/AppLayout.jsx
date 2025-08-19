@@ -43,7 +43,7 @@ function AppLayout() {
   return (
     <div className="app-root">
       <header className="app-head">
-        <Head title={getTitle()} showSearch />
+        <Head title={getTitle()} />
       </header>
 
       <aside className="app-aside">
