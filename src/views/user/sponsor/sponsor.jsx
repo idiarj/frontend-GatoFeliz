@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
+import { useUser } from "../../../hooks/useUser.jsx";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard.jsx";
-import Loading from '../../../views/user/loading/Loading.jsx'
 import "./sponsor.css";
 
 
 const Sponsor =  () => {
+  const testing = import.meta.env.VITE_TESTING === 'true';
+  const { user } = useUser();
   const [cats, setCats] = useState([]);
   const data  = useLoaderData();
   //console.log(data)
@@ -30,9 +32,6 @@ const Sponsor =  () => {
       console.error("Error handling request:", error);
     }
   }
-
-
-
 
   const onDelete = async (id) => {
     try {
@@ -63,7 +62,6 @@ const Sponsor =  () => {
   }
 
   return (
-
       <div className="sponsor-content">
         <div className="sponsor-info">
           Apadrinar tiene un costo de tan solo $12 al mes, con esto le aseguras la comida y salud a tu peludo favorito, Envíanos el nombre del gato y captura del comprobante por whatsapp
@@ -85,7 +83,11 @@ const Sponsor =  () => {
               />
             ))
           )}
-            <AddCatCard onSubmit={onSubmit} uploading={false}/>
+          {
+            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+              <AddCatCard onSubmit={onSubmit} uploading={false} />
+            )
+          }
         </div>
       </div>
   );

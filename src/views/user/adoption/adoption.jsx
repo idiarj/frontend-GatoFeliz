@@ -4,8 +4,6 @@ import { useLoaderData } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard"
-import Head from '../../../components/head/head.jsx';
-import Menu from "../../../components/menu/menu.jsx";
 
 import "./adoption.css";
 
