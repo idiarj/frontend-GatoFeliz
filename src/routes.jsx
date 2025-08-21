@@ -82,6 +82,7 @@ export const router = createBrowserRouter([
         loader: async () => {
             const response = await fetchInstance.get({ endpoint: '/animal?adoptable=false',  headers: { 'Content-Type': 'application/json' } });
             const data = await response.json();
+            //data.data.forEach(cat=> console.table(cat))
             return data.data;
         },
         hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>

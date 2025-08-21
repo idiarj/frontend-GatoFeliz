@@ -26,6 +26,22 @@ const Adoptions = () => {
   //   cat.name.toLowerCase().includes(search.toLowerCase())
   // );
 
+    const handleRequest = async (cat)=>{
+      try {
+        console.table(cat);
+        const response = await fetchInstance.post({
+          endpoint: "/request-cat?type=adopt",
+          body: { id_animal: cat.id_animal },
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include'
+        });
+        console.table(response);
+        console.log("Request successful:", response.ok);
+      } catch (error) {
+        console.error("Error handling request:", error);
+      }
+    }
+
     const onDelete = async (id) => {
       try {
         await fetchInstance.delete({
@@ -82,7 +98,7 @@ const Adoptions = () => {
                 gender={cat.genero_animal}
                 age={cat.edad_animal}
                 image={cat.ruta_imagen_an}
-                onRequest={() => alert(`Solicitud enviada para ${cat.nom_animal}`)}
+                onRequest={() => handleRequest(cat)}
                 onDelete={() => onDelete(cat.id_animal)}
               />
             ))

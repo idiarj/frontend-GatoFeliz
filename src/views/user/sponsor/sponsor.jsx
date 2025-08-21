@@ -3,17 +3,36 @@ import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard.jsx";
+import Loading from '../../../views/user/loading/Loading.jsx'
 import "./sponsor.css";
 
 
 const Sponsor =  () => {
   const [cats, setCats] = useState([]);
-  //const [search, setSearch] = useState("");
-
-  const data = useLoaderData();
+  const data  = useLoaderData();
+  //console.log(data)
   useEffect(() => {
     setCats(data);
   }, [data]);
+
+  const handleRequest = async (cat)=>{
+    try {
+      console.table(cat);
+      const response = await fetchInstance.post({
+        endpoint: "/request-cat?type=sponsor",
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: { id_animal: cat.id_animal }
+      });
+      console.table(response);
+      console.log("Request successful:", response.ok);
+    } catch (error) {
+      console.error("Error handling request:", error);
+    }
+  }
+
+
+
 
   const onDelete = async (id) => {
     try {
@@ -26,12 +45,7 @@ const Sponsor =  () => {
     }
   };
 
-  // Filtrar gatos por nombre
-  // const filteredCats = cats.filter(cat =>
-  //   cat.name.toLowerCase().includes(search.toLowerCase())
-  // );
-
-    const onSubmit = async (data) => {
+  const onSubmit = async (data) => {
     try {
       const response = await fetchInstance.postMultipart({
         endpoint: "/animal",
@@ -49,16 +63,12 @@ const Sponsor =  () => {
   }
 
   return (
-    // <div className="sponsor-container">
-    // </div>
+
       <div className="sponsor-content">
         <div className="sponsor-info">
           Apadrinar tiene un costo de tan solo $12 al mes, con esto le aseguras la comida y salud a tu peludo favorito, Envíanos el nombre del gato y captura del comprobante por whatsapp
         </div>
         <div className="sponsor-cards">
-          {/* {filteredCats.map((cat) => (
-            <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
-          ))} */}
           {cats && (
             cats.map((cat) => (
               <CatCard
@@ -67,7 +77,7 @@ const Sponsor =  () => {
                 gender={cat.genero_animal}
                 age={cat.edad_animal}
                 image={cat.ruta_imagen_an}
-                onRequest={() => alert(`Solicitud enviada para ${cat.nom_animal}`)}
+                onRequest={() => handleRequest(cat)}
                 onDelete={onDelete}
                 buttonLabel="ENVIAR SOLICITUD"
                 boxShadow={true}

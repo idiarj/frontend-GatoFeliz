@@ -21,6 +21,7 @@ class Fetch{
     }
 
     async post({endpoint, body, headers, credentials}){
+        console.log(credentials)
         try {
             const response = await fetch(`${this.baseUrl}${endpoint}`, {
                 method: 'POST',
