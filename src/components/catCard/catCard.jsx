@@ -23,6 +23,10 @@ const CatCard = ({
   const { user } = useUser();
   let testing = import.meta.env.VITE_TESTING === 'true';
 
+  // Determina si el usuario puede eliminar (admin)
+  const canDelete = testing || (user && (user.id_perfil === 1 || user.id_perfil === 2));
+  const buttonMarginLeft = canDelete ? 22 : 75;
+
   return (
     <div
       className="adoption-card"
@@ -41,7 +45,7 @@ const CatCard = ({
           {gender} &bull; {age}
         </p>
         <div className="adoption-card-actions-row">
-          {(testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+          {canDelete && (
             <button
               className="adoption-card-icon-btn adoption-card-delete-btn"
               onClick={onDelete}
@@ -53,6 +57,7 @@ const CatCard = ({
           <button
             className="adoption-card-button adoption-card-button-large"
             onClick={onRequest}
+            style={{ marginLeft: buttonMarginLeft }}
           >
             {buttonLabel}
           </button>
