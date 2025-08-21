@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Head from '../../../components/head/head.jsx';
 import questionsImg from '../../../assets/images/questions.png';
 import questionsImg2 from '../../../assets/images/questions2.png';
@@ -99,7 +99,23 @@ const chunkArray = (arr, size) => {
 
 const Questions = () => {
   const [openIdx, setOpenIdx] = useState(null);
+  const [animateImg, setAnimateImg] = useState(false);
   const faqChunks = chunkArray(faqs, 4);
+
+  // Detect cambio de imagen y activa animación
+  const benitoImg = openIdx !== null ? questionsImg2 : questionsImg;
+
+  // Cuando openIdx cambia, activa animación
+  // Se activa solo si cambia entre las dos imágenes
+  const prevImgRef = useRef(benitoImg);
+  useEffect(() => {
+    if (prevImgRef.current !== benitoImg) {
+      setAnimateImg(true);
+      prevImgRef.current = benitoImg;
+      setTimeout(() => setAnimateImg(false), 400); // Duración de la animación
+    }
+  }, [benitoImg]);
+
   return (
     <>
       <div className="questions-root">
@@ -107,11 +123,13 @@ const Questions = () => {
           <div className="questions-section">
             <div className="questions-benito-fixed">
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                {openIdx !== null ? (
-                  <img src={questionsImg2} alt="Benito responde" className="questions-benito-img benito-img-2" />
-                ) : (
-                  <img src={questionsImg} alt="Benito responde" className="questions-benito-img" />
-                )}
+                <div className="questions-benito-img-container">
+                  <img
+                    src={benitoImg}
+                    alt="Benito responde"
+                    className={`questions-benito-img${openIdx !== null ? ' benito-img-2' : ''}${animateImg ? ' benito-animate' : ''}`}
+                  />
+                </div>
                 <div className="questions-benito-text">Benito responde tus dudas...</div>
               </div>
             </div>
