@@ -185,7 +185,7 @@
   gap: 0;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
+  margin-left: -33px;
 }
 
 .aportes-title-modern {

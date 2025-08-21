@@ -25,7 +25,7 @@ const CatCard = ({
 
   // Determina si el usuario puede eliminar (admin)
   const canDelete = testing || (user && (user.id_perfil === 1 || user.id_perfil === 2));
-  const buttonMarginLeft = canDelete ? 22 : 75;
+  const buttonMarginLeft = canDelete ? 18 : 75;
 
   return (
     <div

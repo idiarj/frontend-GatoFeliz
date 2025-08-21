@@ -13,6 +13,7 @@ import Adoptions from './views/user/adoption/adoption.jsx';
 import Sponsor from './views/user/sponsor/sponsor.jsx';
 import Loading from "./views/user/loading/Loading.jsx";
 import MedicalPanel from './views/user/medicalPanel/medicalPanel.jsx';
+import Administration from './views/user/administration/administration.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 import NotFound from "./views/user/notFound/notFound.jsx";
 
@@ -96,6 +97,10 @@ export const router = createBrowserRouter([
             // return data.data;
         },
         hydrateFallbackElement: <Loading subtitle={'Cargando panel médico...'}/>
+    },
+    {
+        path: '/administration',
+        element: <Administration/>
     }
         ]
     },
