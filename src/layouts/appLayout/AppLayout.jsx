@@ -32,9 +32,9 @@ function AppLayout() {
       case '/misgatos':
         return 'Mis Gatos';
       case '/medical':
-        return 'Panel Medico';
-      case '/admin':
-        return 'Administracion';
+        return 'Panel médico';
+      case '/administration':
+        return 'Administración';
       default:
         return 'Gato Feliz';
     }

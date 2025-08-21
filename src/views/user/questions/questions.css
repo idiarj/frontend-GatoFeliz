@@ -1,3 +1,11 @@
+.questions-benito-img-container {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
 .questions-benito-text {
   font-size: 1.5rem;
   font-weight: 900;
@@ -8,7 +16,7 @@
   text-shadow: 0 2px 8px #ffe0d1, 0 1px 2px #f37021;
 }
 .benito-img-2 {
-  width: 404px;
+  width: 397px;
   height: auto;
   margin-bottom: 12px;
   position: relative;
@@ -72,8 +80,30 @@
 
 .questions-benito-img {
   width: 400px;
+  max-height: 400px;
   height: auto;
-  margin-bottom: 12px;
+  margin-bottom: 0;
+  transition: transform 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+  will-change: transform;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.benito-animate {
+  animation: benito-grow 0.4s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+
+@keyframes benito-grow {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 

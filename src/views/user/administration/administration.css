@@ -1,0 +1,285 @@
+
+.admin-container {
+	min-height: 100vh;
+	padding: 2rem;
+}
+
+/* Scroll horizontal para la celda de teléfono */
+.telefono {
+	max-width: 50px;
+	white-space: nowrap;
+	overflow-x: auto;
+	display: block;
+	scrollbar-width: none; /* Firefox */
+	-ms-overflow-style: none; /* IE 10+ */
+}
+
+
+.telefono::-webkit-scrollbar {
+	display: none;
+}
+
+
+.admin-panels {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
+
+.roles-permisos {
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 2px 12px #0001;
+	padding: 2rem;
+	flex: 1 1 350px;
+	min-width: 350px;
+}
+
+.roles-permisos h2 {
+	color: #222;
+	font-weight: 600;
+	font-size: 1.3rem;
+	margin-bottom: 1.2rem;
+}
+
+.buscar-usuario,
+.roles-asignados {
+	margin-bottom: 1rem;
+}
+
+.buscar-usuario label,
+.roles-asignados label {
+	font-weight: 500;
+}
+
+.buscar-usuario input,
+.roles-asignados select {
+	width: 100%;
+	padding: 0.5rem;
+	border-radius: 8px;
+	border: 1px solid #eee;
+	margin-top: 0.3rem;
+}
+
+.permisos-list {
+	margin-bottom: 1.5rem;
+}
+.permisos-list span {
+	font-weight: 500;
+}
+.permisos-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.7rem;
+	margin-top: 0.7rem;
+}
+.permiso-label {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-weight: 400;
+}
+.roles-buttons {
+	display: flex;
+	gap: 1rem;
+}
+.btn-restablecer {
+	background: #F5F5F5;
+	color: #222;
+	border: none;
+	border-radius: 8px;
+	padding: 0.7rem 1.2rem;
+	font-weight: 500;
+	cursor: pointer;
+}
+.btn-guardar {
+	background: #4A90E2;
+	color: #fff;
+	border: none;
+	border-radius: 8px;
+	padding: 0.7rem 1.2rem;
+	font-weight: 500;
+	cursor: pointer;
+}
+
+.solicitudes-panel {
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 2px 12px #0001;
+	padding: 2rem;
+	flex: 2 1 500px;
+	min-width: 400px;
+}
+.solicitudes-panel h2 {
+	color: #222;
+	font-weight: 600;
+	font-size: 1.3rem;
+	margin-bottom: 1.2rem;
+}
+.solicitudes-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 1.5rem;
+}
+.solicitudes-table thead tr {
+	background: #FFB987;
+}
+.solicitudes-table th {
+	padding: 0.7rem;
+	text-align: left;
+	font-weight: 500;
+}
+.th-nombre {
+	border-radius: 8px 0 0 8px;
+}
+.th-acciones {
+	border-radius: 0 8px 8px 0;
+	text-align: center;
+}
+.sol-row {
+	border-bottom: 1px solid #f3f3f3;
+}
+.sol-row td {
+	padding: 0.7rem;
+}
+.acciones {
+	text-align: center;
+}
+
+.btn-aceptar, .btn-rechazar {
+	display: inline-block;
+	min-width: 70px;
+	font-size: 0.95rem;
+	padding: 0.3rem 0.7rem;
+	border-radius: 6px;
+	margin: 0 2px;
+	font-weight: 500;
+	cursor: pointer;
+	vertical-align: middle;
+	transition: box-shadow 0.2s, background 0.2s;
+}
+.btn-aceptar {
+	background: #4A90E2;
+	color: #fff;
+	border: none;
+}
+.btn-aceptar:hover {
+	background: #357ABD;
+}
+.btn-rechazar {
+	background: #F5F5F5;
+	color: #222;
+	border: none;
+}
+.btn-rechazar:hover {
+	background: #e3e6f3;
+}
+.acciones {
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+}
+
+.btn-paginar {
+	background: #F5F5F5;
+	border: none;
+	border-radius: 6px;
+	padding: 0.3rem 0.8rem;
+	cursor: pointer;
+}
+.pagina-actual {
+	font-weight: 500;
+	color: #FF914D;
+}
+
+.admin-container {
+	font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.admin-panels {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+}
+
+.roles-permisos, .solicitudes-panel {
+	background: #fff;
+	border-radius: 18px;
+	box-shadow: 0 2px 12px #0001;
+	padding: 2rem;
+}
+
+.roles-permisos {
+	min-width: 350px;
+	flex: 1 1 350px;
+}
+
+.solicitudes-panel {
+	min-width: 400px;
+	flex: 2 1 500px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 1.5rem;
+}
+
+th, td {
+	padding: 0.7rem;
+	text-align: left;
+}
+
+th {
+	background: #fffdce;
+	font-weight: 500;
+}
+
+tr {
+	border-bottom: 1px solid #f3f3f3;
+}
+
+button {
+	transition: box-shadow 0.2s, transform 0.2s;
+}
+
+button:hover {
+	box-shadow: 0 2px 8px #FFB98744;
+	transform: translateY(-2px) scale(1.04);
+}
+
+input[type="text"], select {
+	width: 100%;
+	padding: 0.5rem;
+	border-radius: 8px;
+	border: 1px solid #eee;
+	margin-top: 0.3rem;
+	font-size: 1rem;
+}
+
+label {
+	font-weight: 500;
+}
+
+.roles-permisos .grid-permisos {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.7rem;
+	margin-top: 0.7rem;
+}
+
+.admin-container h1 {
+	color: #FF914D;
+	font-weight: 700;
+	font-size: 2.2rem;
+	margin-bottom: 2rem;
+}
+
+.admin-container h2 {
+	color: #222;
+	font-weight: 600;
+	font-size: 1.3rem;
+	margin-bottom: 1.2rem;
+}

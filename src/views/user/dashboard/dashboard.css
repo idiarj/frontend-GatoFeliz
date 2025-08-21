@@ -246,7 +246,7 @@ html, body {
   min-height: 180px;
   height: auto;
   width: 310px;
-  margin-top: -10px;
+  margin-top: 1px;
 }
 
 .preguntas-icons-row {

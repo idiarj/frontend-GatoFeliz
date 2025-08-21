@@ -39,7 +39,7 @@ const menuOptions = [
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos', session: true },
   {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/auth/login', onClick: logout, session: true},
   { label: 'Panel Medico', icon: <FaStethoscope />, path: '/medical', session: true, needed_profiles: [1, 2]},
-  {label: 'Administracion', icon: <FaUserShield />, path: '/admin', session: true, needed_profiles: [1]}
+  {label: 'Administración', icon: <FaUserShield />, path: '/administration', session: true, needed_profiles: [1]}
 ];
 
 const Menu = () => {
