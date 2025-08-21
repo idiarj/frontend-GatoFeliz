@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Head from '../../../components/head/head.jsx';
 import questionsImg from '../../../assets/images/questions.png';
+import questionsImg2 from '../../../assets/images/questions2.png';
 import { FaArrowCircleDown, FaArrowCircleUp } from "react-icons/fa";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
@@ -105,8 +106,14 @@ const Questions = () => {
         <div className="questions-container">
           <div className="questions-section">
             <div className="questions-benito-fixed">
-              <img src={questionsImg} alt="Benito responde" className="questions-benito-img" />
-              <div className="questions-benito-text">Benito responde tus dudas...</div>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                {openIdx !== null ? (
+                  <img src={questionsImg2} alt="Benito responde" className="questions-benito-img benito-img-2" />
+                ) : (
+                  <img src={questionsImg} alt="Benito responde" className="questions-benito-img" />
+                )}
+                <div className="questions-benito-text">Benito responde tus dudas...</div>
+              </div>
             </div>
             <div className="questions-faqs">
               {faqs.map((faq, idx) => (

@@ -71,7 +71,7 @@ const Donations = () => {
                   <div>
                     <div className="donations-block-title">Gofundme</div>
                     <div className="donations-block-info">
-                      <a href="https://www.gofundme.com/f/9yevcq-ayudanos-a-que-400-gatos-no-vuelvan-a-la-calle" target="_blank" rel="noopener noreferrer" style={{ color: '#F37021', fontWeight: 'bold', textDecoration: 'underline' }}>¡Apoya a 400 gatitos! 🐾</a>
+                      <a href="https://www.gofundme.com/f/9yevcq-ayudanos-a-que-400-gatos-no-vuelvan-a-la-calle" target="_blank" rel="noopener noreferrer" style={{ color: '#0033ffff', fontWeight: 'bold', textDecoration: 'underline' }}>¡Apoya a 400 gatitos! 🐾</a>
                     </div>
                   </div>
                 </div>
