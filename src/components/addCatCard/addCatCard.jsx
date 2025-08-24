@@ -124,7 +124,7 @@ const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
             <label><FaWeight /> Peso (kg)</label>
             <input type="number" name="peso_animal" value={formData.peso_animal} onChange={handleChange} min="0" step="0.1" />
           </div>
-          <button onClick={handleSubmit} className="submit-button">🎉 Crear Tarjeta</button>
+          <button onClick={handleSubmit} className="submit-button"> Crear Tarjeta</button>
         </Modal>
       )}
     </div>

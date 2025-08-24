@@ -97,7 +97,7 @@ const Administration = () => {
 					<h2>Administrar roles y permisos</h2>
 					<div className="buscar-usuario">
 						<label htmlFor="buscar-usuario">Buscar usuario</label>
-						<input id="buscar-usuario" type="text" placeholder="Buscar usuario" />
+						<input id="buscar-usuario" type="text" placeholder="Buscar usuario" className="search-user" />
 					</div>
 					<div className="roles-asignados">
 						<label htmlFor="roles-asignados">Roles asignados</label>
