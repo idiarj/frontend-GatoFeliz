@@ -1,3 +1,174 @@
+/* Contenedor del botón volver */
+.volver-container {
+	width: fit-content;
+	margin: 0 auto 0.5rem 0;
+	display: block;
+	position: relative;
+	z-index: 2;
+}
+/* Quitar borde negro al seleccionar cualquier elemento */
+button:focus, input:focus, select:focus {
+	outline: none !important;
+	box-shadow: none !important;
+	border-color: #eee !important;
+}
+/* Botones principales de paneles */
+.admin-buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+	justify-content: center;
+	min-height: 70vh;
+}
+.panel-btn {
+	width: 80%;
+	max-width: 600px;
+	padding: 2rem 1rem;
+	font-size: 1.3rem;
+	font-weight: 700;
+	border: none;
+	border-radius: 40px;
+	background: #fffdce;
+	color: #FF914D;
+	box-shadow: 0 2px 12px #FFB98744;
+	cursor: pointer;
+	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.panel-btn:nth-child(2) {
+	background: #FFB987;
+	color: #E85C1A;
+}
+.panel-btn:nth-child(3) {
+	background: #fffdce;
+	color: #FF914D;
+}
+.panel-btn:nth-child(4) {
+	background: #e3e6f3;
+	color: #4A90E2;
+}
+.panel-btn:hover {
+	box-shadow: 0 4px 16px #FFB98788;
+	transform: scale(1.03);
+}
+
+/* Botón volver */
+/* Botón volver con flecha */
+.btn-volver {
+	display: flex;
+	align-items: center;
+	gap: 0.7rem;
+	margin-bottom: 1.5rem;
+	background: #FF914D;
+	color: #fff;
+	border: none;
+	border-radius: 12px;
+	padding: 0.7rem 1.5rem;
+	font-weight: 600;
+	font-size: 1rem;
+	cursor: pointer;
+	box-shadow: 0 2px 8px #FFB98744;
+	transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.btn-volver:hover {
+	background: #E85C1A;
+	box-shadow: 0 4px 16px #FFB98788;
+	transform: scale(1.04);
+}
+.btn-volver .arrow {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-left: 6px solid #E85C1A;
+	border-bottom: 6px solid #E85C1A;
+	border-radius: 4px;
+	transform: rotate(45deg);
+	margin-right: 5px;
+	background: transparent;
+}
+.btn-volver {
+	background: transparent;
+	color: #E85C1A;
+	font-size: 2rem;
+	font-weight: 700;
+	box-shadow: none;
+	border: none;
+	padding: 0.1rem 0.2rem;
+	margin-bottom: 2rem;
+	transition: color 0.2s;
+	width: fit-content;
+	min-width: 0;
+	max-width: 200px;
+	max-height: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.btn-volver:hover {
+	color: #FF914D;
+	background: transparent;
+	box-shadow: none;
+}
+
+/* Paneles individuales */
+.roles-panel h2, .permisos-panel h2, .ejemplo-panel h2 {
+	color: #FF914D;
+	font-weight: 700;
+	font-size: 1.5rem;
+	margin-bottom: 1.2rem;
+}
+.usuarios-list ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	max-height: 220px;
+	overflow-y: auto;
+	border-radius: 18px;
+	border: 1.5px solid #eee;
+}
+/* Scrollbar personalizado para lista de usuarios */
+.usuarios-list ul::-webkit-scrollbar {
+	width: 8px;
+	background: #eee;
+	border-radius: 8px;
+}
+.usuarios-list ul::-webkit-scrollbar-thumb {
+	background: #bbb;
+	border-radius: 8px;
+}
+.usuario-item {
+	display: flex;
+	align-items: center;
+	padding: 1.2rem 0;
+	border-bottom: 1.5px solid #eaeaea;
+	position: relative;
+	font-size: 1.7rem;
+	font-family: 'Montserrat', Arial, sans-serif;
+}
+.usuario-item > select {
+	position: relative;
+	left: 0;
+	top: 0;
+	transform: none;
+	min-width: 180px;
+	max-width: 260px;
+	font-size: 1.4rem;
+	padding: 0.5rem 1.2rem;
+	margin-left: 2rem;
+	border-radius: 22px;
+	border: 1.5px solid #ccc;
+	background: #fff;
+	font-family: 'Montserrat', Arial, sans-serif;
+}
+.usuario-item > span {
+	min-width: 80px;
+	display: inline-block;
+	font-size: 1.3rem;
+	font-family: 'Montserrat', Arial, sans-serif;
+}
+.usuario-item select {
+	min-width: 140px;
+}
 
 .admin-container {
 	min-height: 100vh;
@@ -24,6 +195,8 @@
 	display: flex;
 	gap: 2rem;
 	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
 }
 
 .roles-permisos {
@@ -52,13 +225,15 @@
 	font-weight: 500;
 }
 
-.buscar-usuario input,
-.roles-asignados select {
+.buscar-usuario input {
 	width: 100%;
-	padding: 0.5rem;
-	border-radius: 8px;
-	border: 1px solid #eee;
-	margin-top: 0.3rem;
+	padding: 1.2rem 1.5rem;
+	border-radius: 22px;
+	border: 1.5px solid #ccc;
+	margin-top: 0.7rem;
+	font-size: 1.7rem;
+	font-family: 'Montserrat', Arial, sans-serif;
+	background: #fff;
 }
 
 .permisos-list {
@@ -194,9 +369,6 @@
 	color: #FF914D;
 }
 
-.admin-container {
-	font-family: 'Montserrat', Arial, sans-serif;
-}
 
 .admin-panels {
 	display: flex;
