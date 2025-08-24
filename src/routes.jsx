@@ -79,7 +79,7 @@ export const router = createBrowserRouter([
                     console.table(data);
                     return data.data;
                 },
-                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos...'} compact/></div>
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos adoptables...'} compact/></div>
             },
             {
                 path: '/apadrinar',
@@ -100,7 +100,7 @@ export const router = createBrowserRouter([
                     // const data = await response.json();
                     // return data.data;
                 },
-                hydrateFallbackElement: <Loading subtitle={'Cargando panel médico...'}/>
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando panel medico...'} compact/></div>
             },
             {
                 path: '/administration',
@@ -108,7 +108,18 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/administration/request',
-                element: <Request/>
+                element: <Request/>,
+                loader: async ()=>{
+                    const response = await fetchInstance.get({
+                        endpoint: '/request-cat/pending',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    const { data } = await response.json();
+                    return data;
+                },
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando solicitudes...'} compact/></div>
             },
                 {
                     path: '/administration/rol',
