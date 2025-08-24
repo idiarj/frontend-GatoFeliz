@@ -35,6 +35,14 @@ function AppLayout() {
         return 'Panel médico';
       case '/administration':
         return 'Administración';
+        case '/administration/request':
+          return 'Solicitudes de Adopción y Apadrinamiento';
+        case '/administration/permission':
+          return 'Administrar Permisos';
+        case '/administration/rol':
+          return 'Administrar Roles';
+      case '/administration/test':
+        return 'Administrar Test';
       default:
         return 'Gato Feliz';
     }

@@ -1,0 +1,123 @@
+.rol-admin-container {
+  max-width: 650px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+  padding: 32px 38px 24px 38px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+.rol-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.rol-back-btn {
+  background: none;
+  border: none;
+  color: #f57c1a;
+  font-size: 1.7rem;
+  cursor: pointer;
+  margin-right: 4px;
+}
+.rol-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #222;
+}
+.rol-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 6px;
+  display: block;
+}
+.rol-search {
+  display: block;
+  margin: 0 auto 18px auto;
+  width: 90%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  font-size: 1rem;
+  background: #f7f7fa;
+}
+.rol-users-list {
+  max-height: 260px;
+  overflow-y: auto;
+  margin-bottom: 22px;
+  border-radius: 10px;
+  background: #f7f7fa;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  scrollbar-width: thin;
+  scrollbar-color: #f57c1a #e0e0e0;
+}
+
+.rol-users-list::-webkit-scrollbar {
+  width: 8px;
+  background: #e0e0e0;
+  border-radius: 10px;
+}
+.rol-users-list::-webkit-scrollbar-thumb {
+  background: #f57c1a;
+  border-radius: 10px;
+}
+.rol-user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 8px;
+  background: transparent;
+  min-height: 44px;
+}
+.rol-user-name {
+  font-size: 1.18rem;
+  color: #333;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.rol-select {
+  padding: 10px 22px;
+  border-radius: 9px;
+  border: 1.5px solid #e0e0e0;
+  background: #fff;
+  font-size: 1.08rem;
+  color: #444;
+  outline: none;
+  transition: border 0.2s;
+  min-width: 170px;
+  font-weight: 500;
+}
+.rol-select:focus {
+  border: 1.5px solid #f57c1a;
+}
+.rol-no-users {
+  text-align: center;
+  color: #888;
+  font-size: 1rem;
+  padding: 18px 0;
+}
+.rol-save-btn {
+  width: auto;
+  min-width: 120px;
+  background: #3b82f6;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 22px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(59,130,246,0.08);
+  transition: background 0.2s;
+  margin-top: 8px;
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+.rol-save-btn:hover {
+  background: #2563eb;
+}

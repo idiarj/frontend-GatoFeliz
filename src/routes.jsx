@@ -14,6 +14,10 @@ import Sponsor from './views/user/sponsor/sponsor.jsx';
 import Loading from "./views/user/loading/Loading.jsx";
 import MedicalPanel from './views/user/medicalPanel/medicalPanel.jsx';
 import Administration from './views/user/administration/administration.jsx';
+import Request from './views/user/administration/views/request/request.jsx';
+import Permision from './views/user/administration/views/permission/permission.jsx';
+import RolAdmin from './views/user/administration/views/rol/rol.jsx';
+import RolesPermisos from './views/user/administration/views/test/test.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 import NotFound from "./views/user/notFound/notFound.jsx";
 
@@ -49,59 +53,75 @@ export const router = createBrowserRouter([
     {
         element: <AppLayout/>,
         children: [
+            {
+                path: '/dashboard',
+                element: <Dashboard/>
+            },
+            {
+                path: '/aboutUs',
+                element: <AboutUs/>
+            },
+            {
+                path: '/donations',
+                element: <Donations/>
+            },
+            {
+                path: '/questions',
+                element: <Questions/>
+            },
+            {
+                path: '/adoption',
+                element: <Adoptions/>,
+                loader: async () => {
+                    await delay(1000);
+                    const response = await fetchInstance.get({ endpoint: '/animal?adoptable=true',  headers: { 'Content-Type': 'application/json' } });
+                    const data = await response.json();
+                    console.table(data);
+                    return data.data;
+                },
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos...'} compact/></div>
+            },
+            {
+                path: '/apadrinar',
+                element: <Sponsor/>,
+                loader: async () => {
+                    const response = await fetchInstance.get({ endpoint: '/animal?adoptable=false',  headers: { 'Content-Type': 'application/json' } });
+                    const data = await response.json();
+                    //data.data.forEach(cat=> console.table(cat))
+                    return data.data;
+                },
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>
+            },
+            {
+                path: '/medical',
+                element: <MedicalPanel/>,
+                loader: async () => {
+                    // const response = await fetchInstance.get({ endpoint: '/medical', headers: { 'Content-Type': 'application/json' } });
+                    // const data = await response.json();
+                    // return data.data;
+                },
+                hydrateFallbackElement: <Loading subtitle={'Cargando panel médico...'}/>
+            },
+            {
+                path: '/administration',
+                element: <Administration/>
+            },
+            {
+                path: '/administration/request',
+                element: <Request/>
+            },
                 {
-        path: '/dashboard',
-        element: <Dashboard/>
-    },
-    {
-        path: '/aboutUs',
-        element: <AboutUs/>
-    },
-    {
-        path: '/donations',
-        element: <Donations/>
-    },
-    {
-        path: '/questions',
-        element: <Questions/>
-    },
-    {
-        path: '/adoption',
-        element: <Adoptions/>,
-        loader: async () => {
-            await delay(1000);
-            const response = await fetchInstance.get({ endpoint: '/animal?adoptable=true',  headers: { 'Content-Type': 'application/json' } });
-            const data = await response.json();
-            console.table(data);
-            return data.data;
-        },
-        hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos...'} compact/></div>
-    },
-    {
-        path: '/apadrinar',
-        element: <Sponsor/>,
-        loader: async () => {
-            const response = await fetchInstance.get({ endpoint: '/animal?adoptable=false',  headers: { 'Content-Type': 'application/json' } });
-            const data = await response.json();
-            //data.data.forEach(cat=> console.table(cat))
-            return data.data;
-        },
-        hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>
-    },
-    {
-        path: '/medical',
-        element: <MedicalPanel/>,
-        loader: async () => {
-            // const response = await fetchInstance.get({ endpoint: '/medical', headers: { 'Content-Type': 'application/json' } });
-            // const data = await response.json();
-            // return data.data;
-        },
-        hydrateFallbackElement: <Loading subtitle={'Cargando panel médico...'}/>
-    },
-    {
-        path: '/administration',
-        element: <Administration/>
-    }
+                    path: '/administration/rol',
+                    element: <RolAdmin/>
+                },
+                {
+                    path: '/administration/test',
+                    element: <RolesPermisos/>
+                },
+                {
+                    path: '/administration/permission',
+                    element: <Permision/>
+                }
         ]
     },
     {

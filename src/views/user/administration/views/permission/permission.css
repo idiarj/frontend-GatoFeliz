@@ -1,0 +1,130 @@
+
+.permision-root {
+  width: 100%;
+  min-height: 100vh;
+  background: #f7f8fa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: -50px;
+}
+
+.permision-back {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 30px;
+  margin-left: 0;
+  align-self: flex-start;
+}
+.permision-back-arrow {
+  color: #ff8c2b;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-right: 8px;
+}
+.permision-back-text {
+  color: #ff8c2b;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.permision-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px 0 rgba(255, 140, 43, 0.08);
+  padding: 40px 48px;
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.permision-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 28px;
+  text-align: center;
+  color: #222;
+}
+
+.permision-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.permision-label {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+
+.permision-select {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.permision-permisos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.permision-permisos-list {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+.permision-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1rem;
+  color: #444;
+  font-weight: 500;
+  cursor: pointer;
+}
+.permision-checkbox-label input[type="checkbox"] {
+  accent-color: #ff8c2b;
+  width: 18px;
+  height: 18px;
+}
+
+.permision-actions {
+  display: flex;
+  gap: 18px;
+  margin-top: 18px;
+  justify-content: center;
+}
+.permision-btn {
+  padding: 10px 28px;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.permision-btn.reset {
+  background: #fff9cc;
+  color: #ff8c2b;
+  border: 1px solid #ffe999;
+}
+.permision-btn.reset:hover {
+  background: #ffe999;
+}
+.permision-btn.save {
+  background: #3498db;
+  color: #fff;
+}
+.permision-btn.save:hover {
+  background: #217dbb;
+}

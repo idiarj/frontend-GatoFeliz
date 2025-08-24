@@ -1,0 +1,43 @@
+
+.administration-container {
+	width: 100%;
+	min-height: 100vh;
+}
+
+.admin-btn {
+	width: 700px;
+	max-width: 90vw;
+	height: 100px;
+	border: none;
+	border-radius: 50px;
+	font-size: 2rem;
+	font-weight: bold;
+	box-shadow: 0 4px 24px 0 rgba(255, 140, 43, 0.08);
+	margin: 0 auto;
+	transition: transform 0.2s, box-shadow 0.2s;
+	cursor: pointer;
+	outline: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.admin-btn-yellow {
+	background: #fff9cc;
+	color: #ff8c2b;
+}
+
+.admin-btn-orange {
+	background: #ffbb85;
+	color: #ff8c2b;
+}
+
+.admin-btn-blue {
+	background: #e6eaf6;
+	color: #3498db;
+}
+
+.admin-btn:hover {
+	transform: scale(1.04);
+	box-shadow: 0 8px 32px 0 rgba(255, 140, 43, 0.16);
+}
