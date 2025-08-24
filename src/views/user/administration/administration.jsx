@@ -2,12 +2,11 @@
 import React, { useState } from "react";
 import "./administration.css";
 
-// Datos de prueba para roles y permisos
 const rolesData = [
 	{
 		id: 1,
 		nombre: "Usuario",
-		permisos: ["Panel Médico"]
+		permisos: ["Panel Adopciones"]
 	},
 	{
 		id: 2,
@@ -21,7 +20,6 @@ const rolesData = [
 	}
 ];
 
-// Datos de prueba para solicitudes
 const solicitudesData = [
 	{
 		id: 1,
