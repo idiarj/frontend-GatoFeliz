@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { fetchInstance } from "../../../utils/Fetch";
+import { createRequest } from "../../../api/Requests.js";
+import { deleteCat, postCat } from "../../../api/Cats.js";
 import { useLoaderData } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard"
-
 import "./adoption.css";
 
 
@@ -24,46 +24,32 @@ const Adoptions = () => {
   //   cat.name.toLowerCase().includes(search.toLowerCase())
   // );
 
-    const handleRequest = async (cat)=>{
-      try {
-        console.table(cat);
-        const response = await fetchInstance.post({
-          endpoint: "/request-cat?type=adopt",
-          body: { id_animal: cat.id_animal },
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include'
-        });
-        console.table(response);
-        console.log("Request successful:", response.ok);
-      } catch (error) {
-        console.error("Error handling request:", error);
-      }
-    }
-
-    const onDelete = async (id) => {
-      try {
-        await fetchInstance.delete({
-          endpoint: `/animal/${id}`
-        });
-        setCats((prevCats) => prevCats.filter((cat) => cat.id_animal !== id));
-      } catch (error) {
-        console.error("Error deleting cat:", error);
-      }
-    };
-
-    const onSubmit = async (data) => {
+  const handleRequest = async (cat)=>{
     try {
-      const response = await fetchInstance.postMultipart({
-        endpoint: "/animal",
-        body: data,
-      });
-      console.log("Response:", response.data);
-      const catData = await response.json();
-      setCats((prevCats) => {
-        console.log("Previous cats:", prevCats);
-        console.log("New cat data:", catData);
-        return [...prevCats, catData.data];
-      });
+      console.table(cat);
+      const data = await createRequest({ id_animal: cat.id_animal });
+      console.table(data);
+      if(!data.success){
+        console.error('Error al enviar la solicitud de apadrinamiento:', data.errorMsg);
+      }
+    } catch (error) {
+      console.error("Error handling request:", error);
+    }
+  }
+
+  const onDelete = async (id) => {
+    try {
+      await deleteCat(id);
+      setCats((prevCats) => prevCats.filter((cat) => cat.id_animal !== id));
+    } catch (error) {
+      console.error("Error deleting cat:", error);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      const catData = await postCat(data);
+      setCats((prevCats) => [...prevCats, catData]);
 
       return catData;
     } catch (error) {
@@ -73,12 +59,6 @@ const Adoptions = () => {
   }
 
   return (
-    // <div className="adoption-container">
-    //   {/* <Head title="Adopciones" showSearch={true} onSearch={() => {}} />
-    //   <Menu /> */}
-   
-    // </div>
-
        <div className="adoption-content">
         <div className="adoption-info">
           La manera de adoptar es enviando una solicitud o visitando directamente la fundación.<br />

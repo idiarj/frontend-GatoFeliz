@@ -1,6 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { fetchInstance } from "./utils/Fetch.js";
+import { fetchAllCats, fetchAdoptableCats } from "./api/Cats.js";
+import { fetchRequestData } from "./api/Requests.js";
 import { delay } from "./utils/delay.js";
+
+//Views
 import Login from './views/auth/login/login.jsx';
 import Register from './views/auth/register/register.jsx';
 import RecoverPassword from './views/auth/recoverPassword/recoverPassword.jsx';
@@ -72,33 +75,20 @@ export const router = createBrowserRouter([
             {
                 path: '/adoption',
                 element: <Adoptions/>,
-                loader: async () => {
-                    await delay(1000);
-                    const response = await fetchInstance.get({ endpoint: '/animal?adoptable=true',  headers: { 'Content-Type': 'application/json' } });
-                    const data = await response.json();
-                    console.table(data);
-                    return data.data;
-                },
+                loader: fetchAdoptableCats,
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos adoptables...'} compact/></div>
             },
             {
                 path: '/apadrinar',
                 element: <Sponsor/>,
-                loader: async () => {
-                    const response = await fetchInstance.get({ endpoint: '/animal?adoptable=false',  headers: { 'Content-Type': 'application/json' } });
-                    const data = await response.json();
-                    //data.data.forEach(cat=> console.table(cat))
-                    return data.data;
-                },
+                loader: fetchAllCats,
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>
             },
             {
                 path: '/medical',
                 element: <MedicalPanel/>,
-                loader: async () => {
-                    // const response = await fetchInstance.get({ endpoint: '/medical', headers: { 'Content-Type': 'application/json' } });
-                    // const data = await response.json();
-                    // return data.data;
+                loader: async ()=>{
+                    await delay(800);
                 },
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando panel medico...'} compact/></div>
             },
@@ -109,16 +99,7 @@ export const router = createBrowserRouter([
             {
                 path: '/administration/request',
                 element: <Request/>,
-                loader: async ()=>{
-                    const response = await fetchInstance.get({
-                        endpoint: '/request-cat/pending',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
-                    })
-                    const { data } = await response.json();
-                    return data;
-                },
+                loader: fetchRequestData,
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando solicitudes...'} compact/></div>
             },
                 {

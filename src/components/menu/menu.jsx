@@ -1,31 +1,30 @@
 import { useState } from 'react';
-import { FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaStethoscope, FaUserShield } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { fetchInstance } from '../../utils/Fetch';
 import { useUser } from '../../hooks/useUser';
+import { logout } from '../../api/Auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaStethoscope, FaUserShield } from 'react-icons/fa';
 import './menu.css';
 
 
-const logout = async (setUser, navigate) => {
-    // Aquí puedes manejar el cierre de sesión, por ejemplo, limpiando el estado del usuario
-      console.log('Cerrar sesión');
+const handleLogout = async (setUser, navigate) => {
+  try {
+          console.log('Cerrar sesión');
       // Redirigir a la página de inicio o login
-      const response = await fetchInstance.post({
-        endpoint: '/auth/logout',
-        credentials: 'include'
-      });
-      console.log('Respuesta del servidor:', response);
-      const data = await response.json();
-      console.log('Datos recibidos:', data);
-      if (response.ok) {
+      const data = await logout();
+      if (data.success) {
         console.log('Sesión cerrada');
         setUser(null); // Limpiar el estado del usuario
         // Redirigir a la página de inicio o login
         navigate('/auth/login');
       } else {
-        console.error('Error al cerrar sesión', );
+        console.error('Error al cerrar sesión', data.errorMsg);
       }
-    }
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+  }
+    // Aquí puedes manejar el cierre de sesión, por ejemplo, limpiando el estado del usuario
+
+}
 
 const menuOptions = [
   { label: 'Inicio', icon: <FaHome />, path: '/dashboard', session: 'indiferent'},
@@ -37,7 +36,7 @@ const menuOptions = [
   { label: 'Apadrinar', icon: <FaPaw />, path: '/apadrinar', session: 'indiferent' },
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions', session: 'indiferent' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos', session: true },
-  {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/auth/login', onClick: logout, session: true},
+  {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/auth/login', onClick: handleLogout, session: true},
   { label: 'Panel Medico', icon: <FaStethoscope />, path: '/medical', session: true, needed_profiles: [1, 2]},
   {label: 'Administración', icon: <FaUserShield />, path: '/administration', session: true, needed_profiles: [1]}
 ];

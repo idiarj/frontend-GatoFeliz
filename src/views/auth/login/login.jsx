@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { FaUserCircle, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { playSoundOnce, stopAllPurring } from '../../../utils/audio';
-import { fetchInstance } from '../../../utils/Fetch';
+import { login } from '../../../api/Auth';
 import { useNavigate, Link } from 'react-router-dom';
 import { useUser } from '../../../hooks/useUser';
 import logo from '../../../assets/images/logo.png';
@@ -43,17 +43,9 @@ const Login = () => {
     setError(null);
     e.preventDefault();
     try {
-      const response = await fetchInstance.post({
-        endpoint: '/auth/login',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: formData,
-        credentials: 'include'
-      });
-      const data = await response.json();
+      const data = await login(formData);
       console.log("Login response:", data);
-      if (!response.ok && !data.success) {
+      if (!data.success) {
         setError(data.errorMsg || "Error de inicio de sesión");
         return;
       }

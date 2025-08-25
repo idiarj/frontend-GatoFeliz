@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { playSoundOnce, stopAllPurring } from "../../../utils/audio";
-import { fetchInstance } from "../../../utils/Fetch";
+import { forgotPassword } from "../../../api/Auth";
 import gatosesion from "../../../assets/images/gatosesion.png";
 import gatosesiondespierto from "../../../assets/images/gatosesiondespierto.png";
 import purring from "../../../assets/audios/purrings.mp3";
 import recoverPasswordImg from "../../../assets/images/recoverPassword.png";
-import "../../../App.css";
-import "../../../index.css";
 import "./recoverPassword.css";
 
 const RecoverPassword = () => {
@@ -21,16 +19,11 @@ const RecoverPassword = () => {
     setError(null);
     setSuccess("");
     try {
-      const response = await fetchInstance.post({
-        endpoint: '/auth/forgot-password',
-        body: { email_usuario: email },
-        headers: { 'Content-Type': 'application/json' },
-      });
-      const data = await response.json();
+      const data = await forgotPassword({ email_usuario: email });
       console.log("Email submitted:", email);
       console.log("Response data:", data);
-
-      if (!response.ok && !data.success) {
+      
+      if (!data.success) {
         setError(data.errorMsg || "Error al enviar el correo");
       } else {
         setSuccess("¡Listo! Te hemos enviado un maullido con instrucciones para recuperar tu contraseña. 🐾");

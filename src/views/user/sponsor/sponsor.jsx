@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { fetchInstance } from "../../../utils/Fetch";
 import { useLoaderData } from "react-router-dom";
+import { postCat, deleteCat } from "../../../api/Cats.js";
+import { createRequest } from "../../../api/Requests.js";
 import { useUser } from "../../../hooks/useUser.jsx";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard.jsx";
@@ -20,14 +21,11 @@ const Sponsor =  () => {
   const handleRequest = async (cat)=>{
     try {
       console.table(cat);
-      const response = await fetchInstance.post({
-        endpoint: "/request-cat?type=sponsor",
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: { id_animal: cat.id_animal }
-      });
-      console.table(response);
-      console.log("Request successful:", response.ok);
+      const data = await createRequest({ id_animal: cat.id_animal });
+      console.table(data);
+      if(!data.success){
+        console.error('Error al enviar la solicitud de apadrinamiento:', data.errorMsg);
+      }
     } catch (error) {
       console.error("Error handling request:", error);
     }
@@ -35,9 +33,7 @@ const Sponsor =  () => {
 
   const onDelete = async (id) => {
     try {
-      await fetchInstance.delete({
-        endpoint: `/animal/${id}`
-      });
+      await deleteCat(id);
       setCats((prevCats) => prevCats.filter((cat) => cat.id_animal !== id));
     } catch (error) {
       console.error("Error deleting cat:", error);
@@ -46,12 +42,7 @@ const Sponsor =  () => {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetchInstance.postMultipart({
-        endpoint: "/animal",
-        body: data,
-      });
-      console.log("Response:", response.data);
-      const catData = await response.json();
+      const catData = await postCat(data);
       setCats((prevCats) => [...prevCats, catData]);
 
       return catData;

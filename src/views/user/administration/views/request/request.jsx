@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { fetchInstance } from "../../../../../utils/Fetch";
+import { acceptRequest, rejectRequest } from "../../../../../api/Requests";
 import { useLoaderData } from "react-router-dom";
 import RequestTable from "../../../../../components/requestTable/RequestTable";
 import "./request.css";
@@ -12,23 +12,18 @@ import "./request.css";
 // ];
 
 const Request = () => {
-	const data = useLoaderData();
-	console.log("Datos cargados:", data);
+	const { allRequestData, pendingRequestData } = useLoaderData();
+	console.log("Datos de las solicitudes pendientes:", pendingRequestData);
+	console.log("Datos de todas las solicitudes:", allRequestData);
 	const [page, setPage] = useState(1);
 	const rowsPerPage = 4;
-	const totalPages = Math.ceil(data.length / rowsPerPage);
+	const totalPages = Math.ceil(pendingRequestData.data.length / rowsPerPage);
 
 	const handleAccept = async (id) => {
 		alert(`Solicitud de ${id} aceptada`);
 		try {
-			const response = await fetchInstance.patch({
-				endpoint: `/request-cat/accept/${id}`,
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-			const { data } = await response.json();
-			if (response.ok) {
+			const data = await acceptRequest(id);
+			if (data.success) {
 				console.log("Solicitud aceptada con exito:", data);
 			} else {
 				console.error("Error al aceptar la solicitud:", data);
@@ -37,17 +32,12 @@ const Request = () => {
 			console.error("Error al aceptar la solicitud:", error);
 		}
 	};
+
 	const handleReject = async (id) => {
 		alert(`Solicitud de ${id} rechazada`);
 		try {
-			const response = await fetchInstance.patch({
-				endpoint: `/request-cat/reject/${id}`,
-				headers: {
-					'Content-Type': 'application/json'
-				}
-			});
-			const { data } = await response.json();
-			if (response.ok) {
+			const data = await rejectRequest(id);
+			if (data.success) {
 				console.log("Solicitud rechazada con exito:", data);
 			} else {
 				console.error("Error al rechazar la solicitud:", data);
@@ -60,7 +50,7 @@ const Request = () => {
 	const handlePrev = () => setPage((p) => Math.max(1, p - 1));
 	const handleNext = () => setPage((p) => Math.min(totalPages, p + 1));
 
-	const solicitudes = data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+	const solicitudes = pendingRequestData.data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
 	return (
 			<div className="request-root">
