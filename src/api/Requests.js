@@ -7,6 +7,7 @@ export const fetchAllRequests = async () => {
   return fetchInstance.get({
     endpoint: "/request-cat",
     headers: { "Content-Type": "application/json" },
+    credentials: 'include'
   });
 };
 
@@ -16,6 +17,7 @@ export const fetchPendingRequests = async ()=>{
     return fetchInstance.get({
         endpoint: "/request-cat/pending",
         headers: { "Content-Type": "application/json" },
+        credentials: 'include'
     });
 
 }
@@ -32,12 +34,13 @@ export const fetchRequestData = async ()=>{
     return { allRequestData, pendingRequestData };
 }
 
-export const createRequest = async (requestData) => {
+export const createRequest = async (requestData, type) => {
     await delay(500);
     const response = await fetchInstance.post({
-        endpoint: "/request-cat",
+        endpoint: `/request-cat?type=${type}`,
         headers: { "Content-Type": "application/json" },
-        body: requestData
+        body: requestData,
+        credentials: 'include'
     });
     const data = await response.json();
     return data;
@@ -48,6 +51,7 @@ export const acceptRequest = async (id) => {
   const response = await fetchInstance.patch({
     endpoint: `/request-cat/accept/${id}`,
     headers: { "Content-Type": "application/json" },
+    credentials: 'include'
   });
   return await response.json();
 };
@@ -57,6 +61,7 @@ export const rejectRequest = async (id) => {
   const response = await fetchInstance.patch({
     endpoint: `/request-cat/reject/${id}`,
     headers: { "Content-Type": "application/json" },
+    credentials: 'include'
   });
   return await response.json();
 };

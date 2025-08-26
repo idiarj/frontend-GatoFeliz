@@ -21,10 +21,12 @@ export const fetchAdoptableCats = async () => {
 };
 
 export const postCat = async (catData) => {
-  await delay(500);
+  // await delay(500);
+  console.table(catData)
   const response = await fetchInstance.postMultipart({
     endpoint: "/animal",
     body: catData,
+    credentials: 'include'
   });
   return await response.json();
 };
@@ -33,6 +35,7 @@ export const deleteCat = async (catId) => {
   await delay(500);
   const response = await fetchInstance.delete({
     endpoint: `/animal/${catId}`,
+    credentials:'include'
   });
   return await response.json();
 };

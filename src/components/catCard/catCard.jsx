@@ -109,8 +109,8 @@ const CatCard = ({
       {showAuthModal && (
         <Modal onClose={handleCloseModal}>
           <h3 style={{marginTop: '40px'}}>Debes iniciar sesión para enviar una solicitud</h3>
-          <div style={{ position: 'absolute', display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: 24, justifySelf: 'center', bottom: '50px'}}>
-            <Link to="/auth/login" style={{ background: '#f37021', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer', textDecoration: 'none', display: 'inline-block' }}>Iniciar sesión</Link>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: 24, justifySelf: 'center', bottom: '50px'}}>
+            <Link to="/auth/login" style={{  background: '#f37021', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer', textDecoration: 'none', display: 'inline-block' }}>Iniciar sesión</Link>
             <Link to="/auth/register" style={{ background: '#ccc', color: '#333', border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer', textDecoration: 'none', display: 'inline-block' }}>Registrarse</Link>
           </div>
         </Modal>

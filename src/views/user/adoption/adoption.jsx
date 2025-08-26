@@ -27,7 +27,7 @@ const Adoptions = () => {
   const handleRequest = async (cat)=>{
     try {
       console.table(cat);
-      const data = await createRequest({ id_animal: cat.id_animal });
+      const data = await createRequest({ id_animal: cat.id_animal }, "adopt");
       console.table(data);
       if(!data.success){
         console.error('Error al enviar la solicitud de apadrinamiento:', data.errorMsg);
@@ -48,10 +48,11 @@ const Adoptions = () => {
 
   const onSubmit = async (data) => {
     try {
+      console.table(data);
       const catData = await postCat(data);
-      setCats((prevCats) => [...prevCats, catData]);
+      setCats((prevCats) => [...prevCats, catData.data]);
 
-      return catData;
+      // return catData;
     } catch (error) {
       console.error("Error submitting form:", error);
       throw error;
