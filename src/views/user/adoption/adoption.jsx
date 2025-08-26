@@ -14,7 +14,7 @@ const Adoptions = () => {
   const testing = import.meta.env.VITE_TESTING === 'true';
   //const [search, setSearch] = useState("");
 
-  const data = useLoaderData();
+  const {data} = useLoaderData();
   useEffect(() => {
     setCats(data);
   }, [data]);

@@ -12,7 +12,7 @@ const Sponsor =  () => {
   const testing = import.meta.env.VITE_TESTING === 'true';
   const { user } = useUser();
   const [cats, setCats] = useState([]);
-  const data  = useLoaderData();
+  const {data}  = useLoaderData();
   //console.log(data)
   useEffect(() => {
     setCats(data);
