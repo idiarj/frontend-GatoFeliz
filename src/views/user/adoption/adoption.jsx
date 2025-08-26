@@ -12,8 +12,7 @@ const Adoptions = () => {
   const [cats, setCats] = useState([]);
   const { user } = useUser();
   const testing = import.meta.env.VITE_TESTING === 'true';
-  //const [search, setSearch] = useState("");
-
+  console.log(cats)
   const {data} = useLoaderData();
   useEffect(() => {
     setCats(data);
@@ -39,8 +38,8 @@ const Adoptions = () => {
 
   const onDelete = async (id) => {
     try {
+      setCats((prevCats = []) => prevCats.filter((cat) => cat.id_animal !== id));
       await deleteCat(id);
-      setCats((prevCats) => prevCats.filter((cat) => cat.id_animal !== id));
     } catch (error) {
       console.error("Error deleting cat:", error);
     }
@@ -50,7 +49,8 @@ const Adoptions = () => {
     try {
       console.table(data);
       const catData = await postCat(data);
-      setCats((prevCats) => [...prevCats, catData.data]);
+      console.table(catData.data);
+      setCats((prevCats) => [...(prevCats || []), catData.data]);
 
       // return catData;
     } catch (error) {
@@ -69,7 +69,12 @@ const Adoptions = () => {
           {/* {filteredCats.map((cat) => (
             <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
           ))} */}
-          {cats && (
+          {/* {cats && cats.length === 0 && (
+            <div className="no-cats-message">
+              No hay gatos disponibles para adopción en este momento.
+            </div>
+          )} */}
+          {cats && cats.length > 0 && (
             cats.map((cat)=>(
               <CatCard
                 key={cat.id_animal}

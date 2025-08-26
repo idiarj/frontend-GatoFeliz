@@ -16,7 +16,7 @@ const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
     edad_animal: "",
     genero_animal: "",
     peso_animal: "",
-    adoptable: !fromSponsor
+    adoptable_animal: !fromSponsor
   });
 
 
@@ -68,7 +68,7 @@ const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
 
       <div className="add-card-image-preview">
         {imagePreview ? (
-          <img src={imagePreview} alt="preview" className="image-preview" style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '12px' }} />
+          <img src={imagePreview} alt="preview" className="image-preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
         ) : (
           <button
             className="add-card-image-btn"

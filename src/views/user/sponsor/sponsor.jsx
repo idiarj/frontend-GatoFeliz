@@ -33,8 +33,8 @@ const Sponsor =  () => {
 
   const onDelete = async (id) => {
     try {
-      await deleteCat(id);
       setCats((prevCats) => prevCats.filter((cat) => cat.id_animal !== id));
+      await deleteCat(id);
     } catch (error) {
       console.error("Error deleting cat:", error);
     }
@@ -44,7 +44,7 @@ const Sponsor =  () => {
     try {
       const catData = await postCat(data);
       console.table(catData.data);
-      setCats((prevCats) => [...prevCats, catData.data]);
+      setCats((prevCats) => [...(prevCats || []), catData.data]);
 
       return catData/data;
     } catch (error) {
@@ -68,7 +68,7 @@ const Sponsor =  () => {
                 age={cat.edad_animal}
                 image={cat.ruta_imagen_an}
                 onRequest={() => handleRequest(cat)}
-                onDelete={onDelete}
+                onDelete={() => onDelete(cat.id_animal)}
                 buttonLabel="ENVIAR SOLICITUD"
                 boxShadow={true}
                 fromSponsor={true}
@@ -77,7 +77,7 @@ const Sponsor =  () => {
           )}
           {
             (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
-              <AddCatCard onSubmit={onSubmit} uploading={false} />
+              <AddCatCard onSubmit={onSubmit} uploading={false} fromSponsor={true}/>
             )
           }
         </div>

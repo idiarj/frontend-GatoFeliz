@@ -15,7 +15,7 @@ const Request = () => {
 	const { allRequestData, pendingRequestData } = useLoaderData();
 	console.log("Datos de las solicitudes pendientes:", pendingRequestData);
 	console.log("Datos de todas las solicitudes:", allRequestData);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(0);
 	const rowsPerPage = 4;
 	const totalPages = Math.ceil(pendingRequestData.data.length / rowsPerPage);
 
