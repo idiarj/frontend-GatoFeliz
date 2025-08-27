@@ -56,17 +56,15 @@
   object-fit: contain;
   border: none;
   outline: none;
-  box-shadow: none;
   transition: transform .25s ease;
 }
 
 .profile-img:hover{
   transform: translateY(-2px) scale(1.02);
   outline-color: rgba(242,108,31,.35);
-  box-shadow: 0 14px 28px rgba(0,0,0,.12);
 }
 
-/* Popover de opciones de imagen */
+
 .profile-img-options{
   display: grid;
   grid-template-columns: repeat(6, 40px);
@@ -250,11 +248,16 @@
 }
 
 /* ====== Estados de foco accesibles ====== */
+
+.profile-action-btn:focus,
 .profile-action-btn:focus-visible,
+.save-btn:focus,
 .save-btn:focus-visible,
+.cancel-btn:focus,
 .cancel-btn:focus-visible,
-.profile-info-item input:focus-visible{
-  outline: none;
+.profile-info-item input:focus,
+.profile-info-item input:focus-visible {
+  outline: none !important;
   box-shadow: 0 0 0 4px var(--ring);
 }
 

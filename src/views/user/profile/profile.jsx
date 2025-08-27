@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FiEdit } from "react-icons/fi";
+import { FaUserCircle, FaEnvelope, FaPhone, FaLock, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import "./profile.css";
 import tabby from "../../../assets/perfil/tabby.png";
@@ -7,6 +9,8 @@ import carey from "../../../assets/perfil/carey.png";
 import amarillo from "../../../assets/perfil/amarillo.png";
 import siames from "../../../assets/perfil/siames.png";
 import blanco from "../../../assets/perfil/blanco.png";
+import negro from "../../../assets/perfil/negro.png";
+
 
 /** Si luego conectas tu UserContext, solo reemplaza mockUser y updateUser */
 const profileImages = [
@@ -15,7 +19,8 @@ const profileImages = [
   { key: "carey.png", src: carey, alt: "Gato Carey" },
   { key: "amarillo.png", src: amarillo, alt: "Gato Amarillo" },
   { key: "siames.png", src: siames, alt: "Gato Siamés" },
-  { key: "blanco.png", src: blanco, alt: "Gato Blanco" }
+  { key: "blanco.png", src: blanco, alt: "Gato Blanco" },
+  { key: "negro.png", src: negro, alt: "Gato Negro" }
 ];
 
 // Datos de ejemplo para pruebas
@@ -38,7 +43,6 @@ const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [showImgOptions, setShowImgOptions] = useState(false);
   const [formData, setFormData] = useState({
-    name: user.name,
     username: user.username,
     email: user.email,
     phone: user.phone,
@@ -84,126 +88,92 @@ const Profile = () => {
 
   return (
     <div className="profile-main-container" role="main">
-      <div className="profile-content">
+  <div className="profile-content">
         {/* ===== Columna Izquierda (Perfil) ===== */}
         <section className="profile-left" aria-labelledby="profile-heading">
           {/* Cabecera del perfil */}
           <header className="profile-header">
-            <div className="profile-avatar-wrap" style={{ position: "relative", display: "inline-block" }}>
-              <button
-                type="button"
-                className="avatar-button"
-                aria-label={editMode ? "Cambiar foto de perfil" : "Foto de perfil"}
-                onClick={() => editMode && setShowImgOptions((v) => !v)}
-                style={{ background: "transparent", border: 0, padding: 0, cursor: editMode ? "pointer" : "default" }}
-              >
-                <img
-                  src={currentImg?.src}
-                  alt={currentImg?.alt || "Foto de perfil"}
-                  className="profile-img"
-                />
-              </button>
-
-                        {/* Cabecera del perfil reorganizada */}
-              {editMode && (
+            <div className="profile-avatar-row" style={{ display: "flex", alignItems: "center", gap: "22px" }}>
+              <div className="profile-avatar-wrap" style={{ position: "relative", display: "inline-block" }}>
                 <button
                   type="button"
-                  className="avatar-fab"
-                  title="Cambiar foto"
-                  aria-haspopup="listbox"
-                  aria-expanded={showImgOptions}
-                  onClick={() => setShowImgOptions((v) => !v)}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                    background: "#fff",
-                    borderRadius: "50%",
-                    padding: 6,
-                    border: "1px solid #ddd",
-                    cursor: "pointer",
-                    boxShadow: "0 6px 14px rgba(0,0,0,.12)"
-                  }}
+                  className="avatar-button"
+                  aria-label={editMode ? "Cambiar foto de perfil" : "Foto de perfil"}
+                  onClick={() => editMode && setShowImgOptions((v) => !v)}
+                  style={{ background: "transparent", border: 0, padding: 0, cursor: editMode ? "pointer" : "default" }}
                 >
-                  ✏️
+                  <img
+                    src={currentImg?.src}
+                    alt={currentImg?.alt || "Foto de perfil"}
+                    className="profile-img"
+                  />
                 </button>
-              )}
 
-              {/* Popover selección de imagen */}
-              {editMode && showImgOptions && (
-                <div
-                  className="profile-img-options"
-                  role="listbox"
-                  aria-label="Seleccionar imagen de perfil"
-                  style={{ position: "absolute", top: "100%", left: 0 }}
-                >
-                  {profileImages.map((img) => {
-                    const selected = formData.profileImg === img.key;
-                    return (
-                      <button
-                        key={img.key}
-                        type="button"
-                        role="option"
-                        aria-selected={selected}
-                        tabIndex={0}
-                        className={`profile-img-option${selected ? " selected" : ""}`}
-                        onClick={() => handleImgChange(img.key)}
-                        title={img.alt}
-                        style={{ border: 0, padding: 0, background: "transparent" }}
-                      >
-                        <img
-                          src={img.src}
-                          alt={img.alt}
-                          style={{ width: 40, height: 40, borderRadius: "50%" }}
-                        />
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
+                {editMode && (
+                  <button
+                    type="button"
+                    className="avatar-fab"
+                    title="Cambiar foto"
+                    aria-haspopup="listbox"
+                    aria-expanded={showImgOptions}
+                    onClick={() => setShowImgOptions((v) => !v)}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      right: -16,
+                      padding: 6,
+                      cursor: "pointer",
+                      background: "transparent",
+                      border: 0
+                    }}
+                  >
+                    <FiEdit size={24} color="#F26C1F" />
+                  </button>
+                )}
+
+                {/* Popover selección de imagen */}
+                {editMode && showImgOptions && (
+                  <div
+                    className="profile-img-options"
+                    role="listbox"
+                    aria-label="Seleccionar imagen de perfil"
+                    style={{ position: "absolute", top: "100%", left: 0 }}
+                  >
+                    {profileImages.map((img) => {
+                      const selected = formData.profileImg === img.key;
+                      return (
+                        <button
+                          key={img.key}
+                          type="button"
+                          role="option"
+                          aria-selected={selected}
+                          tabIndex={0}
+                          className={`profile-img-option${selected ? " selected" : ""}`}
+                          onClick={() => handleImgChange(img.key)}
+                          title={img.alt}
+                          style={{ border: 0, padding: 0, background: "transparent" }}
+                        >
+                          <img
+                            src={img.src}
+                            alt={img.alt}
+                            style={{ width: 40, height: 40, borderRadius: "50%" }}
+                          />
+                        </button>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+              {/* Nombre eliminado, solo se muestra el username */}
+              <span style={{ fontSize: "1.5rem", fontWeight: 800, color: "#F26C1F" }}>@{formData.username}</span>
             </div>
-
-<h2 id="profile-heading" className="profile-title" style={{ color: "#F26C1F", marginTop: 12 }}>
-  {editMode ? (
-    <>
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        aria-label="Nombre"
-        className="profile-title-input"
-        style={{ fontSize: "1.5rem", fontWeight: 800, border: "none", outline: "none" }}
-      />
-    </>
-  ) : (
-    <>
-      {formData.name}
-    </>
-  )}
-</h2>
           </header>
 
           {/* Información / Form */}
               <form className="profile-info-card" onSubmit={handleSave} noValidate>
-                {/* Nombre y usuario en la misma línea */}
+                {/* Solo usuario, nombre eliminado */}
                 <div className="profile-info-item" style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <span aria-hidden="true">👤</span>
-                  <div style={{ flex: 1 }}>
-                    <div className="profile-label">Nombre</div>
-                    {editMode ? (
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        autoComplete="name"
-                      />
-                    ) : (
-                      <div>{formData.name}</div>
-                    )}
-                  </div>
-                  <span aria-hidden="true">🏷️</span>
+                  <FaUserCircle className="profile-icon user" style={{ fontSize: 22, color: "#F26C1F" }} />
                   <div style={{ flex: 1 }}>
                     <div className="profile-label">Usuario</div>
                     {editMode ? (
@@ -222,7 +192,7 @@ const Profile = () => {
 
                 {/* Correo y teléfono en la misma línea */}
                 <div className="profile-info-item" style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <span aria-hidden="true">📧</span>
+                  <FaEnvelope className="profile-icon email" style={{ fontSize: 22, color: "#F26C1F" }} />
                   <div style={{ flex: 1 }}>
                     <div className="profile-label">Correo</div>
                     {editMode ? (
@@ -237,7 +207,7 @@ const Profile = () => {
                       <div>{formData.email}</div>
                     )}
                   </div>
-                  <span aria-hidden="true" style={{ marginLeft: 16 }}>📞</span>
+                  <FaPhone className="profile-icon phone" style={{ fontSize: 22, color: "#F26C1F", marginLeft: 16 }} />
                   <div style={{ flex: 1 }}>
                     <div className="profile-label">Teléfono</div>
                     {editMode ? (
@@ -273,15 +243,15 @@ const Profile = () => {
             <div className="profile-actions-title">ACCIONES RÁPIDAS</div>
 
             <button className="profile-action-btn" type="button" onClick={handleEdit}>
-              ✏️ Editar Perfil
+                <FiEdit className="profile-icon edit" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Editar Perfil
             </button>
 
             <button className="profile-action-btn" type="button" onClick={goToRecoverPassword}>
-              🔒 Cambiar Contraseña
+              <FaLock className="profile-icon lock" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Cambiar Contraseña
             </button>
 
             <button className="profile-action-btn" type="button" onClick={() => navigate("/logout")}> 
-              🚪 Cerrar Sesión
+              <FaSignOutAlt className="profile-icon logout" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Cerrar Sesión
             </button>
           </div>
         </aside>
