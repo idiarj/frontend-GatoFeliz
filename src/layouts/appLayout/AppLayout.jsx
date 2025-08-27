@@ -41,8 +41,6 @@ function AppLayout() {
           return 'Administrar Permisos';
         case '/administration/rol':
           return 'Administrar Roles';
-      case '/administration/test':
-        return 'Administrar Test';
       default:
         return 'Gato Feliz';
     }

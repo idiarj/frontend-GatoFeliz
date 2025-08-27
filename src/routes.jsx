@@ -17,7 +17,6 @@ import Administration from './views/user/administration/administration.jsx';
 import Request from './views/user/administration/views/request/request.jsx';
 import Permision from './views/user/administration/views/permission/permission.jsx';
 import RolAdmin from './views/user/administration/views/rol/rol.jsx';
-import RolesPermisos from './views/user/administration/views/test/test.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 import NotFound from "./views/user/notFound/notFound.jsx";
 
@@ -113,10 +112,6 @@ export const router = createBrowserRouter([
                 {
                     path: '/administration/rol',
                     element: <RolAdmin/>
-                },
-                {
-                    path: '/administration/test',
-                    element: <RolesPermisos/>
                 },
                 {
                     path: '/administration/permission',
