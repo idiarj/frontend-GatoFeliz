@@ -28,7 +28,8 @@ const handleLogout = async (setUser, navigate) => {
 
 const menuOptions = [
   { label: 'Inicio', icon: <FaHome />, path: '/dashboard', session: 'indiferent'},
-  { label: 'Iniciar Sesión', icon: <FaSignInAlt />, path: '/auth/login', session: false }, 
+  { label: 'Perfil', icon: <FaUserPlus />, path: '/profile', session: true },
+  { label: 'Iniciar Sesion', icon: <FaSignInAlt />, path: '/auth/login', session: false }, 
   { label: 'Registrarse', icon: <FaUserPlus />, path: '/auth/register', session: false },
   { label: '¿Qué Hacemos?', icon: <FaQuestionCircle />, path: '/aboutUs', session: 'indiferent' },
   { label: 'Donaciones', icon: <FaDonate />, path: '/donations', session: 'indiferent' },
@@ -39,7 +40,7 @@ const menuOptions = [
   {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/auth/login', onClick: handleLogout, session: true},
   { label: 'Panel Medico', icon: <FaStethoscope />, path: '/medical', session: true, needed_profiles: [1, 2]},
   {label: 'Administración', icon: <FaUserShield />, path: '/administration', session: true, needed_profiles: [1]}
-];
+  ];
 
 const Menu = () => {
   const location = useLocation();

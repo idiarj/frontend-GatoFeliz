@@ -22,6 +22,7 @@ import Permision from './views/user/administration/views/permission/permission.j
 import RolAdmin from './views/user/administration/views/rol/rol.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 import NotFound from "./views/user/notFound/notFound.jsx";
+import Profile from './views/user/profile/profile.jsx';
 
 
 
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard',
                 element: <Dashboard/>
+            },
+            {
+                path: '/profile',
+                element: <Profile/>
             },
             {
                 path: '/aboutUs',
