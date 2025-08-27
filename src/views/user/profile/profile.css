@@ -9,6 +9,12 @@
   --muted: #6b7280;           /* texto secundario */
   --ring: rgba(242,108,31,.35); /* foco */
   --shadow: 0 12px 28px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);
+  --font-size-base: 1.18rem;
+  --font-size-lg: 1.45rem;
+  --font-size-title: 2.1rem;
+  --profile-img-size: 160px;
+  --profile-card-padding: 20px;
+  --profile-gap: 20px;
 }
 
 /* ====== Animaciones ====== */
@@ -28,31 +34,33 @@
   background: none;
   display: grid;
   place-items: start center;
-  padding: clamp(16px, 2vw, 28px);
+  padding: clamp(24px, 4vw, 48px);
+  margin-top: var(--profile-margin-top, -30px);
   color: var(--ink);
+  font-size: var(--font-size-base);
   animation: fadeInUp .5s ease both;
 }
 
 .profile-content{
-  width: min(1150px, 100%);
+  width: min(1400px, 100%);
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: clamp(16px, 3vw, 28px);
+  grid-template-columns: 1.35fr 1fr;
+  gap: var(--profile-gap);
   align-items: start;
 }
 
 /* ====== Columna izquierda (perfil) ====== */
 .profile-left{
   background: var(--card);
-  border-radius: 20px;
+  border-radius: 24px;
   box-shadow: var(--shadow);
-  padding: clamp(18px, 2.4vw, 28px);
+  padding: var(--profile-card-padding);
   animation: gentlePop .45s ease both;
 }
 
 .profile-img{
-  width: 124px;
-  height: 124px;
+  width: var(--profile-img-size);
+  height: var(--profile-img-size);
   object-fit: contain;
   border: none;
   outline: none;
@@ -67,19 +75,20 @@
 
 .profile-img-options{
   display: grid;
-  grid-template-columns: repeat(6, 40px);
-  gap: 6px;
-  padding: 10px;
+  grid-template-columns: repeat(7, 38px);
+  gap: 8px;
+  padding: 10px 0 10px 0;
+  min-width: 280px;
   background: #fff;
   border: 1px solid rgba(0,0,0,.06);
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: var(--shadow);
-  margin-top: 10px;
+  margin-top: 18px;
 }
 
 .profile-img-option{
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   object-fit: cover;
   transition: transform .18s ease, box-shadow .18s ease;
@@ -97,23 +106,24 @@
 
 /* Tarjeta con info */
 .profile-info-card{
-  margin-top: 14px;
+  margin-top: 24px;
   background: linear-gradient(180deg, #fff, rgba(255,255,255,.96));
   border: 1px solid rgba(0,0,0,.06);
-  border-radius: 16px;
+  border-radius: 20px;
   box-shadow: var(--shadow);
-  padding: clamp(14px, 2vw, 20px);
+  padding: clamp(16px, 2vw, 24px);
   display: grid;
   gap: 14px;
 }
 
 .profile-info-item{
   display: grid;
-  grid-template-columns: 28px 1fr;
+  grid-template-columns: 28px 1fr 120px;
   align-items: center;
-  gap: 10px;
-  padding: 10px 8px;
-  border-radius: 12px;
+  gap: 40px;
+  padding: 10px 8px 10px 10px;
+  border-radius: 16px;
+  font-size: 1.15em;
   transition: background .2s ease, transform .2s ease;
 }
 
@@ -123,13 +133,27 @@
 }
 
 .profile-label{
-  font-size: .78rem;
+  font-size: 1rem;
   letter-spacing: .3px;
   color: var(--muted);
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 /* Inputs en modo edición dentro de la tarjeta */
+/* Input de usuario más corto */
+/* Inputs cortos para usuario, correo y teléfono */
+.profile-info-item input[name="username"],
+.profile-info-item input[name="email"] {
+  width: 160px;
+  min-width: 80px;
+  max-width: 220px;
+}
+.profile-info-item input[name="phone"] {
+  width: 120px;
+  min-width: 70px;
+  max-width: 150px;
+}
+
 .profile-info-item input[type="text"],
 .profile-info-item input[type="email"]{
   width: 100%;
@@ -151,17 +175,18 @@
 /* Acciones de edición */
 .profile-edit-actions{
   display: flex;
-  gap: 10px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .save-btn,
-.cancel-btn{
+ .cancel-btn{
   appearance: none;
   border: none;
-  border-radius: 12px;
-  padding: 10px 14px;
+  border-radius: 14px;
+  padding: 14px 20px;
   font-weight: 600;
+  font-size: 1.08em;
   cursor: pointer;
   transition: transform .12s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
   box-shadow: 0 6px 16px rgba(0,0,0,.08);
@@ -192,16 +217,16 @@
 /* ====== Columna derecha (acciones) ====== */
 .profile-right{
   position: sticky;
-  top: 18px;
+  top: 32px;
   align-self: start;
 }
 
 .profile-actions-card{
   background: var(--card);
-  border-radius: 20px;
+  border-radius: 18px;
   border: 1px solid rgba(0,0,0,.06);
   box-shadow: var(--shadow);
-  padding: clamp(18px, 2.4vw, 26px);
+  padding: clamp(14px, 2vw, 20px);
   display: grid;
   gap: 12px;
   animation: gentlePop .5s .05s ease both;
@@ -209,11 +234,11 @@
 
 .profile-actions-title{
   font-weight: 800;
-  font-size: .82rem;
+  font-size: 1rem;
   letter-spacing: .6px;
-  color: var(--muted);
+  color: var(--brand);
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .profile-action-btn{
@@ -225,9 +250,10 @@
   background: #fff;
   color: var(--ink);
   border: 1px solid rgba(0,0,0,.1);
-  border-radius: 14px;
-  padding: 12px 14px;
+  border-radius: 12px;
+  padding: 10px 14px;
   font-weight: 600;
+  font-size: 0.98em;
   cursor: pointer;
   transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease, background-color .2s ease;
   box-shadow: 0 6px 16px rgba(0,0,0,.06);
@@ -242,8 +268,8 @@
 
 /* Título principal (h2) que ya pintas en inline con #F26C1F) */
 .profile-left h2{
-  margin: 12px 0 8px;
-  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  margin: 18px 0 12px;
+  font-size: var(--font-size-title);
   font-weight: 800;
 }
 
@@ -268,15 +294,16 @@
   }
   .profile-right{
     position: static;
+    top: 0;
   }
 }
 
 @media (max-width: 520px){
   .profile-img{
-    width: 108px;
-    height: 108px;
+    width: 88px;
+    height: 88px;
   }
   .profile-img-options{
-    grid-template-columns: repeat(5, 40px);
+    grid-template-columns: repeat(4, 40px);
   }
 }

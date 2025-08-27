@@ -10,6 +10,7 @@ import amarillo from "../../../assets/perfil/amarillo.png";
 import siames from "../../../assets/perfil/siames.png";
 import blanco from "../../../assets/perfil/blanco.png";
 import negro from "../../../assets/perfil/negro.png";
+import esterilizarImg from "../../../assets/images/esterilizar.png"
 
 
 /** Si luego conectas tu UserContext, solo reemplaza mockUser y updateUser */
@@ -36,7 +37,6 @@ const Profile = () => {
   // const { user, updateUser } = useContext(UserContext);
   const user = mockUser;
   const updateUser = (data) => {
-    // Aquí conectas tu update real (contexto/endpoint)
     console.log("Actualizar usuario:", data);
   };
 
@@ -84,7 +84,7 @@ const Profile = () => {
     setShowImgOptions(false);
   };
 
-  const goToRecoverPassword = () => navigate("/recoverpassword");
+const goToRecoverPassword = () => navigate("/auth/recoverPassword");
 
   return (
     <div className="profile-main-container" role="main">
@@ -170,9 +170,11 @@ const Profile = () => {
           </header>
 
           {/* Información / Form */}
+
               <form className="profile-info-card" onSubmit={handleSave} noValidate>
-                {/* Solo usuario, nombre eliminado */}
-                <div className="profile-info-item" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                {/* Usuario y teléfono en la misma línea */}
+                <div className="profile-info-item" style={{ display: "flex", alignItems: "center", gap: 32 }}>
+                  {/* Usuario */}
                   <FaUserCircle className="profile-icon user" style={{ fontSize: 22, color: "#F26C1F" }} />
                   <div style={{ flex: 1 }}>
                     <div className="profile-label">Usuario</div>
@@ -188,25 +190,7 @@ const Profile = () => {
                       <div>@{formData.username}</div>
                     )}
                   </div>
-                </div>
-
-                {/* Correo y teléfono en la misma línea */}
-                <div className="profile-info-item" style={{ display: "flex", alignItems: "center", gap: 16 }}>
-                  <FaEnvelope className="profile-icon email" style={{ fontSize: 22, color: "#F26C1F" }} />
-                  <div style={{ flex: 1 }}>
-                    <div className="profile-label">Correo</div>
-                    {editMode ? (
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        autoComplete="email"
-                      />
-                    ) : (
-                      <div>{formData.email}</div>
-                    )}
-                  </div>
+                  {/* Teléfono */}
                   <FaPhone className="profile-icon phone" style={{ fontSize: 22, color: "#F26C1F", marginLeft: 16 }} />
                   <div style={{ flex: 1 }}>
                     <div className="profile-label">Teléfono</div>
@@ -221,6 +205,27 @@ const Profile = () => {
                       />
                     ) : (
                       <div>{formData.phone}</div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Correo debajo */}
+                <div className="profile-info-item" style={{ display: "flex", alignItems: "center", gap: 16 }}>
+                  <FaEnvelope className="profile-icon email" style={{ fontSize: 22, color: "#F26C1F" }} />
+                  <div style={{ flex: 1 }}>
+                    <div className="profile-label">Correo</div>
+                    {editMode ? (
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        autoComplete="email"
+                        maxLength={80}
+                        style={{ width: "100%" }}
+                      />
+                    ) : (
+                      <div>{formData.email}</div>
                     )}
                   </div>
                 </div>
@@ -254,6 +259,9 @@ const Profile = () => {
               <FaSignOutAlt className="profile-icon logout" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Cerrar Sesión
             </button>
           </div>
+            <div style={{ display: "flex", justifyContent: "center", marginTop: -10 }}>
+              <img src={esterilizarImg} alt="Esterilizar" style={{ maxWidth: "230px", height: "auto" }} />
+            </div>
         </aside>
       </div>
     </div>
