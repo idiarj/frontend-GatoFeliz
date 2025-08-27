@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getUsers, getProfiles } from "../../../../../api/Admin";
 import "./rol.css";
 
 const ROLES = ["Usuario", "Veterinario", "adminVeterinario", "Admin"];
@@ -14,8 +15,9 @@ const initialUsers = [
 ];
 
 export default function RolAdmin() {
-  const [users, setUsers] = useState(initialUsers);
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [profiles, setProfiles] = useState([]);
 
   const handleRoleChange = (index, newRole) => {
     const updated = [...users];
@@ -23,13 +25,26 @@ export default function RolAdmin() {
     setUsers(updated);
   };
 
+  useEffect(() => {
+    const usersData = async () => {
+      const usersData = await getUsers();
+      setUsers(usersData.data);
+    };
+    const profileData = async () => {
+      const profileData = await getProfiles();
+      setProfiles(profileData.data);
+    };
+    usersData();
+    profileData();
+  }, []);
+
   const handleSave = () => {
     // Aquí iría la lógica para guardar los cambios en el backend
     alert("Cambios guardados");
   };
 
   const filteredUsers = users.filter(u =>
-    u.name.toLowerCase().includes(search.toLowerCase())
+    u.nom_usuario.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -54,15 +69,15 @@ export default function RolAdmin() {
               <div className="rol-no-users">No se encontraron usuarios</div>
             ) : (
               filteredUsers.map((user, idx) => (
-                <div className="rol-user-row" key={user.name}>
-                  <span className="rol-user-name">{user.name}</span>
+                <div className="rol-user-row" key={user.nom_usuario}>
+                  <span className="rol-user-name">{user.nom_usuario}</span>
                   <select
                     className="rol-select"
-                    value={user.role}
+                    value={user.des_perfil}
                     onChange={e => handleRoleChange(idx, e.target.value)}
                   >
-                    {ROLES.map(role => (
-                      <option key={role} value={role}>{role}</option>
+                    {profiles.map(role => (
+                      <option key={role.id_perfil} value={role.id_perfil}>{role.perfil}</option>
                     ))}
                   </select>
                 </div>
