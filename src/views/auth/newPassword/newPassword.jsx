@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams, Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { playSoundOnce, stopAllPurring } from "../../../utils/audio";
-import { fetchInstance } from "../../../utils/Fetch";
+import { resetPassword } from "../../../api/Auth";
 import recoverPasswordImg from "../../../assets/images/recoverPassword.png";
 import gatosesiondespierto from "../../../assets/images/gatosesiondespierto.png";
 import gatosesion from "../../../assets/images/gatosesion.png";
@@ -37,16 +37,9 @@ const NewPassword = () => {
     setSuccess("");
     try {
       console.log("New password submitted:", password);
-      const response = await fetchInstance.post({
-        endpoint: '/auth/reset-password',
-        body: {
-          token,
-          newPassword: password
-        },
-        headers: { 'Content-Type': 'application/json' }
-      });
-      const data = await response.json();
-      if (!response.ok && !data.success) {
+      const data = await resetPassword({ token, newPassword: password });
+      
+      if (!data.success) {
         setError(data.errorMsg || "Error al restablecer la contraseña");
         console.log("Restablecimiento de contraseña fallido:", data);
         return;

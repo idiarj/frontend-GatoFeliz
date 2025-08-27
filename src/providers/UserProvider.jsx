@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchInstance } from "../utils/Fetch";
+import { me } from "../api/Auth.js";
 import { UserContext } from "../context/UserContext.jsx";
 
 
@@ -9,14 +9,9 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     // Aquí puedes hacer una llamada a la API para obtener los permisos del usuario
     const fetchUser = async () => {
-      const response = await fetchInstance.get({
-        endpoint: '/auth/me',
-        credentials: 'include'
-      })
-      console.log(response)
-      const data = await response.json();
+      const data = await me();
       console.log(data)
-      if (!response.ok ) {
+      if (!data.success) {
         setUser(null);
         return;
       }

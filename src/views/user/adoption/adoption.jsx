@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { fetchInstance } from "../../../utils/Fetch";
+import { createRequest } from "../../../api/Requests.js";
+import { deleteCat, postCat } from "../../../api/Cats.js";
 import { useLoaderData } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard"
-
 import "./adoption.css";
 
 
@@ -12,9 +12,8 @@ const Adoptions = () => {
   const [cats, setCats] = useState([]);
   const { user } = useUser();
   const testing = import.meta.env.VITE_TESTING === 'true';
-  //const [search, setSearch] = useState("");
-
-  const data = useLoaderData();
+  console.log(cats)
+  const {data} = useLoaderData();
   useEffect(() => {
     setCats(data);
   }, [data]);
@@ -24,48 +23,36 @@ const Adoptions = () => {
   //   cat.name.toLowerCase().includes(search.toLowerCase())
   // );
 
-    const handleRequest = async (cat)=>{
-      try {
-        console.table(cat);
-        const response = await fetchInstance.post({
-          endpoint: "/request-cat?type=adopt",
-          body: { id_animal: cat.id_animal },
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include'
-        });
-        console.table(response);
-        console.log("Request successful:", response.ok);
-      } catch (error) {
-        console.error("Error handling request:", error);
-      }
-    }
-
-    const onDelete = async (id) => {
-      try {
-        await fetchInstance.delete({
-          endpoint: `/animal/${id}`
-        });
-        setCats((prevCats) => prevCats.filter((cat) => cat.id_animal !== id));
-      } catch (error) {
-        console.error("Error deleting cat:", error);
-      }
-    };
-
-    const onSubmit = async (data) => {
+  const handleRequest = async (cat)=>{
     try {
-      const response = await fetchInstance.postMultipart({
-        endpoint: "/animal",
-        body: data,
-      });
-      console.log("Response:", response.data);
-      const catData = await response.json();
-      setCats((prevCats) => {
-        console.log("Previous cats:", prevCats);
-        console.log("New cat data:", catData);
-        return [...prevCats, catData.data];
-      });
+      console.table(cat);
+      const data = await createRequest({ id_animal: cat.id_animal }, "adopt");
+      console.table(data);
+      if(!data.success){
+        console.error('Error al enviar la solicitud de apadrinamiento:', data.errorMsg);
+      }
+    } catch (error) {
+      console.error("Error handling request:", error);
+    }
+  }
 
-      return catData;
+  const onDelete = async (id) => {
+    try {
+      setCats((prevCats = []) => prevCats.filter((cat) => cat.id_animal !== id));
+      await deleteCat(id);
+    } catch (error) {
+      console.error("Error deleting cat:", error);
+    }
+  };
+
+  const onSubmit = async (data) => {
+    try {
+      console.table(data);
+      const catData = await postCat(data);
+      console.table(catData.data);
+      setCats((prevCats) => [...(prevCats || []), catData.data]);
+
+      // return catData;
     } catch (error) {
       console.error("Error submitting form:", error);
       throw error;
@@ -73,12 +60,6 @@ const Adoptions = () => {
   }
 
   return (
-    // <div className="adoption-container">
-    //   {/* <Head title="Adopciones" showSearch={true} onSearch={() => {}} />
-    //   <Menu /> */}
-   
-    // </div>
-
        <div className="adoption-content">
         <div className="adoption-info">
           La manera de adoptar es enviando una solicitud o visitando directamente la fundación.<br />
@@ -88,7 +69,12 @@ const Adoptions = () => {
           {/* {filteredCats.map((cat) => (
             <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
           ))} */}
-          {cats && (
+          {/* {cats && cats.length === 0 && (
+            <div className="no-cats-message">
+              No hay gatos disponibles para adopción en este momento.
+            </div>
+          )} */}
+          {cats && cats.length > 0 && (
             cats.map((cat)=>(
               <CatCard
                 key={cat.id_animal}

@@ -16,7 +16,7 @@ const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
     edad_animal: "",
     genero_animal: "",
     peso_animal: "",
-    adoptable: !fromSponsor
+    adoptable_animal: !fromSponsor
   });
 
 
@@ -30,7 +30,7 @@ const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    //console.log(`Field changed: ${name} = ${value}`);
+    console.log(`Field changed: ${name} = ${value}`);
     setFormData({ ...formData, [name]: value });
   };
 
@@ -42,7 +42,9 @@ const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
     data.append("catPhoto", imageFile);
     console.log("Image file:", imageFile);
     Object.entries(formData).forEach(([key, value]) => data.append(key, key === "peso_animal" ? Number(value) : value));
-    console.log("Submitting data:", data);
+    Object.entries(formData).forEach(([key, value]) => console.log(`${key}: ${value}`));
+    console.log("Submitting data:");
+    console.log(data)
 
     await onSubmit(data);
     setShowModal(false);
@@ -66,7 +68,7 @@ const AddCatCard = ({ onSubmit, uploading, fromSponsor }) => {
 
       <div className="add-card-image-preview">
         {imagePreview ? (
-          <img src={imagePreview} alt="preview" className="image-preview" style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '12px' }} />
+          <img src={imagePreview} alt="preview" className="image-preview" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '12px' }} />
         ) : (
           <button
             className="add-card-image-btn"

@@ -1,29 +1,56 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { acceptRequest, rejectRequest } from "../../../../../api/Requests";
+import { useLoaderData } from "react-router-dom";
+import RequestTable from "../../../../../components/requestTable/RequestTable";
 import "./request.css";
 
-const solicitudesData = [
-	{ nombre: "Yajaira", apellido: "Fuenmayor", telefono: "555-123456789", gato: "Milo", tipo: "Adopción" },
-	{ nombre: "David", apellido: "Gómez", telefono: "555-987654321", gato: "Luna", tipo: "Apadrinamiento" },
-	{ nombre: "Elena", apellido: "Sánchez", telefono: "555-567890123", gato: "Nala", tipo: "Adopción" },
-	{ nombre: "Javier", apellido: "Ruiz", telefono: "555-234567890", gato: "Simba", tipo: "Apadrinamiento" },
-];
+// const solicitudesData = [
+// 	{ nombre: "Yajaira", apellido: "Fuenmayor", telefono: "555-123456789", gato: "Milo", tipo: "Adopción" },
+// 	{ nombre: "David", apellido: "Gómez", telefono: "555-987654321", gato: "Luna", tipo: "Apadrinamiento" },
+// 	{ nombre: "Elena", apellido: "Sánchez", telefono: "555-567890123", gato: "Nala", tipo: "Adopción" },
+// 	{ nombre: "Javier", apellido: "Ruiz", telefono: "555-234567890", gato: "Simba", tipo: "Apadrinamiento" },
+// ];
 
 const Request = () => {
-	const [page, setPage] = useState(1);
+	const { allRequestData, pendingRequestData } = useLoaderData();
+	console.log("Datos de las solicitudes pendientes:", pendingRequestData);
+	console.log("Datos de todas las solicitudes:", allRequestData);
+	const [page, setPage] = useState(0);
 	const rowsPerPage = 4;
-	const totalPages = Math.ceil(solicitudesData.length / rowsPerPage);
+	const totalPages = Math.ceil(pendingRequestData.data.length / rowsPerPage);
 
-	const handleAccept = (nombre) => {
-		alert(`Solicitud de ${nombre} aceptada`);
+	const handleAccept = async (id) => {
+		alert(`Solicitud de ${id} aceptada`);
+		try {
+			const data = await acceptRequest(id);
+			if (data.success) {
+				console.log("Solicitud aceptada con exito:", data);
+			} else {
+				console.error("Error al aceptar la solicitud:", data);
+			}
+		} catch (error) {
+			console.error("Error al aceptar la solicitud:", error);
+		}
 	};
-	const handleReject = (nombre) => {
-		alert(`Solicitud de ${nombre} rechazada`);
+
+	const handleReject = async (id) => {
+		alert(`Solicitud de ${id} rechazada`);
+		try {
+			const data = await rejectRequest(id);
+			if (data.success) {
+				console.log("Solicitud rechazada con exito:", data);
+			} else {
+				console.error("Error al rechazar la solicitud:", data);
+			}
+		} catch (error) {
+			console.error("Error al rechazar la solicitud:", error);
+		}
 	};
 
 	const handlePrev = () => setPage((p) => Math.max(1, p - 1));
 	const handleNext = () => setPage((p) => Math.min(totalPages, p + 1));
 
-	const solicitudes = solicitudesData.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+	const solicitudes = pendingRequestData.data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
 	return (
 			<div className="request-root">
@@ -31,39 +58,16 @@ const Request = () => {
 					<span style={{ color: '#ff8c2b', fontSize: '2rem', fontWeight: 'bold', cursor: 'pointer' }}>&larr; Volver</span>
 				</div>
 				<div className="request-table-container">
-					<h2 className="request-title">Solicitudes</h2>
-					<table className="request-table">
-						<thead>
-							<tr className="request-table-header">
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th>Teléfono</th>
-								<th>Gato</th>
-								<th>Tipo</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							{solicitudes.map((s, idx) => (
-								<tr key={idx}>
-									<td>{s.nombre}</td>
-									<td>{s.apellido}</td>
-									  <td className="telefono">{s.telefono}</td>
-									<td>{s.gato}</td>
-									<td>{s.tipo}</td>
-									<td>
-										<button className="request-btn accept" onClick={() => handleAccept(s.nombre)}>Aceptar</button>
-										<button className="request-btn reject" onClick={() => handleReject(s.nombre)}>Rechazar</button>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					</table>
-					<div className="request-pagination">
-						<button onClick={handlePrev} disabled={page === 1}>&lt;</button>
-						<span>{page}</span>
-						<button onClick={handleNext} disabled={page === totalPages}>&gt;</button>
-					</div>
+					<RequestTable
+						requests={solicitudes}
+						handleAccept={handleAccept}
+						handleReject={handleReject}
+						page={page}
+						totalPages={totalPages}
+						handlePrev={handlePrev}
+						handleNext={handleNext}
+						status="pending"
+					/>
 				</div>
 			</div>
 	);

@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
 import { FaUserCircle, FaEnvelope, FaLock, FaPhone } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { fetchInstance } from "../../../utils/Fetch.js";
+import { register } from "../../../api/Auth.js";
 import registroImg from "../../../assets/images/registro.png";
 import "../../../App.css";
 import "./register.css";
@@ -46,17 +46,10 @@ const Register = () => {
 
     try {
       console.log("Formulario enviado:", formData);
-      const response = await fetchInstance.post({
-        endpoint: '/auth/register',
-        body: formData,
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include'
-      })
-      console.log("Respuesta del servidor:", response);
-      const data = await response.json();   
+      const data = await register(formData);
       console.log("Datos recibidos:", data);
 
-      if(!response.ok && !data.success){
+      if(!data.success){
         setError(data.errorMsg || "Error al registrar el usuario");
         console.log("Registro fallido:", data);
         setIsSubmitting(false);          // NEW: termina indicador en error
@@ -65,7 +58,7 @@ const Register = () => {
 
       console.log("Registro exitoso:", data);
       // Mantener isSubmitting true hasta que la navegación cambie la vista
-      navigate('/login');
+      navigate('/auth/login');
 
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
