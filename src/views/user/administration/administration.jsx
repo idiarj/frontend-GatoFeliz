@@ -1,6 +1,5 @@
-
-
 import React from "react";
+import adminImg from "../../../assets/images/admin.png";
 import { useNavigate } from "react-router-dom";
 import "./administration.css";
 
@@ -21,36 +20,27 @@ const Administration = () => {
 		}
 	};
 
-	return (
-		<div className="administration-container" style={{ background: '#f7f8fa', minHeight: '100vh', padding: '0' }}>
-			<div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '40px', marginTop: '60px' }}>
-				<button
-					className="admin-btn admin-btn-yellow"
-					onClick={() => handleClick('adopciones')}
-				>
-					Solicitudes de adopciones y apadrinaciones
-				</button>
-				<button
-					className="admin-btn admin-btn-orange"
-					onClick={() => handleClick('roles')}
-				>
-					Administrar roles
-				</button>
-				<button
-					className="admin-btn admin-btn-yellow"
-					onClick={() => handleClick('permisos')}
-				>
-					Administrar permisos a roles
-				</button>
-				<button
-					className="admin-btn admin-btn-blue"
-					onClick={() => handleClick('ejemplo')}
-				>
-					Otro ejemplo
-				</button>
-			</div>
-		</div>
-	);
+	 return (
+		 <div className="admin-container admin-flex-layout">
+			 <div className="admin-cards-column">
+				 <div className="admin-card" onClick={() => handleClick('adopciones')} style={{ cursor: 'pointer' }}>
+					 <div className="admin-card-title">Solicitudes de adopciones y apadrinaciones</div>
+					 <div className="admin-card-desc">Aquí se muestran las solicitudes de los usuarios que quieren adoptar o apadrina</div>
+				 </div>
+				 <div className="admin-card roles" onClick={() => handleClick('roles')} style={{ cursor: 'pointer' }}>
+					 <div className="admin-card-title">Administrar roles</div>
+					 <div className="admin-card-desc">Aquí se le asigna un rol a un usuario</div>
+				 </div>
+				 <div className="admin-card" onClick={() => handleClick('permisos')} style={{ cursor: 'pointer' }}>
+					 <div className="admin-card-title">Administrar permisos a roles</div>
+					 <div className="admin-card-desc">Aquí se le asignan los permisos a los módulos dependiendo de los roles</div>
+				 </div>
+			 </div>
+			 <div className="admin-img-wrapper">
+				 <img src={adminImg} alt="admin" className="admin-img-side" />
+			 </div>
+		 </div>
+	 );
 };
 
 export default Administration;

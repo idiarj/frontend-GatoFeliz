@@ -1,43 +1,85 @@
-
-.administration-container {
-	width: 100%;
-	min-height: 100vh;
+.admin-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 77vh;
+  background: #fafafa;
+  gap: 2.5rem;
+  padding-left: 5.5vw;
 }
 
-.admin-btn {
-	width: 700px;
-	max-width: 90vw;
-	height: 100px;
-	border: none;
-	border-radius: 50px;
-	font-size: 2rem;
-	font-weight: bold;
-	box-shadow: 0 4px 24px 0 rgba(255, 140, 43, 0.08);
-	margin: 0 auto;
-	transition: transform 0.2s, box-shadow 0.2s;
-	cursor: pointer;
-	outline: none;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+.admin-cards-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
 }
 
-.admin-btn-yellow {
-	background: #fff9cc;
-	color: #ff8c2b;
+.admin-card {
+  background: #ffffcc;
+  border-radius: 2rem;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.12);
+  padding: 2.2rem 2.6rem;
+  min-width: 440px;
+  transition: box-shadow 0.3s, transform 0.3s;
+  border: none;
+  cursor: pointer;
+  animation: cardFadeIn 0.7s ease;
+  font-size: 1.13rem;
 }
 
-.admin-btn-orange {
-	background: #ffbb85;
-	color: #ff8c2b;
+@keyframes cardFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.admin-btn-blue {
-	background: #e6eaf6;
-	color: #3498db;
+.admin-card.roles {
+  background: #ffd6a0;
 }
 
-.admin-btn:hover {
-	transform: scale(1.04);
-	box-shadow: 0 8px 32px 0 rgba(255, 140, 43, 0.16);
+.admin-card-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: #ff7b00;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.admin-card.roles .admin-card-title {
+  color: #ff7b00;
+}
+
+.admin-card-desc {
+  font-size: 1.09rem;
+  color: #ff7b00;
+  text-align: center;
+}
+
+.admin-card.roles .admin-card-desc {
+  color: #ff7b00;
+}
+
+.admin-card:hover {
+  box-shadow: 0 12px 48px rgba(0,0,0,0.18);
+  transform: scale(1.04) translateY(-4px);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.admin-img-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.admin-img-side {
+  width: 345px;
+  max-width: 100%;
+  height: auto;
+  margin-left: 2rem;
+  transition: transform 0.3s;
+}
+
+.admin-img-side:hover {
+  transform: scale(1.05) rotate(-2deg);
 }
