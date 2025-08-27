@@ -50,7 +50,7 @@ const Request = () => {
 	const handlePrev = () => setPage((p) => Math.max(1, p - 1));
 	const handleNext = () => setPage((p) => Math.min(totalPages, p + 1));
 
-	const solicitudes = pendingRequestData.data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+	const solicitudes = pendingRequestData.data.slice((page) * rowsPerPage, (page + 1) * rowsPerPage);
 
 	return (
 			<div className="request-root">
