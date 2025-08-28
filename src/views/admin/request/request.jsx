@@ -17,7 +17,8 @@ const Request = () => {
 	console.log("Datos de todas las solicitudes:", allRequestData);
 	const [page, setPage] = useState(0);
 	const rowsPerPage = 4;
-	const totalPages = Math.ceil(pendingRequestData.data.length / rowsPerPage);
+	const pendingDataArray = pendingRequestData && Array.isArray(pendingRequestData.data) ? pendingRequestData.data : [];
+	const totalPages = Math.ceil(pendingDataArray.length / rowsPerPage);
 
 	const handleAccept = async (id) => {
 		alert(`Solicitud de ${id} aceptada`);
@@ -50,7 +51,7 @@ const Request = () => {
 	const handlePrev = () => setPage((p) => Math.max(1, p - 1));
 	const handleNext = () => setPage((p) => Math.min(totalPages, p + 1));
 
-	const solicitudes = pendingRequestData.data.slice((page) * rowsPerPage, (page + 1) * rowsPerPage);
+	const solicitudes = pendingDataArray.slice((page) * rowsPerPage, (page + 1) * rowsPerPage);
 
 	return (
 			<div className="request-root">

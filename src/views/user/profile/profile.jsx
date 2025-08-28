@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import { updateUser } from "../../../api/Auth";
 import { useLoaderData } from "react-router-dom";
-import { logout } from "../../../api/Auth";
 import esterilizarImg from "../../../assets/images/esterilizar.png"
 // import tabby from "../../../assets/perfil/tabby.png";
 // import tuxedo from "../../../assets/perfil/tuxedo.png";
@@ -46,6 +45,14 @@ const Profile = () => {
   const dismissBtnRef = useRef(null); // NUEVO: para enfoque accesible
   const [editMode, setEditMode] = useState(false);
   const [showImgOptions, setShowImgOptions] = useState(false);
+  const navigate = useNavigate();
+
+  // Show loading if data is not available
+  if (!data) {
+    return <Loading message="Cargando perfil..." compact />;
+  }
+
+  // Initialize formData only when data is available
   const [formData, setFormData] = useState({
     id_usuario: data.id_usuario,
     nom_usuario: data.nom_usuario,
@@ -58,47 +65,19 @@ const Profile = () => {
   console.log(formData)
 
   const navigate = useNavigate();
-  const openPwdModal = () => setShowPwdModal(true);
-  const closePwdModal = () => setShowPwdModal(false);
+  // if(!data){
+  //   return <Loading message="Cargando perfil..." compact/>
+  // }
 
-    // NUEVO: mock de logout + navegación a “recover password”
-  const confirmPasswordChange = async () => {
-    try {
-      // Mock: aquí “cerrarías sesión”
-      const data = await logout();
-      if(!data.success){
-        console.error('Error al cerrar sesión.');
-        return;
-      }
-      setUser(null);
-      await new Promise((r) => setTimeout(r, 250)); // simula I/O
-      // Mock: ir a vista de cambio de contraseña
-      navigate("/auth/recoverPassword");
-    } catch (e) {
-      console.error("Error cerrando sesión (mock):", e);
-    }
-  };
+  // const updateUser = (data) => {
+  //   console.log("Actualizar usuario:", data);
+  // };
 
-  // NUEVO: mover la lógica del botón antiguo a abrir modal
-  const goToRecoverPassword = () => openPwdModal();
-
-  // NUEVO: Accesibilidad — enfocar botón cancelar al abrir
-  useEffect(() => {
-    if (showPwdModal && dismissBtnRef.current) {
-      dismissBtnRef.current.focus();
-    }
-  }, [showPwdModal]);
-
-  // NUEVO: cerrar con ESC
-  useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === "Escape" && showPwdModal) closePwdModal();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [showPwdModal]);
 
   const currentImg = profileImages.find((i) => i.key === formData.profileImg);
+
+  // Obtener imagen secundaria según la seleccionada
+  const secondaryImgSrc = secondaryImages[formData.profileImg];
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -318,53 +297,14 @@ const Profile = () => {
               <FaSignOutAlt className="profile-icon logout" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Cerrar Sesión
             </button>
           </div>
-            <div style={{ display: "flex", justifyContent: "center", marginTop: -10 }}>
-              <img src={esterilizarImg} alt="Esterilizar" style={{ maxWidth: "230px", height: "auto" }} />
-            </div>
+            {/* Imagen secundaria centrada debajo de acciones rápidas */}
+            {secondaryImgSrc && (
+              <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: 20 }}>
+                <img src={secondaryImgSrc} alt="Imagen secundaria" style={{ width: 340, height: "auto" }} />
+              </div>
+            )}
         </aside>
       </div>
-            {/* ====== NUEVO: MODAL CAMBIAR CONTRASEÑA ====== */}
-      {showPwdModal && (
-        <div
-          className="modal-backdrop"
-          role="presentation"
-          onClick={(e) => {
-            // cerrar si hace click fuera del diálogo
-            if (e.target.classList.contains("modal-backdrop")) closePwdModal();
-          }}
-        >
-          <div
-            className="modal-card"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="pwd-modal-title"
-            aria-describedby="pwd-modal-desc"
-          >
-            <h3 id="pwd-modal-title" className="modal-title">Cambiar contraseña</h3>
-            <p id="pwd-modal-desc" className="modal-desc">
-              Para cambiar tu contraseña, primero debes cerrar sesión. ¿Deseas cerrar sesión ahora?
-            </p>
-
-            <div className="modal-actions">
-              <button
-                ref={dismissBtnRef}
-                className="modal-btn modal-btn-secondary"
-                type="button"
-                onClick={closePwdModal}
-              >
-                Cancelar
-              </button>
-              <button
-                className="modal-btn modal-btn-primary"
-                type="button"
-                onClick={confirmPasswordChange}
-              >
-                Cerrar sesión y continuar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
