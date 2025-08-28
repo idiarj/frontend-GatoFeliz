@@ -55,6 +55,7 @@
   min-height: 90px;
   box-shadow: 0 2px 12px 0 rgba(243,112,33,0.04);
   gap: 32px;
+  border-radius: 10px;
 }
 
 .head-left {
