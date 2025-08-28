@@ -57,11 +57,11 @@ const Profile = () => {
   const [showImgOptions, setShowImgOptions] = useState(false);
   const [secondaryImgSrc, setSecondaryImgSrc] = useState(null);
   const [formData, setFormData] = useState({
-    id_usuario: data?.id_usuario ?? "",
-    nom_usuario: data?.nom_usuario ?? "",
-    email_usuario: data?.email_usuario ?? "",
-    tlf_usuario: data?.tlf_usuario ?? "",
-    profileImg: userM.profileImg
+    id_usuario: data.id_usuario,
+    nom_usuario: data.nom_usuario,
+    email_usuario: data.email_usuario,
+    tlf_usuario: data.tlf_usuario,
+    img_usuario_url: data.img_usuario_url
   });
 
 
@@ -135,7 +135,7 @@ const Profile = () => {
       nom_usuario: data.nom_usuario,
       email_usuario: data.email_usuario,
       tlf_usuario: data.tlf_usuario,
-      profileImg: userM.profileImg
+      img_usuario_url: data.img_usuario_url
     });
   };
 
@@ -174,7 +174,7 @@ const Profile = () => {
                   style={{ background: "transparent", border: 0, padding: 0, cursor: editMode ? "pointer" : "default" }}
                 >
                   <img
-                    src={currentImg?.src}
+                    src={formData.img_usuario_url}
                     alt={currentImg?.alt || "Foto de perfil"}
                     className="profile-img"
                   />
@@ -225,7 +225,7 @@ const Profile = () => {
                           style={{ border: 0, padding: 0, background: "transparent" }}
                         >
                           <img
-                            src={img.src}
+                            src={img.key}
                             alt={img.alt}
                             style={{ width: 40, height: 40, borderRadius: "50%" }}
                           />
