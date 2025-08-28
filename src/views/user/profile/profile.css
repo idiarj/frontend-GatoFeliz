@@ -17,6 +17,9 @@
   --profile-gap: 20px;
 }
 
+
+
+
 /* ====== Animaciones ====== */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(12px); }
@@ -306,4 +309,93 @@
   .profile-img-options{
     grid-template-columns: repeat(4, 40px);
   }
+}
+
+
+/* ===== Modal Base ===== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 17, 17, 0.38);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  padding: 16px;
+  backdrop-filter: blur(2px);
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: #fffdf6;           /* marfil cálido */
+  border-radius: 16px;
+  box-shadow: 0 18px 60px rgba(0,0,0,.18);
+  padding: 22px 22px 18px;
+  border: 1px solid #ffe5b3;     /* borde suave */
+  animation: modal-pop .16s ease-out;
+  margin-bottom: 200px;
+}
+
+@keyframes modal-pop {
+  from { transform: translateY(6px) scale(.98); opacity: .0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.modal-title {
+  margin: 0 0 8px 0;
+  font-weight: 800;
+  color: #F26C1F;                /* naranja marca */
+  letter-spacing: .2px;
+}
+
+.modal-desc {
+  margin: 0 0 18px 0;
+  color: #2b2b2b;
+  line-height: 1.45;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-btn {
+  appearance: none;
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .06s ease, box-shadow .12s ease, opacity .2s ease;
+}
+
+.modal-btn:active {
+  transform: translateY(1px);
+}
+
+.modal-btn-primary {
+  background: linear-gradient(180deg, #fdbb55, #f8a53a);
+  color: #3b2b06;
+  box-shadow: 0 6px 16px rgba(248,165,58,.32);
+}
+
+.modal-btn-primary:hover {
+  box-shadow: 0 8px 22px rgba(248,165,58,.42);
+}
+
+.modal-btn-secondary {
+  background: #fff;
+  color: #5b4a2a;
+  border: 1px solid #ffe0a6;
+}
+
+.modal-btn-secondary:hover {
+  background: #fff9ed;
+}
+
+/* Accesibilidad: enfoque visible */
+.modal-btn:focus {
+  outline: 3px solid #fdc956;
+  outline-offset: 2px;
 }

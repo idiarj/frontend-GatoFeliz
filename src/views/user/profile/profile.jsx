@@ -1,11 +1,12 @@
 import "./profile.css";
-import React, { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { FaUserCircle, FaEnvelope, FaPhone, FaLock, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import { updateUser } from "../../../api/Auth";
 import { useLoaderData } from "react-router-dom";
+import esterilizarImg from "../../../assets/images/esterilizar.png"
 import tabby from "../../../assets/perfil/tabby.png";
 import tuxedo from "../../../assets/perfil/tuxedo.png";
 import carey from "../../../assets/perfil/carey.png";
@@ -14,13 +15,6 @@ import siames from "../../../assets/perfil/siames.png";
 import blanco from "../../../assets/perfil/blanco.png";
 import negro from "../../../assets/perfil/negro.png";
 import Loading from "../loading/Loading";
-import tabby1 from "../../../assets/perfil/tabby1.png";
-import tuxedo1 from "../../../assets/perfil/tuxedo1.png";
-import carey1 from "../../../assets/perfil/carey1.png";
-import amarillo1 from "../../../assets/perfil/amarillo1.png";
-import siames1 from "../../../assets/perfil/siames1.png";
-import blanco1 from "../../../assets/perfil/blanco1.png";
-import negro1 from "../../../assets/perfil/negro1.png";
 
 
 /** Si luego conectas tu UserContext, solo reemplaza mockUser y updateUser */
@@ -57,6 +51,9 @@ const Profile = () => {
   const data = useLoaderData();
   const { setUser } = useUser();
   const userM = mockUser;
+
+  const [showPwdModal, setShowPwdModal] = useState(false); // NUEVO: estado modal
+  const dismissBtnRef = useRef(null); // NUEVO: para enfoque accesible
   const [editMode, setEditMode] = useState(false);
   const [showImgOptions, setShowImgOptions] = useState(false);
   const navigate = useNavigate();
@@ -74,6 +71,10 @@ const Profile = () => {
     tlf_usuario: data?.tlf_usuario ?? "",
     profileImg: userM.profileImg
   });
+  const navigate = useNavigate();
+  // if(!data){
+  //   return <Loading message="Cargando perfil..." compact/>
+  // }
 
   // const updateUser = (data) => {
   //   console.log("Actualizar usuario:", data);
@@ -126,8 +127,6 @@ const Profile = () => {
       console.error(error)
     }
   };
-
-const goToRecoverPassword = () => navigate("/auth/recoverPassword");
 
   return (
     <div className="profile-main-container" role="main">
@@ -294,8 +293,10 @@ const goToRecoverPassword = () => navigate("/auth/recoverPassword");
                 <FiEdit className="profile-icon edit" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Editar Perfil
             </button>
 
+
             <button className="profile-action-btn" type="button" onClick={goToRecoverPassword}>
-              <FaLock className="profile-icon lock" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Cambiar Contraseña
+              <FaLock className="profile-icon lock" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} />
+              Cambiar Contraseña
             </button>
 
             <button className="profile-action-btn" type="button" onClick={() => navigate("/logout")}> 
@@ -309,7 +310,7 @@ const goToRecoverPassword = () => navigate("/auth/recoverPassword");
               </div>
             )}
         </aside>
-        </div>
+      </div>
     </div>
   );
 };

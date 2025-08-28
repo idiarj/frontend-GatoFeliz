@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { fetchAllCats, fetchAdoptableCats } from "./api/Cats.js";
 import { fetchRequestData } from "./api/Requests.js";
+import { me } from "./api/Auth.js";
 import { delay } from "./utils/delay.js";
-
 //Views
 import Login from './views/auth/login/login.jsx';
 import Register from './views/auth/register/register.jsx';
@@ -23,7 +23,6 @@ import RolAdmin from './views/admin/rol/rol.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 import NotFound from "./views/user/notFound/notFound.jsx";
 import Profile from './views/user/profile/profile.jsx';
-import { me } from "./api/Auth.js";
 
 
 

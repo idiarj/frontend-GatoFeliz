@@ -28,6 +28,7 @@ body {
   top: 0;
   z-index: 10;                        /* por si hay dropdowns */
   /* Tu Head ya maneja estilos internos, solo deja el contenedor limpio */
+  border-radius: 10px;
 }
 
 .app-aside {
