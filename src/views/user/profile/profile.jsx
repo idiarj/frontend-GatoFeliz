@@ -8,24 +8,24 @@ import { updateUser } from "../../../api/Auth";
 import { useLoaderData } from "react-router-dom";
 import { logout } from "../../../api/Auth";
 import esterilizarImg from "../../../assets/images/esterilizar.png"
-import tabby from "../../../assets/perfil/tabby.png";
-import tuxedo from "../../../assets/perfil/tuxedo.png";
-import carey from "../../../assets/perfil/carey.png";
-import amarillo from "../../../assets/perfil/amarillo.png";
-import siames from "../../../assets/perfil/siames.png";
-import blanco from "../../../assets/perfil/blanco.png";
-import negro from "../../../assets/perfil/negro.png";
+// import tabby from "../../../assets/perfil/tabby.png";
+// import tuxedo from "../../../assets/perfil/tuxedo.png";
+// import carey from "../../../assets/perfil/carey.png";
+// import amarillo from "../../../assets/perfil/amarillo.png";
+// import siames from "../../../assets/perfil/siames.png";
+// import blanco from "../../../assets/perfil/blanco.png";
+// import negro from "../../../assets/perfil/negro.png";
 
 
 /** Si luego conectas tu UserContext, solo reemplaza mockUser y updateUser */
 const profileImages = [
-  { key: "tabby.png", src: tabby, alt: "Gato Atigrado" },
-  { key: "tuxedo.png", src: tuxedo, alt: "Gato Tuxedo" },
-  { key: "carey.png", src: carey, alt: "Gato Carey" },
-  { key: "amarillo.png", src: amarillo, alt: "Gato Amarillo" },
-  { key: "siames.png", src: siames, alt: "Gato Siamés" },
-  { key: "blanco.png", src: blanco, alt: "Gato Blanco" },
-  { key: "negro.png", src: negro, alt: "Gato Negro" }
+  { key: 'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355363/gatoFeliz/icons/cat_tabby_cat.png', alt: "Gato Atigrado" },
+  { key: 'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355363/gatoFeliz/icons/cat_tuxedo_cat.png', alt: "Gato Tuxedo" },
+  { key: 'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355363/gatoFeliz/icons/cat_carey_cat.png', alt: "Gato Carey" },
+  { key: 'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355363/gatoFeliz/icons/cat_orange_cat.png', alt: "Gato Amarillo" },
+  { key: 'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355363/gatoFeliz/icons/cat_siames_cat.png', alt: "Gato Siamés" },
+  { key: 'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355495/gatoFeliz/icons/cat_white_cat.png', alt: "Gato Blanco" },
+  { key: 'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355495/gatoFeliz/icons/cat_black_cat.png', alt: "Gato Negro" }
 ];
 
 // Datos de ejemplo para pruebas
@@ -51,8 +51,11 @@ const Profile = () => {
     nom_usuario: data.nom_usuario,
     email_usuario: data.email_usuario,
     tlf_usuario: data.tlf_usuario,
-    profileImg: userM.profileImg
+    img_usuario_url: data.img_usuario_url
   });
+
+
+  console.log(formData)
 
   const navigate = useNavigate();
   const openPwdModal = () => setShowPwdModal(true);
@@ -102,7 +105,8 @@ const Profile = () => {
   };
 
   const handleImgChange = (imgKey) => {
-    setFormData((prev) => ({ ...prev, profileImg: imgKey }));
+    console.log('Selected image:', imgKey);
+    setFormData((prev) => ({ ...prev, img_usuario_url: imgKey }));
     setShowImgOptions(false);
   };
 
@@ -117,7 +121,7 @@ const Profile = () => {
       nom_usuario: data.nom_usuario,
       email_usuario: data.email_usuario,
       tlf_usuario: data.tlf_usuario,
-      profileImg: userM.profileImg
+      img_usuario_url: data.img_usuario_url
     });
   };
 
@@ -156,7 +160,7 @@ const Profile = () => {
                   style={{ background: "transparent", border: 0, padding: 0, cursor: editMode ? "pointer" : "default" }}
                 >
                   <img
-                    src={currentImg?.src}
+                    src={formData.img_usuario_url}
                     alt={currentImg?.alt || "Foto de perfil"}
                     className="profile-img"
                   />
@@ -207,7 +211,7 @@ const Profile = () => {
                           style={{ border: 0, padding: 0, background: "transparent" }}
                         >
                           <img
-                            src={img.src}
+                            src={img.key}
                             alt={img.alt}
                             style={{ width: 40, height: 40, borderRadius: "50%" }}
                           />
