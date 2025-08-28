@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { assignProfiles } from "../../../api/Admin";
 import { useNavigate } from "react-router-dom";
 import { getUsers, getProfiles } from "../../../api/Admin";
 import "./rol.css";
@@ -28,7 +29,8 @@ export default function RolAdmin() {
   useEffect(() => {
     const usersData = async () => {
       const usersData = await getUsers();
-      setUsers(Array.isArray(usersData.data) ? usersData.data : []);
+      console.log(usersData);
+      setUsers(usersData.data);
     };
     const profileData = async () => {
       const profileData = await getProfiles();
@@ -38,14 +40,15 @@ export default function RolAdmin() {
     profileData();
   }, []);
 
-  const filteredUsers = users.filter(u =>
-    typeof u.nom_usuario === "string" && u.nom_usuario.toLowerCase().includes(search.toLowerCase())
-  );
+const filteredUsers = users.filter(u =>
+  typeof u.nom_usuario === "string" &&
+  u.nom_usuario.toLowerCase().includes(search.toLowerCase())
+);
 
-  const handleUserSelect = (user) => {
-    setSelectedUser(user);
-    setSelectedRole(user.id_perfil || "");
-  };
+const handleUserSelect = (user) => {
+  setSelectedUser(user);
+  setSelectedRole(user.id_perfil != null ? user.id_perfil : null);
+};
 
   const handleRoleChange = (e) => {
     setSelectedRole(e.target.value);
@@ -53,11 +56,20 @@ export default function RolAdmin() {
 
   const handleSave = async () => {
     if (!selectedUser || !selectedRole) return;
+    console.log("Guardando rol", selectedRole, "para usuario", selectedUser);
+    console.log(typeof selectedRole);
+    let selectedProfile = typeof selectedRole === "string" ? parseInt(selectedRole) : selectedRole;
+    console.log(typeof selectedProfile);
+
     setLoading(true);
-    // Aquí deberías llamar a tu API para actualizar el rol del usuario
-    // await updateUserRole(selectedUser.id_usuario, selectedRole);
+    const data = await assignProfiles({ id_perfil: selectedProfile, id_usuario: selectedUser.id_usuario });
+    console.log(data);
+    if(!data.success){
+      alert(data.errorMsg);
+    }
+    setUsers(users.map(u => u.id_usuario === selectedUser.id_usuario ? { ...u, id_perfil: selectedProfile } : u));
     setLoading(false);
-    alert("Rol actualizado para " + selectedUser.nom_usuario);
+    // alert("Rol actualizado para " + selectedUser.nom_usuario);
     setSelectedUser(null);
     setSelectedRole("");
     setSearch("");
@@ -85,7 +97,7 @@ export default function RolAdmin() {
               <div className="rol-no-users">No se encontraron usuarios</div>
             ) : (
               filteredUsers.map((user) => (
-                <div className="rol-user-row" key={user.nom_usuario}>
+                <div className="rol-user-row" key={user.id_usuario}>
                   <span className="rol-user-name">{user.nom_usuario}</span>
                   <button className="rol-select-btn" onClick={() => handleUserSelect(user)}>
                     Seleccionar
@@ -105,8 +117,10 @@ export default function RolAdmin() {
                 {selectedRole === "" && (
                   <option value="" disabled hidden>Seleccione un rol</option>
                 )}
-                {ROLES.map(role => (
-                  <option key={role} value={role}>{role}</option>
+                {profiles.map((p) => (
+                  <option key={p.id_perfil} value={p.id_perfil}>
+                    {p.perfil}
+                  </option>
                 ))}
               </select>
               <button className="rol-save-btn" onClick={handleSave} disabled={loading || !selectedRole}>

@@ -3,6 +3,7 @@ import { fetchAllCats, fetchAdoptableCats } from "./api/Cats.js";
 import { fetchRequestData } from "./api/Requests.js";
 import { me } from "./api/Auth.js";
 import { delay } from "./utils/delay.js";
+import { redirect } from "react-router-dom";
 //Views
 import Login from './views/auth/login/login.jsx';
 import Register from './views/auth/register/register.jsx';
@@ -66,6 +67,11 @@ export const router = createBrowserRouter([
                 loader: async ()=>{
                     await delay(800);
                     const data = await me();
+                    if(!data.success) {
+                        console.log("No autenticado, redirigiendo a login");
+                        throw redirect('/auth/login');
+                    }
+                    console.log("Profile loader data:", data);  
                     return data.data;
                 },
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando perfil...'} compact/></div>
