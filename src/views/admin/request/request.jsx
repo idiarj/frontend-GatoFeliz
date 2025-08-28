@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { acceptRequest, rejectRequest } from "../../../../../api/Requests";
+import { acceptRequest, rejectRequest } from "../../../api/Requests";
 import { useLoaderData } from "react-router-dom";
-import RequestTable from "../../../../../components/requestTable/RequestTable";
+import RequestTable from "../../../components/requestTable/RequestTable";
 import "./request.css";
 
 // const solicitudesData = [

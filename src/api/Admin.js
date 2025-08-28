@@ -28,3 +28,8 @@ export const getUsers = async () => {
     throw error;
   }
 };
+
+
+// export const assignProfiles = async ({id_perfil, id_usuario}) = {
+
+// }

@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { getUsers, getProfiles } from "../../../../../api/Admin";
+import { useNavigate } from "react-router-dom";
+import { getUsers, getProfiles } from "../../../api/Admin";
 import "./rol.css";
 
 const ROLES = ["Usuario", "Veterinario", "adminVeterinario", "Admin"];
 
-const initialUsers = [
-  { name: "Yajaira", role: "Usuario" },
-  { name: "David", role: "Usuario" },
-  { name: "Elena", role: "Usuario" },
-  { name: "Carlos", role: "Usuario" },
-    { name: "Marta", role: "Usuario" },
-    { name: "Luis", role: "Usuario" }
+// const initialUsers = [
+//   { name: "Yajaira", role: "Usuario" },
+//   { name: "David", role: "Usuario" },
+//   { name: "Elena", role: "Usuario" },
+//   { name: "Carlos", role: "Usuario" },
+//     { name: "Marta", role: "Usuario" },
+//     { name: "Luis", role: "Usuario" }
 
-];
+// ];
 
 export default function RolAdmin() {
+
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
   const [profiles, setProfiles] = useState([]);
@@ -40,6 +43,7 @@ export default function RolAdmin() {
 
   const handleSave = () => {
     // Aquí iría la lógica para guardar los cambios en el backend
+
     alert("Cambios guardados");
   };
 
@@ -49,7 +53,7 @@ export default function RolAdmin() {
 
   return (
     <>
-      <div className="rol-back" onClick={() => window.history.back()}>
+      <div className="rol-back" onClick={() => navigate('/administration')}>
         <span style={{ color: '#ff8c2b', fontSize: '2rem', fontWeight: 'bold', cursor: 'pointer' }}>&larr; Volver</span>
       </div>
       <div className="rol-admin-container">
@@ -77,7 +81,7 @@ export default function RolAdmin() {
                     onChange={e => handleRoleChange(idx, e.target.value)}
                   >
                     {profiles.map(role => (
-                      <option key={role.id_perfil} value={role.id_perfil}>{role.perfil}</option>
+                      <option key={role.id_perfil} value={role.id_perfil}>{user.des_perfil}</option>
                     ))}
                   </select>
                 </div>

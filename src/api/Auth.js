@@ -56,3 +56,17 @@ export const logout = async ()=>{
     return await response.json();
 };
 
+
+export const updateUser = async (body)=>{
+    const response = await fetchInstance.put({
+        endpoint: '/auth',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body,
+        credentials: 'include'
+    })
+
+    return await response.json();
+}
+

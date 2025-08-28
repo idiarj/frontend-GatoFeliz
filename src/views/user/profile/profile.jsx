@@ -1,8 +1,12 @@
+import "./profile.css";
 import React, { useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { FaUserCircle, FaEnvelope, FaPhone, FaLock, FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "./profile.css";
+import { useUser } from "../../../hooks/useUser";
+import { updateUser } from "../../../api/Auth";
+import { useLoaderData } from "react-router-dom";
+import esterilizarImg from "../../../assets/images/esterilizar.png"
 import tabby from "../../../assets/perfil/tabby.png";
 import tuxedo from "../../../assets/perfil/tuxedo.png";
 import carey from "../../../assets/perfil/carey.png";
@@ -10,7 +14,7 @@ import amarillo from "../../../assets/perfil/amarillo.png";
 import siames from "../../../assets/perfil/siames.png";
 import blanco from "../../../assets/perfil/blanco.png";
 import negro from "../../../assets/perfil/negro.png";
-import esterilizarImg from "../../../assets/images/esterilizar.png"
+import Loading from "../loading/Loading";
 
 
 /** Si luego conectas tu UserContext, solo reemplaza mockUser y updateUser */
@@ -34,22 +38,28 @@ const mockUser = {
 };
 
 const Profile = () => {
-  // const { user, updateUser } = useContext(UserContext);
-  const user = mockUser;
-  const updateUser = (data) => {
-    console.log("Actualizar usuario:", data);
-  };
-
+  const data = useLoaderData();
+  console.log(data)
+  const { setUser } = useUser();
+  const userM = mockUser;
   const [editMode, setEditMode] = useState(false);
   const [showImgOptions, setShowImgOptions] = useState(false);
   const [formData, setFormData] = useState({
-    username: user.username,
-    email: user.email,
-    phone: user.phone,
-    profileImg: user.profileImg
+    id_usuario: data.id_usuario,
+    nom_usuario: data.nom_usuario,
+    email_usuario: data.email_usuario,
+    tlf_usuario: data.tlf_usuario,
+    profileImg: userM.profileImg
   });
-
   const navigate = useNavigate();
+  // if(!data){
+  //   return <Loading message="Cargando perfil..." compact/>
+  // }
+
+  // const updateUser = (data) => {
+  //   console.log("Actualizar usuario:", data);
+  // };
+
 
   const currentImg = profileImages.find((i) => i.key === formData.profileImg);
 
@@ -69,19 +79,30 @@ const Profile = () => {
     setShowImgOptions(false);
     // Restablece a los datos del usuario actual (mock o contexto)
     setFormData({
-      name: user.name,
-      username: user.username,
-      email: user.email,
-      phone: user.phone,
-      profileImg: user.profileImg
+      id_usuario: data.id_usuario,
+      nom_usuario: data.nom_usuario,
+      email_usuario: data.email_usuario,
+      tlf_usuario: data.tlf_usuario,
+      profileImg: userM.profileImg
     });
   };
 
-  const handleSave = (e) => {
+  const handleSave = async (e) => {
     e.preventDefault();
-    updateUser(formData);
-    setEditMode(false);
-    setShowImgOptions(false);
+    try{
+        const data = await updateUser(formData);
+        if(!data.success){
+          console.error('Error al actualizar los datos.');
+          return;
+        }
+        setUser(null);
+        console.log(data);
+        setUser(data.data);
+        setEditMode(false);
+        setShowImgOptions(false);
+    }catch(error){
+      console.error(error)
+    }
   };
 
 const goToRecoverPassword = () => navigate("/auth/recoverPassword");
@@ -165,7 +186,7 @@ const goToRecoverPassword = () => navigate("/auth/recoverPassword");
                 )}
               </div>
               {/* Nombre eliminado, solo se muestra el username */}
-              <span style={{ fontSize: "1.5rem", fontWeight: 800, color: "#F26C1F" }}>@{formData.username}</span>
+              <span style={{ fontSize: "1.5rem", fontWeight: 800, color: "#F26C1F" }}>@{formData.nom_usuario}</span>
             </div>
           </header>
 
@@ -181,13 +202,13 @@ const goToRecoverPassword = () => navigate("/auth/recoverPassword");
                     {editMode ? (
                       <input
                         type="text"
-                        name="username"
-                        value={formData.username}
+                        name="nom_usuario"
+                        value={formData.nom_usuario}
                         onChange={handleChange}
                         autoComplete="username"
                       />
                     ) : (
-                      <div>@{formData.username}</div>
+                      <div>@{formData.nom_usuario}</div>
                     )}
                   </div>
                   {/* Teléfono */}
@@ -197,14 +218,14 @@ const goToRecoverPassword = () => navigate("/auth/recoverPassword");
                     {editMode ? (
                       <input
                         type="text"
-                        name="phone"
-                        value={formData.phone}
+                        name="tlf_usuario"
+                        value={formData.tlf_usuario}
                         onChange={handleChange}
                         inputMode="tel"
                         autoComplete="tel"
                       />
                     ) : (
-                      <div>{formData.phone}</div>
+                      <div>{formData.tlf_usuario}</div>
                     )}
                   </div>
                 </div>
@@ -217,15 +238,15 @@ const goToRecoverPassword = () => navigate("/auth/recoverPassword");
                     {editMode ? (
                       <input
                         type="email"
-                        name="email"
-                        value={formData.email}
+                        name="email_usuario"
+                        value={formData.email_usuario}
                         onChange={handleChange}
                         autoComplete="email"
                         maxLength={80}
                         style={{ width: "100%" }}
                       />
                     ) : (
-                      <div>{formData.email}</div>
+                      <div>{formData.email_usuario}</div>
                     )}
                   </div>
                 </div>

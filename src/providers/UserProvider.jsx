@@ -7,7 +7,6 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Aquí puedes hacer una llamada a la API para obtener los permisos del usuario
     const fetchUser = async () => {
       const data = await me();
       console.log(data)

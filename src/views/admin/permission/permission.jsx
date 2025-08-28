@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { getProfiles } from "../../../../../api/Admin";
+// import { getProfiles } from "../../../../../api/Admin";
 import "./permission.css";
 
 const roles = [

@@ -16,13 +16,14 @@ import Adoptions from './views/user/adoption/adoption.jsx';
 import Sponsor from './views/user/sponsor/sponsor.jsx';
 import Loading from "./views/user/loading/Loading.jsx";
 import MedicalPanel from './views/user/medicalPanel/medicalPanel.jsx';
-import Administration from './views/user/administration/administration.jsx';
-import Request from './views/user/administration/views/request/request.jsx';
-import Permision from './views/user/administration/views/permission/permission.jsx';
-import RolAdmin from './views/user/administration/views/rol/rol.jsx';
+import Administration from './views/admin/administration/administration.jsx';
+import Request from './views/admin/request/request.jsx';
+import Permision from './views/admin/permission/permission.jsx';
+import RolAdmin from './views/admin/rol/rol.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 import NotFound from "./views/user/notFound/notFound.jsx";
 import Profile from './views/user/profile/profile.jsx';
+import { me } from "./api/Auth.js";
 
 
 
@@ -62,7 +63,13 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/profile',
-                element: <Profile/>
+                element: <Profile/>,
+                loader: async ()=>{
+                    await delay(800);
+                    const data = await me();
+                    return data.data;
+                },
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando perfil...'} compact/></div>
             },
             {
                 path: '/aboutUs',
@@ -98,7 +105,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/administration',
-                element: <Administration/>
+                element: <Administration/>,
             },
             {
                 path: '/administration/request',
@@ -106,14 +113,14 @@ export const router = createBrowserRouter([
                 loader: fetchRequestData,
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando solicitudes...'} compact/></div>
             },
-                {
+            {
                     path: '/administration/rol',
                     element: <RolAdmin/>
-                },
-                {
+            },
+            {
                     path: '/administration/permission',
                     element: <Permision/>
-                }
+            }
         ]
     },
     {
