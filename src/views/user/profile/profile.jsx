@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import { updateUser } from "../../../api/Auth";
 import { useLoaderData } from "react-router-dom";
-import esterilizarImg from "../../../assets/images/esterilizar.png"
 import tabby from "../../../assets/perfil/tabby.png";
 import tuxedo from "../../../assets/perfil/tuxedo.png";
 import carey from "../../../assets/perfil/carey.png";
@@ -15,6 +14,13 @@ import siames from "../../../assets/perfil/siames.png";
 import blanco from "../../../assets/perfil/blanco.png";
 import negro from "../../../assets/perfil/negro.png";
 import Loading from "../loading/Loading";
+import tabby1 from "../../../assets/perfil/tabby1.png";
+import tuxedo1 from "../../../assets/perfil/tuxedo1.png";
+import carey1 from "../../../assets/perfil/carey1.png";
+import amarillo1 from "../../../assets/perfil/amarillo1.png";
+import siames1 from "../../../assets/perfil/siames1.png";
+import blanco1 from "../../../assets/perfil/blanco1.png";
+import negro1 from "../../../assets/perfil/negro1.png";
 
 
 /** Si luego conectas tu UserContext, solo reemplaza mockUser y updateUser */
@@ -58,6 +64,9 @@ const Profile = () => {
   const [showImgOptions, setShowImgOptions] = useState(false);
   const navigate = useNavigate();
 
+  // Definir función para navegar a recuperar contraseña
+  const goToRecoverPassword = () => navigate("/auth/recoverPassword");
+
   // Show loading if data is not available
   if (!data) {
     return <Loading message="Cargando perfil..." compact />;
@@ -71,7 +80,6 @@ const Profile = () => {
     tlf_usuario: data?.tlf_usuario ?? "",
     profileImg: userM.profileImg
   });
-  const navigate = useNavigate();
   // if(!data){
   //   return <Loading message="Cargando perfil..." compact/>
   // }

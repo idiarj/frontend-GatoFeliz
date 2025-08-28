@@ -39,7 +39,7 @@ export default function RolAdmin() {
   }, []);
 
   const filteredUsers = users.filter(u =>
-    u.nom_usuario.toLowerCase().includes(search.toLowerCase())
+    typeof u.nom_usuario === "string" && u.nom_usuario.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleUserSelect = (user) => {
