@@ -14,7 +14,7 @@ const CatCard = ({
   onDelete, // <-- Nueva prop para manejar la acción de eliminar
   buttonLabel = 'ENVIAR SOLICITUD',
   boxShadow = true,
-  fromSponsor
+  fromSponsor,
 }) => {
   const pageUrl = `${window.location.origin}/adopcion/${encodeURIComponent(name)}`;
   const [showModal, setShowModal] = useState(false);

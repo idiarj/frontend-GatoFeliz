@@ -36,7 +36,7 @@ const menuOptions = [
   { label: 'Adopciones', icon: <FaCat />, path: '/adoption', session: 'indiferent' },
   { label: 'Apadrinar', icon: <FaPaw />, path: '/apadrinar', session: 'indiferent' },
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions', session: 'indiferent' },
-  { label: 'Mis Gatos', icon: <FaCat />, path: '/misgatos', session: true },
+  { label: 'Mis Gatos', icon: <FaCat />, path: '/tusGatos', session: true },
   {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/auth/login', onClick: handleLogout, session: true},
   { label: 'Panel Medico', icon: <FaStethoscope />, path: '/medical', session: true, needed_profiles: [1, 2]},
   {label: 'Administración', icon: <FaUserShield />, path: '/administration', session: true, needed_profiles: [1]}

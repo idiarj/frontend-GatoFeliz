@@ -1,4 +1,4 @@
-/* Fila de acciones: eliminar izquierda, compartir derecha, botón centrado */
+/* 
 .adoption-card-actions-row {
   display: flex;
   align-items: center;
@@ -16,11 +16,9 @@
   margin-left: auto;
 }
 
-/* Mueve el icono de compartir a la derecha */
 .adoption-card-share-icon {
   margin-left: auto;
 }
-/* Acciones alineadas a la derecha */
 .adoption-card-button {
   background-color: #f37021;
   color: #fff;
@@ -131,7 +129,6 @@
   transform: none !important;
 }
 
-/* Desactiva la animación de la imagen si se usa esta clase */
 .adoption-card-image--no-anim {
   transition: none;
 }
@@ -189,4 +186,207 @@
 
 .delete-btn:hover svg {
   color: #b71c1c;
+} */
+
+
+/* Fila de acciones: eliminar izquierda, compartir derecha, botón centrado */
+.adoption-card-actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  margin-top: 14px;
+}
+
+.adoption-card-delete-btn {
+  margin-right: auto;
+}
+
+.adoption-card-share-btn {
+  margin-left: auto;
+}
+
+/* Icono de compartir alineado a la derecha */
+.adoption-card-share-icon {
+  margin-left: auto;
+}
+
+/* Botón principal */
+.adoption-card-button {
+  background-color: #f37021;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 36px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.15s ease;
+  white-space: nowrap;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.adoption-card-button:hover {
+  background-color: #d95c13;
+  transform: translateY(-2px);
+}
+
+.share-dropdown {
+  position: relative;
+}
+
+.adoption-card-share-main {
+  background: #ffb347;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 0.55rem 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: background 0.25s ease, transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.adoption-card-share-main:hover {
+  background: #ff9800;
+  transform: translateY(-2px);
+}
+
+.share-icon svg {
+  display: block;
+}
+
+.share-menu {
+  position: absolute;
+  top: 115%;
+  right: 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  padding: 0.5rem 0;
+  z-index: 20;
+  min-width: 160px;
+  animation: fadeIn 0.2s ease;
+}
+
+.share-menu-btn {
+  background: none;
+  border: none;
+  color: #333;
+  padding: 0.6rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.share-menu-btn:hover {
+  background: #ffb34722;
+  color: #ff9800;
+}
+
+.adoption-card {
+  width: 355px;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.adoption-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
+}
+
+.adoption-card-image-wrapper {
+  height: 260px;
+  overflow: hidden;
+}
+
+.adoption-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.adoption-card:hover .adoption-card-image {
+  transform: scale(1.06);
+}
+
+.adoption-card:hover .adoption-card-image--no-anim {
+  transform: none !important;
+}
+
+/* Desactiva la animación de la imagen si se usa esta clase */
+.adoption-card-image--no-anim {
+  transition: none;
+}
+.adoption-card:hover .adoption-card-image--no-anim {
+  transform: none;
+}
+
+.adoption-card-content {
+  padding: 18px 16px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.adoption-card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #b94d0d;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.adoption-card-subtitle {
+  margin: 6px 0 14px;
+  font-size: 0.95rem;
+  color: #7a4f02;
+  font-weight: 500;
+}
+
+.adoption-card-icon-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+  border-radius: 50%;
+}
+
+.adoption-card-icon-btn:hover {
+  transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.delete-btn svg {
+  color: #d32f2f;
+  transition: color 0.2s ease;
+}
+
+.delete-btn:hover svg {
+  color: #b71c1c;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
 }

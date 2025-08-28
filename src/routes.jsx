@@ -24,6 +24,7 @@ import RolAdmin from './views/admin/rol/rol.jsx';
 import AppLayout from "./layouts/appLayout/AppLayout.jsx";
 import NotFound from "./views/user/notFound/notFound.jsx";
 import Profile from './views/user/profile/profile.jsx';
+import { MyCats } from "./views/user/myCats/MyCats.jsx";
 
 
 
@@ -99,6 +100,11 @@ export const router = createBrowserRouter([
                 element: <Sponsor/>,
                 loader: fetchAllCats,
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>
+            },
+            {
+                path: '/tusGatos',
+                element: <MyCats/>,
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando tus gatos...'} compact/></div>
             },
             {
                 path: '/medical',

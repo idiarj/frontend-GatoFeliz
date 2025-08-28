@@ -43,6 +43,8 @@ function AppLayout() {
           return 'Administrar Roles';
           case '/profile':
             return 'Perfil de Usuario';
+          case '/tusGatos':
+            return 'Tus Gatos';
       default:
         return 'Gato Feliz';
     }

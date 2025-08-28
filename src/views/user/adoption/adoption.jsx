@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createRequest } from "../../../api/Requests.js";
 import { deleteCat, postCat } from "../../../api/Cats.js";
 import { useLoaderData } from "react-router-dom";
@@ -69,11 +69,11 @@ const Adoptions = () => {
           {/* {filteredCats.map((cat) => (
             <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
           ))} */}
-          {/* {cats && cats.length === 0 && (
+          {cats && cats.length === 0 && (
             <div className="no-cats-message">
               No hay gatos disponibles para adopción en este momento.
             </div>
-          )} */}
+          )}
           {cats && cats.length > 0 && (
             cats.map((cat)=>(
               <CatCard
