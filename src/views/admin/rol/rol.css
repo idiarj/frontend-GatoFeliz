@@ -2,6 +2,7 @@
   max-width: 650px;
   margin: 40px auto;
   background: #fff;
+  margin-top: -30px;
   border-radius: 18px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.08);
   padding: 32px 38px 24px 38px;
@@ -63,6 +64,7 @@
   background: #f57c1a;
   border-radius: 10px;
 }
+
 .rol-user-row {
   display: flex;
   align-items: center;
@@ -70,14 +72,44 @@
   padding: 12px 18px;
   border-bottom: 1px solid #f0f0f0;
   margin-bottom: 8px;
-  background: transparent;
+  background: #f9f9fc;
   min-height: 44px;
+  border-radius: 8px;
+  transition: box-shadow 0.2s;
+}
+.rol-user-row:hover {
+  box-shadow: 0 2px 8px rgba(245,124,26,0.08);
 }
 .rol-user-name {
   font-size: 1.18rem;
   color: #333;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+.rol-select-btn {
+  background: #f57c1a;
+  color: #fff;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(245,124,26,0.08);
+  transition: background 0.2s;
+}
+.rol-select-btn:hover {
+  background: #d65c00;
+}
+.rol-selected-user {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #f7f7fa;
+  border-radius: 12px;
+  padding: 18px 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 12px rgba(59,130,246,0.07);
 }
 .rol-select {
   padding: 10px 22px;
@@ -94,12 +126,6 @@
 .rol-select:focus {
   border: 1.5px solid #f57c1a;
 }
-.rol-no-users {
-  text-align: center;
-  color: #888;
-  font-size: 1rem;
-  padding: 18px 0;
-}
 .rol-save-btn {
   width: auto;
   min-width: 120px;
@@ -113,11 +139,33 @@
   cursor: pointer;
   box-shadow: 0 1px 6px rgba(59,130,246,0.08);
   transition: background 0.2s;
-  margin-top: 8px;
-  display: block;
-  margin-left: auto;
-  margin-right: 0;
+  margin-left: 0;
+  margin-right: 8px;
 }
-.rol-save-btn:hover {
+.rol-save-btn:disabled {
+  background: #bcd6fa;
+  cursor: not-allowed;
+}
+.rol-save-btn:hover:not(:disabled) {
   background: #2563eb;
+}
+.rol-cancel-btn {
+  background: #e0e0e0;
+  color: #444;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.rol-cancel-btn:hover {
+  background: #bdbdbd;
+}
+.rol-no-users {
+  text-align: center;
+  color: #888;
+  font-size: 1rem;
+  padding: 18px 0;
 }

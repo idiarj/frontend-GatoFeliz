@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser";
 import { updateUser } from "../../../api/Auth";
 import { useLoaderData } from "react-router-dom";
-import esterilizarImg from "../../../assets/images/esterilizar.png"
 import tabby from "../../../assets/perfil/tabby.png";
 import tuxedo from "../../../assets/perfil/tuxedo.png";
 import carey from "../../../assets/perfil/carey.png";
@@ -15,6 +14,13 @@ import siames from "../../../assets/perfil/siames.png";
 import blanco from "../../../assets/perfil/blanco.png";
 import negro from "../../../assets/perfil/negro.png";
 import Loading from "../loading/Loading";
+import tabby1 from "../../../assets/perfil/tabby1.png";
+import tuxedo1 from "../../../assets/perfil/tuxedo1.png";
+import carey1 from "../../../assets/perfil/carey1.png";
+import amarillo1 from "../../../assets/perfil/amarillo1.png";
+import siames1 from "../../../assets/perfil/siames1.png";
+import blanco1 from "../../../assets/perfil/blanco1.png";
+import negro1 from "../../../assets/perfil/negro1.png";
 
 
 /** Si luego conectas tu UserContext, solo reemplaza mockUser y updateUser */
@@ -28,6 +34,16 @@ const profileImages = [
   { key: "negro.png", src: negro, alt: "Gato Negro" }
 ];
 
+const secondaryImages = {
+  "tabby.png": tabby1,
+  "tuxedo.png": tuxedo1,
+  "carey.png": carey1,
+  "amarillo.png": amarillo1,
+  "siames.png": siames1,
+  "blanco.png": blanco1,
+  "negro.png": negro1
+};
+
 // Datos de ejemplo para pruebas
 const mockUser = {
   name: "Victoria Acosta",
@@ -39,22 +55,25 @@ const mockUser = {
 
 const Profile = () => {
   const data = useLoaderData();
-  console.log(data)
   const { setUser } = useUser();
   const userM = mockUser;
   const [editMode, setEditMode] = useState(false);
   const [showImgOptions, setShowImgOptions] = useState(false);
+  const navigate = useNavigate();
+
+  // Show loading if data is not available
+  if (!data) {
+    return <Loading message="Cargando perfil..." compact />;
+  }
+
+  // Initialize formData only when data is available
   const [formData, setFormData] = useState({
-    id_usuario: data.id_usuario,
-    nom_usuario: data.nom_usuario,
-    email_usuario: data.email_usuario,
-    tlf_usuario: data.tlf_usuario,
+    id_usuario: data?.id_usuario ?? "",
+    nom_usuario: data?.nom_usuario ?? "",
+    email_usuario: data?.email_usuario ?? "",
+    tlf_usuario: data?.tlf_usuario ?? "",
     profileImg: userM.profileImg
   });
-  const navigate = useNavigate();
-  // if(!data){
-  //   return <Loading message="Cargando perfil..." compact/>
-  // }
 
   // const updateUser = (data) => {
   //   console.log("Actualizar usuario:", data);
@@ -62,6 +81,9 @@ const Profile = () => {
 
 
   const currentImg = profileImages.find((i) => i.key === formData.profileImg);
+
+  // Obtener imagen secundaria según la seleccionada
+  const secondaryImgSrc = secondaryImages[formData.profileImg];
 
   const handleChange = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -280,11 +302,14 @@ const goToRecoverPassword = () => navigate("/auth/recoverPassword");
               <FaSignOutAlt className="profile-icon logout" style={{ fontSize: 22, color: "#F26C1F", marginRight: 8 }} /> Cerrar Sesión
             </button>
           </div>
-            <div style={{ display: "flex", justifyContent: "center", marginTop: -10 }}>
-              <img src={esterilizarImg} alt="Esterilizar" style={{ maxWidth: "230px", height: "auto" }} />
-            </div>
+            {/* Imagen secundaria centrada debajo de acciones rápidas */}
+            {secondaryImgSrc && (
+              <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: 20 }}>
+                <img src={secondaryImgSrc} alt="Imagen secundaria" style={{ width: 340, height: "auto" }} />
+              </div>
+            )}
         </aside>
-      </div>
+        </div>
     </div>
   );
 };

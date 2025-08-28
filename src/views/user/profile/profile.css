@@ -217,7 +217,7 @@
 /* ====== Columna derecha (acciones) ====== */
 .profile-right{
   position: sticky;
-  top: 32px;
+  top: 10px;
   align-self: start;
 }
 
