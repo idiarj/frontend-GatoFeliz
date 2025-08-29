@@ -28,3 +28,15 @@
   gap: 32px;
   justify-content: center;
 }
+
+.myCats-link{
+  color: inherit;         /* Hereda el color del texto padre */
+  text-decoration: none;  /* Quita el subrayado */
+  font-weight: bold; 
+}
+
+.myCats-link:hover {
+  color: #b94d0d;         /* Cambia a un color personalizado en hover */
+  text-decoration: underline; /* Opcional: agrega subrayado en hover */
+  cursor: pointer;        /* Cambia el cursor a pointer */
+}

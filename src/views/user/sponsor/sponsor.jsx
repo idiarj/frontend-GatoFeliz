@@ -58,12 +58,12 @@ const Sponsor =  () => {
         <div className="sponsor-info">
           Apadrinar tiene un costo de tan solo $12 al mes, con esto le aseguras la comida y salud a tu peludo favorito, Envíanos el nombre del gato y captura del comprobante por whatsapp
         </div>
-        <div className="sponsor-cards">
           {cats && cats.length === 0 && (
             <div className="no-cats-message">
               No hay gatos disponibles para apadrinar en este momento.
             </div>
           )}
+        <div className="sponsor-cards">
           {cats && (
             cats.map((cat) => (
               <CatCard

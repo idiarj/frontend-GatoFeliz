@@ -11,7 +11,6 @@ const roles = [
 
 const permisos = [
   { value: "medico", label: "Panel Médico" },
-  { value: "adopciones", label: "Panel Adopciones" },
   { value: "administrativo", label: "Panel Administrativo" },
 ];
 

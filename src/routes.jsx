@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { fetchAllCats, fetchAdoptableCats } from "./api/Cats.js";
+import { fetchAllCats, fetchAdoptableCats, fetchMyCats } from "./api/Cats.js";
 import { fetchRequestData } from "./api/Requests.js";
 import { me } from "./api/Auth.js";
 import { delay } from "./utils/delay.js";
@@ -92,18 +92,44 @@ export const router = createBrowserRouter([
             {
                 path: '/adoption',
                 element: <Adoptions/>,
-                loader: fetchAdoptableCats,
+                loader: async ()=>{
+                    await delay(800);
+                    let data = await fetchAdoptableCats();
+                    if(!data.success || !data.data) {
+                        data.data = [];
+                    }
+                    console.log("Adoptions loader data:", data);
+                    return data;
+                },
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos adoptables...'} compact/></div>
             },
             {
                 path: '/apadrinar',
                 element: <Sponsor/>,
-                loader: fetchAllCats,
+                loader: async ()=>{
+                    await delay(800);
+                    let data = await fetchAllCats();
+                    if(!data.success || !data.data) {
+                        data.data = [];
+                    }
+                    console.log("Sponsor loader data:", data);
+                    return data;
+                },
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>
             },
             {
                 path: '/tusGatos',
                 element: <MyCats/>,
+                loader: async ()=>{
+                    await delay(800);
+                    const data = await fetchMyCats();
+                    if(!data.success) {
+                        console.log("No autenticado, redirigiendo a login");
+                        throw redirect('/auth/login');
+                    }
+                    console.log("MyCats loader data:", data);
+                    return data;
+                },
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando tus gatos...'} compact/></div>
             },
             {

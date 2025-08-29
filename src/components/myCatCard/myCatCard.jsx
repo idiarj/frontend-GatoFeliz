@@ -1,20 +1,20 @@
 import React from 'react'
 import { FiShare2 } from 'react-icons/fi'
 import './myCatCard.css'
-export const MyCatCard = ({gender, age}) => {
+export const MyCatCard = ({gender, age, image, name}) => {
   return (
     <div className="cat-share-card">
       <div className="cat-share-card-image-wrapper">
         <img
-          src={'https://res.cloudinary.com/dqc0yku26/image/upload/v1756355363/gatoFeliz/icons/cat_siames_cat.png'}
-          alt={`Foto de ${'gato'}`}
+          src={image}
+          alt={`Foto de ${name}`}
           className="cat-share-card-image"
         />
       </div>
       <div className="cat-share-card-content">
-        <h3 className="cat-share-card-title">{'gato'}</h3>
+        <h3 className="cat-share-card-title">{name}</h3>
         <p className="cat-share-card-subtitle">
-          {'genero'} · {'edad'}
+          {gender} · {age}
         </p>
 
         <div className="cat-share-card-actions">
