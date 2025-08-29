@@ -64,16 +64,16 @@
 }
 
 .case-card {
-  background: #f5f7fa;
+  background: #faf9f5;
   border-radius: 10px;
   padding: 18px 20px;
   box-shadow: 0 2px 8px rgba(30,136,229,0.08);
   cursor: pointer;
   transition: box-shadow 0.2s, background 0.2s;
-  border: 1px solid #e3eaf2;
+  border: 1px solid #faf9f5;
 }
 .case-card:hover {
-  background: #e3f2fd;
+  background: #fdf8e3;
   box-shadow: 0 4px 16px rgba(30,136,229,0.12);
 }
 
@@ -105,7 +105,7 @@
   margin-bottom: 12px;
 }
 .case-detail-gato-owner > div {
-  background: #f5f7fa;
+  background: #faf9f5;
   border-radius: 8px;
   padding: 12px 18px;
   flex: 1;

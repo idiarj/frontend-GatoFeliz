@@ -14,7 +14,6 @@ const initialForm = {
   telefono: "",
   ciudad: "",
   especie: "",
-  raza: "",
   sexo: "",
   edad: "",
   color: "",
@@ -44,6 +43,18 @@ const initialForm = {
   firmaPropietario: ""
 };
 
+const pruebaVeterinarios = [
+  { id: 1, nombre: "Dra. Ana Torres" },
+  { id: 2, nombre: "Dr. Luis Pérez" },
+  { id: 3, nombre: "Dra. Marta Gómez" }
+];
+
+const pruebaGatos = [
+  { id_animal: 101, nom_animal: "Michi" },
+  { id_animal: 102, nom_animal: "Pelusa" },
+  { id_animal: 103, nom_animal: "Bigotes" }
+];
+
 const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) => {
   // Si no pasan onClose, el modal se controla internamente
   const [internalOpen, setInternalOpen] = useState(true);
@@ -71,6 +82,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
   }, []);
 
   const [form, setForm] = useState(initialForm);
+  const [esFundacion, setEsFundacion] = useState(false);
 
   // Si no hay onClose y ya se cerró internamente, no renderizar
   // (Move this check after all hooks)
@@ -91,10 +103,16 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
     return `${hours}:${minutes}`;
   };
 
+  // Solo actualiza el formulario cuando selectedCase cambia
   useEffect(() => {
     if (selectedCase) {
       setForm(selectedCase);
-    } else {
+    }
+  }, [selectedCase]);
+
+  // Inicializa el formulario solo una vez al montar si no hay selectedCase
+  useEffect(() => {
+    if (!selectedCase) {
       setForm({
         ...initialForm,
         historiaClinica: getNextHistoriaClinica(),
@@ -102,12 +120,26 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
         horaAdmision: getCurrentTime(),
       });
     }
-  }, [selectedCase, medicalCases]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!onClose && !internalOpen) return null;
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+    if (name === "esFundacion") {
+      setEsFundacion(checked);
+      if (!checked) {
+        setForm((prev) => ({ ...prev, nombrePaciente: "" }));
+      }
+      return;
+    }
+    if (name === "telefono") {
+      // Permitir solo números y máximo 11 dígitos
+      const soloNumeros = value.replace(/\D/g, "").slice(0, 11);
+      setForm((prev) => ({ ...prev, telefono: soloNumeros }));
+      return;
+    }
     if (name.startsWith("constantes.")) {
       setForm((prev) => ({
         ...prev,
@@ -172,6 +204,19 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
       >
         {/* Sección 1: Encabezado */}
         <div className="section-table">
+          {/* Checkbox gato de la fundación */}
+          <div className="form-row" style={{ marginBottom: '12px' }}>
+            <label>
+              <input
+                type="checkbox"
+                name="esFundacion"
+                checked={esFundacion}
+                onChange={handleChange}
+                style={{ marginRight: '8px' }}
+              />
+              El gato es de la fundación
+            </label>
+          </div>
           <div className="form-row" style={{ display: 'flex', gap: '24px' }}>
             <div style={{ flex: 1 }}>
               <label>N° Historia clínica:</label>
@@ -193,11 +238,41 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
             </div>
             <div style={{ flex: 1 }}>
               <label>Nombre del paciente:</label>
-              <input className="modern-input" name="nombrePaciente" value={form.nombrePaciente} onChange={handleChange} />
+              {esFundacion ? (
+                <select
+                  className="modern-input"
+                  name="nombrePaciente"
+                  value={form.nombrePaciente}
+                  onChange={handleChange}
+                >
+                  {!form.nombrePaciente && (
+                    <option value="" disabled hidden>Selecciona un gato</option>
+                  )}
+                  {pruebaGatos.map(g => (
+                    <option key={g.id_animal} value={g.nom_animal}>
+                      {g.nom_animal} (ID: {g.id_animal})
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input className="modern-input" name="nombrePaciente" value={form.nombrePaciente} onChange={handleChange} />
+              )}
             </div>
             <div style={{ flex: 1 }}>
               <label>Veterinario encargado:</label>
-              <input className="modern-input" name="veterinario" value={form.veterinario} onChange={handleChange} />
+              <select
+                className="modern-input"
+                name="veterinario"
+                value={form.veterinario}
+                onChange={handleChange}
+              >
+                {!form.veterinario && (
+                  <option value="" disabled hidden>Selecciona un veterinario</option>
+                )}
+                {pruebaVeterinarios.map(v => (
+                  <option key={v.id} value={v.nombre}>{v.nombre}</option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="form-row" style={{ display: 'flex', gap: '24px', marginTop: '16px' }}>
@@ -207,7 +282,16 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
             </div>
             <div style={{ flex: 1 }}>
               <label>Teléfono:</label>
-              <input className="modern-input" name="telefono" value={form.telefono} onChange={handleChange} />
+              <input 
+                className="modern-input" 
+                name="telefono" 
+                value={form.telefono} 
+                onChange={handleChange} 
+                type="tel" 
+                pattern="[0-9]*" 
+                maxLength={11} 
+                inputMode="numeric" 
+              />
             </div>
             <div style={{ flex: 1 }}>
               <label>Ciudad:</label>
@@ -219,10 +303,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
               <label>Especie:</label>
               <input className="modern-input" name="especie" value={form.especie} onChange={handleChange} />
             </div>
-            <div style={{flex: 1}}>
-              <label>Raza:</label>
-              <input className="modern-input" name="raza" value={form.raza} onChange={handleChange} />
-            </div>
+            {/* Raza eliminado */}
             <div style={{flex: 1}}>
               <label>Sexo:</label>
               <input className="modern-input" name="sexo" value={form.sexo} onChange={handleChange} />
@@ -406,10 +487,9 @@ export function visualizeCaseInfo(caseData) {
         <div><strong>Teléfono:</strong> {caseData.telefono}</div>
         <div><strong>Ciudad:</strong> {caseData.ciudad}</div>
       </div>
-      {/* Especie, raza, sexo y edad */}
+      {/* Especie, sexo y edad (raza eliminado) */}
       <div className="mc-row">
         <div><strong>Especie:</strong> {caseData.especie}</div>
-        <div><strong>Raza:</strong> {caseData.raza}</div>
         <div><strong>Sexo:</strong> {caseData.sexo}</div>
         <div><strong>Edad:</strong> {caseData.edad}</div>
       </div>

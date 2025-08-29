@@ -18,7 +18,6 @@ const initialCases = [
     date: '2025-08-29T10:00:00',
     nombreGato: 'Michi',
     edadGato: '2 años',
-    razaGato: 'Tabby',
     sexoGato: 'Macho',
     nombreDueno: 'Juan Pérez',
     telefonoDueno: '+58 412-1234567',
@@ -34,7 +33,6 @@ const initialCases = [
     date: '2025-08-28T09:00:00',
     nombreGato: 'Pelusa',
     edadGato: '3 años',
-    razaGato: 'Siames',
     sexoGato: 'Hembra',
     nombreDueno: 'María Gómez',
     telefonoDueno: '+58 414-9876543',
@@ -50,7 +48,6 @@ const initialCases = [
     date: '2025-08-27T15:30:00',
     nombreGato: 'Nube',
     edadGato: '1 año',
-    razaGato: 'Persa',
     sexoGato: 'Hembra',
     nombreDueno: 'Carlos Ruiz',
     telefonoDueno: '+58 424-5556677',
@@ -101,7 +98,6 @@ function MedicalPanel() {
     firmaEncargado: 'Dra. Felina',
     firmaPropietario: 'Juan Pérez'
   };
-
   
   const [cases, setCases] = useState(initialCases);
   const [showForm, setShowForm] = useState(false);
@@ -205,7 +201,6 @@ function CaseDetailEditor({ caseData, onClose, onSave }) {
           <strong>Datos del gato:</strong><br/>
           Nombre: {caseData.nombreGato}<br/>
           Edad: {caseData.edadGato}<br/>
-          Raza: {caseData.razaGato}<br/>
           Sexo: {caseData.sexoGato}
         </div>
         <div>
