@@ -49,13 +49,17 @@ const profileImages = [
 
 const Profile = () => {
   const data = useLoaderData();
-  const { setUser } = useUser();
+  const { user, setUser } = useUser();
 
   const [showPwdModal, setShowPwdModal] = useState(false); // NUEVO: estado modal
   const dismissBtnRef = useRef(null); // NUEVO: para enfoque accesible
   const [editMode, setEditMode] = useState(false);
   const [showImgOptions, setShowImgOptions] = useState(false);
   const [secondaryImgSrc, setSecondaryImgSrc] = useState(null);
+  const navigate = useNavigate();
+  
+  
+  
   const [formData, setFormData] = useState({
     id_usuario: data.id_usuario,
     nom_usuario: data.nom_usuario,
@@ -63,6 +67,12 @@ const Profile = () => {
     tlf_usuario: data.tlf_usuario,
     img_usuario_url: data.img_usuario_url
   });
+
+  useEffect(()=>{
+    if(!user){
+      navigate("/auth/login");
+    }
+  }, [user, navigate])
 
 
   useEffect(() => {
@@ -72,7 +82,6 @@ const Profile = () => {
 
   console.log(secondaryImgSrc);
 
-  const navigate = useNavigate();
   const openPwdModal = () => setShowPwdModal(true);
   const closePwdModal = () => setShowPwdModal(false);
 

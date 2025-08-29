@@ -30,6 +30,18 @@ export const getUsers = async () => {
 };
 
 
-// export const assignProfiles = async ({id_perfil, id_usuario}) = {
 
-// }
+export const assignProfiles = async ({id_perfil, id_usuario}) => {
+  try {
+    const response = await fetchInstance.post({
+      endpoint: "/admin/assign-profile",
+      headers: { 'Content-type': 'application/json' },
+      credentials: 'include',
+      body: { id_perfil, id_usuario }
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Error assigning profile:", error);
+    throw error;
+  }
+}

@@ -39,3 +39,14 @@ export const deleteCat = async (catId) => {
   });
   return await response.json();
 };
+
+
+export const fetchMyCats = async () => {
+  await delay(800);
+  const response = await fetchInstance.get({
+    endpoint: "/animal/sponsorships",
+    headers: { "Content-Type": "application/json" },
+    credentials: 'include'
+  });
+  return await response.json();
+}
