@@ -382,5 +382,93 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
   );
 };
 
+
+// Método para visualizar la información de un caso (solo visualización)
+export function visualizeCaseInfo(caseData) {
+  if (!caseData) return <div>No hay datos para mostrar.</div>;
+  return (
+    <div className="medical-case-visualization">
+      <h2>Historia Clínica #{caseData.historiaClinica || caseData.id}</h2>
+      {/* Fecha, hora y propietario */}
+      <div className="mc-row">
+        <div><strong>Fecha admisión:</strong> {caseData.fechaAdmision}</div>
+        <div><strong>Hora:</strong> {caseData.horaAdmision}</div>
+        <div><strong>Propietario:</strong> {caseData.propietario}</div>
+      </div>
+      {/* Nombre paciente y veterinario */}
+      <div className="mc-row">
+        <div><strong>Nombre del paciente:</strong> {caseData.nombrePaciente}</div>
+        <div><strong>Veterinario encargado:</strong> {caseData.veterinario}</div>
+      </div>
+      {/* Dirección, teléfono y ciudad */}
+      <div className="mc-row">
+        <div><strong>Dirección:</strong> {caseData.direccion}</div>
+        <div><strong>Teléfono:</strong> {caseData.telefono}</div>
+        <div><strong>Ciudad:</strong> {caseData.ciudad}</div>
+      </div>
+      {/* Especie, raza, sexo y edad */}
+      <div className="mc-row">
+        <div><strong>Especie:</strong> {caseData.especie}</div>
+        <div><strong>Raza:</strong> {caseData.raza}</div>
+        <div><strong>Sexo:</strong> {caseData.sexo}</div>
+        <div><strong>Edad:</strong> {caseData.edad}</div>
+      </div>
+      {/* Color y Kennel */}
+      <div className="mc-row">
+        <div><strong>Color y señas particulares:</strong> {caseData.color}</div>
+        <div><strong>N° Kennel:</strong> {caseData.kennel}</div>
+      </div>
+      {/* Motivo consulta */}
+      <div className="mc-section">
+        <span className="mc-section-title">Motivo consulta:</span> {caseData.motivo}
+      </div>
+      {/* Historia */}
+      <div className="mc-section">
+        <span className="mc-section-title">Historia:</span> {caseData.historia}
+      </div>
+      {/* Dieta, vacunación y desparasitante */}
+      <div className="mc-row">
+        <div><strong>Dieta:</strong> {caseData.dieta}</div>
+        <div><strong>Vacunación:</strong> {caseData.vacunacion ? 'Sí' : 'No'}</div>
+        <div><strong>Desparasitaciones:</strong> {caseData.desparasitacion ? 'Sí' : 'No'}</div>
+      </div>
+      {/* Productos */}
+      <div className="mc-section">
+        <span className="mc-section-title">Productos:</span> {caseData.productos}
+      </div>
+      {/* Estado reproductivo y procedencia */}
+      <div className="mc-row">
+        <div><strong>Estado reproductivo:</strong> {caseData.estadoReproductivo}</div>
+        <div><strong>Procedencia:</strong> {caseData.procedencia}</div>
+      </div>
+      {/* Constantes fisiológicas */}
+      <div className="mc-section">
+        <span className="mc-section-title">Constantes fisiológicas:</span>
+        <ul>
+          <li>Peso: {caseData.constantes?.peso}</li>
+          <li>Temperatura: {caseData.constantes?.temperatura}</li>
+          <li>F. Car.: {caseData.constantes?.fCar}</li>
+          <li>F. Res.: {caseData.constantes?.fRes}</li>
+          <li>T. LL. C: {caseData.constantes?.tllc}</li>
+          <li>Mucosas: {caseData.constantes?.mucosas}</li>
+          <li>Turgencia piel: {caseData.constantes?.turgencia}</li>
+          <li>Pulso: {caseData.constantes?.pulso}</li>
+          <li>Otras: {caseData.constantes?.otras}</li>
+        </ul>
+      </div>
+      <div className="mc-section">
+        <span className="mc-section-title">Anamnesis:</span> {caseData.anamnesis}
+      </div>
+      <div className="mc-section">
+        <span className="mc-section-title">Enfermedades o procedimientos anteriores:</span> {caseData.enfermedadesPrevias}
+      </div>
+      <div className="mc-firmas">
+        <div><strong>Firma encargado:</strong> {caseData.firmaEncargado}</div>
+        <div><strong>Firma propietario:</strong> {caseData.firmaPropietario}</div>
+      </div>
+    </div>
+  );
+}
+
 export default MedicalCaseForm;
 

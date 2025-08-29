@@ -1,3 +1,106 @@
+/* Botón de cierre del modal en color naranja */
+.medical-panel-modal-close {
+  color: #f9a826 !important;
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  z-index: 10;
+  transition: color 0.2s;
+}
+.medical-panel-modal-close:hover {
+  color: #e08c1a !important;
+}
+/* Visualización moderna de casos médicos */
+.medical-case-visualization {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px #0002;
+  padding: 32px 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border: 2px solid #f9a82633;
+}
+.medical-case-visualization h2 {
+  color: #f97a26;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+.medical-case-visualization .mc-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  margin-bottom: 12px;
+}
+.medical-case-visualization .mc-row > div {
+  flex: 1 1 120px;
+  min-width: 120px;
+  font-size: 1.08em;
+  color: #333;
+  background: #f7f7fa;
+  border-radius: 8px;
+  padding: 8px 12px;
+  box-shadow: 0 1px 4px #0001;
+}
+.medical-case-visualization .mc-row > div strong {
+  color: #f9a826;
+  font-weight: 600;
+}
+.medical-case-visualization .mc-section {
+  margin-bottom: 18px;
+}
+.medical-case-visualization ul {
+  background: #f7f7fa;
+  border-radius: 8px;
+  padding: 12px 18px;
+  margin: 8px 0 18px 0;
+  box-shadow: 0 1px 4px #0001;
+}
+.medical-case-visualization ul li {
+  font-size: 1em;
+  color: #444;
+  margin-bottom: 4px;
+}
+.medical-case-visualization .mc-section-title {
+  color: #f9a826;
+  font-weight: 600;
+  font-size: 1.1em;
+  margin-bottom: 6px;
+}
+.medical-case-visualization .mc-firmas {
+  display: flex;
+  gap: 32px;
+  margin-top: 18px;
+}
+.medical-case-visualization .mc-firmas > div {
+  flex: 1 1 120px;
+  background: #f7f7fa;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: #555;
+  font-size: 1em;
+}
+@media (max-width: 700px) {
+  .medical-case-visualization, .medical-case-form {
+    padding: 8px 2px;
+    min-width: 0;
+    max-width: 99vw;
+  }
+  .medical-case-visualization .mc-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .medical-case-visualization .mc-firmas {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
 /* Modern input styles */
 .modern-input {
   width: 100%;
@@ -13,7 +116,7 @@
   margin-right: 6px;
 }
 .modern-input:focus {
-  border-color: #1976d2;
+  border-color: #f97a26;
   box-shadow: 0 2px 8px #1976d222;
   background: #fff;
 }
