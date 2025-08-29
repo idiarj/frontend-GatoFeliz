@@ -63,8 +63,8 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
   const modalRef = useRef(null);
 
   const closeModal = () => {
-    if (onClose) return onClose();
     setInternalOpen(false);
+    if (onClose) onClose();
   };
 
   useEffect(() => {
@@ -123,7 +123,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!onClose && !internalOpen) return null;
+  if (!internalOpen) return null;
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -217,7 +217,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
               El gato es de la fundación
             </label>
           </div>
-          <div className="form-row" style={{ display: 'flex', gap: '24px' }}>
+    <div className="form-row" style={{ display: 'flex', gap: '24px', paddingRight: '16px' }}>
             <div style={{ flex: 1 }}>
               <label>N° Historia clínica:</label>
               <input className="modern-input" name="historiaClinica" value={form.historiaClinica} type="text" readOnly />
@@ -250,7 +250,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
                   )}
                   {pruebaGatos.map(g => (
                     <option key={g.id_animal} value={g.nom_animal}>
-                      {g.nom_animal} (ID: {g.id_animal})
+                      {g.nom_animal}
                     </option>
                   ))}
                 </select>
@@ -319,8 +319,25 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
               <input className="modern-input" name="color" value={form.color} onChange={handleChange} />
             </div>
             <div style={{ flex: 1 }}>
-              <label>N° Kennel:</label>
-              <input className="modern-input" name="kennel" value={form.kennel || ''} onChange={handleChange} type="text" placeholder="Si se hospitaliza" />
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: 0 , marginLeft: '10px' }}>
+                <input
+                  type="checkbox"
+                  name="kennelFundacion"
+                  checked={form.kennelFundacion || false}
+                  onChange={e => setForm(prev => ({ ...prev, kennelFundacion: e.target.checked }))}
+                  style={{ marginRight: '8px' }}
+                />
+                <span style={{ whiteSpace: 'nowrap' }}>Es kennel de fundación</span>
+              </label>
+              <input
+                className="modern-input"
+                name="kennel"
+                value={form.kennel || ''}
+                onChange={handleChange}
+                type="text"
+                placeholder={form.kennelFundacion ? "N° fundación" : "N° propietario"}
+                style={{ width: '350px', marginTop: '0px', marginLeft: '20px' }}
+              />
             </div>
           </div>
         </div>
@@ -448,7 +465,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
             width: '100%',
             padding: '14px',
             fontSize: '1.05rem',
-            background: '#1976d2',
+            background: '#fb7d00ff',
             color: '#fff',
             border: 'none',
             borderRadius: '8px',

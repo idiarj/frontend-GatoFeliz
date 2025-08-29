@@ -1,19 +1,4 @@
 /* Botón de cierre del modal en color naranja */
-.medical-panel-modal-close {
-  color: #f9a826 !important;
-  font-size: 2rem;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  top: 18px;
-  right: 24px;
-  z-index: 10;
-  transition: color 0.2s;
-}
-.medical-panel-modal-close:hover {
-  color: #e08c1a !important;
-}
 /* Visualización moderna de casos médicos */
 .medical-case-visualization {
   background: #fff;
