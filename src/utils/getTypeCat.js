@@ -1,6 +1,7 @@
 
 
 export function getTypeCat(string){
+    if (!string) return undefined;
     // obtener la parte final del path (nombre del archivo)
     const filename = string.split("/").pop();  // "cat_black_cat.png"
 
