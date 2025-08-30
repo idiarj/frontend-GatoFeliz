@@ -343,7 +343,7 @@ const Profile = () => {
           </div>
             {secondaryImgSrc && (
               <div style={{ width: "100%", display: "flex", justifyContent: "center", marginTop: 20 }}>
-                <img src={secondaryImgSrc} alt="Imagen secundaria" style={{ width: 340, height: "auto" }} />
+                <img src={secondaryImgSrc} alt="Imagen secundaria" style={{ width: 340, height: "auto" }} className="profile-img-secondary" />
               </div>
             )}
         </aside>

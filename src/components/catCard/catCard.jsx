@@ -101,7 +101,7 @@ const CatCard = ({
         <Modal onClose={handleCloseModal}>
           <h3>¿Estás seguro que deseas enviar la solicitud por {name}?</h3>
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: 24 }}>
-            <button onClick={handleCloseModal} style={{ background: '#ccc', color: '#333', border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>Cancelar</button>
+            <button onClick={handleCloseModal} style={{ background: '#ffffffff', color: '#333', border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>Cancelar</button>
             <button onClick={handleConfirmRequest} style={{ background: '#f37021', color: '#fff', border: 'none', borderRadius: 8, padding: '8px 18px', cursor: 'pointer' }}>Sí, enviar</button>
           </div>
         </Modal>

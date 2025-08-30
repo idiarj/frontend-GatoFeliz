@@ -77,8 +77,13 @@ const handleUserSelect = (user) => {
 
   return (
     <>
-      <div className="rol-back" onClick={() => navigate('/administration')}>
-        <span style={{ color: '#ff8c2b', fontSize: '2rem', fontWeight: 'bold', cursor: 'pointer' }}>&larr; Volver</span>
+      <div className="permision-back" onClick={() => navigate('/administration')}>
+        <span className="permision-back-arrow">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" style={{verticalAlign: 'middle'}}>
+            <path d="M20 6L10 16L20 26" stroke="#F47C2C" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </span>
+        <span className="permision-back-text">Volver</span>
       </div>
       <div className="rol-admin-container">
         <div className="rol-header">
