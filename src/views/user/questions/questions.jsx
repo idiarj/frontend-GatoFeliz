@@ -45,10 +45,7 @@ const faqs = [
     question: "¿Piensan expandirse más allá de Maracaibo?",
     answer: "No, es logísticamente imposible expandirnos fuera de Maracaibo."
   },
-  {
-    question: "¿Cómo manejan la organización y logística para cubrir todas las necesidades de la fundación?",
-    answer: "Responde Luis. Luis es el gerente, estoy esperando que me conteste para cambiarlo."
-  },
+
   {
     question: "¿Cómo puedo participar en las actividades de la fundación?",
     answer: "Puedes participar estando pendiente de nuestro Instagram, donde publicamos cuando necesitamos traslados para los rescates."
@@ -63,7 +60,7 @@ const faqs = [
   },
   {
     question: "¿Cómo logran ayudar a tantos gatos con emergencias médicas y también en la alimentación de los de la fundación y zonas cercanas?",
-    answer: "Responde Luis. Luis es el gerente, estoy esperando que me conteste para cambiarlo."
+    answer: "Con el apoyo de la comunidad y los donativos que recibimos."
   },
   {
     question: "¿Cómo se puede colaborar sin necesidad de dar dinero?",

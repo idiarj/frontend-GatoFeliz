@@ -4,7 +4,6 @@ import { fetchRequestData } from "./api/Requests.js";
 import { me } from "./api/Auth.js";
 import { delay } from "./utils/delay.js";
 import { redirect } from "react-router-dom";
-//Views
 import Login from './views/auth/login/login.jsx';
 import Register from './views/auth/register/register.jsx';
 import RecoverPassword from './views/auth/recoverPassword/recoverPassword.jsx';
