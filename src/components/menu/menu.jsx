@@ -1,35 +1,38 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useUser } from '../../hooks/useUser';
+import { usePermissions } from '../../hooks/usePermissions';
 import { logout } from '../../api/Auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle, FaDonate, FaCat, FaPaw, FaStethoscope, FaUserShield } from 'react-icons/fa';
+import {
+  FaHome, FaSignInAlt, FaUserPlus, FaQuestionCircle,
+  FaDonate, FaCat, FaPaw, FaStethoscope, FaUserShield
+} from 'react-icons/fa';
 import './menu.css';
 
-
+/** Logout */
 const handleLogout = async (setUser, navigate) => {
   try {
-          console.log('Cerrar sesión');
-      // Redirigir a la página de inicio o login
-      const data = await logout();
-      if (data.success) {
-        console.log('Sesión cerrada');
-        setUser(null); // Limpiar el estado del usuario
-        // Redirigir a la página de inicio o login
-        navigate('/auth/login');
-      } else {
-        console.error('Error al cerrar sesión', data.errorMsg);
-      }
+    const data = await logout();
+    if (data?.success) {
+      setUser(null);
+      navigate('/auth/login');
+    } else {
+      console.error('Error al cerrar sesión', data?.errorMsg);
+    }
   } catch (error) {
     console.error('Error al cerrar sesión:', error);
   }
-    // Aquí puedes manejar el cierre de sesión, por ejemplo, limpiando el estado del usuario
+};
 
-}
-
+/**
+ * Menú:
+ * - `session`: true (solo logueado), false (solo deslogueado), 'indiferent' (todos)
+ * - `needed_permission`: string con el nombre EXACTO del permiso del backend (p.ej. "Panel Medico")
+ */
 const menuOptions = [
-  { label: 'Inicio', icon: <FaHome />, path: '/dashboard', session: 'indiferent'},
+  { label: 'Inicio', icon: <FaHome />, path: '/dashboard', session: 'indiferent' },
   { label: 'Perfil', icon: <FaUserPlus />, path: '/profile', session: true },
-  { label: 'Iniciar Sesion', icon: <FaSignInAlt />, path: '/auth/login', session: false }, 
+  { label: 'Iniciar Sesion', icon: <FaSignInAlt />, path: '/auth/login', session: false },
   { label: 'Registrarse', icon: <FaUserPlus />, path: '/auth/register', session: false },
   { label: '¿Qué Hacemos?', icon: <FaQuestionCircle />, path: '/aboutUs', session: 'indiferent' },
   { label: 'Donaciones', icon: <FaDonate />, path: '/donations', session: 'indiferent' },
@@ -37,29 +40,63 @@ const menuOptions = [
   { label: 'Apadrinar', icon: <FaPaw />, path: '/apadrinar', session: 'indiferent' },
   { label: 'Preguntas', icon: <FaQuestionCircle />, path: '/questions', session: 'indiferent' },
   { label: 'Mis Gatos', icon: <FaCat />, path: '/tusGatos', session: true },
-  {label: `Cerrar sesion`, icon: <FaSignInAlt />, path: '/auth/login', onClick: handleLogout, session: true},
-  { label: 'Panel Medico', icon: <FaStethoscope />, path: '/medical', session: true, needed_profiles: [1, 2]},
-  {label: 'Administración', icon: <FaUserShield />, path: '/administration', session: true, needed_profiles: [1]}
-  ];
+
+  // Botón de logout (usa onClick para ejecutar logout y navegar)
+  { label: 'Cerrar sesion', icon: <FaSignInAlt />, path: '/auth/login', onClick: handleLogout, session: true },
+
+  // Protegidos por permisos de backend (dinámicos por nombre):
+  { label: 'Panel Medico', icon: <FaStethoscope />, path: '/medical', session: true, needed_permission: 'Panel Medico' },
+  { label: 'Administración', icon: <FaUserShield />, path: '/administration', session: true, needed_permission: 'Administracion' },
+];
+
+/** Reglas de visibilidad por sesión y permiso */
+const canSee = ({ item, user, testing, permissions }) => {
+  const isLogged = !!user;
+
+  // 1) Reglas de sesión
+  if (item.session === true && !isLogged && !testing) return false;
+  if (item.session === false && isLogged && !testing) return false;
+
+  // 2) Reglas de permisos dinámicos por nombre
+  if (!item.needed_permission) return true; // no requiere permiso -> visible
+
+  if (testing) return true; // en testing, no filtramos por permisos
+  if (!isLogged || !user?.id_perfil) return false;
+
+  // Buscar el perfil actual en la data del contexto
+  // permissions es un array de objetos: { id_perfil, perfil, permissions: { "Panel Medico": true, "Administracion": false, ... } }
+  const perfilActual = Array.isArray(permissions)
+    ? permissions.find(p => p.id_perfil === user.id_perfil)
+    : null;
+
+  if (!perfilActual || !perfilActual.permissions) return false;
+
+  return !!perfilActual.permissions[item.needed_permission];
+};
 
 const Menu = () => {
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { user, setUser } = useUser();
-  let testing = import.meta.env.VITE_TESTING === 'true';
-  console.log(user);
+
+  // Trae el array "permissions" directamente del contexto (ya con el payload del backend)
+  const { permissions } = usePermissions() || { permissions: [] };
+
+  const testing = import.meta.env.VITE_TESTING === 'true';
+
+  const visibleOptions = useMemo(
+    () => menuOptions.filter(opt => canSee({ item: opt, user, testing, permissions })),
+    [user, testing, permissions]
+  );
+
   return (
     <nav className="menu-nav">
       <div className="menu-title">
         <span>MENU</span>
       </div>
       <ul className="menu-list">
-        {menuOptions.map(opt => {
+        {visibleOptions.map(opt => {
           const isActive = location.pathname === opt.path;
-          // Filtrado de opciones según sesión y perfil
-          if ((user && opt.session === false) && !testing) return null;
-          if ((!user && opt.session === true) && !testing) return null;
-          if ((user && opt.needed_profiles && !opt.needed_profiles.includes(user.id_perfil)) && !testing) return null;
           return (
             <li key={opt.label} className="menu-list-item">
               <MenuLink
@@ -76,22 +113,23 @@ const Menu = () => {
     </nav>
   );
 };
-    
-// Componente para manejar el hover y estilos de las opciones
+
+/** Link estilizado con manejo de onClick (logout) */
 const MenuLink = ({ to, children, isActiveBg, onClick }) => {
   const [hover, setHover] = useState(false);
   let linkClass = 'menu-link';
   if (isActiveBg) linkClass += ' active';
   if (hover) linkClass += ' hover';
-    const handleClick = (e) => {
+
+  const handleClick = (e) => {
     if (onClick) {
-      e.preventDefault();   // ← evita que <Link> navegue
+      e.preventDefault();
       e.stopPropagation();
-      onClick();            // ← ejecuta tu logout (hará navigate internamente)
+      onClick();
     }
   };
-  return (
 
+  return (
     <Link
       to={to}
       className={linkClass}

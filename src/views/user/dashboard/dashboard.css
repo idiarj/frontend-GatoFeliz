@@ -360,6 +360,41 @@ html, body {
   margin-right: 6px;
 }
 
+.no-cats-message-dash {
+  display: flex;
+  flex-direction: column; /* ahora icono arriba, texto abajo */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #fff9e5; /* amarillo clarito */
+  border: 2px dashed #f47c2c;
+  color: #d35400;
+  font-weight: 600;
+  font-size: 0.95rem;
+
+  padding: 20px 15px;
+  margin: 10px auto;
+  margin-left: 20px;
+  border-radius: 14px;
+  max-width: 280px; /* más compacto */
+  min-height: 300px; /* fuerza forma más cuadrada */
+
+  box-shadow: 0px 4px 8px rgba(0,0,0,0.05);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.no-cats-message-dash:hover {
+  transform: translateY(-3px);
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.1);
+}
+
+.no-cats-message-dash::before {
+  content: "😿";
+  font-size: 2rem;
+  display: block;
+}
+
 /* Responsive design */
 @media (max-width: 1200px) {
   .dashboard-sections {

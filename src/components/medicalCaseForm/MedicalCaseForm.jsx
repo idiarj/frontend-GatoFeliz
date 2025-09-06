@@ -62,6 +62,42 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
   // Ref para enfocar el modal y manejar Escape
   const modalRef = useRef(null);
 
+    // Mapeo de campos del formulario a los nombres de la tabla
+    const mapFormToDb = (form) => ({
+      id_caso: undefined, // Se puede asignar en backend si es autoincremental
+      des_caso: form.historiaClinica,
+      id_usuario: undefined, // Si tienes el usuario, asígnalo aquí
+      id_animal: pruebaGatos.find(g => g.nom_animal === form.nombrePaciente)?.id_animal || undefined,
+      id_caso_est: undefined, // Si tienes el estado del caso, asígnalo aquí
+      sexo_animal_caso: form.sexo,
+      especie_animal_caso: form.especie,
+      edad_animal_caso: form.edad,
+      senas_caso: form.color,
+      motivo_caso: form.motivo,
+      historia_caso: form.historia,
+      dieta_caso: form.dieta,
+      vacunacion_caso: form.vacunacion,
+      desp_caso: form.desparasitacion,
+      prod_caso: form.productos,
+      fechas_caso: form.fechas,
+      estado_repr: form.estadoReproductivo,
+      proc_caso: form.procedencia,
+      peso_animal_caso: form.constantes.peso,
+      temperatura_animal_caso: form.constantes.temperatura,
+      fcar_animal_caso: form.constantes.fCar,
+      fres_animal_caso: form.constantes.fRes,
+      tllc_animal_caso: form.constantes.tllc,
+      mucosas_animal_caso: form.constantes.mucosas,
+      turg_piel_animal_caso: form.constantes.turgencia,
+      pulso_animal_caso: form.constantes.pulso,
+      otras_animal_caso: form.constantes.otras,
+      anamnesis_caso: form.anamnesis,
+      enfer_ante_animal_caso: form.enfermedadesPrevias,
+      hora_agregado_caso: form.horaAdmision,
+      fecha_agregado_caso: form.fechaAdmision,
+      id_kennel: form.kennel,
+    });
+
   const closeModal = () => {
     setInternalOpen(false);
     if (onClose) onClose();
@@ -156,8 +192,10 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(form);
+  e.preventDefault();
+  const dbData = mapFormToDb(form);
+  console.log("Guardando caso:", dbData);
+  onSave(dbData);
   };
 
   return (
@@ -482,86 +520,90 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
 
 
 // Método para visualizar la información de un caso (solo visualización)
-export function visualizeCaseInfo(caseData) {
-  if (!caseData) return <div>No hay datos para mostrar.</div>;
+export function VisualizeCaseInfo({caseData}) {
+  console.log("Visualizando caso:", caseData);
+  let caso = caseData.__db || caseData;
+  console.log("Datos originales del caso:", caso);
+  if (!caso) return <div>No hay datos para mostrar.</div>;
   return (
     <div className="medical-case-visualization">
-      <h2>Historia Clínica #{caseData.historiaClinica || caseData.id}</h2>
+      <h2>Historia Clínica #{caso.des_caso || caso.id_caso}</h2>
       {/* Fecha, hora y propietario */}
       <div className="mc-row">
-        <div><strong>Fecha admisión:</strong> {caseData.fechaAdmision}</div>
-        <div><strong>Hora:</strong> {caseData.horaAdmision}</div>
-        <div><strong>Propietario:</strong> {caseData.propietario}</div>
+        <div><strong>Fecha admisión:</strong> {caso.fecha_agregado_caso}</div>
+        <div><strong>Hora:</strong> {caso.hora_agregado_caso}</div>
+        <div><strong>Propietario:</strong> {caso.nom_dueno_caso}</div>
       </div>
       {/* Nombre paciente y veterinario */}
       <div className="mc-row">
-        <div><strong>Nombre del paciente:</strong> {caseData.nombrePaciente}</div>
-        <div><strong>Veterinario encargado:</strong> {caseData.veterinario}</div>
+        <div><strong>Nombre del paciente:</strong> {caso.nom_animal_caso}</div>
+        {/* Si tienes veterinario en la base de datos, usa el campo correspondiente */}
+        <div><strong>Veterinario encargado:</strong> {caso.veterinario || ''}</div>
       </div>
       {/* Dirección, teléfono y ciudad */}
       <div className="mc-row">
-        <div><strong>Dirección:</strong> {caseData.direccion}</div>
-        <div><strong>Teléfono:</strong> {caseData.telefono}</div>
-        <div><strong>Ciudad:</strong> {caseData.ciudad}</div>
+        <div><strong>Dirección:</strong> {caso.direccion || ''}</div>
+        <div><strong>Teléfono:</strong> {caso.tlf_dueno_caso}</div>
+        <div><strong>Ciudad:</strong> {caso.ciudad || ''}</div>
       </div>
       {/* Especie, sexo y edad (raza eliminado) */}
       <div className="mc-row">
-        <div><strong>Especie:</strong> {caseData.especie}</div>
-        <div><strong>Sexo:</strong> {caseData.sexo}</div>
-        <div><strong>Edad:</strong> {caseData.edad}</div>
+        <div><strong>Especie:</strong> {caso.especie_animal_caso}</div>
+        <div><strong>Sexo:</strong> {caso.sexo_animal_caso}</div>
+        <div><strong>Edad:</strong> {caso.edad_animal_caso}</div>
       </div>
       {/* Color y Kennel */}
       <div className="mc-row">
-        <div><strong>Color y señas particulares:</strong> {caseData.color}</div>
-        <div><strong>N° Kennel:</strong> {caseData.kennel}</div>
+        <div><strong>Color y señas particulares:</strong> {caso.senas_caso}</div>
+        <div><strong>N° Kennel:</strong> {caso.id_kennel}</div>
       </div>
       {/* Motivo consulta */}
       <div className="mc-section">
-        <span className="mc-section-title">Motivo consulta:</span> {caseData.motivo}
+        <span className="mc-section-title">Motivo consulta:</span> {caso.motivo_caso}
       </div>
       {/* Historia */}
       <div className="mc-section">
-        <span className="mc-section-title">Historia:</span> {caseData.historia}
+        <span className="mc-section-title">Historia:</span> {caso.historia_caso}
       </div>
       {/* Dieta, vacunación y desparasitante */}
       <div className="mc-row">
-        <div><strong>Dieta:</strong> {caseData.dieta}</div>
-        <div><strong>Vacunación:</strong> {caseData.vacunacion ? 'Sí' : 'No'}</div>
-        <div><strong>Desparasitaciones:</strong> {caseData.desparasitacion ? 'Sí' : 'No'}</div>
+        <div><strong>Dieta:</strong> {caso.dieta_caso}</div>
+        <div><strong>Vacunación:</strong> {caso.vacunacion_caso ? 'Sí' : 'No'}</div>
+        <div><strong>Desparasitaciones:</strong> {caso.desp_caso ? 'Sí' : 'No'}</div>
       </div>
       {/* Productos */}
       <div className="mc-section">
-        <span className="mc-section-title">Productos:</span> {caseData.productos}
-      </div>
+        <span className="mc-section-title">Productos:</span> {caso.prod_caso}</div>
+      {/* Fechas */}
+      <div className="mc-section">
+        <span className="mc-section-title">Fechas:</span> {caso.fechas_caso}</div>
       {/* Estado reproductivo y procedencia */}
       <div className="mc-row">
-        <div><strong>Estado reproductivo:</strong> {caseData.estadoReproductivo}</div>
-        <div><strong>Procedencia:</strong> {caseData.procedencia}</div>
+        <div><strong>Estado reproductivo:</strong> {caso.estado_repr}</div>
+        <div><strong>Procedencia:</strong> {caso.proc_caso}</div>
       </div>
       {/* Constantes fisiológicas */}
       <div className="mc-section">
         <span className="mc-section-title">Constantes fisiológicas:</span>
         <ul>
-          <li>Peso: {caseData.constantes?.peso}</li>
-          <li>Temperatura: {caseData.constantes?.temperatura}</li>
-          <li>F. Car.: {caseData.constantes?.fCar}</li>
-          <li>F. Res.: {caseData.constantes?.fRes}</li>
-          <li>T. LL. C: {caseData.constantes?.tllc}</li>
-          <li>Mucosas: {caseData.constantes?.mucosas}</li>
-          <li>Turgencia piel: {caseData.constantes?.turgencia}</li>
-          <li>Pulso: {caseData.constantes?.pulso}</li>
-          <li>Otras: {caseData.constantes?.otras}</li>
+          <li>Peso: {caso.peso_animal_caso}</li>
+          <li>Temperatura: {caso.temperatura_animal_caso}</li>
+          <li>F. Car.: {caso.fcar_animal_caso}</li>
+          <li>F. Res.: {caso.fres_animal_caso}</li>
+          <li>T. LL. C: {caso.tllc_animal_caso}</li>
+          <li>Mucosas: {caso.mucosas_animal_caso}</li>
+          <li>Turgencia piel: {caso.turg_piel_animal_caso}</li>
+          <li>Pulso: {caso.pulso_animal_caso}</li>
+          <li>Otras: {caso.otras_animal_caso}</li>
         </ul>
       </div>
       <div className="mc-section">
-        <span className="mc-section-title">Anamnesis:</span> {caseData.anamnesis}
-      </div>
+        <span className="mc-section-title">Anamnesis:</span> {caso.anamnesis_caso}</div>
       <div className="mc-section">
-        <span className="mc-section-title">Enfermedades o procedimientos anteriores:</span> {caseData.enfermedadesPrevias}
-      </div>
+        <span className="mc-section-title">Enfermedades o procedimientos anteriores:</span> {caso.enfer_ante_animal_caso}</div>
       <div className="mc-firmas">
-        <div><strong>Firma encargado:</strong> {caseData.firmaEncargado}</div>
-        <div><strong>Firma propietario:</strong> {caseData.firmaPropietario}</div>
+        <div><strong>Firma encargado:</strong> {caso.veterinario || ''}</div>
+        <div><strong>Firma propietario:</strong> {caso.nom_dueno_caso || ''}</div>
       </div>
     </div>
   );

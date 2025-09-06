@@ -314,6 +314,38 @@
   margin: 0;
 }
 
+.donations-copy-btn {
+  margin-top: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  background: #fb7d00;          /* naranja principal */
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.donations-copy-btn:hover {
+  background: #f37021;          /* naranja más oscuro */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.donations-copy-btn:active {
+  transform: scale(0.96);
+}
+
+.donations-copy-btn.copied {
+  background: #4caf50;          /* verde para feedback de copiado */
+}
+
+
 @media (max-width: 1100px) {
   .donations-grid {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

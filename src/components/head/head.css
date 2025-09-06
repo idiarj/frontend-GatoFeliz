@@ -119,6 +119,15 @@
   color: #F37021;
 }
 
+.head-contact-link {
+  color: #F37021; /* Elige el color que prefieras */
+}
+
+.head-contact-link:hover {
+  color: #F37021;
+  text-decoration: underline;
+}
+
 .head-logo {
   margin-top: -3px;
   margin-bottom: 3px;

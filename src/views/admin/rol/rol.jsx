@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { assignProfiles } from "../../../api/Admin";
 import { useNavigate } from "react-router-dom";
 import { getUsers, getProfiles } from "../../../api/Admin";
+import { useUser } from "../../../hooks/useUser";
 import "./rol.css";
 
 const ROLES = ["Usuario", "Veterinario", "adminVeterinario", "Admin"];
@@ -25,6 +26,7 @@ export default function RolAdmin() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [selectedRole, setSelectedRole] = useState("");
   const [loading, setLoading] = useState(false);
+  const { user } = useUser();
 
   useEffect(() => {
     const usersData = async () => {

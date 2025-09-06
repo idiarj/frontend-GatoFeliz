@@ -1,4 +1,4 @@
-/* Alturas base para que el grid pueda ocupar toda la pantalla */
+Alturas base para que el grid pueda ocupar toda la pantalla
 html, body, #root {
   height: 100%;
 }

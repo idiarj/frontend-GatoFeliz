@@ -1,7 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { fetchAllCats, fetchAdoptableCats, fetchMyCats } from "./api/Cats.js";
+import { fetchAllCats, fetchAdoptableCats, fetchMyCats, fetchLastCat } from "./api/Cats.js";
 import { fetchRequestData } from "./api/Requests.js";
 import { me } from "./api/Auth.js";
+import { getProfiles } from "./api/Admin.js";
+import { fetchMedicalData } from "./api/Medical.js";
 import { delay } from "./utils/delay.js";
 import { redirect } from "react-router-dom";
 import Login from './views/auth/login/login.jsx';
@@ -59,7 +61,15 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Dashboard/>
+                element: <Dashboard/>,
+                loader: async ()=>{
+                    // await delay(800);
+                    let catData = await fetchLastCat({adoptable:true});
+                    let sponsorCatData = await fetchLastCat({adoptable:false});
+                    console.log("Dashboard loader data:", { catData, sponsorCatData });
+                    return {catData, sponsorCatData}
+                },
+                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando pagina principal...'} compact/></div>
             },
             {
                 path: '/profile',
@@ -68,7 +78,7 @@ export const router = createBrowserRouter([
                     await delay(800);
                     const data = await me();
                     if(!data.success) {
-                        console.log("No autenticado, redirigiendo a login");
+                        console.log("No autenticado,~ redirigiendo a login");
                         throw redirect('/auth/login');
                     }
                     console.log("Profile loader data:", data);  
@@ -136,12 +146,24 @@ export const router = createBrowserRouter([
                 element: <MedicalPanel/>,
                 loader: async ()=>{
                     await delay(800);
+                    const data = await fetchMedicalData();
+                    return { ...data.data }
                 },
                 hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando panel medico...'} compact/></div>
             },
             {
                 path: '/administration',
                 element: <Administration/>,
+                 loader: async ()=>{
+                        await delay(800);
+                        const data = await me();
+                        if(!data.success) {
+                            console.log("No autenticado, redirigiendo a login");
+                            throw redirect('/auth/login');
+                        }
+                        console.log("Administration loader data:", data);
+                        return;
+                    }
             },
             {
                 path: '/administration/request',
@@ -151,11 +173,32 @@ export const router = createBrowserRouter([
             },
             {
                     path: '/administration/rol',
-                    element: <RolAdmin/>
+                    element: <RolAdmin/>,
+                     loader: async ()=>{
+                        await delay(800);
+                        const data = await me();
+                        if(!data.success) {
+                            console.log("No autenticado, redirigiendo a login");
+                            throw redirect('/auth/login');
+                        }
+                        console.log("Permission loader data:", data);
+                        return;
+                    }
             },
             {
                     path: '/administration/permission',
-                    element: <Permision/>
+                    element: <Permision/>,
+                    loader: async ()=>{
+                        await delay(800);
+                        const permissions = await getProfiles();
+                        if(!permissions.success) {
+                            console.log("No autenticado, redirigiendo a login");
+                            throw redirect('/auth/login');
+                        }
+                        console.log("Permission loader data:", permissions);
+                        return permissions;
+                    },
+                    hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando permisologia...'} compact/></div>
             }
         ]
     },

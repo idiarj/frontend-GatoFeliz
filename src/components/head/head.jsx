@@ -43,7 +43,7 @@ const Head = ({ title, onSearch }) => {
               </div>
               <div className="head-contact-row">
                 <IoLogoInstagram className="head-contact-icon" />
-                <span className="head-contact-text">gatofelizvenezuela</span>
+                <span className="head-contact-text"><a className="head-contact-link" href="https://www.instagram.com/gatofelizvenezuela/" target="_blank" rel="noopener noreferrer">gatofelizvenezuela</a></span>
               </div>
             </div>
         <Logo width={100} height={100} className="head-logo" />

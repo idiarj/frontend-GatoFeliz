@@ -50,3 +50,12 @@ export const fetchMyCats = async () => {
   });
   return await response.json();
 }
+
+export const fetchLastCat = async ({adoptable}) =>{
+  await delay(500);
+  const response = await fetchInstance.get({
+    endpoint: `/animal/last?adoptable=${adoptable}`,
+    headers: { "Content-Type": "application/json" },
+  });
+  return await response.json();
+}

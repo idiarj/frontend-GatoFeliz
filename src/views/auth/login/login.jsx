@@ -16,19 +16,19 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [gatoDespierto, setGatoDespierto] = useState(false);
   const [error, setError] = useState(null);
-  const { setUser, user } = useUser();
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     identifier_usuario: "",
     pwd_usuario: ""
   });
+  const { setUser, user } = useUser();
+  const navigate = useNavigate();
 
   useEffect(()=>{
     if(user){
       console.log(`Usuario autenticado: ${user.nom_usuario}`);
       navigate('/dashboard')
     }
-  })
+  }, [user, navigate])
 
   const handleChange = (e) => {
 

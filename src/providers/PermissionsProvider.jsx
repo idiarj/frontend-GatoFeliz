@@ -4,24 +4,25 @@ import { useState, useEffect } from "react";
 
 
 export const PermissionsProvider = ({children}) => {
-    const [profiles, setProfiles] = useState({})
+    const [permissions, setPermissions] = useState({})
 
     useEffect(()=>{
         const fetchProfiles = async () =>{
             const data = await getProfiles()
             console.log(data);
             if(!data.success){
-                setProfiles(null);
-                return
+                setPermissions(null);
+                return;
             }
-            setProfiles(data.data)
+            console.log(data.data)
+            setPermissions(data.data)
         };
         fetchProfiles()
     }, [])
 
 
     return (
-        <PermissionContext.Provider value={(profiles, setProfiles)}>
+        <PermissionContext.Provider value={{permissions, setPermissions}}>
             {children}
         </PermissionContext.Provider>
     )
