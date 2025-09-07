@@ -29,3 +29,21 @@ export const createMedicalRecord = async (recordData) => {
         throw error;
     }
 }
+
+
+export const updateMedicalRecord = async (id, updatedData) => {
+    try {
+        console.log('Updating medical record with data:', updatedData);
+        console.log('Medical record ID:', id);
+        const response = await fetchInstance.put({
+            endpoint: `/medical/${id}`,
+            headers: { "Content-Type": "application/json" },
+            credentials: 'include',
+            body: updatedData
+        });
+        return await response.json();
+    } catch (error) {
+        console.error("Error updating medical record:", error);
+        throw error;
+    }
+}

@@ -232,7 +232,8 @@ export const router = createBrowserRouter([
                         }
                         console.log("Permission loader data:", data);
                         return;
-                    }
+                    },
+                    hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando roles...'} compact/></div>
             },
             {
                     path: '/administration/permission',

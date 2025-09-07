@@ -43,32 +43,30 @@ const initialForm = {
   firmaPropietario: ""
 };
 
-const pruebaVeterinarios = [
-  { id: 1, nombre: "Dra. Ana Torres" },
-  { id: 2, nombre: "Dr. Luis Pérez" },
-  { id: 3, nombre: "Dra. Marta Gómez" }
-];
-
 const pruebaGatos = [
   { id_animal: 101, nom_animal: "Michi" },
   { id_animal: 102, nom_animal: "Pelusa" },
   { id_animal: 103, nom_animal: "Bigotes" }
 ];
 
-const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) => {
+const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose, veterinarios, gatos }) => {
   // Si no pasan onClose, el modal se controla internamente
   const [internalOpen, setInternalOpen] = useState(true);
-
+  console.log(medicalCases)
   // Ref para enfocar el modal y manejar Escape
   const modalRef = useRef(null);
 
     // Mapeo de campos del formulario a los nombres de la tabla
     const mapFormToDb = (form) => ({
-      id_caso: undefined, // Se puede asignar en backend si es autoincremental
       des_caso: form.historiaClinica,
-      id_usuario: undefined, // Si tienes el usuario, asígnalo aquí
-      id_animal: pruebaGatos.find(g => g.nom_animal === form.nombrePaciente)?.id_animal || undefined,
-      id_caso_est: undefined, // Si tienes el estado del caso, asígnalo aquí
+      id_usuario: form.veterinario || null,
+      id_animal: (gatos && Array.isArray(gatos) && form.nombrePaciente)
+        ? (gatos.find(g => g.nom_animal === form.nombrePaciente)?.id_animal || null)
+        : (pruebaGatos.find(g => g.nom_animal === form.nombrePaciente)?.id_animal || null),
+      id_caso_est: selectedCase?.id_caso_est || 1,
+      nom_dueno_caso: form.propietario,
+      tlf_dueno_caso: form.telefono,
+      nom_animal_caso: form.nombrePaciente,
       sexo_animal_caso: form.sexo,
       especie_animal_caso: form.especie,
       edad_animal_caso: form.edad,
@@ -95,7 +93,9 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
       enfer_ante_animal_caso: form.enfermedadesPrevias,
       hora_agregado_caso: form.horaAdmision,
       fecha_agregado_caso: form.fechaAdmision,
-      id_kennel: form.kennel,
+      id_kennel: form.kennel || 1,
+      direccion_dueno: form.direccion,
+      ciudad_dueno: form.ciudad,
     });
 
   const closeModal = () => {
@@ -124,7 +124,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
   // (Move this check after all hooks)
   
   const getNextHistoriaClinica = () => {
-    if (!medicalCases.length) return "001";
+    if (!medicalCases.length) return "002";
     const last = medicalCases.reduce((max, c) => {
       const num = parseInt(c.historiaClinica, 10);
       return num > max ? num : max;
@@ -258,7 +258,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
     <div className="form-row" style={{ display: 'flex', gap: '24px', paddingRight: '16px' }}>
             <div style={{ flex: 1 }}>
               <label>N° Historia clínica:</label>
-              <input className="modern-input" name="historiaClinica" value={form.historiaClinica} type="text" readOnly />
+              <input className="modern-input" name="historiaClinica" value={medicalCases[0].id + 1} type="text" readOnly />
             </div>
             <div style={{ flex: 1 }}>
               <label>Fecha admisión:</label>
@@ -286,7 +286,7 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
                   {!form.nombrePaciente && (
                     <option value="" disabled hidden>Selecciona un gato</option>
                   )}
-                  {pruebaGatos.map(g => (
+                  {gatos.map(g => (
                     <option key={g.id_animal} value={g.nom_animal}>
                       {g.nom_animal}
                     </option>
@@ -307,8 +307,8 @@ const MedicalCaseForm = ({ selectedCase, onSave, medicalCases = [], onClose }) =
                 {!form.veterinario && (
                   <option value="" disabled hidden>Selecciona un veterinario</option>
                 )}
-                {pruebaVeterinarios.map(v => (
-                  <option key={v.id} value={v.nombre}>{v.nombre}</option>
+                {veterinarios.map(v => (
+                  <option key={v.id_usuario} value={v.id_usuario}>{`Dr. ${v.veterinario}`}</option>
                 ))}
               </select>
             </div>
@@ -527,7 +527,7 @@ export function VisualizeCaseInfo({caseData}) {
   if (!caso) return <div>No hay datos para mostrar.</div>;
   return (
     <div className="medical-case-visualization">
-      <h2>Historia Clínica #{caso.des_caso || caso.id_caso}</h2>
+      <h2>Historia Clínica #{caso.id_caso}</h2>
       {/* Fecha, hora y propietario */}
       <div className="mc-row">
         <div><strong>Fecha admisión:</strong> {caso.fecha_agregado_caso}</div>
@@ -542,9 +542,9 @@ export function VisualizeCaseInfo({caseData}) {
       </div>
       {/* Dirección, teléfono y ciudad */}
       <div className="mc-row">
-        <div><strong>Dirección:</strong> {caso.direccion || ''}</div>
+        <div><strong>Dirección:</strong> {caso.direccion_dueno || ''}</div>
         <div><strong>Teléfono:</strong> {caso.tlf_dueno_caso}</div>
-        <div><strong>Ciudad:</strong> {caso.ciudad || ''}</div>
+        <div><strong>Ciudad:</strong> {caso.ciudad_dueno || ''}</div>
       </div>
       {/* Especie, sexo y edad (raza eliminado) */}
       <div className="mc-row">
