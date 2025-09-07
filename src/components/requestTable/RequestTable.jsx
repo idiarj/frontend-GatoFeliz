@@ -1,6 +1,6 @@
-import React from 'react'
+import { MdDeleteOutline } from "react-icons/md";
 
-const RequestTable = ({ requests, handleAccept, handleReject, page, totalPages, handlePrev, handleNext, status }) => {
+const RequestTable = ({ requests, handleAccept, handleReject, page, totalPages, handlePrev, handleNext, status, handleDeleteRequest }) => {
     const message = status === "pending" ? "No hay solicitudes pendientes" : "No hay solicitudes en el historial";
 
   return (
@@ -27,20 +27,58 @@ const RequestTable = ({ requests, handleAccept, handleReject, page, totalPages, 
                 <td className="telefono">{s.tlf_usuario}</td>
                 <td>{s.nom_animal}</td>
                 <td>{s.des_acogida}</td>
-                <td>
-                  <button
-                    className="request-btn accept"
-                    onClick={() => handleAccept(s.id_acogida)}
-                  >
-                    Aceptar
-                  </button>
-                  <button
-                    className="request-btn reject"
-                    onClick={() => handleReject(s.id_acogida)}
-                  >
-                    Rechazar
-                  </button>
-                </td>
+                  <td>
+                    {status === "pending" ? (
+                      <>
+                        <button
+                          className="request-btn accept"
+                          onClick={() => handleAccept(s.id_acogida)}
+                        >
+                          Aceptar
+                        </button>
+                        <button
+                          className="request-btn reject"
+                          onClick={() => handleReject(s.id_acogida)}
+                        >
+                          Rechazar
+                        </button>
+                      </>
+                    ) : (
+                      // status === "history"
+                      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px" }}>
+                        <span
+                          style={{
+                            display: "inline-block",
+                            padding: "6px 16px",
+                            borderRadius: "12px",
+                            fontWeight: 500,
+                            background: s.des_estado === "Aprobada" ? "#eafbe7" : "#ffeaea",
+                            color: s.des_estado === "Aprobada" ? "#1e7c2a" : "#c62828",
+                            border: s.des_estado === "Aprobada" ? "1px solid #b6e2c6" : "1px solid #f7bcbc"
+                          }}
+                        >
+                          {s.des_estado === "Aprobada" ? "Aceptada" : "Rechazada"}
+                        </span>
+                          <button
+                            className="request-btn delete"
+                            title="Eliminar solicitud"
+                            onClick={() => {
+                              if (window.confirm("¿Seguro que deseas eliminar esta solicitud?")) {
+                                if (typeof handleDeleteRequest === "function") {
+                                  handleDeleteRequest(s.id_acogida);
+                                } else {
+                                  alert("Función de eliminar no disponible");
+                                }
+                              }
+                            }}
+                            style={{ display: 'flex', alignItems: 'center', gap: '4px', padding: '6px 10px' }}
+                          >
+                            <MdDeleteOutline size={20} style={{ verticalAlign: 'middle' }} />
+                            <span style={{ fontSize: '1rem' }}>Eliminar</span>
+                          </button>
+                      </div>
+                    )}
+                  </td>
               </tr>
             ))
           ) : (
@@ -58,7 +96,7 @@ const RequestTable = ({ requests, handleAccept, handleReject, page, totalPages, 
           &lt;
         </button>
         <span>{page+1}</span>
-        <button onClick={handleNext} disabled={page === totalPages}>
+        <button onClick={handleNext} disabled={page + 1 === totalPages}>
           &gt;
         </button>
       </div>

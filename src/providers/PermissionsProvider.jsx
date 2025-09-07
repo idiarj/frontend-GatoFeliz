@@ -2,28 +2,28 @@ import { PermissionContext } from "../context/PermissionsContext";
 import { getProfiles } from "../api/Admin";
 import { useState, useEffect } from "react";
 
-
 export const PermissionsProvider = ({children}) => {
-    const [permissions, setPermissions] = useState({})
+    const [permissions, setPermissions] = useState({});
+    const [loading, setLoading] = useState(true); // Nuevo estado
 
     useEffect(()=>{
         const fetchProfiles = async () =>{
-            const data = await getProfiles()
-            console.log(data);
+            setLoading(true); // Empieza cargando
+            const data = await getProfiles();
             if(!data.success){
                 setPermissions(null);
+                setLoading(false);
                 return;
             }
-            console.log(data.data)
-            setPermissions(data.data)
+            setPermissions(data.data);
+            setLoading(false); // Termina de cargar
         };
-        fetchProfiles()
-    }, [])
-
+        fetchProfiles();
+    }, []);
 
     return (
-        <PermissionContext.Provider value={{permissions, setPermissions}}>
+        <PermissionContext.Provider value={{permissions, setPermissions, loading}}>
             {children}
         </PermissionContext.Provider>
-    )
+    );
 }

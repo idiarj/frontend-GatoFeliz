@@ -1,11 +1,11 @@
 import { fetchInstance } from "../utils/Fetch";
-import { delay } from "../utils/delay";
+// import { delay } from "../utils/delay";
 
 
 
 
 export const fetchMedicalData = async () => {
-    await delay(500);
+    // await delay(500);
     const response = await fetchInstance.get({
         endpoint: "/medical",
         headers: { "Content-Type": "application/json" },

@@ -1,9 +1,9 @@
 import { fetchInstance } from "../utils/Fetch";
-import { delay } from "../utils/delay";
+// import { delay } from "../utils/delay";
 
 
 export const fetchAllCats = async () => {
-  await delay(500);
+  // await delay(500);
   const response = await fetchInstance.get({
     endpoint: "/animal?adoptable=false",
     headers: { "Content-Type": "application/json" },
@@ -12,7 +12,7 @@ export const fetchAllCats = async () => {
 };
 
 export const fetchAdoptableCats = async () => {
-  await delay(500);
+  // await delay(500);
   const response = await fetchInstance.get({
     endpoint: "/animal?adoptable=true",
     headers: { "Content-Type": "application/json" },
@@ -32,7 +32,7 @@ export const postCat = async (catData) => {
 };
 
 export const deleteCat = async (catId) => {
-  await delay(500);
+  // await delay(500);
   const response = await fetchInstance.delete({
     endpoint: `/animal/${catId}`,
     credentials:'include'
@@ -42,7 +42,7 @@ export const deleteCat = async (catId) => {
 
 
 export const fetchMyCats = async () => {
-  await delay(800);
+  // await delay(800);
   const response = await fetchInstance.get({
     endpoint: "/animal/sponsorships",
     headers: { "Content-Type": "application/json" },
@@ -52,7 +52,7 @@ export const fetchMyCats = async () => {
 }
 
 export const fetchLastCat = async ({adoptable}) =>{
-  await delay(500);
+  // await delay(500);
   const response = await fetchInstance.get({
     endpoint: `/animal/last?adoptable=${adoptable}`,
     headers: { "Content-Type": "application/json" },

@@ -78,17 +78,28 @@ const Menu = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, setUser } = useUser();
-
-  // Trae el array "permissions" directamente del contexto (ya con el payload del backend)
-  const { permissions } = usePermissions() || { permissions: [] };
+  const { permissions, loading } = usePermissions() || { permissions: [], loading: false };
 
   const testing = import.meta.env.VITE_TESTING === 'true';
 
+  // useMemo must be called unconditionally
   const visibleOptions = useMemo(
     () => menuOptions.filter(opt => canSee({ item: opt, user, testing, permissions })),
     [user, testing, permissions]
   );
 
+  // Si el usuario está logueado y los permisos están cargando, no mostrar nada excepto el loader
+  if (user && loading) {
+    return (
+      <nav className="menu-nav">
+        <div className="menu-title"><span>MENU</span></div>
+        <div className="menu-loading">Cargando menú...</div>
+      </nav>
+    );
+  }
+
+  // Si el usuario está logueado y loading es true, no mostrar nada (ya cubierto arriba)
+  // Si el usuario está logueado y loading es false, mostrar el menú normalmente
   return (
     <nav className="menu-nav">
       <div className="menu-title">

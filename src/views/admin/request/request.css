@@ -28,7 +28,7 @@
 	border-radius: 18px;
 	box-shadow: 0 4px 24px 0 rgba(255, 140, 43, 0.08);
 	padding: 32px;
-	margin: 0 auto;
+	/* margin: 0 auto; */
 	max-width: 900px;
 }
 
@@ -86,6 +86,22 @@
 	color: #fff9cc;
 }
 
+.request-btn.delete {
+	background: #ffeaea;
+	color: #c62828;
+	border: 1px solid #f7bcbc;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	font-weight: 500;
+	padding: 6px 14px;
+}
+.request-btn.delete:hover {
+	background: #ffd6d6;
+	color: #a30000;
+	border-color: #f7bcbc;
+}
+
 .request-pagination {
 	display: flex;
 	align-items: center;
@@ -105,4 +121,13 @@
 .request-pagination button:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
+}
+
+
+.tables-container {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+	width: 950%;
+	margin-left: 150px;
 }

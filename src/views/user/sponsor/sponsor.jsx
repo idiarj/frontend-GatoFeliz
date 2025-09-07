@@ -81,7 +81,7 @@ const Sponsor =  () => {
             ))
           )}
           {
-            (testing || (user && (user.id_perfil === 1 || user.id_perfil === 2))) && (
+            (testing || (user && (user.perfil !== 'Usuario'))) && (
               <AddCatCard onSubmit={onSubmit} uploading={false} fromSponsor={true}/>
             )
           }

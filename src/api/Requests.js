@@ -1,9 +1,9 @@
-import { delay } from "../utils/delay";
+// import { delay } from "../utils/delay";
 import { fetchInstance } from "../utils/Fetch";
 
 
 export const fetchAllRequests = async () => {
-  await delay(500);
+  // await delay(500);
   return fetchInstance.get({
     endpoint: "/request-cat",
     headers: { "Content-Type": "application/json" },
@@ -13,7 +13,7 @@ export const fetchAllRequests = async () => {
 
 
 export const fetchPendingRequests = async ()=>{
-    await delay(500);
+    // await delay(500);
     return fetchInstance.get({
         endpoint: "/request-cat/pending",
         headers: { "Content-Type": "application/json" },
@@ -35,7 +35,7 @@ export const fetchRequestData = async ()=>{
 }
 
 export const createRequest = async (requestData, type) => {
-    await delay(500);
+    // await delay(500);
     const response = await fetchInstance.post({
         endpoint: `/request-cat?type=${type}`,
         headers: { "Content-Type": "application/json" },
@@ -47,7 +47,7 @@ export const createRequest = async (requestData, type) => {
 };
 
 export const acceptRequest = async (id) => {
-  await delay(500);
+  // await delay(500);
   const response = await fetchInstance.patch({
     endpoint: `/request-cat/accept/${id}`,
     headers: { "Content-Type": "application/json" },
@@ -57,7 +57,7 @@ export const acceptRequest = async (id) => {
 };
 
 export const rejectRequest = async (id) => {
-  await delay(500);
+  // await delay(500);
   const response = await fetchInstance.patch({
     endpoint: `/request-cat/reject/${id}`,
     headers: { "Content-Type": "application/json" },
@@ -65,3 +65,18 @@ export const rejectRequest = async (id) => {
   });
   return await response.json();
 };
+
+
+export const deleteRequest = async (id) => {
+  try {
+    // await delay(500);
+    const response = await fetchInstance.delete({
+      endpoint: `/request-cat/${id}`,
+      headers: { "Content-Type": "application/json" },
+      credentials: 'include'
+    });
+    return await response.json();
+  } catch (error) {
+    console.error("Error al eliminar la solicitud:", error);
+  }
+}
