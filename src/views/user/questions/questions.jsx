@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import questionAudio from '../../../assets/audios/question.mp3';
 import Head from '../../../components/head/head.jsx';
 import questionsImg from '../../../assets/images/questions.png';
 import questionsImg2 from '../../../assets/images/questions2.png';
@@ -105,16 +106,24 @@ const Questions = () => {
   // Cuando openIdx cambia, activa animación
   // Se activa solo si cambia entre las dos imágenes
   const prevImgRef = useRef(benitoImg);
+  // Ref para el audio
+  const audioRef = useRef(null);
   useEffect(() => {
     if (prevImgRef.current !== benitoImg) {
       setAnimateImg(true);
+      // Solo reproducir audio si se está abriendo una pregunta (openIdx pasa de null a un número)
+      if (openIdx !== null && audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play();
+      }
       prevImgRef.current = benitoImg;
       setTimeout(() => setAnimateImg(false), 400); // Duración de la animación
     }
-  }, [benitoImg]);
+  }, [benitoImg, openIdx]);
 
   return (
     <>
+      <audio ref={audioRef} src={questionAudio} preload="auto" />
       <div className="questions-root">
         <div className="questions-container">
           <div className="questions-section">
