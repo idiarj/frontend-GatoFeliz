@@ -66,3 +66,35 @@
   border-radius: 12px;
   box-shadow: 0 2px 8px 0 #ffe0d1;
 }
+
+.menu-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  min-height: 120px;
+  color: var(--brand);
+  font-size: 1.25rem;
+  font-weight: 500;
+  background: var(--card);
+  border-radius: 16px;
+  /* box-shadow: var(--shadow); */
+  margin: 18px 0 0 20px;
+  animation: gentlePop .45s ease both;
+  gap: 12px;
+}
+
+.menu-loading::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--accent);
+  border-top: 3px solid var(--brand);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

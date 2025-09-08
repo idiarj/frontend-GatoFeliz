@@ -49,7 +49,8 @@ const CatCard = ({
   let testing = import.meta.env.VITE_TESTING === 'true';
 
   // Determina si el usuario puede eliminar (admin)
-  const canDelete = testing || (user && (user.id_perfil === 1 || user.id_perfil === 2));
+  console.log(user);
+  const canDelete = testing || (user && (user.id_perfil !== 5));
   const buttonMarginLeft = canDelete ? 18 : 75;
 
   return (

@@ -68,6 +68,14 @@ const Profile = () => {
     img_usuario_url: data.img_usuario_url
   });
 
+  useEffect(() => {
+    if(showPwdModal){
+    document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  }, [showPwdModal]);
+
   useEffect(()=>{
     if(!user){
       navigate("/auth/login");

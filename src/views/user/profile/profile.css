@@ -401,3 +401,9 @@
   outline-offset: 2px;
 }
 
+.profile-main-container.modal-open {
+  overflow: hidden;  /* desactiva scroll */
+  height: 100vh;     /* evita desplazamiento accidental */
+}
+
+

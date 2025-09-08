@@ -33,8 +33,8 @@ export const MyCats = () => {
         {myCats && myCats.length === 0 && (
             <div className="no-cats-message">
                 No tienes gatos en tu lista de favoritos.<br />
-                <Link to="/sponsor" className="myCats-link">
-                ¡Explora gatos para adoptar!
+                <Link to="/apadrinar" className="myCats-link">
+                ¡Explora gatos para apadrinar!
                 </Link>
             </div>
         )}

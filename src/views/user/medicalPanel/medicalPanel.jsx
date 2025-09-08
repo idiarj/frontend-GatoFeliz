@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { VisualizeCaseInfo } from '../../../components/medicalCaseForm/MedicalCaseForm';
-import { createMedicalRecord } from '../../../api/Medical.js';
+import { createMedicalRecord, updateMedicalRecord } from '../../../api/Medical.js';
 import { useLoaderData } from 'react-router-dom';
 import MedicalCaseForm from '../../../components/medicalCaseForm/MedicalCaseForm';
 import MedicalPanelModal from './medicalpanelmodal/MedicalPanelModal';
@@ -25,34 +25,7 @@ const CASE_STATUS_ID = {
 /* =========================================
    Adaptador BD → UI (sin cambiar tus clases)
    ========================================= */
-function mapDbCaseToUI(db) {
-  console.log('Mapping DB case to UI:', db);
-  // db es un registro con los campos de la tabla "caso"
-  return {
-    id: db.id_caso,
-    id_caso: db.id_caso,
-    id_animal: db.id_animal,
-    id_usuario: db.id_usuario,
-    motivo: db.motivo_caso ?? '',
-    estado: CASE_STATUS_LABEL[db.id_caso_est] || '—',
-    tratamiento: db.des_caso ?? '',
-    insumos: db.prod_caso ?? '',
-
-    // fecha para ordenar/mostrar (usa fechas_caso si no hay 'date')
-    date: db.date ?? db.fechas_caso ?? null,
-
-    // Estos campos son “extra UI”; si tu loader los trae, se muestran
-    kennelNumber: db.id_kennel ?? null,
-    nombreGato: db.nom_animal_caso,
-    edadGato: db.edad_animal_caso ?? '—',
-    sexoGato: db.sexo_animal_caso ?? '—',
-    nombreDueno: db.nom_dueno_caso,
-    telefonoDueno: db.tlf_dueno_caso,
-    historia: db.historia_caso ?? '',
-
-    __db: db, // conserva original por si lo necesitas
-  };
-}
+// (Eliminado: función mapDbCaseToUI no utilizada en el ámbito global)
 
 /* =========================================
    Editor inline
@@ -63,6 +36,9 @@ function CaseDetailEditor({ caseData, onClose, onSave }) {
   const [tratamiento, setTratamiento] = useState(caseData.tratamiento || '');
   const [insumos, setInsumos] = useState(caseData.insumos || '');
   console.log('Editing case:', caseData); 
+  console.log('Current estado:', CASE_STATUS_ID[estado]);
+  console.log('Current tratamiento:', tratamiento);
+  console.log('Current insumos:', insumos);
 
   const handleSave = () => {
     const updated = {
@@ -72,7 +48,11 @@ function CaseDetailEditor({ caseData, onClose, onSave }) {
       insumos,
       id_caso_est: CASE_STATUS_ID[estado] ?? caseData.__db?.id_caso_est,
     };
-    onSave?.(updated);
+    onSave(caseData.id, {
+      newEstado: CASE_STATUS_ID[estado],
+      newTratamiento: tratamiento,
+      newInsumos: insumos,
+    });
     setEditMode(false);
   };
 
@@ -158,7 +138,8 @@ function CaseDetailEditor({ caseData, onClose, onSave }) {
 function MedicalPanel() {
   // Trae datos del loader
   const loaderData = useLoaderData() || {};
-  const { records = [], kennels = [], veterinarians = [] } = loaderData;
+  console.log('Loader data:', loaderData);
+  const { records = [], kennels = [], veterinarians = [], animals = [] } = loaderData;
 
   // Mapea los registros de BD que vienen del loader
   const [cases, setCases] = useState(() => records.map(mapDbCaseToUI));
@@ -179,24 +160,52 @@ function MedicalPanel() {
   const kennelsAvailable = TOTAL_KENNELS - kennelsUsed;
 
   // Crear nuevo caso (viene del formulario)
-  const handleAddCase = async (newCaseUI) => {
-    // Aquí puedes mapear UI → payload BD antes de enviar:
-    // const payload = mapUIToDb(newCaseUI)
-    await createMedicalRecord(newCaseUI);
+  // Mapea un caso de la BD al formato UI
+  function mapDbCaseToUI(db) {
+    return {
+      id: db.id_caso ?? db.id,
+      id_caso: db.id_caso ?? db.id,
+      id_animal: db.id_animal,
+      id_usuario: db.id_usuario,
+      motivo: db.motivo_caso ?? '',
+      estado: CASE_STATUS_LABEL[db.id_caso_est] || '—',
+      tratamiento: db.des_caso ?? '',
+      insumos: db.prod_caso ?? '',
+      date: db.date ?? db.fechas_caso ?? null,
+      kennelNumber: db.id_kennel ?? null,
+      nombreGato: db.nom_animal_caso ?? db.nombrePaciente,
+      edadGato: db.edad_animal_caso ?? '—',
+      sexoGato: db.sexo_animal_caso ?? '—',
+      nombreDueno: db.nom_dueno_caso ?? db.propietario,
+      telefonoDueno: db.tlf_dueno_caso ?? db.telefono,
+      historia: db.historia_caso ?? '',
+      __db: db,
+    };
+  }
 
-    setCases(prev => [{
-      ...newCaseUI,
-      id: prev.length ? Math.max(...prev.map(c => c.id)) + 1 : 1,
+  const handleAddCase = async (newCase) => {
+    await createMedicalRecord(newCase);
+    const uiCase = mapDbCaseToUI({
+      ...newCase,
+      id: newCase.id_caso ?? (cases.length ? Math.max(...cases.map(c => c.id)) + 1 : 1),
       date: new Date().toISOString(),
-    }, ...prev]);
-
+    });
+    setCases(prev => [uiCase, ...prev]);
     setShowForm(false);
   };
 
   // Actualizar caso desde el editor inline
-  const handleUpdateCase = (updatedCase) => {
-    setCases(prev => prev.map(c => c.id === updatedCase.id ? updatedCase : c));
-    setSelectedCase(null);
+  const handleUpdateCase = async (id, updatedData) => {
+    try {
+      console.log('Updating case:', updatedData);
+      const { data } = await updateMedicalRecord(id, updatedData);
+      console.log('Update response data:', data);
+      const mapedData = mapDbCaseToUI(data);
+      setCases(prev => prev.map(c => c.id === id ? { ...c, id: mapedData.id, ...mapedData } : c));
+      setSelectedCase(null);
+    } catch (error) {
+      console.error("Error updating medical record:", error);
+    }
   };
 
   // Orden por fecha (desc) con fallback al id
@@ -253,7 +262,10 @@ function MedicalPanel() {
             medicalCases={cases}
             veterinarians={veterinarians}
             kennels={kennels}
+            
             onClose={() => setShowForm(false)}
+            veterinarios={veterinarians}
+            gatos={animals}
           />
         </MedicalPanelModal>
       )}
