@@ -16,7 +16,7 @@ const CatCard = ({
   boxShadow = true,
   fromSponsor,
 }) => {
-  const pageUrl = `${window.location.origin}/adopcion/${encodeURIComponent(name)}`;
+  const pageUrl = `${window.location.origin}/adoption/}`;
   const [showModal, setShowModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const { user } = useUser();
