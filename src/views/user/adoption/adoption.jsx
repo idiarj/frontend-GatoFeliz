@@ -1,102 +1,106 @@
-import { useState, useEffect } from "react";
+// Adoptions.jsx
+import { useState, useEffect, useMemo } from "react";
+import { useLoaderData, useOutletContext } from "react-router-dom"; // 👈 añade useOutletContext
 import { createRequest } from "../../../api/Requests.js";
 import { deleteCat, postCat } from "../../../api/Cats.js";
-import { useLoaderData } from "react-router-dom";
 import { useUser } from "../../../hooks/useUser.jsx";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard"
 import "./adoption.css";
 
+const normalize = (s = "") =>
+  s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
 
 const Adoptions = () => {
   const [cats, setCats] = useState([]);
   const { user } = useUser();
   const testing = import.meta.env.VITE_TESTING === 'true';
-  console.log(cats)
-  const {data} = useLoaderData();
-  console.log(data)
-  console.log(user)
+  const { data } = useLoaderData();
+
+  // 👇 recibe la búsqueda del Layout
+  const { search = "" } = useOutletContext() || {};
+
   useEffect(() => {
     setCats(data);
   }, [data]);
 
-  // Filtrar gatos por nombre
-  // const filteredCats = cats.filter(cat =>
-  //   cat.name.toLowerCase().includes(search.toLowerCase())
-  // );
+  // 🔎 Filtrado por nombre (insensible a acentos y mayúsculas)
+  const filteredCats = useMemo(() => {
+    if (!search) return cats;
+    const q = normalize(search);
+    return (cats || []).filter(cat => normalize(cat.nom_animal).includes(q));
+  }, [cats, search]);
 
-  const handleRequest = async (cat)=>{
+  const handleRequest = async (cat) => {
     try {
-      console.table(cat);
-      const data = await createRequest({ id_animal: cat.id_animal }, "adopt");
-      console.table(data);
-      if(!data.success){
-        console.error('Error al enviar la solicitud de apadrinamiento:', data.errorMsg);
+      const res = await createRequest({ id_animal: cat.id_animal }, "adopt");
+      if (!res.success) {
+        console.error('Error al enviar la solicitud de adopción:', res.errorMsg);
       }
     } catch (error) {
       console.error("Error handling request:", error);
     }
-  }
+  };
 
   const onDelete = async (id) => {
     try {
-      setCats((prevCats = []) => prevCats.filter((cat) => cat.id_animal !== id));
+      setCats(prev => (prev || []).filter(cat => cat.id_animal !== id));
       await deleteCat(id);
     } catch (error) {
       console.error("Error deleting cat:", error);
     }
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
     try {
-      console.table(data);
-      const catData = await postCat(data);
-      console.table(catData.data);
-      setCats((prevCats) => [...(prevCats || []), catData.data]);
-
-      // return catData;
+      const catData = await postCat(formData);
+      setCats(prev => ([...(prev || []), catData.data]));
     } catch (error) {
       console.error("Error submitting form:", error);
       throw error;
     }
-  }
+  };
 
   return (
-       <div className="adoption-content">
-        <div className="adoption-info">
-          La manera de adoptar es enviando una solicitud o visitando directamente la fundación.<br />
-          Escríbenos antes de venir para coordinar tu visita y poder atenderte de la mejor manera posible.
-        </div>
-        {cats.length === 0 && (
-            <div className="no-cats-message">
-              No hay gatos disponibles para adopción en este momento.
-            </div>
-          )}
-        <div className="adoption-cards">
-          {/* {filteredCats.map((cat) => (
-            <AdoptionCard key={cat.id} {...cat} onRequest={() => alert(`Solicitud enviada para ${cat.name}`)} />
-          ))} */}
-
-          {cats && cats.length > 0 && (
-            cats.map((cat)=>(
-              <CatCard
-                key={cat.id_animal}
-                name={cat.nom_animal}
-                gender={cat.genero_animal}
-                age={cat.edad_animal}
-                image={cat.ruta_imagen_an}
-                onRequest={() => handleRequest(cat)}
-                onDelete={() => onDelete(cat.id_animal)}
-              />
-            ))
-          )}
-          {
-            (testing || (user && (user.perfil !== 'Usuario'))) && (
-              <AddCatCard onSubmit={onSubmit} uploading={false} />
-            )
-          }
-        </div>
+    <div className="adoption-content">
+      <div className="adoption-info">
+        La manera de adoptar es enviando una solicitud o visitando directamente la fundación.<br />
+        Escríbenos antes de venir para coordinar tu visita y poder atenderte de la mejor manera posible.
       </div>
+
+      {/* Mensaje cuando no hay gatos en absoluto */}
+      {(!cats || cats.length === 0) && (
+        <div className="no-cats-message">
+          No hay gatos disponibles para adopción en este momento.
+        </div>
+      )}
+
+      <div className="adoption-cards">
+        {/* Render con filtro */}
+        {filteredCats && filteredCats.length > 0 && filteredCats.map((cat) => (
+          <CatCard
+            key={cat.id_animal}
+            name={cat.nom_animal}
+            gender={cat.genero_animal}
+            age={cat.edad_animal}
+            image={cat.ruta_imagen_an}
+            onRequest={() => handleRequest(cat)}
+            onDelete={() => onDelete(cat.id_animal)}
+          />
+        ))}
+
+        {/* Mensaje cuando hay gatos pero no coinciden con la búsqueda */}
+        {cats.length > 0 && filteredCats.length === 0 && search && (
+          <div className="no-cats-message">
+            No hay coincidencias para “{search}”.
+          </div>
+        )}
+
+        {(testing || (user && (user.perfil !== 'Usuario'))) && (
+          <AddCatCard onSubmit={onSubmit} uploading={false} />
+        )}
+      </div>
+    </div>
   );
 };
 

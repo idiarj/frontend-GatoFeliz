@@ -6,6 +6,12 @@ import './head.css';
 
 const Head = ({ title, onSearch }) => {
   const [showSearch, setShowSearch] = useState(false);
+  const [local, setLocal] = useState('');
+  useEffect(() => {
+    const id = setTimeout(() => onSearch && onSearch(local.trim()), 250);
+    return () => clearTimeout(id);
+  }, [local, onSearch]);
+
   const location = useLocation();
   console.log(location.pathname);
   useEffect(() => {
@@ -30,7 +36,7 @@ const Head = ({ title, onSearch }) => {
                   type="text"
                   placeholder="Buscar por nombre..."
                   className="head-search-input"
-                  onChange={e => onSearch && onSearch(e.target.value)}
+                  onChange={(e)=>{setLocal(e.target.value)}}
                 />
               </div>
           </>
