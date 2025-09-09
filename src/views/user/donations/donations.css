@@ -329,6 +329,8 @@
   gap: 8px;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  min-width: 120px; /* Fija el ancho mínimo para evitar que el botón cambie de tamaño */
+  justify-content: center;
 }
 
 .donations-copy-btn:hover {

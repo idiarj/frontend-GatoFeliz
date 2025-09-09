@@ -8,7 +8,9 @@ import ropaIcon from '../../../assets/logos/ropa.png';
 import './donations.css';
 
 const Donations = () => {
+
   const [copiedTransfer, setCopiedTransfer] = useState(false);
+  const [copiedPagoMovil, setCopiedPagoMovil] = useState(false);
 
   const copyToClipboard = async (text, onDone) => {
     try {
@@ -46,9 +48,7 @@ const Donations = () => {
                   type="button"
                   className={`donations-copy-btn ${copiedTransfer ? "copied" : ""}`}
                   onClick={() => {
-                    const info = `Titular: Saile Devis
-                                  CI: 11.281.817
-                                  Cuenta: 0134 0050 4105 0102 3671`;
+                    const info = `Titular: Saile Devis\nCI: 11.281.817\nCuenta: 0134 0050 4105 0102 3671`;
                     copyToClipboard(info, () => {
                       setCopiedTransfer(true);
                       setTimeout(() => setCopiedTransfer(false), 1500);
@@ -73,19 +73,19 @@ const Donations = () => {
                 <span><strong>Teléfono:</strong> 0414 640-7460</span>
                 <button
                   type="button"
-                  className={`donations-copy-btn ${copiedTransfer ? "copied" : ""}`}
+                  className={`donations-copy-btn ${copiedPagoMovil ? "copied" : ""}`}
                   onClick={() => {
-                    const info = `Titular: Saile Devis
-                CI: 11.281.817
-                Cuenta: 0134 0050 4105 0102 3671`;
+                    const info = `Banco: Banesco\nTitular: Saile Devis\nCI: 11.281.817\nTeléfono: 0414 640-7460`;
                     copyToClipboard(info, () => {
-                      setCopiedTransfer(true);
-                      setTimeout(() => setCopiedTransfer(false), 1500);
+                      setCopiedPagoMovil(true);
+                      setTimeout(() => setCopiedPagoMovil(false), 1500);
                     });
                   }}
+                  title={copiedPagoMovil ? "¡Copiado!" : "Copiar datos"}
+                  aria-label="Copiar datos de pago móvil"
                 >
                   <FaCopy />
-                  {copiedTransfer ? "¡Copiado!" : "Copiar datos"}
+                  {copiedPagoMovil ? "Copiado" : "Copiar datos"}
                 </button>
               </div>
             </div>

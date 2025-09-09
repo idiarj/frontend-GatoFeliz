@@ -39,7 +39,7 @@ const Dashboard = () => {
           {/* Card informativo arriba del sponsor */}
           <div className="dashboard-section info-animales">
             <p>
-              ¿Sabías que todos nuestros animales han sido abandonados y ahora buscan una adopción que les dé la vida que merecen?
+              ¿Sabías que todos nuestros animales han sido abandonados y ahora buscan una familia que les dé la vida que merecen?
             </p>
           </div>
 

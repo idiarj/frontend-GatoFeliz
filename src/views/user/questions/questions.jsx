@@ -103,8 +103,6 @@ const Questions = () => {
   // Detect cambio de imagen y activa animación
   const benitoImg = openIdx !== null ? questionsImg2 : questionsImg;
 
-  // Cuando openIdx cambia, activa animación
-  // Se activa solo si cambia entre las dos imágenes
   const prevImgRef = useRef(benitoImg);
   // Ref para el audio
   const audioRef = useRef(null);
