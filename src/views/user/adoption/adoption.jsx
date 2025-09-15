@@ -1,9 +1,11 @@
 // Adoptions.jsx
-import { useState, useEffect, useMemo } from "react";
-import { useLoaderData, useOutletContext } from "react-router-dom"; // 👈 añade useOutletContext
+import { useState, useMemo } from "react";
+import { useOutletContext } from "react-router-dom";
 import { createRequest } from "../../../api/Requests.js";
-import { deleteCat, postCat } from "../../../api/Cats.js";
+import { deleteCat, postCat, fetchAdoptableCats } from "../../../api/Cats.js";
 import { useUser } from "../../../hooks/useUser.jsx";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../loading/Loading.jsx";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard"
 import "./adoption.css";
@@ -15,21 +17,37 @@ const Adoptions = () => {
   const [cats, setCats] = useState([]);
   const { user } = useUser();
   const testing = import.meta.env.VITE_TESTING === 'true';
-  const { data } = useLoaderData();
+  // const { data } = useLoaderData();
+  // const { data } = { data: [], success: true }; // datos por defecto
+  const { data, isLoading } = useQuery({
+    queryKey: ['adoptableCats'],
+    queryFn: async () => {
+      const res = await fetchAdoptableCats();
+      if (!res.success || !res.data) {
+        return [];
+      }
+      console.log("Adoptable cats fetched:", res);
+      return res.data;
+    }
+  });
 
-  // 👇 recibe la búsqueda del Layout
+
   const { search = "" } = useOutletContext() || {};
 
-  useEffect(() => {
-    setCats(data);
-  }, [data]);
+  // useEffect(() => {
+  //   setCats(data);
+  // }, [data]);
 
   // 🔎 Filtrado por nombre (insensible a acentos y mayúsculas)
   const filteredCats = useMemo(() => {
-    if (!search) return cats;
+    if (!search) return data;
     const q = normalize(search);
-    return (cats || []).filter(cat => normalize(cat.nom_animal).includes(q));
-  }, [cats, search]);
+    return (data || []).filter(cat => normalize(cat.nom_animal).includes(q));
+  }, [data, search]);
+
+  if (isLoading) {
+    return <div style={{ marginTop: '250px' }}><Loading subtitle={'Cargando gatos adoptables...'} compact /></div>;
+  }
 
   const handleRequest = async (cat) => {
     try {
@@ -69,7 +87,7 @@ const Adoptions = () => {
       </div>
 
       {/* Mensaje cuando no hay gatos en absoluto */}
-      {(!cats || cats.length === 0) && (
+      {(!data || data.length === 0) && (
         <div className="no-cats-message">
           No hay gatos disponibles para adopción en este momento.
         </div>

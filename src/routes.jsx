@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { fetchAllCats, fetchAdoptableCats, fetchMyCats, fetchLastCat } from "./api/Cats.js";
+import { fetchMyCats, fetchLastCat } from "./api/Cats.js";
 import { fetchRequestData } from "./api/Requests.js";
 import { me } from "./api/Auth.js";
 import { getProfiles, checkIfProfileHasPermission } from "./api/Admin.js";
@@ -100,31 +100,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/adoption',
-                element: <Adoptions/>,
-                loader: async ()=>{
-                    await delay(800);
-                    let data = await fetchAdoptableCats();
-                    if(!data.success || !data.data) {
-                        data.data = [];
-                    }
-                    console.log("Adoptions loader data:", data);
-                    return data;
-                },
-                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos adoptables...'} compact/></div>
+                element: <Adoptions/>
             },
             {
                 path: '/apadrinar',
-                element: <Sponsor/>,
-                loader: async ()=>{
-                    await delay(800);
-                    let data = await fetchAllCats();
-                    if(!data.success || !data.data) {
-                        data.data = [];
-                    }
-                    console.log("Sponsor loader data:", data);
-                    return data;
-                },
-                hydrateFallbackElement: <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos apadrinables...'} compact/></div>
+                element: <Sponsor/>
             },
             {
                 path: '/tusGatos',

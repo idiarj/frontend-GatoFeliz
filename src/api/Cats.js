@@ -1,5 +1,5 @@
 import { fetchInstance } from "../utils/Fetch";
-// import { delay } from "../utils/delay";
+import { delay } from "../utils/delay";
 
 
 export const fetchAllCats = async () => {
@@ -12,7 +12,7 @@ export const fetchAllCats = async () => {
 };
 
 export const fetchAdoptableCats = async () => {
-  // await delay(500);
+  await delay(1500);
   const response = await fetchInstance.get({
     endpoint: "/animal?adoptable=true",
     headers: { "Content-Type": "application/json" },

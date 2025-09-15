@@ -1,11 +1,13 @@
 // Sponsor.jsx
-import { useState, useEffect, useMemo } from "react";
-import { useLoaderData, useOutletContext } from "react-router-dom";
-import { postCat, deleteCat } from "../../../api/Cats.js";
+import { useState, useMemo } from "react";
+import {useOutletContext } from "react-router-dom";
+import { postCat, deleteCat, fetchAllCats } from "../../../api/Cats.js";
 import { createRequest } from "../../../api/Requests.js";
 import { useUser } from "../../../hooks/useUser.jsx";
+import { useQuery } from "@tanstack/react-query";
 import CatCard from "../../../components/catCard/catCard.jsx";
 import AddCatCard from "../../../components/addCatCard/addCatCard.jsx";
+import Loading from "../loading/Loading.jsx";
 import "./sponsor.css";
 
 const normalize = (s = "") =>
@@ -13,23 +15,33 @@ const normalize = (s = "") =>
 
 const Sponsor = () => {
   const testing = import.meta.env.VITE_TESTING === "true";
+  const {_, setCats} = useState([]);
   const { user } = useUser();
-  const [cats, setCats] = useState([]);
-  const { data } = useLoaderData();
-
-  // 👇 recibe { search } desde el AppLayout (<Outlet context={{ search }} />)
+  const { data, isLoading } = useQuery({
+    queryKey: ["sponsorCats"],
+    queryFn: async () => {
+      const res = await fetchAllCats();
+      if (!res.success || !res.data) {
+        return [];
+      }
+      console.log("Sponsor cats fetched:", res);
+      return res.data;
+    },
+  });
   const { search = "" } = useOutletContext() || {};
 
-  useEffect(() => {
-    setCats(data);
-  }, [data]);
 
   // 🔎 Filtrado por nombre (insensible a acentos y mayúsculas)
   const filteredCats = useMemo(() => {
-    if (!search) return cats;
+    if (!search) return data;
     const q = normalize(search);
-    return (cats || []).filter((cat) => normalize(cat.nom_animal).includes(q));
-  }, [cats, search]);
+    return (data || []).filter((cat) => normalize(cat.nom_animal).includes(q));
+  }, [data, search]);
+
+
+  if(isLoading){
+    return <div style={{marginTop: '250px'}}><Loading subtitle={'Cargando gatos para apadrinables...'} compact/></div>;
+  }
 
   const handleRequest = async (cat) => {
     try {
@@ -69,7 +81,7 @@ const Sponsor = () => {
       </div>
 
       {/* Sin gatos en absoluto */}
-      {(!cats || cats.length === 0) && (
+      {(!data || data.length === 0) && (
         <div className="no-cats-message">
           No hay gatos disponibles para apadrinar en este momento.
         </div>
@@ -93,7 +105,7 @@ const Sponsor = () => {
         ))}
 
         {/* Hay gatos, pero ninguno coincide con la búsqueda */}
-        {cats.length > 0 && filteredCats.length === 0 && search && (
+        {data.length > 0 && filteredCats.length === 0 && search && (
           <div className="no-cats-message">
             No hay coincidencias para “{search}”.
           </div>
